@@ -1,0 +1,155 @@
+:root{
+    --works_height:1400px;
+}
+.works{
+    display: none;
+    position: relative;
+    background-color:rgb(250, 243, 217);
+    width: 1763px;
+    height: var(--works_height);
+    top: 100px;
+    left: 4%;
+}
+.works_top{
+    position: relative;
+    background-image: url(../img/top.png);
+    height: 59px;
+    width: auto;
+    top: -4%;
+}
+.works_foot{
+    position: relative;
+    background-image: url(../img/foot.png);
+    height: 59px;
+    width: auto;
+    top: 94%;
+}
+.works_left{
+    position: absolute;
+    background-image: url(../img/left.png);
+    width: 84px;
+    height: var(--works_height);
+    top: 0;
+}
+.works_right{
+    position: absolute;
+    background-image: url(../img/right.png);
+    width: 84px;
+    height: var(--works_height);
+    top: 0;
+    left: 1679px
+}
+/* 111111111111111111111111111 */
+.works_skyblock{
+    position: relative;
+    width:1440px;
+    height: 600px;
+    overflow: hidden;
+    object-fit: cover;
+    background-image: url(/img/skyblock.jpg);
+    background-repeat: no-repeat;
+    left: 160px;
+    top:-40px;
+    border-style: solid;
+    border-radius: 5px;
+    transition: all 500ms;
+}
+.works_skyblock:hover{
+    border-color: rgb(142, 223, 255);
+    border-width: 5px;
+}
+.works .skyblock{
+    position: relative;
+    left:45%;
+    top: 10%;
+}
+.works .skyblock span:first-child{
+    color: rgb(3, 55, 114);
+    font-size: 50px;
+    font-family: cool_font;
+}
+.works .skyblock span:last-child{
+    color: rgb(2, 116, 30);
+    font-size: 50px;
+    font-family: circle_font;
+}
+.works .skyblock_ins_and_out{
+    position: absolute;
+    top: 40%;
+    left: 12%;
+    text-align: center;
+}
+.works .skyblock_ins_and_out span:first-child{
+    font-family: writter_font;
+    font-size: 25px;
+    color: rgb(241, 100, 100);
+}
+.works .skyblock_ins_and_out span:last-child{
+    font-family: writter_font;
+    font-weight: 100px;
+    font-size: 20px;
+    color: rgb(248, 253, 220);
+}
+.works .skyblock_logo img{
+    position: relative;
+    height: 64px;
+    width: 64px;
+    color: rgb(2, 58, 110);
+    border-style: solid;
+    border-radius: 5px;
+    transition: all 500ms;
+}
+.works .skyblock_logo{
+    position: absolute;
+    color: rgb(86, 248, 11);
+    top: 10px;
+    left: 60px;
+    text-align: center;
+}
+.works .skyblock_logo img:hover{
+    color: rgb(1, 112, 216);
+}
+.works .skyblock_download{
+    position: relative;
+    top: 55%;
+    left: 46%;
+    height: 60px;
+    width: 150px;
+    background-color: rgb(63, 193, 245);
+    text-decoration: none;
+    text-align: center;
+    line-height:50px;
+    font-family: cool_font;
+    color: rgb(3, 94, 10);
+    font-size: 20px;
+    font-weight: bolder;
+    border-radius:20px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: rgb(63, 193, 245);
+    transition: all 250ms;
+}
+.works .skyblock_download:hover{
+    background-color: rgb(255, 255, 255);
+}
+/* 111111111111111111111111111 */
+/* 222222222222222222222222222 */
+.works_bedwars{
+    position: relative;
+    width:1440px;
+    height: 600px;
+    overflow: hidden;
+    left: 160px;
+    top: 40px;
+    background-repeat: no-repeat;
+    background-size: 1500px;
+    object-fit:cover;
+    background-image: url(/img/bedwars.png);
+    border-style: solid;
+    border-radius: 5px;
+    transition: all 500ms;
+}
+.works_bedwars:hover{
+    border-color: rgb(255, 146, 142);
+    border-width: 5px;
+}

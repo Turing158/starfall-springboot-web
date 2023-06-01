@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
+    <title>注册-|StarFall|</title>
+    <link rel="stylesheet" href="css/reg.css">
+    <link rel="stylesheet" href="css/font.css">
+    <script src="js/reg.js"></script>
+</head>
+<body>
+    <div>
+        <form action="/verify_code" method="get">
+            <br><br>
+            <h1>注&emsp;册</h1><br><br>
+            <input type="search" class="user_input" name="vreg_user" th:value="${session.reg_user}" required>
+            <span class="user_span">用户名：</span>
+            <div class="user_underline"></div>
+            <br>
+            <input type="password" class="pass_input" name="vreg_password" th:value="${session.reg_password}" required>
+            <span class="pass_span">密&emsp;码：</span>
+            <div class="pass_underline"></div>
+            <br>
+            <input type="email" class="email_input" name="vreg_email" th:value="${session.reg_email}" required>
+            <span class="email_span">邮&emsp;箱：</span>
+            <div class="email_underline"></div>
+            <br>
+            <input type="search" class="code_input" name="vreg_code" required>
+            <span class="code_span">验证码：</span>
+            <div class="code_underline"></div>
+            <img src="/jpegCode" alt="VerifyCode" onclick="Change()" id="img_code">
+            <p th:text="${session.reg_tips}">info</p>
+            <input type="submit" value="注册" class="reg">
+            <button class="login" onclick="window.location='/login';">返回登录</button>
+        </form>
+    </div>
+</body>
+<script>
+    function Change() {
+    var img = document.getElementById("img_code")
+    var date = new Date().getTime();
+    img.src="jpegCode?"+date;
+}
+</script>
+</html>

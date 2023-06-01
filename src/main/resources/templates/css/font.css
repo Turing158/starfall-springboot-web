@@ -1,0 +1,20 @@
+@font-face {
+    font-family: block_font;
+    src: url(/font/方块体.ttf);
+}
+@font-face {
+    font-family: writter_font;
+    src: url(/font/手写体.ttf);
+}
+@font-face {
+    font-family: double_font;
+    src: url(/font/双线英文.ttf);
+}
+@font-face {
+    font-family: cool_font;
+    src: url(/font/玩酷体.ttf);
+}
+@font-face {
+    font-family: circle_font;
+    src: url(/font/圆润英文.ttf);
+}

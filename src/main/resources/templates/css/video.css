@@ -1,0 +1,41 @@
+:root{
+    --video_height:1000px;
+}
+.video{
+    display: none;
+    position: relative;
+    background-color:rgb(250, 243, 217);
+    width: 1763px;
+    height: var(--video_height);
+    top: 100px;
+    left: 4%;
+}
+.video_top{
+    position: relative;
+    background-image: url(../img/top.png);
+    height: 59px;
+    width: auto;
+    top: -5.9%;
+}
+.video_foot{
+    position: relative;
+    background-image: url(../img/foot.png);
+    height: 59px;
+    width: auto;
+    top: 94%;
+}
+.video_left{
+    position: absolute;
+    background-image: url(../img/left.png);
+    width: 84px;
+    height: 1000px;
+    top: 0;
+}
+.video_right{
+    position: absolute;
+    background-image: url(../img/right.png);
+    width: 84px;
+    height: 1000px;
+    top: 0;
+    left: 1679px
+}

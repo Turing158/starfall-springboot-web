@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/html.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="css/ul.css">
+    <link rel="stylesheet" href="css/top.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/works.css">
+    <link rel="stylesheet" href="css/video.css">
+    <link rel="stylesheet" href="css/comment.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
+    <title>StarFall</title>
+    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/html.js" type="text/javascript"></script>
+    <script src="js/ppt.js" type="text/javascript"></script>
+    <script src="js/comment.js" type="text/javascript"></script>
+    <script src="js/click_power.js" type="text/javascript"></script>
+</head>
+<body background="img/bg.png">
+    <div class="top">
+        <div class="starfall">StarFall</div>
+        <div class="carousel slide" id="ppt" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#ppt" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#ppt" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#ppt" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#ppt" data-bs-slide-to="3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img decoding="async" src="./img/top/top1.png" alt="img1" class="d-block" style="width:100%;">
+                </div>
+                <div class="carousel-item">
+                    <img decoding="async" src="./img/top/top2.png" alt="img2" class="d-block" style="width:100%;">
+                </div>
+                <div class="carousel-item">
+                    <img decoding="async" src="./img/top/top3.png" alt="img3" class="d-block" style="width:100%;">
+                </div>
+                <div class="carousel-item">
+                    <img decoding="async" src="./img/top/top4.png" alt="img4" class="d-block" style="width:100%;">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#ppt" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#ppt" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+        <!-- 
+            弃用[利用Javascript]，改成运用bootstrap5轮播图片
+        <div id="ppt" onmouseover="stop()" onmouseleave="start()">
+            <div class="il" onclick="ppt_left()">&lt;-</div>
+            <div class="ir" onclick="ppt_right()">-&gt;</div>
+            <div id="ppt_dot">
+                <div id="pd1" onclick="click_dot1()"></div>
+                <div id="pd2" onclick="click_dot2()"></div>
+                <div id="pd3" onclick="click_dot3()"></div>
+                <div id="pd4" onclick="click_dot4()"></div>
+            </div>
+        </div> -->
+    </div>
+    <ul id="ul">
+        <li id="ul_li"><a id="ul_home" class="active"><b>首页</b><br><span>home</span></a></li>
+        <li id="ul_li"><a id="ul_works"><b>作品</b><br><span>works</span></a></li>
+        <li id="ul_li"><a id="ul_video"><b>视频</b><br><span>video</span></a></li>
+        <li id="ul_li"><a id="ul_comment"><b>留言</b><br><span>comment</span></a></li>
+        
+        <form th:if="${session.login} == 1" class="user">
+            <!-- <span class="user_massage" th:text="${session.name}">用户名用户名用户名</span> -->
+            <img th:src="@{'/head_img/'+${session.head}}" alt="" class="head_img">
+            <input type="button" value="">
+            <div class="menu">
+            <p><a href="/set" th:text="${session.name}" >用户名用户名用户名</a></p>
+            <p><a href="/exit">退出</a></p>
+            </div>
+        </form>
+            <form action="login" th:if="${session.login} == null" class="unuser">
+                <span class="user_massage">请登录，谢谢</span>
+                <input type="submit" value=""></form>
+    </ul>
+    <div class="return_top" onclick="return_top()">^</div>
+    <div class="home" id="home">
+        <div class="home_top"></div>
+        <div class="home_left"></div>
+        <div class="home_right"></div>
+        <div class="home_foot"></div>
+        <div class="home_center">
+            <a href="https://www.mcbbs.net/home.php?mod=space&uid=1564665&do=thread&view=me&from=space" target="_blank"><img src="img/head.jpg" id="head"></a>
+            <span id="font">看到右边的头像了吗？点他就是了-&gt;</span>
+        </div>
+        <div class="ad"><span id="font">广告位-不招租</span><div id="fen"></div></div>
+    </div>
+    <div class="works" id="works">
+        <div class="works_top"></div>
+        <div class="works_left"></div>
+        <div class="works_right"></div>
+        <div class="works_foot"></div>
+        <div class="works_skyblock">
+            <div class="skyblock">
+                <span>星辰倾城</span><br><span>&nbsp;Skyblock</span>
+            </div>
+            <div class="skyblock_ins_and_out">
+                <span>重大更新</span><br>
+                <span :last-child>
+                1.9版本更新换代,插件重整,共53个模组,更加流畅,少报错,启动快,完全启动只需15-20秒[虽然看起来有点慢,可是可以进服了]<br>
+                总体来说这次更新是大更新,加了扩展,不仅只有粘液科技啦！<br>
+                可配置菜单,可方便游玩，有着AuctionHouse插件的支持，让玩家分享自己的物资<br>
+                空岛不够大怎么办,没事，往下延伸，不用担心上不来，有电梯呢！<br>
+                点击下方下载吧！
+                </span>
+            </div>
+            <div class="skyblock_logo"><a href=""><img src="/img/skyblock.png"></a><br>点logo可下载<br>更新日志</div>
+            <a href=""><div class="skyblock_download"><span>前往下载</span></div></a>
+        </div>
+        <div class="works_bedwars">
+            ads
+        </div>
+    </div>
+    <div class="video" id="video">
+        <div class="video_top"></div>
+        <div class="video_left"></div>
+        <div class="video_right"></div>
+        <div class="video_foot"></div>
+    </div>
+    <div class="comment" id="comment">
+        <div class="comment_top"></div>
+        <div class="comment_left"></div>
+        <div class="comment_right"></div>
+        <div class="comment_foot"></div>
+        <div class="comment_center">
+            <table id="table_comment" class="table_comment">
+                <tr>
+                    <th class="th_user">用户</th>
+                    <th class="th_comment">评论</th>
+                </tr>
+                <tr class="tr_comment" th:each="comment : ${session.comment}">
+                    <td class="td_user"><img src="" alt="" th:src="@{'/head_img/'+${comment.head}}"><br><br><div class="underline"></div><span th:text="${comment.name}">用户名用户名用户名</span></td>
+                    <td class="td_comment">
+                        <div class="td_comment_top"><span class="text">发话于</span><span class="td_date" th:text="${comment.date}">0000-00-00</span>|<a class="td_it" th:href="|/home?only_user=${comment.user}|">只看他/她</a></div>
+                        <div class="td_content" th:utext="${#strings.replace(comment.content,'\n','&lt;br/&gt;')}">
+                            我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我<br>
+                            我<br>
+                            
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="operate">
+                <input type="button" class="display_all_comment" value="显示全部" th:unless="${session.only_user} == null" th:onclick="|comment_all()|">
+                <input type="button" value="首  页" th:onclick="page(1,[[${session.last_page}]],[[${session.only_user}]])">
+                <input type="button" value="上一页" th:onclick="page([[${session.page - 1}]],[[${session.last_page}]],[[${session.only_user}]])">
+                <input type="hidden" name="page">
+                <span th:text="${session.page_center}">1/1</span>
+                <input type="button" value="下一页" th:onclick="page([[${session.page + 1}]],[[${session.last_page}]],[[${session.only_user}]])">
+                <input type="button" value="尾  页" th:onclick="page([[${session.last_page}]],[[${session.last_page}]],[[${session.only_user}]])">
+            </div>
+            <form action="add_comment" method="get" class="add_comment">
+                <table>
+                    <td class="ac_user" th:text="${session.name}">用户名用户名用户名</td>
+                    <td class="ac_comment">
+                        <div class="ac_comment_top">快发话！！！<span class="ac_comment_top_tips" id="ac_comment_top_tips">0 行 | 0 字数</span></div>
+                        <div th:if="${session.login} == null" class="tipsToLogin">请登录，谢谢！</div>
+                        <textarea name="content" id="" th:onkeyup="|Check(this,10,255);|" th:maxlength="255" th:if="${session.login} == 1" th:utext="${session.comment_input}">a</textarea>
+                    </td>
+                    <td class="ac_oprate">
+                        <div class="VerifyCode_div">
+                            <input type="text" id="comment_Verifycode" class="VerifyCode" name="comment_VerifyCode" th:maxlength="4">
+                            <img src="jpegCode" id="VerifyCode_img" th:onclick="|change();|">
+                        </div>
+                        <input type="button" value="发表感言" class="ac_submit" id="ac_submit">
+                        <span class="comment_tips" id="comment_tips" th:text="${session.comment_tips}">tips</span>
+                    </td>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="tail"><p>Star Fall<br>始于2016</p></div>
+</body>
+</html>

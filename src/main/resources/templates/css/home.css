@@ -1,0 +1,91 @@
+:root{
+    --home_height:1000px;
+}
+.home{
+    display: none;
+    position: relative;
+    background-color: rgb(250, 243, 217);
+    width: 1129px;
+    height: var(--home_height);
+    top: 100px;
+    left: 20%;
+    overflow: none;
+}
+.home_top{
+    position: relative;
+    width:1129px;
+    height: 59px;
+    top: -59px;
+    background-image: url(../img/home_top.png);
+}
+.home_foot{
+    position: relative;
+    width:1129px;
+    height: 59px;
+    top: 92%;
+    background-image: url(../img/home_foot.png);
+}
+.home_left{
+    position: absolute;
+    background-image: url(../img/left.png);
+    height: 1000px;
+    width: 84px;
+    top: 0%;
+}
+.home_right{
+    position: absolute;
+    background-image: url(../img/right.png);
+    height: 1000px;
+    width: 84px;
+    top: 0%;
+    left:1045px;
+}
+.home_center{
+    position: relative;
+    background-color: rgb(168, 168, 164);
+    height: 100px;
+    left: 84px;
+    right: 84px;
+    top: -100px;
+    width: 961px;
+}
+.home_center #head{
+    position: absolute;
+    right: 0;
+    border-color: rgb(63, 63, 63);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 5px;
+    width: 100px;
+}
+.home_center #font{
+    position: absolute;
+    left: 5%;
+    top: 15%;
+    font-size: 50px;
+    font-style: 宋体;
+}
+.home .ad{
+    position: relative;
+    background-color: antiquewhite;
+    left: 84px;
+    right: 84px;
+    top: -100px;
+    width: 961px;
+    height: 350px;
+    border-style: solid;
+}
+.home .ad #fen{
+    position: relative;
+    background-color: rgb(0, 0, 0);
+    width: 955px;
+    height: 3px;
+    top: 100px;
+}
+.home .ad span{
+    position: relative;
+    top: 15%;
+    left: 18%;
+    font-size: 100px;
+    font-style: 仿宋;
+}
