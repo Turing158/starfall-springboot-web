@@ -1,27 +1,37 @@
 package com.starfall.controller;
 
 import com.starfall.Application;
+import com.starfall.dao.DiscussDao;
 import com.starfall.dao.UserDao;
 import com.starfall.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.Objects;
 
-//@MultipartConfig
+@MultipartConfig
 @Controller
 @SpringBootApplication(scanBasePackageClasses = Application.class)
-public class SetController {
+public class SetController extends HttpServlet {
 
     @Autowired
+    private DiscussDao discussDao;
+    @Autowired
     private UserDao userDao;
+
+
+
 
     @RequestMapping("/set")
     public String Set(
@@ -39,7 +49,7 @@ public class SetController {
         String user_session = (String) session.getAttribute("user");
         User user = userDao.findByUser(user_session);
         session.setAttribute("name",user.getName());
-        session.setAttribute("date",user.getData());
+        session.setAttribute("date",user.getDate());
         session.setAttribute("introduce",user.getIntroduce());
         session.setAttribute("email",user.getEmail());
         session.setAttribute("level",user.getLevel());
@@ -57,9 +67,9 @@ public class SetController {
 //            HttpServletResponse resp
 //
 //    ) throws IOException, ServletException {
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        DiscussService discussService = context.getBean("discussService", DiscussService.class);
+////        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
+////        UserService userService = context.getBean("userService", UserService.class);
+////        DiscussService discussService = context.getBean("discussService", DiscussService.class);
 ////        HttpSession session = req.getSession();
 //        session.setAttribute("display_me","none");
 //        session.setAttribute("display_i","none");
@@ -69,6 +79,7 @@ public class SetController {
 //        req.setCharacterEncoding("utf-8");
 //        resp.setCharacterEncoding("utf-8");
 //        resp.setContentType("text/html;charset=utf-8");
+//        ServletContext context = this.getServletContext();
 ////        直接获取input的name的值
 //        Part part = req.getPart("head_img");
 ////        这个是保存头像的，现在保存只能临时的，这个填存服务器头像的存储位置，可永久保存
@@ -77,17 +88,17 @@ public class SetController {
 //        //        获取文件后缀
 //        String fileType = part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf("."));
 //        //        设置存储位置
-//        String path = req.getServletContext().getRealPath("head_img/");
 //
+//        String path = getServletContext().getRealPath("head_img/");
 //        System.out.println(path);
 ////        System.out.println(req.getRealPath(req.getServletPath()));
 ////        写入保存的路径
 //        part.write(path+user+fileType);
 ////        永久保存头像，避免服务器崩溃导致丢失
 ////        part.write(savePath+user+fileType);
-//        userService.setHead(user,user+fileType);
+//        userDao.setHead(user,user+fileType);
 ////        更新数据库里头像的名字
-//        discussService.updateHead();
+//        discussDao.updateHeadData();
 //        session.setAttribute("head",user+fileType);
 //        resp.sendRedirect("/set");
 //        return "redirect:/set";
@@ -136,7 +147,7 @@ public class SetController {
             HttpServletRequest req,
             @RequestParam(value = "old_password",required = false) String old_password,
             @RequestParam(value = "new_password",required = false) String new_password,
-            @RequestParam(value = "seti_VerifyCode",required = false) String code
+            @RequestParam(value = "set_VerifyCode",required = false) String code
 
     ) throws IOException {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
@@ -150,11 +161,12 @@ public class SetController {
         session.setAttribute("display_me","none");
         session.setAttribute("display_p","block");
         session.setAttribute("display_i","none");
+//        System.out.println(code);
+//        System.out.println(session.getAttribute("code"));
         boolean flag = old_password.equals(userDao.findByUser(user).getPassword());
         if(flag && Objects.equals(code,session.getAttribute("code"))){
             session.setAttribute("p_tips","密码修改成功");
             session.setAttribute("p_tips_color","lightgreen");
-//            userService.setNewPassword(user,new_password);
             userDao.updatePassword(user,new_password);
             session.setAttribute("code",null);
         }

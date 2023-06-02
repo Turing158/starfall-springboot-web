@@ -47,7 +47,7 @@
                 <span>新密码：</span><input type="password" name="" th:maxlength="16" id="new_password"th:onkeypress="this.value=this.value.replace(/\s+/g,'');check_password_length()" th:onkeyup="this.value=this.value.replace(/\s+/g,'');check_password_length()">
                 <span class="tips_password" id="tips_password" ></span><br><br>
                 <span class="span2">再次输入新密码：</span><input type="password" name="new_password" id="again_password" th:maxlength="16" th:onkeypress="this.value=this.value.replace(/\s+/g,'');check_password_equal()" th:onkeyup="this.value=this.value.replace(/\s+/g,'');check_password_equal()"><br><br>
-                验证码：<input type="text" id="VerifyCode" class="VerifyCode" name="seti_VerifyCode" th:name="setp_code"><img src="jpegCode" id="setp_img_code" class="code_jpg" th:onclick="|setp_Change();|"/><span class="next_code" th:onclick="|setp_Change();|">看不清，换一张</span><br>
+                验证码：<input type="text" id="VerifyCode" class="VerifyCode" th:name="set_VerifyCode"><img src="jpegCode" id="setp_img_code" class="code_jpg" th:onclick="|setp_Change();|"/><span class="next_code" th:onclick="|setp_Change();|">看不清，换一张</span><br>
                 <span class="tips_again_password" id="tips_again_password">aaa</span><br><br>
                 <span class="p_tips" th:text="${session.p_tips}" th:style="'color:'+${session.p_tips_color}+';'"></span><input th:type="button" name="" class="confirm_password" id="confirm_password" value="确认修改">
             </form>

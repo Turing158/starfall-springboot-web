@@ -23,7 +23,7 @@ public class User implements Serializable {
     @Column()
     private String password;
     @Column()
-    private String data;
+    private String date;
     private int level;
     @Column()
     private String name;

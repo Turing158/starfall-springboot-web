@@ -51,20 +51,30 @@ public class HomeController{
         if(Objects.equals(only_user,"")){
             last_page = 1;
         }
+        int count = page*5;
         List<Discuss> discussList = new ArrayList<>();
         if(Objects.equals(only_user,"") || Objects.equals(only_user,null)){
             List<Discuss> discuss_data = discussDao.findAll();
-            for (int i = page-1; i < page+4; i++) {
+//            System.out.println(discuss_data.toString());
+            if((page)*5 > discussDao.countAllBy()){
+                count = discussDao.countAllBy();
+            }
+//            System.out.println(count);
+            for (int i = (page-1)*5; i < count; i++) {
                 discussList.add(discuss_data.get(i));
             }
         }
         else {
             last_page = (discussDao.countAllByUser(only_user)+4)/5;
             List<Discuss> discuss_data = discussDao.findAllByUser(only_user);
-            for (int i = page-1; i < page+4; i++) {
+            if((page)*5 > discussDao.countAllByUser(only_user)){
+                count = discussDao.countAllByUser(only_user);
+            }
+            for (int i = (page-1)*5; i < count; i++) {
                 discussList.add(discuss_data.get(i));
             }
         }
+
         session.setAttribute("comment",discussList);
         session.setAttribute("last_page",last_page);
         session.setAttribute("page",page);
@@ -98,7 +108,7 @@ public class HomeController{
         session.setAttribute("comment_input",content);
         if(Objects.equals(code,session.getAttribute("code"))){
 //            discussService.addComment(user,content,date,name);
-            discussDao.save(new Discuss(user,name,content,date,userDao.findByUser(user).getHead()));
+            discussDao.save(new Discuss((long) (discussDao.countAllBy()+1),user,name,content,date,userDao.findByUser(user).getHead()));
 //            discussService.updateHead();
             discussDao.updateHeadData();
             session.setAttribute("comment_tips","发话成功");

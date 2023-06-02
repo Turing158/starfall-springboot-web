@@ -7,17 +7,24 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
+@Transactional
 @Repository
 public interface UserDao extends JpaRepository<User,Long> {
     User findByUser(String user);
     int countByUser(String user);
     int countByEmail(String email);
+
     @Modifying
-    @Query(value = "update user u set u.name = :name, u.introduce = :introduce where u.user = :user",nativeQuery = true)
-    void updateInformation(@Param("user") String user, @Param("name") String name,@Param("introduce")String introduce);
+    @Query(value = "update user set user.name = ?2, user.introduce = ?3 where user.user = ?1",nativeQuery = true)
+    void updateInformation(String user, String name,String introduce);
     @Modifying
-    @Query(value = "update user u set u.password = :password where u.user = :user",nativeQuery = true)
+    @Query(value = "update user set user.password = :password where user.user = :user",nativeQuery = true)
     void updatePassword(@Param("user") String user, @Param("password") String password);
+    @Modifying
+    @Query(value = "update user set user.head = :head where user.user = :user",nativeQuery = true)
+    void setHead(@Param("user") String user, @Param("head") String head);
 
 }

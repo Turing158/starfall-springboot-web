@@ -8,10 +8,11 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 
 @Configuration
-public class WebConfiguration implements WebMvcConfigurer {
+public class WebConfiguration implements WebMvcConfigurer{
 
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/**")
