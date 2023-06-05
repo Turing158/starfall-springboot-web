@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Objects;
 
+
+//登录注册控制器
 @Controller
 @SpringBootApplication(scanBasePackageClasses = Application.class)
 public class LoginRegController {
@@ -23,6 +25,8 @@ public class LoginRegController {
     @Autowired
     private UserDao userDao;
 
+
+    //前往登录
     @RequestMapping("/login")
     public String toLogin(
             HttpSession session
@@ -31,6 +35,7 @@ public class LoginRegController {
         session.setAttribute("enter_flag",false);
         return "login";
     }
+    //前往注册
     @RequestMapping("/reg")
     public String toReg(
             HttpSession session
@@ -43,7 +48,7 @@ public class LoginRegController {
 
 
 
-
+//确认登录
     @RequestMapping("/confirm_login")
     public String login(
             HttpSession session,
@@ -58,6 +63,7 @@ public class LoginRegController {
 //        String password = req.getParameter("password");
 //        String code = req.getParameter("login_code");
         session.setAttribute("user",user);
+        //判断用户是否存在，及获取用户密码方便判断
         String flag;
         try{
             flag = userDao.findByUser(user).getPassword();
@@ -65,26 +71,31 @@ public class LoginRegController {
             flag = "null";
         }
         session.setAttribute("tips"," ");
+        //验证码为空
         if(Objects.equals(code, "")){
             session.setAttribute("tips","验证码不能为空");
             session.setAttribute("user",user);
             session.setAttribute("password",password);
         }
+        //验证码错误
         else if(!Objects.equals(code,session.getAttribute("code"))){
             session.setAttribute("tips","验证码错误");
             session.setAttribute("user",user);
             session.setAttribute("password",password);
 
         }
+        //用户不存在
         else if(Objects.equals(flag, "null")){
             session.setAttribute("tips","用户名不存在");
 
         }
+        //密码错误
         else if(!Objects.equals(flag, password)){
             session.setAttribute("tips","密码错误!");
             session.setAttribute("user",user);
 
         }
+        //成功
         else if(Objects.equals(flag, password) && Objects.equals(code,session.getAttribute("code"))){
             String name = userDao.findByUser(user).getName();
             session.setAttribute("user",user);
@@ -102,7 +113,7 @@ public class LoginRegController {
 
 
 
-
+//注册发邮件
     @RequestMapping("/verify_code")
     public String reg_email(
             HttpSession session,
@@ -127,6 +138,7 @@ public class LoginRegController {
         session.setAttribute("reg_email",email);
         session.setAttribute("code_tips"," ");
         session.setAttribute("reg_notice",null);
+        //判断用户邮箱是否存在
         boolean user_flag = false;
         boolean flag = false;
         if(userDao.countByUser(user) != 0){
@@ -135,6 +147,7 @@ public class LoginRegController {
         if(userDao.countByEmail(email) != 0){
             flag = true;
         }
+        //原来已经成功进入验证页面，用于重新发送
         if ((boolean) session.getAttribute("enter_flag")){
             email_code = getCode.getcode();
             session.setAttribute("email_code",email_code);
@@ -147,6 +160,7 @@ public class LoginRegController {
             return "reg_emailCode";
         }
         else{
+
             if(user.length() < 3){
                 session.setAttribute("reg_tips","用户名不能小于3个字符");
             }
@@ -162,12 +176,13 @@ public class LoginRegController {
             else if(flag){
                 session.setAttribute("reg_tips","邮箱已存在");
             }
+            //成功
             else if(!flag && !user_flag && Objects.equals(code,session.getAttribute("code"))){
                 session.setAttribute("enter_flag",true);
-                email_code = getCode.getcode();
+                email_code = getCode.getcode();//获取验证码
                 session.setAttribute("email_code",email_code);
                 try {
-                    mail.reg_mail(email,email_code);
+                    mail.reg_mail(email,email_code);//发邮件
                 } catch (EmailException e) {
                     e.printStackTrace();
                 }
@@ -181,7 +196,7 @@ public class LoginRegController {
 
 
 
-
+//验证邮箱验证码
     @RequestMapping("/confirm_reg")
     public String reg(
             HttpSession session,
