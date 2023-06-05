@@ -19,6 +19,11 @@
             window.location.href = "/login";
         }
         function Gologin(){
+            let i = 3
+            gotime = setInterval(function () {
+                i--;
+                document.getElementById("sec").innerHTML = i.toString();
+            },1000)
             jump = setInterval(function(){
                 window.location.href = "/login";
             },3000);
@@ -170,7 +175,7 @@
         <span>您已成功注册，请谨记账号密码，可通过邮箱找回<br>请谨慎将账号透露于别人，以免账号无法找回</span><br>
         <br>
         <br>
-        <span>本页面将在3s后跳转至登录页面</span><br><br>
+        <span>本页面将在</span><span id="sec">3</span><span>s后跳转至登录页面</span><br><br>
         <button onclick="login()">直接前往登录</button>
     </div>
 </body>

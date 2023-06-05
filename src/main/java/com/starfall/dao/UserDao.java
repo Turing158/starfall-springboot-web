@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface UserDao extends JpaRepository<User,Long> {
+public interface UserDao extends JpaRepository<User,String> {
     User findByUser(String user);
     int countByUser(String user);
     int countByEmail(String email);
