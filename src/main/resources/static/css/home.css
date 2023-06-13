@@ -1,8 +1,9 @@
 :root{
     --home_height:1000px;
 }
+
 .home{
-    display: none;
+    display: block;
     position: relative;
     background-color: rgb(250, 243, 217);
     width: 1129px;
@@ -88,4 +89,48 @@
     left: 18%;
     font-size: 100px;
     font-style: 仿宋;
+}
+
+.home_ppt img{
+    width: 854px;
+    height: 480px;
+}
+.home_ppt{
+    margin: 0 auto;
+    position: relative;
+    width: 854px;
+    height: 600px;
+    overflow: hidden;
+}
+#home_ul{
+    width: 9999px;
+    position: relative;
+}
+#home_ul li{
+    list-style: none;
+    float:left;
+    margin:0;
+}
+.home_ppt #pptfoot{
+    width: 999px;
+    height: 80px;
+    left: -5px;
+}
+.home_ppt a{
+    float: left;
+    position: relative;
+}
+.home_ppt a img{
+    left: -2px;
+    position: relative;
+    width:109.5px;
+    height: 56px;
+    margin: 0 45px;
+    border: 4px solid black;
+}
+.home_ppt a:hover :not(.active){
+    border: 4px solid rgb(7, 165, 73);
+}
+.home_ppt .active{
+    border: 4px solid rgb(7, 115, 165);
 }
