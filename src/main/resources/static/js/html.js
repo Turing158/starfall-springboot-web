@@ -94,7 +94,9 @@ function return_top(){
         clearTimeout(count);
     }
 }
-var start_notice = 900;
-var notice = document.getElementById("notice_content")
+var start_notice = 0;
+var notice = document.getElementById("notice")
 notice_interval = setInterval(function(){
-},10)
+    notice.style.left = start_notice+'px'
+    start_notice -= 2;
+},30)
