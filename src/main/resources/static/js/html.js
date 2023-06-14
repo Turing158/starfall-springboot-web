@@ -5,7 +5,7 @@ $(document).ready(function(){
         $(".video").hide();
         $(".comment").hide();
         change_home();
-        
+
     });
     $("#ul_works").click(function(){
         $(".home").hide();
@@ -13,7 +13,7 @@ $(document).ready(function(){
         $(".video").hide();
         $(".comment").hide();
         change_works();
-        
+
     });
     $("#ul_video").click(function(){
         $(".home").hide();
@@ -42,7 +42,7 @@ function change_home(){
     document.documentElement.style.setProperty(
         "--body_height",
         "1000px"
-      );
+    );
 }
 function change_works(){
     var a = document.getElementById("ul_home");
@@ -56,7 +56,7 @@ function change_works(){
     document.documentElement.style.setProperty(
         "--body_height",
         "1000px"
-      );
+    );
 }
 function change_video(){
     var a = document.getElementById("ul_home");
@@ -70,7 +70,7 @@ function change_video(){
     document.documentElement.style.setProperty(
         "--body_height",
         "1000px"
-      );
+    );
 }
 function change_comment(){
     var a = document.getElementById("ul_home");
@@ -84,13 +84,17 @@ function change_comment(){
     document.documentElement.style.setProperty(
         "--body_height",
         "2000px"
-      );
+    );
 }
 var count = 0;
 function return_top(){
     window.scrollBy(0, -100);
     count = setTimeout("return_top()", 10);
     if (document.documentElement.scrollTop <= 1) {
-      clearTimeout(count);
+        clearTimeout(count);
     }
 }
+var start_notice = 900;
+var notice = document.getElementById("notice_content")
+notice_interval = setInterval(function(){
+},10)

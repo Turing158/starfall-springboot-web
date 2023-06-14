@@ -4,16 +4,10 @@ html{
 ::-webkit-scrollbar{
     width: 10px;
 }
-::-webkit-scrollbar-button{
-    background-image: url(/img/icon/understar.png);
-    background-size: 100% 100%;
-    background-color: rgb(119, 119, 119);
-    height: 10px;
-}
 ::-webkit-scrollbar-thumb{
     border-radius: 10px;
-    border: 2px solid rgb(56, 27, 1);
-    background-image: url(/img/icon/stick.png);
+    background-color: rgb(0, 174, 255);
+    border: 1px solid rgb(56, 27, 1);
 }
 ::-webkit-scrollbar-track{
     background-color: gray;
@@ -29,16 +23,23 @@ body{
 }
 .return_top{
     position: fixed;
-    width: 50px;
-    height: 50px;
-    background-color: aliceblue;
+    width: 45px;
+    height: 45px;
     opacity: 0.3;
+    background-color: white;
     text-align: center;
     line-height: 55px;
     top: 80%;
     right: 3%;
-    border-radius: 5px;
+    border-radius: 10px;
     z-index: 10;
+}
+.return_top img{
+    position: relative;
+    top: -6px;
+    left: -2.5px;
+    width: 50px;
+    height: 50px;
 }
 .return_top:hover{
     opacity: 0.8;
@@ -62,4 +63,50 @@ body{
     color: antiquewhite;
     backdrop-filter: blur(1px);
     border-radius: 5px;
+}
+.idppt_select{
+    position: absolute;
+    bottom: 10px;
+    left: 71vh;
+    height: 70px;
+    z-index: 10;
+    background-color: rgba(167, 167, 167, 0);
+
+}
+.idppt_select img{
+    position: relative;
+    top: 10px;
+
+    width: 85.4px;
+    height: 48px;
+    margin: 0 20px;
+    opacity: 0.2;
+}
+.idppt_select:hover{
+    background-color: rgba(167, 167, 167, 0.473);
+}
+.idppt_select:hover img{
+    opacity: 0.7;
+}
+.idppt_select img:hover{
+    opacity: 1;
+}
+.notice{
+    position: absolute;
+    background-color: rgba(70, 70, 70, 0.363);
+    top: 15px;
+    width: 9999px;
+    height: 35px;
+    z-index: 10;
+    list-style: none;
+    color: aliceblue;
+    overflow: hidden;
+}
+.notice li{
+    position: relative;
+    top: 5px;
+    left: 900px;
+    margin-top: 1px;
+    margin-right: 1000px;
+    float: left;
 }

@@ -2,7 +2,7 @@
     --comment_height:2000px;
 }
 .comment{
-    display: block;
+    display: none;
     position: relative;
     background-color: rgb(250, 243, 217);
     width: 1129px;

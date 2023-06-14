@@ -34,5 +34,5 @@ function active(b){
         lj.item(i).className = "";
         
     }
-    lj.item(b+9).className = "active";
+    lj.item(b+13).className = "active";
 }

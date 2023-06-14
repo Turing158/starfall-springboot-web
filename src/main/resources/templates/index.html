@@ -24,12 +24,18 @@
 <body background="img/bg.png">
 <div class="top">
     <div class="starfall">StarFall</div>
+    <ul class="notice">
+        <li id="notice_content">我是个公告1</li>
+        <li>我是个公告2</li>
+        <li>我是个公告3</li>
+        <li>我是个公告4</li>
+    </ul>
     <div class="carousel slide" id="ppt" data-bs-ride="carousel" data-bs-interval="3000">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#ppt" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#ppt" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#ppt" data-bs-slide-to="2"></button>
-            <button type="button" data-bs-target="#ppt" data-bs-slide-to="3"></button>
+        <div class="idppt_select">
+            <img src="./img/top/top1.png" alt="" data-bs-target="#ppt" data-bs-slide-to="0" class="active">
+            <img src="./img/top/top2.png" alt="" data-bs-target="#ppt" data-bs-slide-to="1">
+            <img src="./img/top/top3.png" alt="" data-bs-target="#ppt" data-bs-slide-to="2">
+            <img src="./img/top/top4.png" alt="" data-bs-target="#ppt" data-bs-slide-to="3">
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -68,7 +74,7 @@
 <ul id="ul">
     <li id="ul_li"><a id="ul_home" class="active"><b>首页</b><br><span>home</span></a></li>
     <li id="ul_li"><a id="ul_works"><b>作品</b><br><span>works</span></a></li>
-    <li id="ul_li"><a id="ul_video" href=""><b>博客</b><br><span>Blog</span></a></li>
+    <li id="ul_li"><a id="ul_video" href="https://blog.csdn.net/weixin_46396315?type=blog"><b>博客</b><br><span>Blog</span></a></li>
     <li id="ul_li"><a id="ul_comment"><b>留言</b><br><span>comment</span></a></li>
 
     <form th:if="${session.login} == 1" class="user">
@@ -84,7 +90,7 @@
         <span class="user_massage">请登录，谢谢</span>
         <input type="submit" value=""></form>
 </ul>
-<div class="return_top" onclick="return_top()">^</div>
+<div class="return_top" onclick="return_top()"><img src="./img/icon/Rtop.png" alt=""></div>
 <div class="home" id="home">
     <div class="home_top"></div>
     <div class="home_left"></div>
