@@ -100,7 +100,7 @@ function notice_start(noticeLenght){
     notice_interval = setInterval(function(){
         notice.style = 'left:'+start_notice+'px;width:'+noticeLenght*1000+2000+'px;'
         start_notice -= 4;
-        if(Math.abs(start_notice) >= noticeLenght*1000+500){
+        if(Math.abs(start_notice) >= noticeLenght*1000+600){
             start_notice = 0;
         }
     },50)
