@@ -94,9 +94,14 @@ function return_top(){
         clearTimeout(count);
     }
 }
-var start_notice = 0;
-var notice = document.getElementById("notice")
-notice_interval = setInterval(function(){
-    notice.style.left = start_notice+'px'
-    start_notice -= 2;
-},30)
+function notice_start(noticeLenght){
+    var start_notice = 0;
+    var notice = document.getElementById("notice");
+    notice_interval = setInterval(function(){
+        notice.style = 'left:'+start_notice+'px;width:'+noticeLenght*1000+'px;'
+        start_notice -= 2;
+        if(Math.abs(start_notice) >= noticeLenght*1000){
+            start_notice = 0;
+        }
+    },30)
+}

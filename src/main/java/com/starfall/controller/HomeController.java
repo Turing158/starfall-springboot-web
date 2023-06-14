@@ -14,6 +14,7 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -44,6 +45,8 @@ public class HomeController{
     ) {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
 //        DiscussService discussService = context.getBean("discussService", DiscussService.class);
+        session.setAttribute("noticeLength",noticeDao.count());
+//        System.out.println(noticeDao.count());
         session.setAttribute("notices",noticeDao.findAll());
         //判断有没有传入“只看”
         if (Objects.equals(only_user,"null")){
