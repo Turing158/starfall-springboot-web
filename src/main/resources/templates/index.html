@@ -25,7 +25,7 @@
 <div class="top">
     <div class="starfall">StarFall</div>
     <ul class="notice" id="notice">
-        <li>我是个公告1</li>
+        <li th:each="notice:${session.notices}" th:text="${notice.content}"></li>
     </ul>
     <div class="carousel slide" id="ppt" data-bs-ride="carousel" data-bs-interval="3000">
         <div class="idppt_select">

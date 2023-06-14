@@ -2,6 +2,7 @@ package com.starfall.controller;
 
 import com.starfall.Application;
 import com.starfall.dao.DiscussDao;
+import com.starfall.dao.NoticeDao;
 import com.starfall.dao.UserDao;
 import com.starfall.entity.Discuss;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class HomeController{
     private DiscussDao discussDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private NoticeDao noticeDao;
 
 
 //进入主页与返回主页的控制
@@ -41,6 +44,7 @@ public class HomeController{
     ) {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
 //        DiscussService discussService = context.getBean("discussService", DiscussService.class);
+        session.setAttribute("notices",noticeDao.findAll());
         //判断有没有传入“只看”
         if (Objects.equals(only_user,"null")){
             only_user = "";
