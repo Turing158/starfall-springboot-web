@@ -21,9 +21,10 @@
     <script src="js/click_power.js" type="text/javascript"></script>
     <script src="js/home.js" type="text/javascript"></script>
 </head>
-<body background="img/bg.png" th:onload="'notice_start('+${session.noticeLength}+')'">
+<body background="img/bg.png" onload="notice_start()">
 <div class="top">
     <div class="starfall">StarFall</div>
+    <input type="hidden" th:value="${session.noticeLength}" id="NoticeLength">
     <ul class="notice" id="notice" >
         <li th:each="notice:${session.notices}" th:text="${notice.content}"></li>
     </ul>

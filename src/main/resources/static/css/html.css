@@ -101,11 +101,12 @@ body{
     list-style: none;
     color: aliceblue;
     overflow: hidden;
+    transition: none;
 }
 .notice li{
     position: relative;
     top: 5px;
-    left: 1200px;
+    left: 1900px;
     margin-top: 1px;
     margin-right: 1000px;
     float: left;

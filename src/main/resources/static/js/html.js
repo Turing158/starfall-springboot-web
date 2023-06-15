@@ -94,14 +94,30 @@ function return_top(){
         clearTimeout(count);
     }
 }
-function notice_start(noticeLenght){
-    var start_notice = 0;
-    var notice = document.getElementById("notice");
-    notice_interval = setInterval(function(){
-        notice.style = 'left:'+start_notice+'px;width:'+noticeLenght*1000+2000+'px;'
-        start_notice -= 4;
-        if(Math.abs(start_notice) >= noticeLenght*1000+600){
-            start_notice = 0;
-        }
-    },50)
+//这个播放公告动画会卡顿
+// function notice_start(noticeLenght){
+//     var start_notice = 0;
+//     var notice = document.getElementById("notice");
+//     window.notice_interval = setInterval(function(){
+//         notice.style = 'left:'+start_notice+'px;width:'+noticeLenght*1000+2000+'px;'
+//         start_notice -= 5;
+//         if(Math.abs(start_notice) >= noticeLenght*1000+600){
+//             start_notice = 0;
+//         }
+//     },50);
+
+// }
+//此方法采用 requestAnimationFrame() 解决卡顿问题
+let start_notice = 0;
+function notice_start(){
+    // if(start_notice < -500){
+    requestAnimationFrame(notice_start);
+    // }
+    let noticeLength = document.getElementById("NoticeLength").value*1200+4000;
+    let notice = document.getElementById("notice");
+    notice.style = 'left:'+start_notice+'px;width:'+noticeLength+'px;';
+    start_notice -= 1;
+    if(Math.abs(start_notice) >= noticeLength-2000){
+        start_notice = 0;
+    }
 }
