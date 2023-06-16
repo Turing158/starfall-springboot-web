@@ -65,7 +65,7 @@ button:hover{
     background-color: rgb(168, 168, 168);
 }
 span{
-color: cornflowerblue;
+    color: cornflowerblue;
 }
 a{
     color: antiquewhite;
@@ -77,20 +77,19 @@ a:hover{
     position: absolute;
     background-color: black;
     opacity: 0.4;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     top: 0px;
     left: 0px;
     display:none;
 }
 .confirm_box{
-    position: relative;
+    position: absolute;
     width: 700px;
     height: 400px;
     background-color: rgb(164, 214, 214);
     display:none;
     top: 180px;
-    left: 600px;
     border-radius: 50px;
     border: 3px solid rgb(99, 95, 95);
 }
@@ -99,17 +98,14 @@ a:hover{
     font-size: 50px;
     color: rgb(18, 75, 28);
     font-weight: bold;
-    top: -160px;
 }
 .confirm_box span{
     position: relative;
-    top: -160px;
     font-size: 20px;
     color: rgb(19, 66, 1);
     font-weight: bold;
 }
 .confirm_box button{
     position: relative;
-    top: -160px;
     left: 0;
 }
