@@ -28,7 +28,7 @@
     <ul class="notice" id="notice" >
         <li th:each="notice:${session.notices}" th:text="${notice.content}"></li>
     </ul>
-    <div class="carousel slide" id="ppt" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel slide" id="ppt" data-bs-ride="carousel" data-bs-interval="3000" style="left: 0px">
         <div class="idppt_select">
             <img src="./img/top/top1.png" alt="" data-bs-target="#ppt" data-bs-slide-to="0" class="active">
             <img src="./img/top/top2.png" alt="" data-bs-target="#ppt" data-bs-slide-to="1">

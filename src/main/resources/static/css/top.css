@@ -11,6 +11,7 @@
 }
 .starfall{
     position: relative;
+    height: 200px;
     top: 200px;
     z-index: 10;
     float: left;
@@ -105,7 +106,7 @@
     bottom: 10px;
     /* left: 71vh; */
     height: 70px;
-    z-index: 10;
+    z-index: 20;
     background-color: rgba(167, 167, 167, 0);
 
 }
