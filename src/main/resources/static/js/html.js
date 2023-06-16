@@ -29,6 +29,9 @@ $(document).ready(function(){
         $(".comment").show();
         change_comment();
     });
+    $("#rt").click(function(){
+        $("html,body").animate({scrollTop:"0px"},100);
+    });
 });
 function change_home(){
     var a = document.getElementById("ul_home");
@@ -88,11 +91,11 @@ function change_comment(){
 }
 var count = 0;
 function return_top(){
-    window.scrollBy(0, -100);
-    count = setTimeout("return_top()", 10);
-    if (document.documentElement.scrollTop <= 1) {
-        clearTimeout(count);
-    }
+    $("html,body").Animation({scrollTo:"0px"},200);
+    // count = setInterval("return_top()", 10);
+    // if (document.documentElement.scrollTop <= 1) {
+    //     clearInterval(count);
+    // }
 }
 //这个播放公告动画会卡顿
 // function notice_start(noticeLenght){
