@@ -1,6 +1,6 @@
 *{
     color: rgb(255, 255, 255);
-    user-select: none;  
+    user-select: none;
 }
 html{
     overflow-x: hidden;
@@ -57,7 +57,7 @@ span{
     height: 96vh;
     background-color: #474747;
 }
-.me_square{
+.square{
     position: relative;
     transform: rotate(45deg);
     left: 108px;
@@ -65,6 +65,7 @@ span{
     background-color: rgb(0, 0, 0);
     width: 15px;
     height: 15px;
+    transition: all 0.5s;
     display: block;
 }
 .date_span{
@@ -79,16 +80,6 @@ span{
     width: 60vw;
     height: 96vh;
     background-color: #474747;
-}
-.i_square{
-    position: relative;
-    transform: rotate(45deg);
-    left: 108px;
-    top: 188px;
-    background-color: rgb(0, 0, 0);
-    width: 15px;
-    height: 15px;
-    display: none;
 }
 input{
     border:2px solid black;
@@ -142,16 +133,6 @@ textarea:focus{
     width: 60vw;
     height: 96vh;
     background-color: #474747;
-}
-.p_square{
-    position: relative;
-    display: none;
-    transform: rotate(45deg);
-    left: 108px;
-    top: 252px;
-    background-color: rgb(0, 0, 0);
-    width: 15px;
-    height: 15px;
 }
 .span2{
     position: relative;
@@ -228,16 +209,6 @@ ul .head_set{
     width: 60vw;
     height: 96vh;
     background-color: #474747;
-}
-.h_square{
-    position: relative;
-    transform: rotate(45deg);
-    left: 108px;
-    top: 45px;
-    background-color: rgb(0, 0, 0);
-    width: 15px;
-    height: 15px;
-    display: none;
 }
 #upload_head{
     position: relative;

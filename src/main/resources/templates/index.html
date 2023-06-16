@@ -90,7 +90,7 @@
 </ul>
 <div class="return_top" onclick="return_top()"><img src="./img/icon/Rtop.png" alt=""></div>
 <div class="mainContent">
-    <div class="home" id="home">
+    <div class="home" id="home" th:style="'display:'+${session.homeBlock}">
         <div class="home_top"></div>
         <div class="home_left"></div>
         <div class="home_right"></div>
@@ -142,7 +142,7 @@
         <div class="video_right"></div>
         <div class="video_foot"></div>
     </div>
-    <div class="comment" id="comment">
+    <div class="comment" id="comment" th:style="'display:'+${session.commentBlock}">
         <div class="comment_top"></div>
         <div class="comment_left"></div>
         <div class="comment_right"></div>

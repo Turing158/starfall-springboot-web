@@ -14,7 +14,6 @@ import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -48,6 +47,7 @@ public class HomeController{
         session.setAttribute("noticeLength",noticeDao.count());
 //        System.out.println(noticeDao.count());
         session.setAttribute("notices",noticeDao.findAll());
+
         //判断有没有传入“只看”
         if (Objects.equals(only_user,"null")){
             only_user = "";
@@ -60,6 +60,12 @@ public class HomeController{
         //传入翻看页数
         if (!StringUtils.isEmpty(page_str)){
             page = Integer.valueOf(page_str);
+        }
+        session.setAttribute("homeBlock","block");
+        session.setAttribute("commentBlock","none");
+        if(!StringUtils.isEmpty(page_str)|| !StringUtils.isEmpty(only_user)){
+            session.setAttribute("commentBlock","block");
+            session.setAttribute("homeBlock","none");
         }
         //总页数
         int last_page = (discussDao.countAllBy()+4)/5;

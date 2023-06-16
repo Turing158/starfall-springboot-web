@@ -1,45 +1,55 @@
 $(document).ready(function(){
     $(".ul_me").click(function(){
-        $("#i_square").hide();
+        // $("#i_square").hide();
         $("#information").hide();
-        $("#p_square").hide();
+        // $("#p_square").hide();
         $("#password").hide();
-        $("#me_square").show();
+        // $("#me_square").show();
         $("#me").show();
-        $("#h_square").hide();
+        // $("#h_square").hide();
         $("#head_page").hide();
     });
     $(".ul_inf").click(function(){
-        $("#i_square").show();
+        // $("#i_square").show();
         $("#information").show();
-        $("#p_square").hide();
+        // $("#p_square").hide();
         $("#password").hide();
-        $("#me_square").hide();
+        // $("#me_square").hide();
         $("#me").hide();
-        $("#h_square").hide();
+        // $("#h_square").hide();
         $("#head_page").hide();
     });
     $(".ul_pass").click(function(){
-        $("#i_square").hide();
+        // $("#i_square").hide();
         $("#information").hide();
-        $("#p_square").show();
+        // $("#p_square").show();
         $("#password").show();
-        $("#me_square").hide();
+        // $("#me_square").hide();
         $("#me").hide();
-        $("#h_square").hide();
+        // $("#h_square").hide();
         $("#head_page").hide();
     });
     $(".head_set").click(function(){
-        $("#i_square").hide();
+        // $("#i_square").hide();
         $("#information").hide();
-        $("#p_square").hide();
+        // $("#p_square").hide();
         $("#password").hide();
-        $("#me_square").hide();
+        // $("#me_square").hide();
         $("#me").hide();
-        $("#h_square").show();
+        // $("#h_square").show();
         $("#head_page").show();
     });
 });
+function moveSqurt(i){
+    var s = document.getElementById("square");
+    switch(i){
+        case 1:s.style.top = 125+'px';break;
+        case 2:s.style.top = 190+'px';break;
+        case 3:s.style.top = 250+'px';break;
+        case 4:s.style.top = 45+'px';break;
+    }
+
+}
 // function display_me(){
 //     var a = document.getElementById("i_square");
 //     var b = document.getElementById("information");
@@ -164,16 +174,16 @@ window.onload=function(){
         // 读取文件:
         let reader = new FileReader();
         reader.onload = function(e) {
-        let data = e.target.result;
-        preview1.src = data;
-        preview2.src = data;
-        preview3.src = data;
-        
+            let data = e.target.result;
+            preview1.src = data;
+            preview2.src = data;
+            preview3.src = data;
+
         };
         // 以DataURL的形式读取文件:
         reader.readAsDataURL(file);
-     
-                });
+
+    });
 }
 
 
