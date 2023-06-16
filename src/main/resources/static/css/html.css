@@ -13,13 +13,21 @@ html{
     background-color: gray;
 }
 body{
-    width: auto;
+    /* display: flex;
+    justify-content: center; */
+    width: 100vw;
     min-height: 100vh;
 }
 *{
     margin:0px;
     padding:0px;
     user-select: none;
+}
+.mainContent{
+    position: relative;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
 }
 .return_top{
     position: fixed;
@@ -47,7 +55,7 @@ body{
 .tail{
     position: relative;
     height:100px;
-    width: 100%;
+    width: 100vw;
     background: url(../img/tail.png);
     background-size: 50px;
     z-index: 1;
@@ -63,51 +71,4 @@ body{
     color: antiquewhite;
     backdrop-filter: blur(1px);
     border-radius: 5px;
-}
-.idppt_select{
-    position: absolute;
-    bottom: 10px;
-    left: 71vh;
-    height: 70px;
-    z-index: 10;
-    background-color: rgba(167, 167, 167, 0);
-
-}
-.idppt_select img{
-    position: relative;
-    top: 10px;
-
-    width: 85.4px;
-    height: 48px;
-    margin: 0 20px;
-    opacity: 0.2;
-}
-.idppt_select:hover{
-    background-color: rgba(167, 167, 167, 0.473);
-}
-.idppt_select:hover img{
-    opacity: 0.7;
-}
-.idppt_select img:hover{
-    opacity: 1;
-}
-.notice{
-    position: absolute;
-    background-color: rgba(70, 70, 70, 0.363);
-    top: 15px;
-    width: 9999px;
-    height: 35px;
-    z-index: 10;
-    list-style: none;
-    color: aliceblue;
-    overflow: hidden;
-    transition: none;
-}
-.notice li{
-    position: relative;
-    top: 5px;
-    left: 1900px;
-    margin-top: 1px;
-    margin-right: 1000px;
-    float: left;
 }

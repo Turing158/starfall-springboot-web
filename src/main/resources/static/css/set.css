@@ -2,8 +2,12 @@
     color: rgb(255, 255, 255);
     user-select: none;  
 }
+html{
+    overflow-x: hidden;
+}
 body{
-    background-color: rgb(49, 49, 49);
+    /* background-color: rgb(49, 49, 49); */
+    background-image: url(../img/bg.png);
     height: 800px;
     margin: 0;
     padding: 0;
@@ -18,7 +22,7 @@ ul{
     background-color: rgb(29, 28, 28);
     color: aliceblue;
     width:100px;
-    height: 800px;
+    height: 100vh;
 }
 ul li{
     float: left;
@@ -49,8 +53,8 @@ span{
     border: 2px solid rgb(0, 0, 0);
     display: block;
     left: 115px;
-    width: 100%;
-    height: 778px;
+    width: 60vw;
+    height: 96vh;
     background-color: #474747;
 }
 .me_square{
@@ -72,8 +76,8 @@ span{
     border: 2px solid rgb(0, 0, 0);
     display: none;
     left: 115px;
-    width: 100%;
-    height: 778px;
+    width: 60vw;
+    height: 96vh;
     background-color: #474747;
 }
 .i_square{
@@ -135,8 +139,8 @@ textarea:focus{
     border: 2px solid rgb(0, 0, 0);
     display: none;
     left: 115px;
-    width: 100%;
-    height: 778px;
+    width: 60vw;
+    height: 96vh;
     background-color: #474747;
 }
 .p_square{
@@ -221,8 +225,8 @@ ul .head_set{
     border: 2px solid rgb(0, 0, 0);
     display: none;
     left: 115px;
-    width: 100%;
-    height: 778px;
+    width: 60vw;
+    height: 96vh;
     background-color: #474747;
 }
 .h_square{

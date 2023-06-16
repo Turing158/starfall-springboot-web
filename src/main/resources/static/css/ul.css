@@ -6,17 +6,19 @@
     -webkit-transition: all 250ms;
 }
 #ul{
-    width: 100%;
+    display: flex;
+    width: 100vw;
     height: 55px;
     background-color: rgb(56, 55, 55);
     list-style: none;
     position: sticky;
+    justify-content: center;
     top:0;
+    left: 0;
     overflow: none;
-    padding-left: 38%;
     font-family: cool_font;
     font-weight: bold;
-    z-index: 1;
+    z-index: 10;
     box-shadow:0px 1px 5px rgb(0, 0, 0);
 }
 #ul_li{
@@ -108,9 +110,9 @@ ul form:hover{
     border:2px solid gray;
 }
 .user{
-    position: relative;
+    position: absolute;
     float: right;
-    right: 15px;
+    right: 12px;
     border: 2px solid rgb(255, 255, 255);
     color: aliceblue;
     border-radius: 10px;
@@ -123,7 +125,6 @@ ul form:hover{
     border-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    right: 1px;
     width: 150px;
 }
 .menu{
@@ -132,8 +133,8 @@ ul form:hover{
     border-radius: 0px 0px 5px 5px;
     width: 150px;
     height: 115px;
+    right: 2px;
     top:-210px;
-    left: -2px;
     border: 2px solid rgb(255, 255, 255);
     box-shadow:0px 4px 4px rgb(0, 0, 0);
     border-top: 0;
@@ -154,9 +155,14 @@ ul form:hover{
     background-color:rgb(80, 80, 80);
 }
 .user:hover .menu{
-    top: -95px;
-    right: 2px;
+    top: -98px;
     border:2px solid gray;
     border-top: 0;
     opacity: 1;
+}
+.unuser{
+    position: absolute;
+    display: block;
+    float: right;
+    right: 12px;
 }

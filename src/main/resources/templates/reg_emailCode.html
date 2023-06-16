@@ -4,153 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../../../../Desktop/新建文件夹/img/ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../../../../../Desktop/新建文件夹/css/emailCode.css">
+    <link rel="stylesheet" href="../../../../../../Desktop/新建文件夹/css/font.css">
     <title>已发送验证码，请查收-|StarFall|</title>
-    <script src="js/jquery.js">
-    </script>
-    <script>
-        $(document).ready(function(){
-            $('input').focus();
-            $('.code-box').click(function(){
-                $('input').focus();
-            });
-        });
-        function login(){
-            window.location.href = "/login";
-        }
-        function Gologin(){
-            let i = 3
-            gotime = setInterval(function () {
-                i--;
-                document.getElementById("sec").innerHTML = i.toString();
-            },1000)
-            jump = setInterval(function(){
-                window.location.href = "/login";
-            },3000);
-        }
-        // function update_big(){
-        //     document.getElementById("code-hidden").value.toUpperCase();
-        // }
-    </script>
-    <style>
-        *{
-            user-select: none;
-        }
-        html{
-            overflow-x: hidden;
-            overflow-y: hidden;
-        }
-        body{
-            background-color: rgb(22, 48, 51);
-        }
-        div{
-            position: relative;
-            top: 100px;
-            left: 350px;
-            text-align: center;
-        }
-        input{
-            position: relative;
-            opacity: 0;
-            left: -1000px;
-            /* display: block; */
-        }
-        .code-item{
-            position: relative;
-            background-color: rgb(32, 159, 190);
-            border: 2px solid black;
-            width: 80px;
-            height: 100px;
-            border-radius: 10px;
-            text-transform: uppercase;
-            float: left;
-            margin: 0 5px;
-            font-size: 70px;
-            transition: all 250ms;
-        }
-        .active{
-            background-color: rgb(83, 221, 255);
-            border: 2px solid rgb(255, 255, 255);
-        }
-        .code-box{
-            text-align: center;
-        }
-        .text{
-            position: relative;
-            float: left;
-            left:-125px;
-            top: 200px;
-        }
-        .text p{
-            color: aquamarine;
-        }
-        button{
-            position: relative;
-            border: 1px solid black;
-            border-radius: 10px;
-            margin: 10px 20px;
-            width: 100px;
-            height: 50px;
-            transition: all 250ms;
-        }
-        button:hover{
-            background-color: rgb(168, 168, 168);
-        }
-        span{
-        color: cornflowerblue;
-        }
-        a{
-            color: antiquewhite;
-        }
-        a:hover{
-            text-decoration: underline;
-        }
-        .gray{
-            position: absolute;
-            background-color: black;
-            opacity: 0.4;
-            width: 100%;
-            height: 100%;
-            top: 0px;
-            left: 0px;
-            display:none;
-        }
-        .confirm_box{
-            position: relative;
-            width: 700px;
-            height: 400px;
-            background-color: rgb(164, 214, 214);
-            display:none;
-            top: 180px;
-            left: 600px;
-            border-radius: 50px;
-            border: 3px solid rgb(99, 95, 95);
-        }
-        .confirm_box h1{
-            position: relative;
-            font-size: 50px;
-            color: rgb(18, 75, 28);
-            font-weight: bold;
-            top: -160px;
-        }
-        .confirm_box span{
-            position: relative;
-            top: -160px;
-            font-size: 20px;
-            color: rgb(19, 66, 1);
-            font-weight: bold;
-        }
-        .confirm_box button{
-            position: relative;
-            top: -160px;
-            left: 0;
-        }
-    </style>
+    <script src="../../../../../../Desktop/新建文件夹/js/jquery.js"></script>
+    <script src="../../../../../../Desktop/新建文件夹/js/emailCode.js">   </script>
 </head>
 <body>
     <div class="code-box" onclick="">
         <form action="confirm_reg" method="post">
-            <input type="text" class="code-hidden" id="code-hidden" name="reg_email_code">
+            <input type="search" class="code-hidden" id="code-hidden" name="reg_email_code">
         <div class="code-box" onclick="">
             <p class="code-item"></p>
             <p class="code-item"></p>
@@ -179,57 +43,6 @@
         <button onclick="login()">直接前往登录</button>
     </div>
 </body>
-<script>
-    const input = document.querySelector('.code-hidden');
-    const items=document.querySelectorAll('.code-item');
-    const reg = /^[a-z0-9]{0,6}$/;
-    let tmp = '';
-    input.addEventListener('focus',()=>{
-        input.setSelectionRange(input.value.length-1,input.value.length);
-        const val = input.value;
-        if(!val){
-            items[0].classList.add('active');
-            return;
-        }
-        if(val.length < items.length){
-            items[val.length].classList.add('active');
-        }
-        if(val.length == items.length){
-            items[val.length - 1].classList.add('active');
-        }
-    });
-    input.addEventListener('blur',()=>{
-        items.forEach(item=>{
-            item.classList.remove('active');
-        });
-    });
-    input.addEventListener('input',(e)=>{
-        items.forEach(item=>{
-            item.textContent='';
-            item.classList.remove('active');
-        });
-        const val = e.target.value;
-        if(reg.test(val)){
-            tmp = val;
-        }
-        else{
-            input.value = tmp;
-        }
-        const arr = input.value.split('');
-        if(arr.length){
-            items[0].classList.add('active');
-        }
-        arr.forEach((item,index)=>{
-            items[index].textContent = item;
-            items[index].classList.add('active');
-            if(items[index + 1]){
-                items[index].classList.add('active');
-
-            }
-            if(index == items.length - 1){
-                items[index].classList.add('active');
-            }
-        })
-    });
+<script src="../../../../../../Desktop/新建文件夹/js/emailCode_back.js">
 </script>
 </html>
