@@ -72,8 +72,8 @@
 <ul id="ul">
     <li id="ul_li"><a id="ul_home" class="active"><b>首页</b><br><span>home</span></a></li>
     <li id="ul_li"><a id="ul_works"><b>作品</b><br><span>works</span></a></li>
-    <li id="ul_li"><a id="ul_video" href="https://blog.csdn.net/weixin_46396315?type=blog"><b>博客</b><br><span>Blog</span></a></li>
-    <li id="ul_li"><a id="ul_comment"><b>留言</b><br><span>comment</span></a></li>
+    <li id="ul_li"><a  href="https://blog.csdn.net/weixin_46396315?type=blog"><b>博客</b><br><span>Blog</span></a></li>
+    <li id="ul_li"><a href="/topic"><b>主题</b><br><span>topic</span></a></li>
 
     <form th:if="${session.login} == 1" class="user">
         <!-- <span class="user_massage" th:text="${session.name}">用户名用户名用户名</span> -->
@@ -95,20 +95,6 @@
         <div class="home_left"></div>
         <div class="home_right"></div>
         <div class="home_foot"></div>
-        <div class="home_ppt">
-            <ul id="home_ul">
-                <li><img src="img/home/top1.png" alt="1"></li>
-                <li><img src="img/home/top2.png" alt="1"></li>
-                <li><img src="img/home/top3.png" alt="1"></li>
-                <li><img src="img/home/top4.png" alt="1"></li>
-            </ul>
-            <ul id = "pptfoot">
-                <a href="javascript:home_change(0)" class=""><img class="active" src="img/home/top1.png" alt=""></a>
-                <a href="javascript:home_change(1)"><img src="img/home/top2.png" alt=""></a>
-                <a href="javascript:home_change(2)"><img src="img/home/top3.png" alt=""></a>
-                <a href="javascript:home_change(3)"><img src="img/home/top4.png" alt=""></a>
-            </ul>
-        </div>
     </div>
     <div class="works" id="works">
         <div class="works_top"></div>
@@ -141,58 +127,6 @@
         <div class="video_left"></div>
         <div class="video_right"></div>
         <div class="video_foot"></div>
-    </div>
-    <div class="comment" id="comment" th:style="'display:'+${session.commentBlock}">
-        <div class="comment_top"></div>
-        <div class="comment_left"></div>
-        <div class="comment_right"></div>
-        <div class="comment_foot"></div>
-        <div class="comment_center">
-            <table id="table_comment" class="table_comment">
-                <tr>
-                    <th class="th_user">用户</th>
-                    <th class="th_comment">评论</th>
-                </tr>
-                <tr class="tr_comment" th:each="comment : ${session.comment}">
-                    <td class="td_user"><img src="" alt="" th:src="@{'/head_img/'+${comment.head}}"><br><br><div class="underline"></div><span th:text="${comment.name}">用户名用户名用户名</span></td>
-                    <td class="td_comment">
-                        <div class="td_comment_top"><span class="text">发话于</span><span class="td_date" th:text="${comment.date}">0000-00-00</span>|<a class="td_it" th:href="|/home?only_user=${comment.user}|">只看他/她</a></div>
-                        <div class="td_content" th:utext="${#strings.replace(comment.content,'\n','&lt;br/&gt;')}">
-                            我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我我<br>
-                            我<br>
-    
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <div class="operate">
-                <input type="button" class="display_all_comment" value="显示全部" th:unless="${session.only_user} == null" th:onclick="|comment_all()|">
-                <input type="button" value="首  页" th:onclick="page(1,[[${session.last_page}]],[[${session.only_user}]])">
-                <input type="button" value="上一页" th:onclick="page([[${session.page - 1}]],[[${session.last_page}]],[[${session.only_user}]])">
-                <input type="hidden" name="page">
-                <span th:text="${session.page_center}">1/1</span>
-                <input type="button" value="下一页" th:onclick="page([[${session.page + 1}]],[[${session.last_page}]],[[${session.only_user}]])">
-                <input type="button" value="尾  页" th:onclick="page([[${session.last_page}]],[[${session.last_page}]],[[${session.only_user}]])">
-            </div>
-            <form action="add_comment" method="get" class="add_comment">
-                <table>
-                    <td class="ac_user" th:text="${session.name}">用户名用户名用户名</td>
-                    <td class="ac_comment">
-                        <div class="ac_comment_top">快发话！！！<span class="ac_comment_top_tips" id="ac_comment_top_tips">0 行 | 0 字数</span></div>
-                        <div th:if="${session.login} == null" class="tipsToLogin">请登录，谢谢！</div>
-                        <textarea name="content" id="" th:onkeyup="|Check(this,10,255);|" th:maxlength="255" th:if="${session.login} == 1" th:utext="${session.comment_input}">a</textarea>
-                    </td>
-                    <td class="ac_oprate">
-                        <div class="VerifyCode_div">
-                            <input type="text" id="comment_Verifycode" class="VerifyCode" name="comment_VerifyCode" th:maxlength="4">
-                            <img src="jpegCode" id="VerifyCode_img" th:onclick="|change();|">
-                        </div>
-                        <input type="button" value="发表感言" class="ac_submit" id="ac_submit">
-                        <span class="comment_tips" id="comment_tips" th:text="${session.comment_tips}">tips</span>
-                    </td>
-                </table>
-            </form>
-        </div>
     </div>
 </div>
 <div class="tail"><p>Star Fall<br>始于2016</p></div>

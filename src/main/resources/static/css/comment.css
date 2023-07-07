@@ -1,8 +1,10 @@
+/* 弃用  弃用  弃用  弃用  弃用  弃用 */
+
 :root{
     --comment_height:2000px;
 }
 .comment{
-    display: none;
+    display: block;
     position: relative;
     background-color: rgb(250, 243, 217);
     width: 1129px;
@@ -39,6 +41,7 @@
     top: 0%;
     left:1045px;
 }
+/* 
 .table_comment{
     position: relative;
     background-color: transparent;
@@ -91,13 +94,12 @@
 .td_comment{
     position: relative;
     color:rgb(199, 199, 199);
-    /* display: block; */
+    
     vertical-align: top;
     left: 10px;
     height:304px;
     border-top: 4px solid rgb(179, 82, 3);
     border-bottom: 4px solid rgb(179, 82, 3);
-    /* justify-content: center; */
 }
 .td_comment .text{
     color: rgb(61, 61, 61);
@@ -282,4 +284,20 @@
 .VerifyCode_div img{
     position: relative;
     top: -1px;
+} */
+
+
+
+
+
+
+.comment_content{
+    position: relative;
+    left: 100px;
+}
+
+.comment_content .icon img{
+    position: relative;
+    width: 25px;
+    height: 25px;
 }

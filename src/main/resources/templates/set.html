@@ -17,7 +17,7 @@
     <li><a href="/edit_admin" th:if="${session.level} == 9981">前往管理</a></li>
     <li><a href="/home">返回主页</a></li>
 </ul>
-<div class="square" id="square" th:style="'display:'+${session.display_me}+';'"></div>
+<div class="square" id="square"></div>
 <div class="me" id="me" th:style="'display:'+${session.display_me}+';'">
     你好！<span th:text="${session.name}">用户名</span>
     <p>这里是你的信息</p>

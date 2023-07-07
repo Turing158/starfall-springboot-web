@@ -110,26 +110,3 @@
     float:left;
     margin:0;
 }
-.home_ppt #pptfoot{
-    width: 999px;
-    height: 80px;
-    left: -5px;
-}
-.home_ppt a{
-    float: left;
-    position: relative;
-}
-.home_ppt a img{
-    left: -2px;
-    position: relative;
-    width:109.5px;
-    height: 56px;
-    margin: 0 45px;
-    border: 4px solid black;
-}
-.home_ppt a:hover :not(.active){
-    border: 4px solid rgb(7, 165, 73);
-}
-.home_ppt .active{
-    border: 4px solid rgb(7, 115, 165);
-}
