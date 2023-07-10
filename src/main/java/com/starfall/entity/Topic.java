@@ -33,8 +33,6 @@ public class Topic implements Serializable {
     @Column(nullable = false)
     int view;
     @Column(nullable = false)
-    String head;
-    @Column(nullable = false)
     String href;
     @Column(nullable = false)
     String labelHref;
