@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../topic/css/main.css">
+    <link rel="stylesheet" href="../topic/css/book.css">
+    <link rel="stylesheet" href="../topic/css/comment.css">
+    <link rel="stylesheet" href="../topic/css/font.css">
+    <title>Document</title>
+    <script src="../topic/js/marked.js" type="text/javascript"></script>
+</head>
+<body background="../topic/img/bg.png">
+<ul class="ul">
+    <li class="li_home"><a class="a_home" href="/home">首页</a></li>
+    <li><a href="/topic">主题</a></li>
+    <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
+    <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
+    <li th:if="${session.user == null}" class="li_user" style="border: 2px solid rgb(97, 97, 97); height: 48px;"><a href="/login">! 请登录 !</a></li>
+    <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.head}}" alt="">
+        <div class="div_user">
+            <p class="username" th:text="${session.name}">用户名user</p>
+            <a href="/set">设置 Setting</a>
+            <a href="/exit">退出 Exit</a>
+        </div>
+    </li>
+</ul>
+    <div class="main">
+        <div class="book" style="height: 500px;">
+            <div class="top"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="bookCenter" style="background-color: antiquewhite;height: 500px;display: flex;left: 0px;justify-content: center;">
+                <div style="position: relative;top: 200px;">
+                    <span>不存在该页面！&emsp14;<a href="/topic">!点我返回!</a></span>
+                </div>
+            </div>
+            <div class="bottom"></div>
+        </div>
+       
+    </div>
+    <div class="tail" style="top: 1200px;">
+        <p>StarFall<br>始于2016</p>
+    </div>
+</body>
+
+</html>

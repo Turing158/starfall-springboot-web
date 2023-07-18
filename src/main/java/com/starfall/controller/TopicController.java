@@ -4,6 +4,7 @@ import com.mysql.cj.util.StringUtils;
 import com.starfall.Application;
 import com.starfall.dao.NoticeDao;
 import com.starfall.dao.TopicDao;
+import com.starfall.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 
 @Controller
 @SpringBootApplication(scanBasePackageClasses = Application.class)
@@ -32,7 +32,7 @@ public class TopicController {
             @RequestParam(value = "page",required = false) String page
     ){
         int page_int = 0;
-        int lastPage = 0;
+        int lastPage;
         if(!StringUtils.isNullOrEmpty(page)){
             page_int = Integer.parseInt(page)-1;
         }
@@ -59,6 +59,31 @@ public class TopicController {
         session.setAttribute("noticeLength",noticeDao.count());
         session.setAttribute("notices",noticeDao.findAll());
         return "topic";
+    }
+    @RequestMapping("/topic/html")
+    public String topicPage(
+            HttpSession session,
+        @RequestParam(value = "html",required = false) String html,
+        @RequestParam(value = "page",required = false) String page
+    ){
+        int page_int = 1;
+        int html_int = 1;
+        if (!StringUtils.isNullOrEmpty(page)){
+            page_int = Integer.parseInt(page);
+        }
+        if(!StringUtils.isNullOrEmpty(html)){
+            html_int = Integer.parseInt(html);
+        }
+        boolean topicTF = topicDao.findById((long) html_int).isPresent();
+        Topic topic;
+        if (topicTF){
+            topic = topicDao.findById((long) html_int).get();
+            session.setAttribute("topic",topic);
+            session.setAttribute("topicContent",topic.getContent());
+//            System.out.println(topic.getContent());
+            return "topic/1";
+        }
+        return "topic/null";
     }
     public String label(String label){
         switch(label){

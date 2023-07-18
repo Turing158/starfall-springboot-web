@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    transition: all 500ms;
+}
+html{
+    overflow-x: hidden;
+}
+body{
+    display: block;
+    max-height: 100vh;
+}
+.ul{
+    position:fixed;
+    background-color: rgb(54, 54, 54);
+    height: 50px;
+    width: 100vw;
+    border-bottom: 2px solid rgb(97, 97, 97);
+    border-radius: 0 0 0 8px;
+    z-index: 100;
+}
+.ul li{
+    list-style: none;
+    float: left;
+    text-align: center;
+
+}
+.ul li a{
+    display: block;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: aliceblue;
+    font-weight: bold;
+}
+.ul .li_home{
+    margin-left: 100px;
+}
+.ul li a:hover {
+    background-color: rgb(180, 180, 180);
+    color: rgb(43, 43, 43);
+}
+.ul .li_user{
+    float: right;
+    background-color: rgb(54, 54, 54);
+    border-left: 2px solid rgb(54, 54, 54);
+    border-right: 2px solid rgb(54, 54, 54);
+    width: 150px;
+    margin-right: 100px;
+}
+.ul .li_user img{
+    border: 3px solid rgb(151, 150, 150);
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+}
+.div_user{
+    position: absolute;
+    background-color: rgb(54, 54, 54);
+    display: block;
+    width: 150px;
+    top: 50px;
+    right: 100px;
+    border-bottom: 2px solid rgb(97, 97, 97);
+    border-left: 2px solid rgb(97, 97, 97);
+    border-right: 2px solid rgb(97, 97, 97);
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    z-index: -1;
+    transform: translateY(-155px);
+    transition: all 250ms;
+}
+.div_user .username{
+    font-weight: bolder;
+    padding: 15px 0;
+    color: aliceblue;
+    border-bottom: 2px solid rgb(97, 97, 97);
+}
+.ul .li_user .div_user a{
+    font-weight:500;
+}
+.ul .li_user:hover .div_user{
+    transform:translateY(0);
+}
+.main{
+    position: relative;
+    display: flex;
+    top: 150px;
+    left: -50px;
+    height: auto;
+    justify-content: center;
+    margin-bottom: 280px;
+}
+.book{
+    position: relative;
+    background-color: rgb(250, 241, 217);
+    width: 1129px;
+    height: 1800px;
+}
+.comment{
+    position: relative;
+    background-color: rgb(176, 176, 177);
+    top: -59px;
+    left: 80px;
+    width: 600px;
+    height: 1888px;
+}
+.tail{
+    position: absolute;
+    width: 100vw;
+    height: 100px;
+    background-image: url(../img/tail.png);
+    background-size: 8%;
+    text-align: center;
+}
+.tail p{
+    position: relative;
+    color: aliceblue;
+    font-weight: bold;
+    top: 25px;
+}

@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -14,4 +16,7 @@ public interface TopicDao extends JpaRepository<Topic,Long> {
     Page<Topic> findAllByLabel(String label,Pageable pageable);
     int countAllBy();
     int countAllByLabel(String label);
+//    Topic findById(int num);
+    @Override
+    Optional<Topic> findById(Long aLong);
 }

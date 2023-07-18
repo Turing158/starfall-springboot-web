@@ -1,0 +1,211 @@
+.commentTop{
+    position: relative;
+    background-color: aliceblue;
+    width: 600px;
+    height: 35px;
+    overflow: hidden;
+}
+.commentTop p{
+    position: absolute;
+    color: rgb(231, 213, 190);
+    left: 50px;
+    top: 6px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.commentTop img{
+    position: absolute;
+}
+.commentMain{
+    background-image: url(../img/CommentBackground.png);
+    background-size: 64px;
+    height: 100%;
+    
+}
+.commentTable{
+    position: relative;
+    top: 25px;
+    left: 25px;
+    width: 550px;
+    border-collapse: collapse;
+    /* background-color: antiquewhite; */
+}
+.commentTable tr{
+    height: 275px;
+    background-image: url(../img/pai.png);
+    border-right: 5px solid black;
+    border-bottom: 5px solid black;
+}
+.commentTable .none{
+    height: 25px;
+    border: 0;
+    background-image: none;
+    background-color: initial;
+}
+.commentTable th{
+    /* background-color: aquamarine; */
+    width: 150px;
+    border: 0;
+    vertical-align: top;
+    background-color: rgba(240, 248, 255, 0.062);
+}
+.commentTable th img{
+    position: relative;
+    top: 13px;
+    width: 150px;
+    height: 150px;
+    border: 2px solid white;
+}
+.commentTable td{
+    border-left: 1px solid rgb(207, 183, 142);
+    vertical-align: top;
+    text-align: left;
+}
+.comment_bottom{
+    position: relative;
+    top: calc(9px + 13px);
+    width: 180px;
+    height: 52px;
+    border-top: 1px dashed rgb(194, 166, 120);
+}
+.comment_bottom span{
+    color: rgb(92, 92, 92);
+    font-weight:lighter;
+    font-size: 10px;
+}
+.commentTdTop{
+    position: relative;
+    width: 354px;
+    left: 5px;
+    height: 40px;
+    /* background-color: bisque; */
+    font-size: 13px;
+    border-bottom: 1px dashed rgb(138, 118, 86);
+}
+.commentTdTop img{
+    position: relative;
+    top: 10px;
+    width: 20px;
+}
+.commentTdTop .text{
+    position: relative;
+    top: 4px;
+}
+.commentTdTop .text a{
+    color: rgb(68, 68, 68);
+}
+.commentTdBottom{
+    position: relative;
+    left: 5px;
+    /* background-color: aquamarine; */
+    width: 354px;
+    height: 234px;
+}
+.commentTdBottom span{
+    color: black;
+    font-size: 15px; 
+}
+.page{
+    position: absolute;
+    top: 1580px;
+    width: 600px;
+    height: 30px;
+    /* background-color: antiquewhite; */
+    display: flex;
+    justify-content: center;
+}
+.page a{
+    width: 50px;
+    height:50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.page .back{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    left: -20px;
+    background-image: url(../img/icon/first.png);
+}
+.page .back:hover{
+    background-image: url(../img/icon/firsthover.png);
+}
+.page .pre{
+    background-image: url(../img/icon/left.png);
+    
+}
+.page .pre:hover{
+    background-image: url(../img/icon/lefthover.png);
+    
+}
+.page span{
+    position: relative;
+    font-size: 30px;
+    font-family: block_font;
+    margin: 0 20px;
+}
+.page .next{
+    background-image: url(../img/icon/right.png);
+}
+.page .next:hover{
+    background-image: url(../img/icon/righthover.png);
+}
+.page .last{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    left: 20px;
+    background-image: url(../img/icon/last.png);
+}
+.page .last:hover{
+    background-image: url(../img/icon/lasthover.png);
+}
+.sendComment{
+    position: absolute;
+    top: 1630px;
+}
+.sendCommentTop{
+    text-align: right;
+}
+.sendCommentTop .veritify{
+    position: relative;
+    width: 80px;
+    height: 30px;
+    top: 5px;
+}
+.sendCommentTop .submit{
+    position: relative;
+    width: 50px;
+    height: 30px;
+    top: -5px;
+    border-top: 2px solid rgb(126, 72, 2);
+    border-left: 2px solid rgb(126, 72, 2);
+    background-image: url(../img/botton.png);
+    color: rgb(236, 252, 252);
+    font-weight: bold;
+}
+.sendCommentTop .submit:focus{
+    border-right: 2px solid rgb(126, 72, 2);
+    border-bottom: 2px solid rgb(126, 72, 2);
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+}
+.sendCommentText{
+    /* background-color: aliceblue; */
+    left: 0;
+    width: 367px;
+    height: 234px;
+}
+.sendCommentText textarea{
+    background-color: rgba(240, 248, 255, 0.027);
+    border: 0;
+    height: 232px;
+    width: 365px;
+    font-size: 15px;
+    font-weight: 500;
+    outline: 0;
+    resize: none;
+}
+.sendCommentText textarea:hover,.sendCommentText textarea:focus{
+    background-color: rgba(240, 248, 255, 0.295);
+}

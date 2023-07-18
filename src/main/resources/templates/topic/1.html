@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../topic/css/main.css">
+    <link rel="stylesheet" href="../topic/css/book.css">
+    <link rel="stylesheet" href="../topic/css/comment.css">
+    <link rel="stylesheet" href="../topic/css/font.css">
+    <title th:text="${session.topic.title}">StatFall</title>
+    <script src="../topic/js/marked.js" type="text/javascript"></script>
+</head>
+<body background="../topic/img/bg.png">
+    <ul class="ul">
+        <li class="li_home"><a class="a_home" href="/home">首页</a></li>
+        <li><a href="/topic">主题</a></li>
+        <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
+        <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
+        <li th:if="${session.user == null}" class="li_user" style="border: 2px solid rgb(97, 97, 97); height: 48px;"><a href="/login">! 请登录 !</a></li>
+        <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.head}}" alt="">
+            <div class="div_user">
+                <p class="username" th:text="${session.name}">用户名user</p>
+                <a href="/set">设置 Setting</a>
+                <a href="/exit">退出 Exit</a>
+            </div>
+        </li>
+    </ul>
+    <div class="main">
+        <div class="book">
+            <div class="top"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="bookCenter">
+                <table class="title">
+                    <th class="titleLeft">
+                        <div>
+                            查看：<span class="num1" th:text="${session.topic.view}">1000</span>
+                            &ensp;
+                            评论：<span class="num2" th:text="${session.topic.comment}">2000</span>
+                        </div>
+                    </th>
+                    <th class="titleRight"><h1>[<a href="/topic" th:text="${session.topic.label}">标签</a>] <span th:text="${session.topic.title}">标题title</span> <a href="" class="copyHref">[复制链接]</a></h1></th>
+                </table>
+                <table class="line">
+                    <th class="lineLeft"></th>
+                    <th class="lineRight"></th>
+                </table>
+                <table class="mainTable">
+                    <td class="author">
+                        <div class="authorContent">
+                            <div class="authorName">
+                                <span>TuringICE</span>
+                            </div>
+                            <div class="authorHead">
+                                <img src="../topic/img/head.jpg" alt="">
+                                
+                            </div>
+                            <div class="authorInf">
+                                <!-- <p class="authorInfP">&ensp;作者信息：</p> -->
+                                <span class="authorInfSpan">&emsp;Information</span>
+                                <br>
+                                <span class="authorInfText">哈嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="content">
+                        <table class="contentTable">
+                            <tr>
+                                <td class="contentTop">
+                                    &nbsp;<img src="../topic/img/Cicon.gif" alt=""> <span>发表于<span th:text="${session.topic.date}">0000-00-00</span></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table class="contentInf">
+                                        <!-- <tr>
+                                            <td><h1><span>标签</span>作品发布</h1></td>
+                                        </tr> -->
+                                        <caption><span th:text="${session.topic.label}">标签</span>作品发布</caption>
+                                        <tr>
+                                            <th>作品名称：</th>
+                                            <td th:text="${session.topic.titlename}">标题</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Title：</th>
+                                            <td th:text="${session.topic.titleenglishname}">title</td>
+                                        </tr>
+                                        <tr>
+                                            <th>来源 source：</th>
+                                            <td th:text="${session.topic.source}">原创|搬运</td>
+                                        </tr>
+                                        <tr>
+                                            <th>适用版本 version：</th>
+                                            <td th:text="${session.topic.version}">0.00.0</td>
+                                        </tr>
+                                        <tr>
+                                            <th>作者 author：</th>
+                                            <td th:text="${session.topic.author}">作者</td>
+                                        </tr>
+                                        <tr>
+                                            <th>语言 language：</th>
+                                            <td th:text="${session.topic.language}">简体中文|English</td>
+                                        </tr>
+                                        <tr>
+                                            <th>原帖 address：</th>
+                                            <td><a th:href="${session.topic.address}" th:text="${session.topic.address}">https://www.address.com</a></td>
+                                        </tr>
+                                        <tr>
+                                            <th>下载 download：</th>
+                                            <td><a th:href="${session.topic.download}" th:text="${session.topic.download}">https://www.download.com</a></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="contentMd" id="contentMd" th:utext="${#strings.replace(session.topicContent,'&#10;','&lt;br/&gt;')}">
+                                        # StarFall-ssm
+                                        <br>
+                                        #### 1.介绍☺<br>
+                                        基于ssm框架<br>
+                                        无mybatis，没学<br>
+                                        <br>
+                                        #### 2.软件架构☺<br>
+                                        软件架构说明<br>
+                                        基于ssm框架，但是没mybatis<br>
+                                        <br>
+                                        #### 3.安装教程☺<br>
+                                        <br>
+                                        1.  安装配置MySQL 5.5以上数据库系统    <br>
+                                        2.  连接数据库,创建 login_web 数据库导入doc/web_user<br>
+                                        <br>
+                                        #### 4.使用说明☺<br>
+                                        <br>
+                                        1. 下载tomcat8以上版本<br>
+                                        配置tomcat，方可运行<br>
+
+                                    </div>
+                                    <script src="../topic/js/Markdown.js"></script>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </table>
+            </div>
+            <div class="bottom"></div>
+        </div>
+        <div class="comment">
+            <div class="commentTop">
+                <img src="../topic/img/title_bg_long.png" alt="">
+                <p>评论区&emsp;Comment</p>
+            </div>
+            <div class="commentMain">
+                <table class="commentTable">
+                    <tbody>
+                        <tr>
+                            <th>
+                                <div class="authorName">
+                                    <span>用户名user</span>
+                                </div>
+                                <img src="../topic/img/head.jpg" alt="">
+                                <div class="comment_bottom">
+                                    <span>Aa啊哈吧</span>
+                                </div>
+                            </th>
+                            <td>
+                                <div class="commentTdTop">
+                                    <img src="../topic/img/steve.gif" alt="">
+                                    <span class="text">
+                                        发表于<span>0000-00-00</span>
+                                        &emsp;|&emsp;
+                                        <a href="">只看他/她</a>
+                                    </span>
+                                </div>
+                                <div class="commentTdBottom">
+                                    <span>Aa啊哈吧</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="none">
+                            <td class="none">&nbsp;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="page">
+                <a href="" class="back"></a>
+                <a href="" class="pre"></a>
+                <span>1/10</span>
+                <a href="" class="next"></a>
+                <a href="" class="last"></a>
+            </div>
+            <form action="" th:if="${session.user != null}">
+                <table class="sendComment commentTable">
+                    <tbody>
+                        <tr>
+                            <th>
+                                <div class="authorName">
+                                    <span th:text="${session.name}">用户名user</span>
+                                </div>
+                                <img th:src="@{'/head_img/'+${session.head}}" alt="">
+                                <div class="comment_bottom">
+                                    <span th:text="${session.introduce}">Aa啊哈吧</span>
+                                </div>
+                            </th>
+                            <td>
+                                <div class="sendCommentTop commentTdTop">
+                                    <img src="/jpegCode" alt="" class="veritify" id="veritify" onclick="Change()">
+                                    <input type="submit" class="submit" value="发表">
+                                </div>
+                                <div class="sendCommentText commentTdBottom">
+                                    <textarea name="" id=""></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+            <table class="sendComment commentTable" th:if="${session.user == null}">
+                <tbody>
+                <tr>
+                    <th>
+                        <div class="authorName">
+                            <span>请登录</span>
+                        </div>
+                        <img style="background-color: white" alt="">
+                        <div class="comment_bottom">
+                            <span>请登录</span>
+                        </div>
+                    </th>
+                    <td>
+                        <div class="sendCommentTop commentTdTop">
+                            <img style="background-color: white" alt="" class="veritify" onclick="">
+                            <input type="button" class="submit" value="发表">
+                        </div>
+                        <div class="sendCommentText commentTdBottom">
+                            <span>!请登录!</span>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tail">
+        <p>StarFall<br>始于2016</p>
+    </div>
+</body>
+<script>
+    function Change() {
+        var img = document.getElementById("veritify");
+        var date = new Date().getTime();
+        img.src="/jpegCode?"+date;
+    }
+</script>
+</html>

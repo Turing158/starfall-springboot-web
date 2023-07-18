@@ -102,6 +102,7 @@ public class LoginRegController {
             session.setAttribute("head",userDao.findByUser(user).getHead());
             session.setAttribute("password",password);
             session.setAttribute("login","1");
+            session.setAttribute("introduce",userDao.findByUser(user).getIntroduce());
             session.setAttribute("name",name);
             session.setAttribute("code",null);
             return "redirect:/home";

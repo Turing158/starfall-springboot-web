@@ -36,4 +36,20 @@ public class Topic implements Serializable {
     String href;
     @Column(nullable = false)
     String labelHref;
+    @Column(nullable = false)
+    String titlename;
+    @Column(nullable = false)
+    String titleenglishname;
+    @Column(nullable = false)
+    String version;
+    @Column(nullable = false)
+    String language;
+    @Column(nullable = false)
+    String address;
+    @Column(nullable = false)
+    String download;
+    @Column(nullable = false)
+    String source;
+    @Column(nullable = false)
+    String content;
 }

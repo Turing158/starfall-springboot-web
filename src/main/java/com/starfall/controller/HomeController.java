@@ -1,25 +1,13 @@
 package com.starfall.controller;
 
 import com.starfall.Application;
-import com.starfall.dao.DiscussDao;
 import com.starfall.dao.NoticeDao;
-import com.starfall.dao.UserDao;
-import com.starfall.entity.Discuss;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.thymeleaf.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.UnsupportedEncodingException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 
 //主页控制器

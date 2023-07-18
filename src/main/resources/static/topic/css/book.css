@@ -1,0 +1,222 @@
+a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+a:hover{
+    color: rgb(41, 117, 216);
+    text-decoration: underline;
+}
+.top{
+    position: relative;
+    background-image: url(../img/top.png);
+    width: 1129px;
+    height: 59px;
+    top: -59px;
+}
+.bottom{
+    position: relative;
+    background-image: url(../img/foot.png);
+    width: 1129px;
+    height: 59px;
+    bottom: 59px;
+}
+.left{
+    position: relative;
+    float: left;
+    background-image: url(../img/left.png);
+    width: 84px;
+    top: -59px;
+    height: 100%;
+}
+.right{
+    position: relative;
+    float: right;
+    background-image: url(../img/right.png);
+    width: 84px;
+    top: -59px;
+    height: 100%;
+}
+.bookCenter{
+    position: relative;
+    background-color: aquamarine;
+    top: -59px;
+    width: 961px;
+    left: 84px;
+    height: 1800px;
+}
+.title,.line{
+    position:absolute;
+    width: 100%;
+}
+.title{
+    background-color: rgb(251, 242, 219);
+    height: 40px;
+    border-collapse: collapse;
+}
+.titleLeft{
+    background-color: rgb(227, 201, 158);
+    display: flex;
+    height: 40px;
+    width: 180px;
+    border-right: 1px solid rgb(207, 183, 142);
+}
+.titleLeft div{
+    font-size: 13px;
+    color: gray;
+    margin: auto;
+}
+.titleLeft div span{
+    color: rgb(230, 136, 81);
+    font-weight: 500;
+}
+.titleRight{
+    width: 781px;
+    text-align: left;
+}
+.titleRight h1{
+    position: relative;
+    font-size: 18px;
+    top: 6px;
+    left: 20px;
+}
+.titleRight h1 .copyHref{
+    font-size: 10px;
+    color: gray;
+}
+.line{
+    background-color: rgb(227, 201, 158);
+    height: 5px;
+    top: 40px;
+    border-collapse: collapse;
+}
+.lineLeft{
+    width: 180px;
+    height: 10px;
+    background-color: #CFB78E;
+    border-right: 1px solid rgb(207, 183, 142);
+}
+.mainTable{
+    position: absolute;
+    left: 0;
+    top: 45px;
+    height: 1755px;
+    border-collapse: collapse;
+}
+.author{
+    width: 180px;
+}
+.content{
+    background-color: rgb(251, 242, 219);
+    width: 1000px;
+}
+.authorContent{
+    background-color: rgb(227, 201, 158);
+    width: 180px;
+    height: 1755px;
+    border-right: 1px solid rgb(207, 183, 142);
+}
+.authorName{
+    width: 180px;
+    height: 40px;
+    display: flex;
+    border-bottom: 1px dashed rgb(194, 166, 120);
+}
+.authorName span{
+    position: relative;
+    margin: auto;
+}
+.authorHead{
+    display: flex;
+    width: 180px;
+    height: 180px;
+}
+.authorHead img{
+    margin: auto;
+    border: 5px solid white;
+    width: 130px;
+    height: 130px;
+}
+.authorInf{
+    width: 180px;
+}
+/* .authorInfP{
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 楷体;
+} */
+.authorInfSpan{
+    position: relative;
+    top: -8px;
+    font-size: 10px;
+}
+.authorInfText{
+    position: relative;
+    width: 160px; 
+    left: 10px;
+    top: -10px;
+    word-wrap: break-word;
+    display: block;
+    color: gray;
+    font-size: 13px;
+}
+.contentTable{
+    position: relative;
+    top: -475px;
+    width: 760px;
+    height: 800px;
+    left: 12px;
+    display: block;
+    border-collapse: collapse;
+    /* background-color: aquamarine; */
+}
+.contentTop{
+    width: 760px;
+    height: 38px;
+    /* background-color: aqua; */
+    font-size: 10px;
+    border-bottom: 1px dashed rgb(194, 166, 120);
+}
+.contentTop img{
+    position: relative;
+    top: 3px;
+}
+.contentInf{
+    position: relative;
+    top: 10px;
+    border-collapse: collapse;
+    /* background-color: blueviolet; */
+    width: 760px;
+    font-weight: 400;
+    text-align: left;
+    font-size: 12px;
+}
+.contentInf caption{
+    background: #E3C99E;
+    border-top: 1px solid #99876C;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px;
+    border-bottom: 1px solid #99876C;
+    text-align: left;
+}
+.contentInf th{
+    padding: 5px;
+    border-bottom: 1px solid #99876C;
+    width: 150px;
+    font-weight: 400;
+}
+.contentInf td{
+    border-bottom: 1px solid #99876C;
+}
+.contentMd{
+    position: relative;
+    width: 740px;
+    left: 20px;
+    top: 20px;
+    /* background-color: rgb(142, 192, 192); */
+    line-height: 2;
+    word-wrap: break-word;
+    font-size: 1rem;
+    font-weight: 400;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
