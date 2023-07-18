@@ -114,6 +114,24 @@
     display: flex;
     justify-content: center;
 }
+.showAll{
+    position: relative;
+    left: -100px;
+    height: 40px;
+    top: -5px;
+    border-top: 2px solid rgb(126, 72, 2);
+    border-left: 2px solid rgb(126, 72, 2);
+    background-image: url(../img/botton.png);
+    color: rgb(236, 252, 252);
+    font-weight: bold;
+    transition: all 100ms;
+}
+.showAll:active{
+    border-right: 2px solid rgb(126, 72, 2);
+    border-bottom: 2px solid rgb(126, 72, 2);
+    border-top: 2px solid black;
+    border-left: 2px solid black;
+}
 .page a{
     width: 50px;
     height:50px;
@@ -183,8 +201,9 @@
     background-image: url(../img/botton.png);
     color: rgb(236, 252, 252);
     font-weight: bold;
+    transition: all 100ms;
 }
-.sendCommentTop .submit:focus{
+.sendCommentTop .submit:active{
     border-right: 2px solid rgb(126, 72, 2);
     border-bottom: 2px solid rgb(126, 72, 2);
     border-top: 2px solid black;

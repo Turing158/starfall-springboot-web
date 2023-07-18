@@ -115,25 +115,6 @@
                             <tr>
                                 <td>
                                     <div class="contentMd" id="contentMd" th:utext="${#strings.replace(session.topicContent,'&#10;','&lt;br/&gt;')}">
-                                        # StarFall-ssm
-                                        <br>
-                                        #### 1.介绍☺<br>
-                                        基于ssm框架<br>
-                                        无mybatis，没学<br>
-                                        <br>
-                                        #### 2.软件架构☺<br>
-                                        软件架构说明<br>
-                                        基于ssm框架，但是没mybatis<br>
-                                        <br>
-                                        #### 3.安装教程☺<br>
-                                        <br>
-                                        1.  安装配置MySQL 5.5以上数据库系统    <br>
-                                        2.  连接数据库,创建 login_web 数据库导入doc/web_user<br>
-                                        <br>
-                                        #### 4.使用说明☺<br>
-                                        <br>
-                                        1. 下载tomcat8以上版本<br>
-                                        配置tomcat，方可运行<br>
 
                                     </div>
                                     <script src="../topic/js/Markdown.js"></script>
@@ -151,29 +132,29 @@
                 <p>评论区&emsp;Comment</p>
             </div>
             <div class="commentMain">
-                <table class="commentTable">
+                <table class="commentTable" th:each="comment : ${session.comments}">
                     <tbody>
                         <tr>
                             <th>
                                 <div class="authorName">
-                                    <span>用户名user</span>
+                                    <span th:text="${comment.name}">用户名user</span>
                                 </div>
-                                <img src="../topic/img/head.jpg" alt="">
+                                <img th:src="@{'/head_img/'+${comment.head}}" alt="">
                                 <div class="comment_bottom">
-                                    <span>Aa啊哈吧</span>
+                                    <span th:text="${comment.introduce}">Aa啊哈吧</span>
                                 </div>
                             </th>
                             <td>
                                 <div class="commentTdTop">
                                     <img src="../topic/img/steve.gif" alt="">
                                     <span class="text">
-                                        发表于<span>0000-00-00</span>
+                                        发表于<span th:text="${comment.date}">0000-00-00</span>
                                         &emsp;|&emsp;
-                                        <a href="">只看他/她</a>
+                                        <a th:href="'html?html='+${session.html}+'&user='+${comment.user}">只看他/她</a>
                                     </span>
                                 </div>
                                 <div class="commentTdBottom">
-                                    <span>Aa啊哈吧</span>
+                                    <span th:text="${comment.content}">Aa啊哈吧</span>
                                 </div>
                             </td>
                         </tr>
@@ -184,11 +165,12 @@
                 </table>
             </div>
             <div class="page">
-                <a href="" class="back"></a>
-                <a href="" class="pre"></a>
-                <span>1/10</span>
-                <a href="" class="next"></a>
-                <a href="" class="last"></a>
+                <button class="submit showAll" th:if="${session.lookUser}!=null" th:onclick="|showAll(${session.html})|">&ensp;显示全部&ensp;</button>
+                <a th:href="'javascript:'+|page(1,${session.commentLastPage},${session.lookUser},${session.html})|" class="back"></a>
+                <a th:href="'javascript:'+|page(${session.commentPage}-1,${session.commentLastPage},${session.lookUser},${session.html})|" class="pre"></a>
+                <span th:text="${session.commentPageNum}">1/10</span>
+                <a th:href="'javascript:'+|page(${session.commentPage}+1,${session.commentLastPage},${session.lookUser},${session.html})|" class="next"></a>
+                <a th:href="'javascript:'+|page(${session.commentLastPage},${session.commentLastPage},${session.lookUser},${session.html})|" class="last"></a>
             </div>
             <form action="" th:if="${session.user != null}">
                 <table class="sendComment commentTable">

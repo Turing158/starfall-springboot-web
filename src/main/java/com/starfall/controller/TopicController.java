@@ -2,6 +2,7 @@ package com.starfall.controller;
 
 import com.mysql.cj.util.StringUtils;
 import com.starfall.Application;
+import com.starfall.dao.CommentDao;
 import com.starfall.dao.NoticeDao;
 import com.starfall.dao.TopicDao;
 import com.starfall.entity.Topic;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import sun.plugin.com.event.COMEventHandler;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +26,8 @@ public class TopicController {
     private NoticeDao noticeDao;
     @Autowired
     private TopicDao topicDao;
+    @Autowired
+    private CommentDao commentDao;
 
     @RequestMapping("/topic")
     public String topic(
@@ -63,23 +67,41 @@ public class TopicController {
     @RequestMapping("/topic/html")
     public String topicPage(
             HttpSession session,
-        @RequestParam(value = "html",required = false) String html,
-        @RequestParam(value = "page",required = false) String page
+            @RequestParam(value = "html",required = false) String html,
+            @RequestParam(value = "page",required = false) String page,
+            @RequestParam(value = "user",required = false) String user
     ){
-        int page_int = 1;
-        int html_int = 1;
+        int page_int = 0;
+        int html_int = 0;
+        session.setAttribute("lookUser",null);
         if (!StringUtils.isNullOrEmpty(page)){
-            page_int = Integer.parseInt(page);
+            page_int = Integer.parseInt(page)-1;
         }
         if(!StringUtils.isNullOrEmpty(html)){
             html_int = Integer.parseInt(html);
         }
         boolean topicTF = topicDao.findById((long) html_int).isPresent();
         Topic topic;
+        session.setAttribute("commentPage",page_int+1);
         if (topicTF){
+            int lastpage = 0;
             topic = topicDao.findById((long) html_int).get();
             session.setAttribute("topic",topic);
             session.setAttribute("topicContent",topic.getContent());
+            session.setAttribute("html",html_int);
+            Pageable pageable =PageRequest.of(page_int,5, Sort.by("id").ascending());
+            if(StringUtils.isNullOrEmpty(user)){
+                session.setAttribute("comments",commentDao.findAllByTopicid(pageable,html_int));
+                lastpage = commentDao.countAllByTopicid(html_int);
+            }
+            else {
+                session.setAttribute("comments",commentDao.findAllByTopicidAndUser(pageable,html_int,user));
+                lastpage = commentDao.countAllByTopicidAndUser(html_int,user);
+                session.setAttribute("lookUser","'"+user+"'");
+            }
+            lastpage=(lastpage+4)/5;
+            session.setAttribute("commentPageNum",page_int+1+"/"+lastpage);
+            session.setAttribute("commentLastPage",lastpage);
 //            System.out.println(topic.getContent());
             return "topic/1";
         }
