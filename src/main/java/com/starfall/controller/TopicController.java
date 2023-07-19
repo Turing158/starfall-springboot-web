@@ -5,6 +5,7 @@ import com.starfall.Application;
 import com.starfall.dao.CommentDao;
 import com.starfall.dao.NoticeDao;
 import com.starfall.dao.TopicDao;
+import com.starfall.entity.Comment;
 import com.starfall.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sun.plugin.com.event.COMEventHandler;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 
 @Controller
 @SpringBootApplication(scanBasePackageClasses = Application.class)
@@ -84,7 +86,7 @@ public class TopicController {
         Topic topic;
         session.setAttribute("commentPage",page_int+1);
         if (topicTF){
-            int lastpage = 0;
+            int lastPage = 0;
             topic = topicDao.findById((long) html_int).get();
             session.setAttribute("topic",topic);
             session.setAttribute("topicContent",topic.getContent());
@@ -92,20 +94,45 @@ public class TopicController {
             Pageable pageable =PageRequest.of(page_int,5, Sort.by("id").ascending());
             if(StringUtils.isNullOrEmpty(user)){
                 session.setAttribute("comments",commentDao.findAllByTopicid(pageable,html_int));
-                lastpage = commentDao.countAllByTopicid(html_int);
+                lastPage = commentDao.countAllByTopicid(html_int);
             }
             else {
                 session.setAttribute("comments",commentDao.findAllByTopicidAndUser(pageable,html_int,user));
-                lastpage = commentDao.countAllByTopicidAndUser(html_int,user);
+                lastPage = commentDao.countAllByTopicidAndUser(html_int,user);
                 session.setAttribute("lookUser","'"+user+"'");
             }
-            lastpage=(lastpage+4)/5;
-            session.setAttribute("commentPageNum",page_int+1+"/"+lastpage);
-            session.setAttribute("commentLastPage",lastpage);
+            lastPage=(lastPage+4)/5;
+            session.setAttribute("commentPageNum",page_int+1+"/"+lastPage);
+            session.setAttribute("commentLastPage",lastPage);
 //            System.out.println(topic.getContent());
             return "topic/1";
         }
         return "topic/null";
+    }
+    @RequestMapping("/saveComment")
+    public String saveComment(
+            HttpSession session,
+            @RequestParam(value = "content") String content,
+            @RequestParam(value = "code")String code
+    ){
+        int html = (int) session.getAttribute("html");
+        int lastPage = 1;
+        session.setAttribute("commentContent",content);
+        session.setAttribute("commentTips","error");
+        if(StringUtils.isNullOrEmpty(content) || content.length() < 10){
+            session.setAttribute("commentTips","formatError");
+        }
+        else if(session.getAttribute("code").equals(code)){
+            LocalDateTime ldt = LocalDateTime.now();
+            String user = (String) session.getAttribute("user");
+            String date = ldt.toLocalDate()+" "+ldt.getHour()+":"+ldt.getMinute()+":"+ldt.getSecond();
+            commentDao.save(new Comment(content,date,user,html));
+            commentDao.updateData();
+            lastPage = commentDao.countAllByTopicid(html);
+            lastPage=(lastPage+4)/5;
+            session.setAttribute("commentTips","success");
+        }
+        return "redirect:/topic/html?html="+html+"&page="+lastPage;
     }
     public String label(String label){
         switch(label){

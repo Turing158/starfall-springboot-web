@@ -1,6 +1,7 @@
 package com.starfall.controller;
 
 import com.starfall.Application;
+import com.starfall.dao.CommentDao;
 import com.starfall.dao.DiscussDao;
 import com.starfall.dao.UserDao;
 import com.starfall.entity.User;
@@ -34,6 +35,8 @@ public class SetController extends HttpServlet {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private CommentDao commentDao;
 
 
 
@@ -105,7 +108,7 @@ public class SetController extends HttpServlet {
 //        part.write(savePath+filename+fileType);
         userDao.setHead(user,filename+fileType);
 //        更新数据库里头像的名字
-        discussDao.updateHeadData();
+        commentDao.updateData();
         session.setAttribute("head",filename+fileType);
         return "redirect:/set";
     }
@@ -139,6 +142,7 @@ public class SetController extends HttpServlet {
         else if ((name != null || introduce != null )&& Objects.equals(code,session.getAttribute("code"))){
             session.setAttribute("i_tips","信息修改成功");
             userDao.updateInformation(user,name,introduce);
+            commentDao.updateData();
 //            userService.updateInformation(user,name,introduce);
         }
         session.setAttribute("code",null);

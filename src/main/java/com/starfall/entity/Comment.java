@@ -22,12 +22,20 @@ public class Comment implements Serializable {
     String date;
     @Column(nullable = false)
     String user;
-    @Column(nullable = false)
+    @Column()
     String head;
-    @Column(nullable = false)
+    @Column()
     String name;
     @Column(nullable = false)
     int topicid;
-    @Column(nullable = false)
+    @Column()
     String introduce;
+
+    public Comment(String content, String date, String user, int topicid) {
+        this.content = content;
+        this.date = date;
+        this.user = user;
+        this.topicid = topicid;
+    }
 }
+

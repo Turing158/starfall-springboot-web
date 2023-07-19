@@ -18,7 +18,7 @@ public class Topic implements Serializable {
     @Id
     @GeneratedValue
     Long id;
-    @Column(nullable = false)
+    @Column()
     String icon;
     @Column(nullable = false)
     String label;
@@ -28,9 +28,9 @@ public class Topic implements Serializable {
     String author;
     @Column(nullable = false)
     String date;
-    @Column(nullable = false)
+    @Column()
     int comment;
-    @Column(nullable = false)
+    @Column()
     int view;
     @Column(nullable = false)
     String href;

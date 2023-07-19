@@ -185,11 +185,31 @@
 .sendCommentTop{
     text-align: right;
 }
+.sendCommentTop span{
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    right: 10px;
+    top: -3px;
+}
 .sendCommentTop .veritify{
     position: relative;
     width: 80px;
     height: 30px;
     top: 5px;
+}
+.veritifyInput{
+    position: relative;
+    width: 55px;
+    height: 28px;
+    top: -5px;
+    font-size: 20px;
+    outline: 0;
+    background-image: url(../img/pai.png);
+    border-right: 2px solid rgb(190, 172, 122);
+    border-bottom: 2px solid rgb(190, 172, 122);
+    border-top: 2px solid black;
+    border-left: 2px solid black;
 }
 .sendCommentTop .submit{
     position: relative;

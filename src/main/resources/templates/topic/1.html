@@ -172,7 +172,7 @@
                 <a th:href="'javascript:'+|page(${session.commentPage}+1,${session.commentLastPage},${session.lookUser},${session.html})|" class="next"></a>
                 <a th:href="'javascript:'+|page(${session.commentLastPage},${session.commentLastPage},${session.lookUser},${session.html})|" class="last"></a>
             </div>
-            <form action="" th:if="${session.user != null}">
+            <form action="/saveComment" method="post" th:if="${session.user != null}">
                 <table class="sendComment commentTable">
                     <tbody>
                         <tr>
@@ -187,11 +187,15 @@
                             </th>
                             <td>
                                 <div class="sendCommentTop commentTdTop">
+                                    <span th:if="${session.commentTips == 'error'}" style="color: darkred">验证码错误</span>
+                                    <span th:if="${session.commentTips == 'formatError'}" style="color: darkred">评论内容少于10字</span>
+                                    <span th:if="${session.commentTips == 'success'}" style="color: darkgreen">发布成功</span>
                                     <img src="/jpegCode" alt="" class="veritify" id="veritify" onclick="Change()">
+                                    <input type="text" maxlength="4" class="veritifyInput" id="code" name="code">
                                     <input type="submit" class="submit" value="发表">
                                 </div>
                                 <div class="sendCommentText commentTdBottom">
-                                    <textarea name="" id=""></textarea>
+                                    <textarea name="content" id="content" th:text="${session.commentContent}"></textarea>
                                 </div>
                             </td>
                         </tr>
