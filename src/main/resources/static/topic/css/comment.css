@@ -15,12 +15,13 @@
 }
 .commentTop img{
     position: absolute;
+    object-fit:cover;
 }
 .commentMain{
     background-image: url(../img/CommentBackground.png);
     background-size: 64px;
     height: 100%;
-    
+
 }
 .commentTable{
     position: relative;
@@ -55,6 +56,7 @@
     width: 150px;
     height: 150px;
     border: 2px solid white;
+    object-fit:cover;
 }
 .commentTable td{
     border-left: 1px solid rgb(207, 183, 142);
@@ -103,7 +105,7 @@
 }
 .commentTdBottom span{
     color: black;
-    font-size: 15px; 
+    font-size: 15px;
 }
 .page{
     position: absolute;
@@ -150,11 +152,11 @@
 }
 .page .pre{
     background-image: url(../img/icon/left.png);
-    
+
 }
 .page .pre:hover{
     background-image: url(../img/icon/lefthover.png);
-    
+
 }
 .page span{
     position: relative;
