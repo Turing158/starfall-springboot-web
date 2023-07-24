@@ -8,21 +8,22 @@ html{
 body{
     display: flex;
     justify-content: center;
-    background-color: rgb(22, 48, 51);
+    align-items: center;
+    height: 100vh;
+    background-image: url(../img/email.png);
 }
 div{
     position: relative;
-    top: 100px;
     text-align: center;
 }
 input{
     position: relative;
     opacity: 1;
-    top:-200px;
+    top:-2000px;
 }
 .code-item{
     position: relative;
-    background-color: rgb(32, 159, 190);
+    /* background-color: rgba(105, 105, 105, 0.384); */
     border: 2px solid black;
     width: 80px;
     height: 100px;
@@ -32,17 +33,26 @@ input{
     margin: 0 5px;
     font-size: 70px;
     transition: all 250ms;
+    color: aliceblue;
 }
 .active{
-    background-color: rgb(83, 221, 255);
+    background-color: rgba(41, 41, 41, 0.384);
     border: 2px solid rgb(255, 255, 255);
 }
 .code-box{
     text-align: center;
 }
+.code-boxDiv{
+    display: flex;
+    backdrop-filter: blur(10px);
+    width: 600px;
+    height: 350px;
+    border-radius: 10px;
+    justify-content: center;
+    box-shadow: 0px 0px 10px black;
+}
 .text{
     position: relative;
-    top: 150px;
 }
 .text p{
     font-family: cool_font;
@@ -65,7 +75,7 @@ button:hover{
     background-color: rgb(168, 168, 168);
 }
 span{
-    color: cornflowerblue;
+    color: rgb(50, 76, 124);
 }
 a{
     color: antiquewhite;

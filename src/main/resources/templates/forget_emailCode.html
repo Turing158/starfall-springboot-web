@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/emailCode.css">
+    <link rel="stylesheet" href="css/font.css">
+    <title>已发送验证码，请查收-|StarFall|</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/emailCode.js">   </script>
+</head>
+<body>
+    <div class="code-boxDiv code-box" onclick="">
+        <form action="confirm_forget" method="post">
+            <input type="search" class="code-hidden" id="code-hidden" name="emailCode">
+        <div class="code-box" onclick="">
+            <p class="code-item"></p>
+            <p class="code-item"></p>
+            <p class="code-item"></p>
+            <p class="code-item"></p>
+            <p class="code-item"></p>
+            <p class="code-item"></p>
+        </div>
+        <div class="text">
+                <p>验证码已发送至邮箱 <span th:text="${session.forgetEmail}">123@email.com</span> ,请注意查收</p>
+                <p>若未收到,请检查邮箱是否正确或 <a th:href="@{'/verify_Email?email='+${session.forgetEmail}}">重新发送验证码</a> 至邮箱</p>
+                <p th:text="${session.forget_code_tips}" style="color:#f35e5e;">aaaa</p>
+                <button type="submit">确认</button>
+                <button onclick="window.location.href = '/forget';" type="button">返回忘记密码</button>
+        </div>
+        </form>
+    </div>
+</body>
+<script src="js/emailCode_back.js"></script>
+</html>

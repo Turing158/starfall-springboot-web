@@ -16,7 +16,7 @@ public interface UserDao extends JpaRepository<User,String> {
     User findByUser(String user);
     int countByUser(String user);
     int countByEmail(String email);
-
+    User findByEmail(String email);
     @Modifying
     @Query(value = "update user set user.name = ?2, user.introduce = ?3 where user.user = ?1",nativeQuery = true)
     void updateInformation(String user, String name,String introduce);
@@ -26,5 +26,4 @@ public interface UserDao extends JpaRepository<User,String> {
     @Modifying
     @Query(value = "update user set user.head = :head where user.user = :user",nativeQuery = true)
     void setHead(@Param("user") String user, @Param("head") String head);
-
 }

@@ -12,15 +12,18 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: rgb(83, 83, 83);
+    background-image: url(../img/loginBg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
-div{
+.loginDIv{
     position: relative;
     width: 500px;
     height: 370px;
-    background-color: rgb(207, 206, 206);
+    /* background-color: rgb(207, 206, 206); */
     border-radius: 10px;
     box-shadow: 0px 0px 10px black;
+    backdrop-filter:blur(10px);
 }
 h1{
     position: relative;
@@ -33,7 +36,7 @@ h1{
     height: 30px;
     width: 280px;
     font-size: 20px;
-    border-bottom: 2px solid rgb(143, 143, 143);
+    border-bottom: 2px solid rgb(206, 206, 206);
     background-color: initial;
     left: 46%;
     margin-left: -25%;
@@ -49,6 +52,7 @@ h1{
     left: 0;
     left: 46%;
     margin-left: -25%;
+    color: aliceblue;
 }
 .user_underline,.pass_underline,.code_underline{
     position: relative;
@@ -57,7 +61,7 @@ h1{
     top: -2px;
     left: 0;
     transform: scaleX(0);
-    background-color: rgb(60, 120, 129);
+    background-color: rgb(99, 191, 206);
     left: 46%;
     margin-left: -25%;
     box-shadow: 0px 0px 1px rgb(170, 170, 170);
@@ -103,26 +107,28 @@ img{
     height: 30px;
     background-color: bisque;
 }
-.login,.reg{
+.login,.reg,.forget{
     position: relative;
     width: 80px;
     height: 40px;
     font-size: 20px;
     border-radius: 10px;
+    margin: 0 20px;
     background-color: rgb(223, 251, 252);
 }
 p{
     text-align: center;
     height: 40px;
     left: 150px;
-    
+    color: aliceblue;
 }
-.login{
-    left: 100px;
+.operate{
+    display: flex;
+    justify-content: center;
 }
-.reg{
-    left: 220px;
+.forget{
+    width: 100px;
 }
-.login:hover,.reg:hover{
+.login:hover,.reg:hover,.forget:hover{
     background-color: rgb(167, 211, 211);
 }

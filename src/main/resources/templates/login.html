@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/font.css">
 </head>
 <body>
-    <div>
+    <div class="loginDIv">
         <form action="confirm_login" method="get">
             <br><br>
             <h1>登&emsp;录</h1><br><br>
@@ -27,8 +27,11 @@
         <div class="code_underline"></div>
         <img src="/jpegCode" alt="VerifyCode" onclick="Change()" id="img_code">
         <p th:style="${session.tips_color}" th:text="${session.tips}">info</p>
-        <input type="submit" value="登录" class="login">
-        <button class="reg" onclick="window.location='/reg';">注册</button>
+            <div class="operate">
+                <input type="submit" value="登录" class="login">
+                <button class="reg" onclick="window.location='/reg';">注册</button>
+                <button class="forget" onclick="window.location='/forget';">忘记密码</button>
+            </div>
         </form>
     </div>
 </body>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
+    <title>找回密码-|StarFall|</title>
+    <link rel="stylesheet" href="css/forget.css">
+    <link rel="stylesheet" href="css/font.css">
+</head>
+<body>
+    <div class="forgetDiv">
+        <form action="verify_Email" method="get">
+            <br><br>
+            <h1>找回密码</h1><br><br>
+        <input type="text" class="pass_input" th:value="${session.forgetEmail}" name="email" required>
+        <span class="pass_span">邮&emsp;邮：</span>
+        <div class="pass_underline"></div>
+        <br>
+        <input type="search" class="code_input" name="code" required>
+        <span class="code_span">验证码：</span>
+        <div class="code_underline"></div>
+        <img src="/jpegCode" alt="VerifyCode" onclick="Change()" id="img_code">
+        <p style="color:darkred" th:text="${session.forgetTips}">info</p>
+        <div class="operate">
+            <input type="submit" value="确认" class="confirm">
+            <button class="reg" onclick="window.location='/reg';">注册</button>
+            <button class="login" onclick="window.location='/login';">返回登陆</button>
+        </div>
+        </form>
+    </div>
+    <h2>请保管好，谨记好密码，谢谢!</h2>
+</body>
+<script>
+    function Change() {
+    var img = document.getElementById("img_code")
+    var date = new Date().getTime();
+    img.src="jpegCode?"+date;
+}
+</script>
+</html>

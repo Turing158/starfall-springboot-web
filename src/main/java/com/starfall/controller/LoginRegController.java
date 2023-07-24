@@ -1,5 +1,6 @@
 package com.starfall.controller;
 
+import com.mysql.cj.util.StringUtils;
 import com.starfall.Application;
 import com.starfall.dao.UserDao;
 import com.starfall.entity.User;
@@ -7,6 +8,7 @@ import com.starfall.util.GetCode;
 import com.starfall.util.MailUtil;
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,8 +46,14 @@ public class LoginRegController {
         return "reg";
     }
 
-
-
+    @RequestMapping("/forget")
+    public String toForget(
+            HttpSession session
+    ){
+        session.setAttribute("forgetCodePass",false);
+        session.setAttribute("forgetPass",false);
+        return "forget";
+    }
 
 
 //确认登录
@@ -128,7 +136,7 @@ public class LoginRegController {
 //        HttpSession session = req.getSession();
         GetCode getCode = new GetCode();
         MailUtil mail = new MailUtil();
-        String email_code = "";
+        String email_code;
 //        String user = req.getParameter("vreg_user");
 //        String password = req.getParameter("vreg_password");
 //        String email = req.getParameter("vreg_email");
@@ -238,5 +246,93 @@ public class LoginRegController {
             session.setAttribute("tips","成功注册账号");
         }
         return "reg_emailCode";
+    }
+
+    //找回密码的邮箱验证
+    @RequestMapping("/verify_Email")
+    public String forget_email(
+            HttpSession session,
+            @RequestParam(value = "email",required = false) String email,
+            @RequestParam(value = "code",required = false) String code
+    ) throws EmailException {
+        String emailCode;
+        session.setAttribute("forgetEmail",email);
+        if(StringUtils.isNullOrEmpty(code)){
+            code = null;
+        }
+        if(session.getAttribute("forgetCodePass").equals(true)){
+            session.setAttribute("forgetTips","已重新发送邮箱，请注意查收！");
+        }
+        if(session.getAttribute("code").equals(code) || session.getAttribute("forgetCodePass").equals(true)){
+            if(userDao.countByEmail(email) != 0){
+                GetCode getCode = new GetCode();
+                MailUtil mail = new MailUtil();
+                emailCode = getCode.getcode();
+                session.setAttribute("forgetCode",emailCode);
+                session.setAttribute("forgetCodePass",true);//为了重新发送邮件跳过验证码的session，也作为安保作用
+                mail.set_mail(email,emailCode);
+                return "forget_emailCode";
+            }
+            else {
+                session.setAttribute("forgetTips","不存在该邮箱");
+            }
+        }
+        else if(Objects.equals(code, null)){
+            session.setAttribute("forgetTips","验证码不能为空");
+
+        }
+        else {
+            session.setAttribute("forgetTips","验证码错误");
+        }
+        return "forget";
+    }
+
+    @RequestMapping("/confirm_forget")
+    public String confirm_forget(
+            HttpSession session,
+            @RequestParam(value = "emailCode",required = false) String emailCode
+    ){
+        if(StringUtils.isNullOrEmpty(emailCode)){
+            emailCode = null;
+        }
+        if(session.getAttribute("forgetCode").equals(emailCode)){
+            session.setAttribute("forgetPass",true);
+            String email = (String) session.getAttribute("forgetEmail");
+            String user = userDao.findByEmail(email).getUser();
+            session.setAttribute("forgetUser",user);
+            session.setAttribute("forgetCode",null);
+            return "reset";
+        }
+        else if(Objects.equals(emailCode,null)){
+            session.setAttribute("forget_code_tips","验证码为空！");
+        }
+        else {
+            session.setAttribute("forget_code_tips","邮箱验证码错误，请检查！");
+
+        }
+        return "forget_emailCode";
+    }
+    @RequestMapping("/reset_password")
+    public  String reset(
+            HttpSession session,
+            @RequestParam(value = "password",required = false) String password1,
+            @RequestParam(value = "confirm_password",required = false) String password2
+    ){
+        if(StringUtils.isNullOrEmpty(password1)){
+            password1 = "false";
+        }
+        if(StringUtils.isNullOrEmpty(password2)){
+            password2 = "true";
+        }
+        if(session.getAttribute("forgetPass").equals(true) && password1.equals(password2)) {
+            String user = (String) session.getAttribute("forgetUser");
+            userDao.updatePassword(user,password2);
+            session.setAttribute("tips","成功修改密码");
+        }
+        else{
+            session.setAttribute("forgetPass",false);
+            return "reset";
+        }
+        return "redirect:/login";
     }
 }

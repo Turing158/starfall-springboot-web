@@ -6,43 +6,69 @@
     font-weight: bold;
     font-family: cool_font;
 }
+
 body{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background-color: rgb(83, 83, 83);
-    background-image: url(../img/RegBg.png);
+    background-image: url(../img/resetBg.png);
 }
-.regDiv{
+.error{
     position: relative;
     width: 500px;
-    height: 400px;
+    height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px black;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.error h1{
+    left: 0;
+}
+.error h1 a{
+    color: rgb(7, 104, 160);
+}
+.error h1 a:hover{
+    color: rgb(7, 132, 204);
+}
+.resetDiv{
+    position: relative;
+    width: 500px;
+    height: 350px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px black;
     backdrop-filter: blur(10px);
 }
 h1{
     position: relative;
-    left: 200px;
+    left: 180px;
 }
-.user_input,.pass_input,.code_input,.email_input{
+.text{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.text span{
+    color: rgb(2, 119, 31);
+}
+.pass_input,.confirmPass_input{
     position: relative;
     outline: none;
     border: 0;
     height: 25px;
     width: 280px;
     font-size: 20px;
-    border-bottom: 2px solid rgb(143, 143, 143);
+    border-bottom: 2px solid rgb(199, 199, 199);
     background-color: initial;
     left: 46%;
     margin-left: -25%;
     font-family:Arial, Helvetica, sans-serif;
 }
-.code_input{
-    width: 165px;
-}
-.user_span,.pass_span,.code_span,.email_span{
+.pass_span,.confirmPass_span{
     position: absolute;
     pointer-events: none;
     font-size: 20px;
@@ -50,14 +76,14 @@ h1{
     left: 46%;
     margin-left: -25%;
 }
-.user_underline,.pass_underline,.code_underline,.email_underline{
+.pass_underline,.confirmPass_underline{
     position: relative;
     width: 280px;
     height: 2px;
     top: -2px;
     left: 0;
     transform: scaleX(0);
-    background-color: rgb(60, 120, 129);
+    background-color: rgb(99, 194, 209);
     left: 46%;
     margin-left: -25%;
     box-shadow: 0px 0px 1px rgb(170, 170, 170);
@@ -66,14 +92,10 @@ h1{
     width: 165px;
 }
 /* .user_span,.pass_span,.code_span */
-.user_input:focus ~ .user_span,
 .pass_input:focus ~ .pass_span,
-.code_input:focus ~ .code_span,
-.email_input:focus ~ .email_span,
-.user_input:valid ~ .user_span,
-.pass_input:valid ~ .pass_span,
-.code_input:valid ~ .code_span,
-.email_input:valid ~ .email_span{
+.confirmPass_input:focus ~ .confirmPass_span,
+.confirmPass_input:valid ~ .confirmPass_span,
+.pass_input:valid ~ .pass_span{
     font-size: 15px;
     transform: translateY(-15px);
 }
@@ -87,14 +109,6 @@ h1{
 .email_input:valid ~ .email_underline{
     transform: scaleX(1);
 }
-input[type=search]::-webkit-search-cancel-button{
-    appearance: none;
-    height: 20px;
-    width: 20px;
-    border-radius: 50%;
-    background-size: 100% 100%;
-    background-image: url(/img/icon/delete-icon.png);
-}
 input[type=password]::-ms-reveal{
     width: 20px;
     height: 20px;
@@ -107,7 +121,7 @@ img{
     height: 30px;
     background-color: bisque;
 }
-.login,.reg{
+.confirm{
     position: relative;
     width: 100px;
     height: 40px;
@@ -119,14 +133,16 @@ p{
     text-align: center;
     height: 40px;
     left: 150px;
-    
 }
-.reg{
-    left: 100px;
+.confirm{
+    left: 200px;
 }
-.login{
-    left: 180px;
-}
-.login:hover,.reg:hover{
+.confirm:hover{
     background-color: rgb(167, 211, 211);
+}
+h2{
+    position: absolute;
+    bottom: 50px;
+    backdrop-filter: blur(10px);
+    color: rgb(255, 127, 127);
 }

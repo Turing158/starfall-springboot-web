@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
+    <title>注册-|StarFall|</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/font.css">
+    <script src="js/reset.js"></script>
+</head>
+<body>
+    <div class="error" th:if="${session.forgetPass} == false">
+        <h1><a href="/forget">出错！请点击返回</a></h1>
+    </div>
+    <div class="resetDiv" th:if="${session.forgetPass} == true">
+        <form action="/reset_password" method="post">
+            <br><br>
+            <h1>找回密码</h1><br><br>
+            <div class="text">
+                <h3>
+                    您正在找回&nbsp;<span th:text="${session.forgetUser}">user</span>&nbsp;的密码
+                </h3>
+            </div>
+            <br>
+            <input type="password" class="pass_input" oninput="checkLength()" name="password" required>
+            <span class="pass_span">密&emsp;&emsp;码：</span>
+            <div class="pass_underline"></div>
+            <br>
+            <input type="password" class="confirmPass_input" oninput="checkRepeat()" name="confirm_password" required>
+            <span class="confirmPass_span">确认密码：</span>
+            <div class="confirmPass_underline"></div>
+            <br>
+            <p th:text="${session.reg_tips}">info</p>
+            <div class="submit">
+            </div>
+            <!-- <input type="submit" value="确认" class="confirm"> -->
+        </form>
+    </div>
+   <h2>请谨记好密码！</h2>
+</body>
+</html>
