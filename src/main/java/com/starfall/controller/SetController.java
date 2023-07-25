@@ -30,8 +30,8 @@ import java.util.Random;
 @SpringBootApplication(scanBasePackageClasses = Application.class)
 public class SetController extends HttpServlet {
 
-    @Autowired
-    private DiscussDao discussDao;
+//    @Autowired
+//    private DiscussDao discussDao;
     @Autowired
     private UserDao userDao;
 
