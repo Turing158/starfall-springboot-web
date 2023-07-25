@@ -1,59 +1,10 @@
-create database web default character set utf8;
-create table user
-(
-    user      varchar(255) not null
-        primary key,
-    password  varchar(255) null,
-    date      varchar(255) null,
-    level     int          null,
-    name      varchar(255) null,
-    introduce varchar(255) null,
-    email     varchar(255) null,
-    head      varchar(255) not null,
-    constraint user
-        unique (user)
-);
-
-create index head
-    on user (head);
-
+-- 用户User
 INSERT INTO web.user (user, password, date, level, name, introduce, email, head) VALUES ('1322621134', '123123', '2023-06-05', 1, '新用户19429E', null, '1322621134@qq.com', 'null.jpg');
 INSERT INTO web.user (user, password, date, level, name, introduce, email, head) VALUES ('admin', 'admin', '0000-00-00', 9981, '管理员', '我是管理员!', 'admin@sf.com', '20230603103044829864061.jpg');
 INSERT INTO web.user (user, password, date, level, name, introduce, email, head) VALUES ('asd', 'asd', '0000-00-00', 1, 'asd', 'asdasdasd', 'test@t.com', 'null.png');
 INSERT INTO web.user (user, password, date, level, name, introduce, email, head) VALUES ('qwe', '123456', '0000-00-00', 10, 'qwenba', '我叫qwe，一个用户a', '123@qq.com', 'qwe.jpg');
 
-create table notice
-(
-    id      int          not null,
-    content varchar(255) null
-);
-
-INSERT INTO web.notice (id, content) VALUES (1, '欢迎来到StarFall,请勿随意在留言区发布不正当言论，谢谢！');
-INSERT INTO web.notice (id, content) VALUES (2, '初学者纯手撸练习java，做的不好请见谅');
-INSERT INTO web.notice (id, content) VALUES (3, '喜欢开放自由的像素游戏，不妨试试我的世界?');
-create table topic
-(
-    id               int auto_increment
-        primary key,
-    icon             varchar(255) null,
-    label            varchar(255) null,
-    title            varchar(255) null,
-    author           varchar(255) null,
-    date             date         null,
-    comment          int          null,
-    view             int          null,
-    href             varchar(255) null,
-    label_href       varchar(255) null,
-    titlename        varchar(255) null,
-    titleenglishname varchar(255) null,
-    source           varchar(255) null,
-    version          varchar(255) null,
-    language         varchar(255) null,
-    address          varchar(255) null,
-    download         varchar(255) null,
-    content          varchar(255) null
-);
-
+-- 主题topic
 INSERT INTO web.topic (id, icon, label, title, author, date, comment, view, href, label_href, titlename, titleenglishname, source, version, language, address, download, content) VALUES (1, 'skyblock.png', '服务端', '[1.8.x-1.9.x][Spigot]StarFall空岛生存>巨大更新[物品扩展|粘液科技]', 'Turing_ICE', '2023-07-06', 1, 100, '/topic/html?html=1', 'serve', 'StarFall空岛生存', 'StarFall-Skyblock', '原创', '1.8.x-1.9.x', '简体中文', 'https://www.mcbbs.net/thread-792740-1-1.html', 'http://某.盘.com', '# StarFall空岛生存
 
 #### 1.StarFall空岛生存☺
@@ -124,19 +75,8 @@ INSERT INTO web.topic (id, icon, label, title, author, date, comment, view, href
 INSERT INTO web.topic (id, icon, label, title, author, date, comment, view, href, label_href, titlename, titleenglishname, source, version, language, address, download, content) VALUES (12, 'LanguageBarrierBreakerPlug_in.jpg', '插件', '[信息]Language Barrier Breaker-多种语言[接权搬运][1.8-1.12] ', 'Turing_ICE', '2023-07-05', 2, 100, '/topic/html?html=12', 'plug_in', '多种语言', 'Language Barrier Breaker', '搬运', '1.8-1.12', '简体中文|English', 'https://www.spigotmc.org/resources/rosetta-stone-language-barrier-breaker.55570/', 'https://www.spigotmc.org/resources/rosetta-stone-language-barrier-breaker.55570/download?version=217291', null);
 INSERT INTO web.topic (id, icon, label, title, author, date, comment, view, href, label_href, titlename, titleenglishname, source, version, language, address, download, content) VALUES (13, 'SuperMobPlug_in.jpg', '插件', '[娱乐|角色]SuperMob---超级怪物[接权搬运][1.7.x-1.11.x] ', 'Turing_ICE', '2023-07-06', 7, 100, '/topic/html?html=13', 'plug_in', '超级怪物', 'SuperMob', '搬运', '1.7.x-1.11.x', '简体中文|English', 'https://www.spigotmc.org/resources/supermob.42924/', 'https://www.spigotmc.org/resources/supermob.42924/download?version=215045', null);
 INSERT INTO web.topic (id, icon, label, title, author, date, comment, view, href, label_href, titlename, titleenglishname, source, version, language, address, download, content) VALUES (14, 'skyblockVideo.jpg', '视频', '我的世界[ivtechsky]空岛生存系列', 'Turing_ICE', '2023-07-06', 6, 100, '/topic/html?html=14', 'video', '空岛生存系列', 'Skyblock Survival Series', '原创', '无', '简体中文', 'https://www.mcbbs.net/thread-1054576-1-1.html', 'https://www.mcbbs.net/thread-1054576-1-1.html', null);
-create table comment
-(
-    content   varchar(255) null,
-    date      datetime     null,
-    user      varchar(255) null,
-    head      varchar(255) null,
-    name      varchar(255) null,
-    topicid   int          null,
-    id        int auto_increment
-        primary key,
-    introduce varchar(255) null
-);
 
+-- 评论comment
 INSERT INTO web.comment (content, date, user, head, name, topicid, id, introduce) VALUES ('测试55011测试', '2023-10-16 00:00:00', '123456', 'null.jpg', '新用户BAE846', 9, 101, 'nzTC');
 INSERT INTO web.comment (content, date, user, head, name, topicid, id, introduce) VALUES ('测试31276测试', '2023-01-09 00:00:00', 'asd', 'null.png', 'asd', 12, 102, 'asdasdasd');
 INSERT INTO web.comment (content, date, user, head, name, topicid, id, introduce) VALUES ('测试88860测试', '2023-03-14 00:00:00', '1322621134', 'null.jpg', '新用户19429E', 8, 103, null);
