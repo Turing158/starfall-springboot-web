@@ -2,20 +2,14 @@ package com.starfall.controller;
 
 import com.starfall.Application;
 import com.starfall.dao.CommentDao;
-import com.starfall.dao.DiscussDao;
 import com.starfall.dao.UserDao;
 import com.starfall.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.GenericServlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
@@ -30,8 +24,6 @@ import java.util.Random;
 @SpringBootApplication(scanBasePackageClasses = Application.class)
 public class SetController extends HttpServlet {
 
-//    @Autowired
-//    private DiscussDao discussDao;
     @Autowired
     private UserDao userDao;
 
