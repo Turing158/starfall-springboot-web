@@ -189,6 +189,9 @@ public class TopicController {
         }
         return "redirect:/topic/html?html="+html+"&page="+lastPage;
     }
+
+
+    //处理label字符串
     public String label(String label){
         switch(label){
             case "serve": return "服务端";
