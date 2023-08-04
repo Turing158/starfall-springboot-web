@@ -14,7 +14,7 @@
         <form action="confirm_login" method="get">
             <br><br>
             <h1>登&emsp;录</h1><br><br>
-        <input type="search" class="user_input" name="user" required>
+        <input type="search" class="user_input" th:value="${session.user}" name="user" required>
         <span class="user_span">用户名：</span>
         <div class="user_underline"></div>
         <br>

@@ -1,4 +1,4 @@
-create database web default character set utf8;
+create database web default character set utf8mb4;
 create table user
 (
     user      varchar(255) not null
