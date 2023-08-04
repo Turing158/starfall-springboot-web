@@ -2,6 +2,7 @@ package com.starfall.util;
 
 import java.util.Random;
 
+//就只是个随机字符串的util而已
 public class GetCode {
     public String getcode(){
         char[] num_letter = "abcdefghijklmnobqrstuvwxyz23456789".toCharArray();

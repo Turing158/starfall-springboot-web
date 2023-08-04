@@ -92,8 +92,6 @@ public class SetController extends HttpServlet {
 
 //        String path = getServletContext().getRealPath("head_img/");
         String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static/head_img/")).getPath();
-//        System.out.println(path);
-//        System.out.println(req.getRealPath(req.getServletPath()));
 //        写入保存的路径
         part.write(path+filename+fileType);
 //        永久保存头像，避免服务器崩溃导致丢失
@@ -135,7 +133,6 @@ public class SetController extends HttpServlet {
             session.setAttribute("i_tips","信息修改成功");
             userDao.updateInformation(user,name,introduce);
             commentDao.updateData();
-//            userService.updateInformation(user,name,introduce);
         }
         session.setAttribute("code",null);
         return "redirect:/set";
@@ -163,8 +160,6 @@ public class SetController extends HttpServlet {
         session.setAttribute("display_me","none");
         session.setAttribute("display_p","block");
         session.setAttribute("display_i","none");
-//        System.out.println(code);
-//        System.out.println(session.getAttribute("code"));
         boolean flag = old_password.equals(userDao.findByUser(user).getPassword());
         if(flag && Objects.equals(code,session.getAttribute("code"))){
             session.setAttribute("p_tips","密码修改成功");
