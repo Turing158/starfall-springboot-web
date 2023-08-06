@@ -25,6 +25,35 @@ body{
     box-shadow: 0px 0px 10px black;
     backdrop-filter:blur(10px);
 }
+.back{
+    position: absolute;
+    background-color: none;
+    height: 35px;
+    width: 65px;
+    font-size: 18px;
+    overflow: hidden;
+    display: block;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: aliceblue;
+    border-radius: 5px;
+}
+.back span:first-child{
+    position: relative;
+    top: -20px;
+}
+.back span:last-child{
+    position: relative;
+    top: -14px;
+}
+.back:hover span:first-child{
+    top: 5px;
+}
+.back:hover span:last-child{
+    top: 18px;
+}
+
 h1{
     position: relative;
     left: 200px;
