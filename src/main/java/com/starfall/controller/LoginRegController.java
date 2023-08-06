@@ -10,8 +10,10 @@ import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
@@ -63,12 +65,6 @@ public class LoginRegController {
             @RequestParam(value = "password",required = false)String password,
             @RequestParam(value = "login_code",required = false)String code
     ){
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        HttpSession session = req.getSession();
-//        String user = req.getParameter("user");
-//        String password = req.getParameter("password");
-//        String code = req.getParameter("login_code");
         session.setAttribute("user",user);
         //判断用户是否存在，及获取用户密码方便判断
         String flag;
@@ -77,7 +73,6 @@ public class LoginRegController {
         }catch (NullPointerException e){
             flag = "null";
         }
-        session.setAttribute("tips"," ");
         //验证码为空
         if(Objects.equals(code, "")){
             session.setAttribute("tips","验证码不能为空");
@@ -118,6 +113,30 @@ public class LoginRegController {
     }
 
 
+    @RequestMapping("/checkUser")
+    @ResponseBody
+    public String checkUser(
+            @RequestBody(required = false) String user
+    ){
+        if(userDao.countByUser(user) != 0){
+            return "exist";
+        }
+        return "not exist";
+    }
+
+    @RequestMapping("/checkEmail")
+    @ResponseBody
+    public String checkEmail(
+            @RequestBody(required = false) String email
+    ){
+        if(userDao.countByEmail(email) != 0){
+            return "exist";
+        }
+        return "not exist";
+    }
+
+
+
 
 
 
@@ -130,16 +149,9 @@ public class LoginRegController {
             @RequestParam(value = "vreg_email",required = false)String email,
             @RequestParam(value = "vreg_code",required = false)String code
     ){
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        HttpSession session = req.getSession();
         GetCode getCode = new GetCode();
         MailUtil mail = new MailUtil();
         String email_code;
-//        String user = req.getParameter("vreg_user");
-//        String password = req.getParameter("vreg_password");
-//        String email = req.getParameter("vreg_email");
-//        String code = req.getParameter("vreg_code");
         session.setAttribute("reg_user",user);
         session.setAttribute("reg_password",password);
         session.setAttribute("reg_email",email);

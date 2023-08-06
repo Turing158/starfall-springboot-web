@@ -26,7 +26,7 @@
         <span class="code_span">验证码：</span>
         <div class="code_underline"></div>
         <img src="/jpegCode" alt="VerifyCode" onclick="Change()" id="img_code">
-        <p th:style="${session.tips_color}" th:text="${session.tips}">info</p>
+        <p th:text="${session.tips}">info</p>
             <div class="operate">
                 <input type="submit" value="登录" class="login">
                 <button class="reg" onclick="window.location='/reg';">注册</button>
