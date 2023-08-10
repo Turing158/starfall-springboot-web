@@ -15,7 +15,7 @@ public class WebConfiguration implements WebMvcConfigurer{
 
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/static/","classpath:/templates/");
+                .addResourceLocations("classpath:/templates/");
     }
     @Bean
     public RemoteIpFilter remoteIpFilter(){

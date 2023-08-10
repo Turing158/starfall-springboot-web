@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../topic/css/main.css">
-    <link rel="stylesheet" href="../topic/css/book.css">
-    <link rel="stylesheet" href="../topic/css/comment.css">
-    <link rel="stylesheet" href="../topic/css/font.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/book.css">
+    <link rel="stylesheet" href="./css/comment.css">
+    <link rel="stylesheet" href="./css/font.css">
     <title th:text="${session.topic.title}">StatFall</title>
-    <script src="../topic/js/marked.js" type="text/javascript"></script>
+    <script src="./js/marked.js" type="text/javascript"></script>
 </head>
-<body background="../topic/img/bg.png">
+<body background="./img/bg.png">
     <ul class="ul">
         <li class="li_home"><a class="a_home" href="/home">首页</a></li>
         <li><a href="/topic">主题</a></li>
@@ -52,7 +52,7 @@
                                 <span>TuringICE</span>
                             </div>
                             <div class="authorHead">
-                                <img src="../topic/img/head.jpg" alt="">
+                                <img src="./img/head.jpg" alt="">
                                 
                             </div>
                             <div class="authorInf">
@@ -67,7 +67,7 @@
                         <table class="contentTable">
                             <tr>
                                 <td class="contentTop">
-                                    &nbsp;<img src="../topic/img/Cicon.gif" alt=""> <span>发表于<span th:text="${session.topic.date}">0000-00-00</span></span>
+                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于<span th:text="${session.topic.date}">0000-00-00</span></span>
                                 </td>
                             </tr>
                             <tr>
@@ -117,7 +117,7 @@
                                     <div class="contentMd" id="contentMd" th:utext="${#strings.replace(session.topicContent,'&#10;','&lt;br/&gt;')}">
 
                                     </div>
-                                    <script src="../topic/js/Markdown.js"></script>
+                                    <script src="./js/Markdown.js"></script>
                                 </td>
                             </tr>
                         </table>
@@ -128,7 +128,7 @@
         </div>
         <div class="comment">
             <div class="commentTop">
-                <img src="../topic/img/title_bg_long.png" alt="">
+                <img src="./img/title_bg_long.png" alt="">
                 <p>评论区&emsp;Comment</p>
             </div>
             <div class="commentMain">
@@ -146,7 +146,7 @@
                             </th>
                             <td>
                                 <div class="commentTdTop">
-                                    <img src="../topic/img/steve.gif" alt="">
+                                    <img src="./img/steve.gif" alt="">
                                     <span class="text">
                                         发表于<span th:text="${comment.date}">0000-00-00</span>
                                         &emsp;|&emsp;
