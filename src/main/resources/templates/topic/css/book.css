@@ -47,17 +47,20 @@ a:hover{
 .title,.line{
     position:absolute;
     width: 100%;
+    border: 0;
 }
 .title{
     background-color: rgb(251, 242, 219);
     height: 40px;
     border-collapse: collapse;
+    border: 0;
 }
 .titleLeft{
     background-color: rgb(227, 201, 158);
     display: flex;
     height: 40px;
     width: 180px;
+    border: 0;
     border-right: 1px solid rgb(207, 183, 142);
 }
 .titleLeft div{
@@ -72,6 +75,8 @@ a:hover{
 .titleRight{
     width: 781px;
     text-align: left;
+    border: 0;
+    background-color: initial;
 }
 .titleRight h1{
     position: relative;
@@ -88,12 +93,17 @@ a:hover{
     height: 5px;
     top: 40px;
     border-collapse: collapse;
+    border: 0;
 }
 .lineLeft{
     width: 180px;
     height: 10px;
     background-color: #CFB78E;
+    border: 0;
     border-right: 1px solid rgb(207, 183, 142);
+}
+.lineRight{
+    border: 0;
 }
 .mainTable{
     position: absolute;
@@ -101,13 +111,16 @@ a:hover{
     top: 45px;
     height: 1755px;
     border-collapse: collapse;
+    border: 0;
 }
 .author{
     width: 180px;
+    border: 0;
 }
 .content{
     background-color: rgb(251, 242, 219);
     width: 1000px;
+    border: 0;
 }
 .authorContent{
     background-color: rgb(227, 201, 158);
@@ -167,14 +180,17 @@ a:hover{
     left: 12px;
     display: block;
     border-collapse: collapse;
-    /* background-color: aquamarine; */
+    background-color: initial;
+    border: 0;
 }
 .contentTop{
+    position: relative;
     width: 760px;
     height: 38px;
-    /* background-color: aqua; */
     font-size: 10px;
+    border: 0;
     border-bottom: 1px dashed rgb(194, 166, 120);
+    background-color: initial;
 }
 .contentTop img{
     position: relative;
@@ -184,11 +200,12 @@ a:hover{
     position: relative;
     top: 10px;
     border-collapse: collapse;
-    /* background-color: blueviolet; */
+    background-color: initial;
     width: 760px;
     font-weight: 400;
     text-align: left;
     font-size: 12px;
+    border: 0;
 }
 .contentInf caption{
     background: #E3C99E;
@@ -201,12 +218,16 @@ a:hover{
 }
 .contentInf th{
     padding: 5px;
+    border: 0;
     border-bottom: 1px solid #99876C;
     width: 150px;
     font-weight: 400;
+    background-color: initial;
 }
 .contentInf td{
+    border: 0;
     border-bottom: 1px solid #99876C;
+    background-color: initial;
 }
 .contentMd{
     position: relative;
@@ -219,4 +240,51 @@ a:hover{
     font-size: 1rem;
     font-weight: 400;
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+blockquote{
+    display: block;
+    padding: 2px;
+    border-left: 3px solid #dddfe4;
+    background: #eef0f4;
+    overflow: auto;
+    word-break: break-word!important;
+}
+hr{
+    margin: 10px 0;
+}
+pre code{
+    color: aliceblue;
+    display: block;
+    padding: 5px;
+    -webkit-text-size-adjust: none;
+    overflow-x: auto;
+    white-space: pre;
+    background-color: rgb(77, 77, 77);
+    font-size: 14px;
+    line-height: 22px;
+}
+p code{
+    padding: 5px;
+    background-color: rgba(252, 179, 179, 0.603);
+    color: rgb(192, 2, 2);
+    font-size: 14px;
+    line-height: 22px;
+    font-family: Source Code Pro,DejaVu Sans Mono,Ubuntu Mono,Anonymous Pro,Droid Sans Mono,Menlo,Monaco,Consolas,Inconsolata,Courier,monospace,PingFang SC,Microsoft YaHei,sans-serif;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    display: table;
+    margin-bottom: 20px;
+}
+table td, table th{
+    border: 1px solid #7c6229;
+}
+table th{
+    background-color: #ebcfa3;
+}
+table td{
+    background-color:#f5dfbd;
+
 }

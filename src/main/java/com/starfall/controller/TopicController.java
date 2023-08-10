@@ -5,6 +5,7 @@ import com.starfall.Application;
 import com.starfall.dao.CommentDao;
 import com.starfall.dao.NoticeDao;
 import com.starfall.dao.TopicDao;
+import com.starfall.dao.UserDao;
 import com.starfall.entity.Comment;
 import com.starfall.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Controller
 @SpringBootApplication(scanBasePackageClasses = Application.class)
@@ -29,6 +31,8 @@ public class TopicController {
     private TopicDao topicDao;
     @Autowired
     private CommentDao commentDao;
+    @Autowired
+    private UserDao userDao;
 
     //前往主题区
     @RequestMapping("/topic")
@@ -188,6 +192,19 @@ public class TopicController {
             session.setAttribute("commentTips","success");
         }
         return "redirect:/topic/html?html="+html+"&page="+lastPage;
+    }
+
+    @RequestMapping("/topic/publish")
+    public String publish(
+            HttpSession session
+    ){
+        if(!Objects.equals(session.getAttribute("promise"),null)){
+            int promise = (int) session.getAttribute("promise");
+            if(promise == 10){
+                return "topic/edit";
+            }
+        }
+        return "topic/noEdit";
     }
 
 

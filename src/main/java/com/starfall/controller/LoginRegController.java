@@ -102,6 +102,7 @@ public class LoginRegController {
             String name = userDao.findByUser(user).getName();
             session.setAttribute("user",user);
             session.setAttribute("head",userDao.findByUser(user).getHead());
+            session.setAttribute("promise",userDao.findByUser(user).getPromise());
             session.setAttribute("password",password);
             session.setAttribute("login","1");
             session.setAttribute("introduce",userDao.findByUser(user).getIntroduce());
