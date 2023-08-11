@@ -28,7 +28,7 @@ create table topic
     icon             varchar(255) null,
     label            varchar(255) null,
     title            varchar(255) null,
-    author           varchar(255) null,
+    user           varchar(255) null,
     date             date         null,
     comment          int          null,
     view             int          null,
@@ -41,7 +41,10 @@ create table topic
     language         varchar(255) null,
     address          varchar(255) null,
     download         varchar(255) null,
-    content          varchar(255) null
+    content          varchar(255) null,
+    username          varchar(255) null,
+    userhead         varchar(255) null,
+    userinformation          varchar(255) null
 );
 create table comment
 (
