@@ -1,60 +1,74 @@
+# 新建数据库
 create database web default character set utf8mb4;
+
+#新建用户表结构
 create table user
 (
-    user      varchar(255) not null
+    user      varchar(255) not null comment '用户名[独一无二]'
         primary key,
-    password  varchar(255) null,
-    date      varchar(255) null,
-    level     int          null,
-    name      varchar(255) null,
-    introduce varchar(255) null,
-    email     varchar(255) null,
+    password  varchar(255) null comment '用户名密码',
+    date      varchar(255) null comment '用户注册日期',
+    level     int          null comment '用户等级',
+    name      varchar(255) null comment '用户显示名称',
+    introduce varchar(255) null comment '用户介绍',
+    email     varchar(255) null comment '用户邮箱[独一无二]',
     head      varchar(255) not null,
+    promise   int          null comment '用户',
     constraint user
         unique (user)
 );
 
 create index head
     on user (head);
+
+#新建公告表结构
 create table notice
 (
-    id      int          not null,
-    content varchar(255) null
+    id      int          not null comment '公告id',
+    content varchar(255) null comment '公告内容'
 );
+
+
+#新建主题表结构
 create table topic
 (
-    id               int auto_increment
+    id               int auto_increment comment '主题id[用于分辨每个主题]'
         primary key,
-    icon             varchar(255) null,
-    label            varchar(255) null,
-    title            varchar(255) null,
-    user           varchar(255) null,
-    date             date         null,
-    comment          int          null,
-    view             int          null,
-    href             varchar(255) null,
-    label_href       varchar(255) null,
-    titlename        varchar(255) null,
-    titleenglishname varchar(255) null,
-    source           varchar(255) null,
-    version          varchar(255) null,
-    language         varchar(255) null,
-    address          varchar(255) null,
-    download         varchar(255) null,
-    content          varchar(255) null,
-    username          varchar(255) null,
-    userhead         varchar(255) null,
-    userinformation          varchar(255) null
+    icon             varchar(255) null comment '可上传的主题贴图标，就是为了好看',
+    label            varchar(255) null comment '标签：用于区分每个主题贴的主题为什么',
+    title            varchar(255) null comment '大标题：在主题区显示，且在主题帖最顶上',
+    user             varchar(255) null comment '发帖人用户名',
+    date             date         null comment '发帖日期',
+    comment          int          null comment '评论数量',
+    view             int          null comment '点击查看人数',
+    href             varchar(255) null comment '前往指定主题贴的链接',
+    label_href       varchar(255) null comment '标签链接[此列相当于lable列的翻译]',
+    titlename        varchar(255) null comment '标题名称[中文]',
+    titleenglishname varchar(255) null comment '标题名称[英文]',
+    source           varchar(255) null comment '来源[原创 or 转载]',
+    version          varchar(255) null comment 'ban''b',
+    language         varchar(255) null comment '语言',
+    address          varchar(255) null comment '原帖地址',
+    download         varchar(255) null comment '下载地址',
+    content          varchar(255) null comment '主题帖内容',
+    authorname       varchar(255) null comment '主题发布的东西的作者',
+    username         varchar(255) null comment '发帖人名称',
+    userhead         varchar(255) null comment '发帖人头像',
+    userinformation  varchar(255) null comment '发帖人介绍'
 );
+
+
+
+#新建评论表结构
 create table comment
 (
-    content   varchar(255) null,
-    date      datetime     null,
-    user      varchar(255) null,
-    head      varchar(255) null,
-    name      varchar(255) null,
-    topicid   int          null,
-    id        int auto_increment
+    content   varchar(255) null comment '评论内容',
+    date      datetime     null comment '评论日期',
+    user      varchar(255) null comment '评论用户',
+    head      varchar(255) null comment '评论用户的头像',
+    name      varchar(255) null comment '评论用户的名称',
+    topicid   int          null comment '评论位于那个主题帖id',
+    id        int auto_increment comment '评论的id'
         primary key,
-    introduce varchar(255) null
+    introduce varchar(255) null comment '评论用户的介绍'
 );

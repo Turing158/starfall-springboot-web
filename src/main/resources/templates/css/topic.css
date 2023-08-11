@@ -201,11 +201,11 @@
 }
 .page .pre{
     background-image: url(../img/icon/left.png);
-    
+
 }
 .page .pre:hover{
     background-image: url(../img/icon/lefthover.png);
-    
+
 }
 .page span{
     position: relative;
@@ -229,4 +229,55 @@
 }
 .page .last:hover{
     background-image: url(../img/icon/lasthover.png);
+}
+.showall{
+    position: relative;
+    top: -5px;
+    font-size: 13px;
+    width: 80px;
+    height: 20px;
+    background-color: rgb(241, 217, 185);
+    outline: 0;
+    border: 0;
+    border-radius: 5px;
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+.showall:hover{
+    background-color: rgb(224, 197, 160);
+    border-top: 2px solid rgb(201, 190, 174);
+    border-left: 2px solid rgb(201, 190, 174);
+    border-right: 2px solid rgb(102, 93, 80);
+    border-bottom: 2px solid rgb(102, 93, 80);
+}
+.showall:active{
+    background-color: rgb(187, 166, 136);
+    border-right: 2px solid rgb(201, 190, 174);
+    border-bottom: 2px solid rgb(201, 190, 174);
+    border-top: 2px solid rgb(102, 93, 80);
+    border-left: 2px solid rgb(102, 93, 80);
+}
+.createTopic{
+    position: absolute;
+    top: -43px;
+    width: 80px;
+    height: 40px;
+    background-image: url(../img/botton.png);
+    background-size: 100%;
+    outline: 0;
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 5px;
+
+    color: aliceblue;
+}
+.createTopic:hover{
+    border-top: 2px solid rgb(184, 147, 93);
+    border-left: 2px solid rgb(184, 147, 93);
+    border-right: 2px solid rgb(59, 37, 3);
+    border-bottom: 2px solid rgb(59, 37, 3);
+}
+.createTopic:active{
+    border-right: 2px solid rgb(184, 147, 93);
+    border-bottom: 2px solid rgb(184, 147, 93);
+    border-top: 2px solid rgb(59, 37, 3);
+    border-left: 2px solid rgb(59, 37, 3);
 }

@@ -215,25 +215,29 @@ public class TopicController {
     @RequestMapping("/topic/submitTopic")
     public String submitTopic(
             HttpSession session,
-            @RequestParam(value = "verifyCode",required = false) String code,
-            @RequestParam(value = "bigTitle",required = false) String bigTitle,
-            @RequestParam(value = "label",required = false) String label,
-            @RequestParam(value = "titleName",required = false) String titleName,
-            @RequestParam(value = "titleEnglishName",required = false) String titleEnglishName,
-            @RequestParam(value = "source",required = false) String source,
-            @RequestParam(value = "version",required = false) String version,
-            @RequestParam(value = "authorName",required = false) String authorName,
-            @RequestParam(value = "language",required = false) String language,
-            @RequestParam(value = "address",required = false) String address,
-            @RequestParam(value = "download",required = false) String download,
-            @RequestParam(value = "content",required = false) String content
+            @RequestParam(value = "verifyCode",required = false) String code,//输入的验证码
+            @RequestParam(value = "bigTitle",required = false) String bigTitle,//大标题
+            @RequestParam(value = "label",required = false) String label,//标签
+            @RequestParam(value = "titleName",required = false) String titleName,//标题
+            @RequestParam(value = "titleEnglishName",required = false) String titleEnglishName,//标题英文名
+            @RequestParam(value = "source",required = false) String source,//来源
+            @RequestParam(value = "version",required = false) String version,//版本
+            @RequestParam(value = "authorName",required = false) String authorName,//作者
+            @RequestParam(value = "language",required = false) String language,//语言
+            @RequestParam(value = "address",required = false) String address,//地址
+            @RequestParam(value = "download",required = false) String download,//下载地址
+            @RequestParam(value = "content",required = false) String content//内容
     ){
+        //防止label和source为空
         if(label == null || label.equals("请选择")){
             label = "";
         }
         if(source == null || source.equals("请选择")){
             source = "";
         }
+
+
+        //方便检测是否有空值
         String[] list = {bigTitle,label,titleName,titleEnglishName,source,version,authorName,language,address,download,content};
         boolean infoNull = false;
         for (int i = 0; i < list.length; i++) {
@@ -242,23 +246,33 @@ public class TopicController {
                 break;
             }
         }
+        //有空值，提示，并作修改
         if(infoNull){
             session.setAttribute("editErrorColor","border-color: darkred");
             session.setAttribute("editErrorTips","请填写完整信息，必填已标红");
         }
+        //没有空值，检测验证码，验证码为空
         else if(code.isEmpty()){
             session.setAttribute("editErrorTips","验证码不能为空");
         }
         else if(session.getAttribute("code").equals(code)){
+            //获取时间
             LocalDateTime ldt = LocalDateTime.now();
             String date = ldt.toLocalDate().toString();
+            //获取labelHref变量[详细看数据库]
             String labelHref = labelCE(label);
-            String name = (String) session.getAttribute("name");
+            //获取用户名称，及发帖作者
+            String user = (String) session.getAttribute("user");
+            //获取主题id
             List<Topic> topics = topicDao.findAll(Sort.by("id").descending());
             Long id = topics.get(0).getId()+1;
+            //获取href变量[详细看数据库]
             String href = "/topic/html?html="+id;
-            topicDao.save(new Topic(id,null,label,bigTitle,name,date,0,0,href,labelHref,titleName,titleEnglishName,source,version,language,address,download,content,authorName));
-
+            //添加主题
+            topicDao.save(new Topic(id,null,label,bigTitle,user,date,0,0,href,labelHref,titleName,titleEnglishName,source,version,language,address,download,content,authorName));
+            //更新主题一些与user相关的信息
+            topicDao.updateData();
+            //清除session
             session.setAttribute("editBigTitle",null);
             session.setAttribute("editLabel",null);
             session.setAttribute("editTitle",null);

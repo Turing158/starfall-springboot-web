@@ -4,6 +4,7 @@ import com.starfall.entity.Topic;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.Optional;
@@ -18,4 +19,6 @@ public interface TopicDao extends JpaRepository<Topic,Long> {
 //    Topic findById(int num);
     @Override
     Optional<Topic> findById(Long aLong);
+    @Query(value = "UPDATE web.topic t INNER JOIN web.user u ON t.user = u.user SET t.userhead = u.head, t.username = u.name, t.userinformation = u.introduce",nativeQuery = true)
+    void updateData();
 }
