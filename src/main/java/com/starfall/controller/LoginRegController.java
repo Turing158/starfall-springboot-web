@@ -246,7 +246,7 @@ public class LoginRegController {
             String name = "新用户"+ id_last6;
             LocalDate date = LocalDate.now();
 //            userService.reg(user,password,name,String.valueOf(date),email);
-            userDao.save(new User(user,password,String.valueOf(date),1,name,null,email,"null.jpg"));
+            userDao.save(new User(user,password,String.valueOf(date),1,name,null,email,"null.jpg",0));
             session.setAttribute("reg_notice","block");
 //            super.processTemplate("reg_emailCode",req,resp);
             session.setAttribute("email_code",null);

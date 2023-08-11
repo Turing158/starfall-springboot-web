@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -41,6 +42,9 @@ public class TopicController {
             @RequestParam(value = "label",required = false) String label,
             @RequestParam(value = "page",required = false) String page
     ){
+        session.setAttribute("editErrorTips",null);//初始化帖子编辑器session
+        session.setAttribute("editLabel","请选择");
+        session.setAttribute("editSource","请选择");
         int page_int = 0;
         int lastPage;
         //当page不为空指针
@@ -54,7 +58,7 @@ public class TopicController {
         if (!StringUtils.isNullOrEmpty(label)){
             session.setAttribute("labelTF",true);//控制"显示全部"按钮
             session.setAttribute("label","'"+label+"'");//防止session输出时，字符串没''引号
-            label_Chinese = label(label);
+            label_Chinese = labelEC(label);
         }
         //分页
         Pageable pageable =PageRequest.of(page_int,10, Sort.by("id").ascending());
@@ -198,18 +202,97 @@ public class TopicController {
     public String publish(
             HttpSession session
     ){
-        if(!Objects.equals(session.getAttribute("promise"),null)){
-            int promise = (int) session.getAttribute("promise");
-            if(promise == 10){
-                return "topic/edit";
-            }
-        }
-        return "topic/noEdit";
+//        if(!Objects.equals(session.getAttribute("promise"),null)){
+//            int promise = (int) session.getAttribute("promise");
+//            if(promise == 10){
+//                return "topic/edit";
+//            }
+//        }
+        return "topic/edit";
     }
 
+    //发布主题
+    @RequestMapping("/topic/submitTopic")
+    public String submitTopic(
+            HttpSession session,
+            @RequestParam(value = "verifyCode",required = false) String code,
+            @RequestParam(value = "bigTitle",required = false) String bigTitle,
+            @RequestParam(value = "label",required = false) String label,
+            @RequestParam(value = "titleName",required = false) String titleName,
+            @RequestParam(value = "titleEnglishName",required = false) String titleEnglishName,
+            @RequestParam(value = "source",required = false) String source,
+            @RequestParam(value = "version",required = false) String version,
+            @RequestParam(value = "authorName",required = false) String authorName,
+            @RequestParam(value = "language",required = false) String language,
+            @RequestParam(value = "address",required = false) String address,
+            @RequestParam(value = "download",required = false) String download,
+            @RequestParam(value = "content",required = false) String content
+    ){
+        if(label == null || label.equals("请选择")){
+            label = "";
+        }
+        if(source == null || source.equals("请选择")){
+            source = "";
+        }
+        String[] list = {bigTitle,label,titleName,titleEnglishName,source,version,authorName,language,address,download,content};
+        boolean infoNull = false;
+        for (int i = 0; i < list.length; i++) {
+            if (list[i] == null || list[i].isEmpty()) {
+                infoNull = true;
+                break;
+            }
+        }
+        if(infoNull){
+            session.setAttribute("editErrorColor","border-color: darkred");
+            session.setAttribute("editErrorTips","请填写完整信息，必填已标红");
+        }
+        else if(code.isEmpty()){
+            session.setAttribute("editErrorTips","验证码不能为空");
+        }
+        else if(session.getAttribute("code").equals(code)){
+            LocalDateTime ldt = LocalDateTime.now();
+            String date = ldt.toLocalDate().toString();
+            String labelHref = labelCE(label);
+            String name = (String) session.getAttribute("name");
+            List<Topic> topics = topicDao.findAll(Sort.by("id").descending());
+            Long id = topics.get(0).getId()+1;
+            String href = "/topic/html?html="+id;
+            topicDao.save(new Topic(id,null,label,bigTitle,name,date,0,0,href,labelHref,titleName,titleEnglishName,source,version,language,address,download,content,authorName));
+
+            session.setAttribute("editBigTitle",null);
+            session.setAttribute("editLabel",null);
+            session.setAttribute("editTitle",null);
+            session.setAttribute("editTitleName",null);
+            session.setAttribute("editSource",null);
+            session.setAttribute("editVersion",null);
+            session.setAttribute("editAuthorName",null);
+            session.setAttribute("editLanguage",null);
+            session.setAttribute("editAddress",null);
+            session.setAttribute("editDownload",null);
+            session.setAttribute("editContent",null);
+            session.setAttribute("editErrorColor",null);
+            session.setAttribute("editErrorTips",null);
+            return "redirect:"+href;
+        }
+        else{
+            session.setAttribute("editErrorTips","验证码错误");
+        }
+        session.setAttribute("editBigTitle",bigTitle);
+        session.setAttribute("editLabel",label);
+        session.setAttribute("editTitleName",titleName);
+        session.setAttribute("editTitleEnglishName",titleEnglishName);
+        session.setAttribute("editSource",source);
+        session.setAttribute("editVersion",version);
+        session.setAttribute("editAuthorName",authorName);
+        session.setAttribute("editLanguage",language);
+        session.setAttribute("editAddress",address);
+        session.setAttribute("editDownload",download);
+        session.setAttribute("editContent",content);
+        return "redirect:/topic/publish";
+    }
 
     //处理label字符串
-    public String label(String label){
+    public String labelEC(String label){
         switch(label){
             case "serve": return "服务端";
             case "Client":return "客户端";
@@ -217,6 +300,17 @@ public class TopicController {
             case "article":return "文章";
             case "plug_in":return "插件";
             case "notice": return "公告";
+        }
+        return "no";
+    }
+    public String labelCE(String label){
+        switch(label){
+            case "服务端": return "serve";
+            case "客户端":return "Client";
+            case "视频": return "video";
+            case "文章":return "article";
+            case "插件":return "plug_in";
+            case "公告": return "notice";
         }
         return "no";
     }

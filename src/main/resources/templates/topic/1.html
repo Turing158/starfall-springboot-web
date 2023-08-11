@@ -49,24 +49,24 @@
                     <td class="author">
                         <div class="authorContent">
                             <div class="authorName">
-                                <span>TuringICE</span>
+                                <span th:text="${session.topic.username}">TuringICE</span>
                             </div>
                             <div class="authorHead">
-                                <img src="./img/head.jpg" alt="">
+                                <img th:src="'../head_img/'+${session.topic.userhead}" alt="">
                                 
                             </div>
                             <div class="authorInf">
                                 <!-- <p class="authorInfP">&ensp;作者信息：</p> -->
                                 <span class="authorInfSpan">&emsp;Information</span>
                                 <br>
-                                <span class="authorInfText">哈嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</span>
+                                <span class="authorInfText" th:text="${session.topic.userinformation}">哈嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</span>
                             </div>
                         </div>
                     </td>
                     <td class="content">
                         <table class="contentTable">
                             <tr>
-                                <td class="contentTop">
+                                <td class="contentTop" style="height: 47px">
                                     &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于<span th:text="${session.topic.date}">0000-00-00</span></span>
                                 </td>
                             </tr>
@@ -95,7 +95,7 @@
                                         </tr>
                                         <tr>
                                             <th>作者 author：</th>
-                                            <td th:text="${session.topic.author}">作者</td>
+                                            <td th:text="${session.topic.authorname}">作者</td>
                                         </tr>
                                         <tr>
                                             <th>语言 language：</th>
@@ -113,8 +113,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="border: 0;">
-                                    <div class="contentMd" id="contentMd" th:utext="${#strings.replace(session.topicContent,'&#10;','&lt;br/&gt;')}">
+                                <td style="border: 0;background-color: initial">
+                                    <div class="contentMd" id="contentMd"  th:utext="${#strings.replace(session.topicContent,'&#10;','&lt;br/&gt;')}">
 
                                     </div>
                                     <script src="./js/Markdown.js"></script>
@@ -185,7 +185,7 @@
                                     <span th:text="${session.introduce}">Aa啊哈吧</span>
                                 </div>
                             </th>
-                            <td>
+                            <td style="background-color: initial">
                                 <div class="sendCommentTop commentTdTop">
                                     <span th:if="${session.commentTips == 'error'}" style="color: darkred">验证码错误</span>
                                     <span th:if="${session.commentTips == 'formatError'}" style="color: darkred">评论内容少于10字</span>
