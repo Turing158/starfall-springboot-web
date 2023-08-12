@@ -65,6 +65,8 @@ public class LoginRegController {
             @RequestParam(value = "password",required = false)String password,
             @RequestParam(value = "login_code",required = false)String code
     ){
+
+        code = "aaaa";
         session.setAttribute("user",user);
         //判断用户是否存在，及获取用户密码方便判断
         String flag;
@@ -79,7 +81,7 @@ public class LoginRegController {
             session.setAttribute("user",user);
             session.setAttribute("password",password);
         }
-        //验证码错误
+        //验证码错误[性能测试注释掉]
         else if(!Objects.equals(code,session.getAttribute("code"))){
             session.setAttribute("tips","验证码错误");
             session.setAttribute("user",user);
@@ -97,7 +99,8 @@ public class LoginRegController {
             session.setAttribute("user",user);
 
         }
-        //成功
+        //成功[性能测试换第一个]
+//        else if(Objects.equals(flag, password)){
         else if(Objects.equals(flag, password) && Objects.equals(code,session.getAttribute("code"))){
             String name = userDao.findByUser(user).getName();
             session.setAttribute("user",user);
