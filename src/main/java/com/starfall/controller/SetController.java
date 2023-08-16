@@ -2,6 +2,7 @@ package com.starfall.controller;
 
 import com.starfall.Application;
 import com.starfall.dao.CommentDao;
+import com.starfall.dao.TopicDao;
 import com.starfall.dao.UserDao;
 import com.starfall.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class SetController extends HttpServlet {
 
     @Autowired
     private CommentDao commentDao;
+
+    @Autowired
+    private TopicDao topicDao;
 
 
 
@@ -99,6 +103,7 @@ public class SetController extends HttpServlet {
         userDao.setHead(user,filename+fileType);
 //        更新数据库里头像的名字
         commentDao.updateData();
+        topicDao.updateData();
         session.setAttribute("head",filename+fileType);
         return "redirect:/set";
     }
@@ -133,6 +138,7 @@ public class SetController extends HttpServlet {
             session.setAttribute("i_tips","信息修改成功");
             userDao.updateInformation(user,name,introduce);
             commentDao.updateData();
+            topicDao.updateData();
         }
         session.setAttribute("code",null);
         return "redirect:/set";
