@@ -108,8 +108,8 @@
                         <th> </th>
                         <th></th>
                         <th>
-                            <!-- <a href="/topic" th:if="${session.topics.isEmpty() || session.labelTF == true}">显示所有</a> -->
                             <button class="showall" onclick="window.location.href='/topic'" th:if="${session.topics.isEmpty() || session.labelTF == true}">显示所有</button>
+                            <button style="height: 30px;outline:0;background-color: transparent;opacity: 0">&nbsp;<!--你无论怎么按也没用，因为这里什么都没有--></button>
                         </th>
                         <th>作者</th>
                         <th>观看/回复</th>
