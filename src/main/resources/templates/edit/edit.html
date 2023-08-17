@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/editHome.css">
+</head>
+<script src="./js/page.js"></script>
+<body>
+    <input class="pageHide" type="hidden" value="">
+    <div class="labelBar">
+        <ul>
+            <li><div style="border: 0;border-bottom:5px solid #313131 ; padding: 20px 0;">管理面板</div></li>
+            <li><a href="javascript:pageTransform(1)">主页</a></li>
+            <li><a href="javascript:pageTransform(2)">用户</a></li>
+            <li><a href="javascript:pageTransform(3)">主题</a></li>
+            <li><a href="javascript:pageTransform(4)">公告</a></li>
+            <li><a href="javascript:pageTransform(5)">主题</a></li>
+        </ul>
+    </div>
+    <div class="square"></div>
+    <div class="page">
+        <div class="homePage">
+            主页
+        </div>
+        <div class="userPage">
+            <table>
+                <tr class="EditTh">
+                    <th><div><span>用户名<br>User</span></div></th>
+                    <th><div><span>密码<br>Password</span></div></th>
+                    <th><div><span>等级<br>Level</span></div></th>
+                    <th><div><span>名称<br>Name</span></div></th>
+                    <th><div><span>介绍<br>Introduce</span></div></th>
+                    <th><div><span>邮箱<br>Email</span></div></th>
+                    <th><div><span>头像<br>Head</span></div></th>
+                    <th><div><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr class="EditTd">
+                    <td>user</td>
+                    <td>password</td>
+                    <td>0000-00-00</td>
+                    <td>name</td>
+                    <td>introduce</td>
+                    <td>email</td>
+                    <td style="text-align: center;">
+                        <img class="minImg" src="./img/forgetBg.png" alt="">
+                    </td>
+                    <td style="text-align: center;">
+                        <button class="btn">编辑</button>
+                        <button class="btn">删除</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="topicPage">
+            <table>
+                <tr class="EditTh">
+                    <th><div style="width: 50px"><span>编号<br>Id</span></div></th>
+                    <th><div><span>发帖用户<br>PublishUser</span></div></th>
+                    <th><div style="width: 80px;"><span>图标<br>Icon</span></div></th>
+                    <th><div style="width: 80px;"><span>标签<br>Label</span></div></th>
+                    <th><div style="width: 300px;"><span>大标题<br>BigTitle</span></div></th>
+                    <th><div><span>作者<br>Author</span></div></th>
+                    <th><div><span>发布日期<br>Date</span></div></th>
+                    <th><div style="width: 50px"><span>评论<br>Num</span></div></th>
+                    <th><div style="width: 50px"><span>浏览<br>Num</span></div></th>
+                    <th><div style="width: 80px"><span>来源<br>Source</span></div></th>
+                    <th><div style="width: 50px"><span>版本<br>Version</span></div></th>
+                    <th><div><span>语言<br>Language</span></div></th>
+                    <th><div><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>user</td>
+                    <td style="text-align: center;"><img src="./img/forgetBg.png" alt="" class="minImg"></td>
+                    <td>label</td>
+                    <td>title</td>
+                    <td>author</td>
+                    <td>date</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>原创</td>
+                    <td>0.00.0</td>
+                    <td>简体中文</td>
+                    <td style="text-align: center;">
+                        <button class="btn">编辑</button>
+                        <button class="btn">删除</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="noticePage">
+            <table>
+                <tr class="EditTh">
+                    <th><div><span>公告编号<br>Id</span></div></th>
+                    <th><div style="width: 400px;"><span>内容<br>Content</span></div></th>
+                    <th><div><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>content</td>
+                    <td style="text-align: center;">
+                        <button class="btn">编辑</button>
+                        <button class="btn">删除</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="commentPage">
+            <table>
+                <tr class="EditTh">
+                    <th><div><span>编号<br>Id</span></div></th>
+                    <th><div><span>主题<br>Topic</span></div></th>
+                    <th><div><span>用户<br>User</span></div></th>
+                    <th><div><span>内容<br>Content</span></div></th>
+                    <th><div><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>topic</td>
+                    <td>user</td>
+                    <td>content</td>
+                    <td style="text-align: center;">
+                        <button class="btn">编辑</button>
+                        <button class="btn">删除</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

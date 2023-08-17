@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s;
+    user-select: none;
+    color: #313131;
+}
+.btn{
+    border: 1px solid #313131;
+    background-color: #f2f2f2;
+    color: #313131;
+    width: 50px;
+    height: 25px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.btn:hover{
+    background-color: #313131;
+    color: #f2f2f2;
+}
+body{
+    background-color: #f2f2f2;
+    display: flex;
+}
+a{
+    text-decoration: none;
+    color: #313131;
+}
+div{
+    background-color: #f2f2f2;
+    border: 2px solid #313131;
+}
+.labelBar{
+    flex-shrink: 0;
+    margin-top: 5px;
+    margin-left: 5px;
+    background-color: #f2f2f2;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    height: 98vh;
+    width: 100px;
+    max-width: 100px;
+    
+}
+.labelBar:hover{
+    box-shadow: 1px 1px 5px #313131;
+}
+.labelBar ul{
+    list-style: none;
+}
+.labelBar ul li{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.labelBar ul li a{
+    display: flex;
+    padding: 10px 30px;
+    color: #313131;
+}
+.labelBar ul li a:hover{
+    background-color: #313131;
+    color: #f2f2f2;
+}
+.square{
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    rotate: 45deg;
+    left: 117px;
+    border-right: 2px solid #31313100;
+    border-top: 2px solid #31313100;
+    top: 90px;
+}
+.page{
+    margin-left: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 90vw;
+    padding: 10px 20px;
+}
+.page div{
+    border: 0;
+}
+.EditTh div{
+    border: 2px solid #313131;
+    color: #313131;
+    width: 150px;
+    font-size: 18px;
+    height: 25px;
+    overflow: hidden;
+}
+.EditTh div span{
+    position: relative;
+    top: 0;
+}
+.EditTh div:hover span{
+    top: -25px;
+}
+.minImg{
+    position: relative;
+    width: 25px;
+    height: 25px;
+    transform: scale(1);
+    transform-origin: 50% 0;
+    z-index: 1;
+}
+.minImg:hover{
+    transform: scale(6);
+    z-index: 99;
+}
+.homePage{
+    top: 0;
+    scale: 1;
+    transform-origin: 0 0;
+}
+.userPage,.topicPage,.noticePage,.commentPage{
+    position: absolute;
+    top: 20px;
+    scale: 0;
+    transform-origin: 0 0;
+}
