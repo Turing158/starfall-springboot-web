@@ -66,7 +66,7 @@ public class LoginRegController {
             @RequestParam(value = "login_code",required = false)String code
     ){
 
-        code = "aaaa";
+//        code = "aaaa";
         session.setAttribute("user",user);
         //判断用户是否存在，及获取用户密码方便判断
         String flag;

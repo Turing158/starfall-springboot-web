@@ -22,117 +22,159 @@
 <div class="square"></div>
 <div class="page">
     <div class="homePage">
-        主页
+        <div class="welcome">
+            <p>你好，管理员!</p>
+        </div>
+        <div class="sum">
+            <p style="position: relative;left: 10px;font-weight: bold;font-size: 25px;">统计:</p>
+            <div class="online">当前在线人数:&nbsp;<span class="onlineCount">0</span></div>
+        </div>
     </div>
     <div class="userPage">
-        <table>
-            <tr class="EditTh">
-                <th><div><span>用户名<br>User</span></div></th>
-                <th><div><span>密码<br>Password</span></div></th>
-                <th><div><span>注册日期<br>Date</span></div></th>
-                <th><div style="width: 50px;"><span>等级<br>Level</span></div></th>
-                <th><div><span>名称<br>Name</span></div></th>
-                <th><div style="width: 200px;"><span>介绍<br>Introduce</span></div></th>
-                <th><div style="width: 200px;"><span>邮箱<br>Email</span></div></th>
-                <th><div><span>头像<br>Head</span></div></th>
-                <th><div style="width: 120px;"><span>操作<br>Operate</span></div></th>
-            </tr>
-            <tr class="EditTd" th:each="user : ${session.adminUsers}">
-                <td><div th:text="${user.user}" style="width: 150px;">user</div></td>
-                <td><div th:text="${user.password}" style="width: 150px;">password</div></td>
-                <td><div th:text="${user.date}">0000-00-00</div></td>
-                <td><div th:text="${user.level}" style="width: 50px;">level</div></td>
-                <td><div th:text="${user.name}">name</div></td>
-                <td><div th:text="${user.introduce}" style="width: 200px;">introduce</div></td>
-                <td><div th:text="${user.email}" style="width: 200px;">12345678901@163.com</div></td>
-                <td style="text-align: center;">
-                    <img class="minImg" th:src="'../head_img/'+${user.head}" alt="">
-                </td>
-                <td style="text-align: center;">
-                    <button class="btn">编辑</button>
-                    &nbsp;
-                    <button class="btn">删除</button>
-                </td>
-            </tr>
-        </table>
+        <div>
+            <table>
+                <tr class="EditTh">
+                    <th><div><span>用户名<br>User</span></div></th>
+                    <th><div><span>密码<br>Password</span></div></th>
+                    <th><div><span>注册日期<br>Date</span></div></th>
+                    <th><div style="width: 50px;"><span>等级<br>Level</span></div></th>
+                    <th><div><span>名称<br>Name</span></div></th>
+                    <th><div style="width: 200px;"><span>介绍<br>Introduce</span></div></th>
+                    <th><div style="width: 200px;"><span>邮箱<br>Email</span></div></th>
+                    <th><div><span>头像<br>Head</span></div></th>
+                    <th><div style="width: 120px;"><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr class="EditTd" th:each="user : ${session.adminUsers}">
+                    <td><div th:text="${user.user}" style="width: 150px;">user</div></td>
+                    <td><div th:text="${user.password}" style="width: 150px;">password</div></td>
+                    <td><div th:text="${user.date}">0000-00-00</div></td>
+                    <td><div th:text="${user.level}" style="width: 50px;">level</div></td>
+                    <td><div th:text="${user.name}">name</div></td>
+                    <td><div th:text="${user.introduce}" style="width: 200px;">introduce</div></td>
+                    <td><div th:text="${user.email}" style="width: 200px;">12345678901@163.com</div></td>
+                    <td style="text-align: center;">
+                        <img class="minImg" th:src="'../head_img/'+${user.head}" alt="">
+                    </td>
+                    <td style="text-align: center;">
+                        <button class="btn">编辑</button>
+                        &nbsp;
+                        <button class="btn">删除</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="changePage">
+                <button class="btn">首页</button>
+                <button class="btn arrow">←</button>
+                <span>1/1</span>
+                <button class="btn arrow">→</button>
+                <button class="btn">尾页</button>
+            </div>
+        </div>
     </div>
     <div class="topicPage">
-        <table>
-            <tr class="EditTh">
-                <th><div style="width: 50px"><span>编号<br>Id</span></div></th>
-                <th><div><span>发帖用户<br>PublishUser</span></div></th>
-                <th><div style="width: 80px;"><span>图标<br>Icon</span></div></th>
-                <th><div style="width: 80px;"><span>标签<br>Label</span></div></th>
-                <th><div style="width: 300px;"><span>大标题<br>BigTitle</span></div></th>
-                <th><div><span>作者<br>Author</span></div></th>
-                <th><div><span>发布日期<br>Date</span></div></th>
-                <th><div style="width: 50px"><span>评论<br>Num</span></div></th>
-                <th><div style="width: 50px"><span>浏览<br>Num</span></div></th>
-                <th><div style="width: 80px"><span>来源<br>Source</span></div></th>
-                <th><div style="width: 50px"><span>版本<br>Version</span></div></th>
-                <th><div><span>语言<br>Language</span></div></th>
-                <th><div style="width: 120px"><span>操作<br>Operate</span></div></th>
-            </tr>
-            <tr class="EditTd" th:each="topic : ${session.adminTopics}">
-                <td><div th:text="${topic.id}">id</div></td>
-                <td><div th:text="${topic.user}">user</div></td>
-                <td style="text-align: center;"><img th:src="'../img/topic/icon/'+${topic.icon}" alt="" class="minImg"></td>
-                <td><div th:text="${topic.label}">label</div></td>
-                <td><div th:text="${topic.title}" style="width:300px">title</div></td>
-                <td><div th:text="${topic.authorname}">author</div></td>
-                <td><div th:text="${topic.date}">date</div></td>
-                <td><div th:text="${topic.comment}">0</div></td>
-                <td><div th:text="${topic.view}">0</div></td>
-                <td><div th:text="${topic.source}">原创</div></td>
-                <td><div th:text="${topic.version}" style="width: 50px;">0.00.0</div></td>
-                <td><div th:text="${topic.language}" style="width: 100px;">简体中文</div></td>
-                <td style="text-align: center;">
-                    <button class="btn">编辑</button>
-                    &nbsp;
-                    <button class="btn">删除</button>
-                </td>
-            </tr>
-        </table>
+        <div>
+            <table>
+                <tr class="EditTh">
+                    <th><div style="width: 50px"><span>编号<br>Id</span></div></th>
+                    <th><div><span>发帖用户<br>PublishUser</span></div></th>
+                    <th><div style="width: 80px;"><span>图标<br>Icon</span></div></th>
+                    <th><div style="width: 80px;"><span>标签<br>Label</span></div></th>
+                    <th><div style="width: 300px;"><span>大标题<br>BigTitle</span></div></th>
+                    <th><div><span>作者<br>Author</span></div></th>
+                    <th><div><span>发布日期<br>Date</span></div></th>
+                    <th><div style="width: 50px"><span>评论<br>Num</span></div></th>
+                    <th><div style="width: 50px"><span>浏览<br>Num</span></div></th>
+                    <th><div style="width: 80px"><span>来源<br>Source</span></div></th>
+                    <th><div style="width: 50px"><span>版本<br>Version</span></div></th>
+                    <th><div><span>语言<br>Language</span></div></th>
+                    <th><div style="width: 120px"><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr class="EditTd" th:each="topic : ${session.adminTopics}">
+                    <td><div th:text="${topic.id}">id</div></td>
+                    <td><div th:text="${topic.user}">user</div></td>
+                    <td style="text-align: center;"><img th:src="'../img/topic/icon/'+${topic.icon}" alt="" class="minImg"></td>
+                    <td><div th:text="${topic.label}">label</div></td>
+                    <td><div th:text="${topic.title}" style="width:300px">title</div></td>
+                    <td><div th:text="${topic.authorname}">author</div></td>
+                    <td><div th:text="${topic.date}">date</div></td>
+                    <td><div th:text="${topic.comment}">0</div></td>
+                    <td><div th:text="${topic.view}">0</div></td>
+                    <td><div th:text="${topic.source}">原创</div></td>
+                    <td><div th:text="${topic.version}" style="width: 50px;">0.00.0</div></td>
+                    <td><div th:text="${topic.language}" style="width: 100px;">简体中文</div></td>
+                    <td style="text-align: center;">
+                        <button class="btn">编辑</button>
+                        &nbsp;
+                        <button class="btn">删除</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="changePage">
+                <button class="btn">首页</button>
+                <button class="btn arrow">←</button>
+                <span>1/1</span>
+                <button class="btn arrow">→</button>
+                <button class="btn">尾页</button>
+            </div>
+        </div>
     </div>
     <div class="noticePage">
-        <table>
-            <tr class="EditTh">
-                <th><div><span>公告编号<br>Id</span></div></th>
-                <th><div style="width: 1000px;"><span>内容<br>Content</span></div></th>
-                <th><div style="width: 120px;"><span>操作<br>Operate</span></div></th>
-            </tr>
-            <tr class="EditTd" th:each="notice : ${session.adminNotices}">
-                <td><div th:text="${notice.id}">id</div></td>
-                <td><div th:text="${notice.content}" style="width: 1000px;">content</div></td>
-                <td style="text-align: center;">
-                    <button class="btn">编辑</button>
-                    &nbsp;
-                    <button class="btn">删除</button>
-                </td>
-            </tr>
-        </table>
+        <div>
+            <table>
+                <tr class="EditTh">
+                    <th><div><span>公告编号<br>Id</span></div></th>
+                    <th><div style="width: 1000px;"><span>内容<br>Content</span></div></th>
+                    <th><div style="width: 120px;"><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr class="EditTd" th:each="notice : ${session.adminNotices}">
+                    <td><div th:text="${notice.id}">id</div></td>
+                    <td><div th:text="${notice.content}" style="width: 1000px;">content</div></td>
+                    <td style="text-align: center;">
+                        <button class="btn">编辑</button>
+                        &nbsp;
+                        <button class="btn">删除</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="changePage">
+                <button class="btn">首页</button>
+                <button class="btn arrow">←</button>
+                <span>1/1</span>
+                <button class="btn arrow">→</button>
+                <button class="btn">尾页</button>
+            </div>
+        </div>
     </div>
     <div class="commentPage">
-        <table>
-            <tr class="EditTh">
-                <th><div><span>编号<br>Id</span></div></th>
-                <th><div><span>主题<br>Topic</span></div></th>
-                <th><div><span>用户<br>User</span></div></th>
-                <th><div style="width: 800px;"><span>内容<br>Content</span></div></th>
-                <th><div style="width: 120px;"><span>操作<br>Operate</span></div></th>
-            </tr>
-            <tr class="EditTd" th:each="comment : ${session.adminComments}">
-                <td><div th:text="${comment.id}">id</div></td>
-                <td><div th:text="${comment.topicid}">topic</div></td>
-                <td><div th:text="${comment.user}">user</div></td>
-                <td><div th:text="${comment.content}">content</div></td>
-                <td style="text-align: center;">
-                    <button class="btn">编辑</button>
-                    &nbsp;
-                    <button class="btn">删除</button>
-                </td>
-            </tr>
-        </table>
+        <div>
+            <table>
+                <tr class="EditTh">
+                    <th><div><span>编号<br>Id</span></div></th>
+                    <th><div><span>主题<br>Topic</span></div></th>
+                    <th><div><span>用户<br>User</span></div></th>
+                    <th><div style="width: 800px;"><span>内容<br>Content</span></div></th>
+                    <th><div style="width: 120px;"><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr class="EditTd" th:each="comment : ${session.adminComments}">
+                    <td><div th:text="${comment.id}">id</div></td>
+                    <td><div th:text="${comment.topicid}">topic</div></td>
+                    <td><div th:text="${comment.user}">user</div></td>
+                    <td><div th:text="${comment.content}">content</div></td>
+                    <td style="text-align: center;">
+                        <button class="btn">编辑</button>
+                        &nbsp;
+                        <button class="btn">删除</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="changePage">
+                <button class="btn">首页</button>
+                <button class="btn arrow">←</button>
+                <span>1/1</span>
+                <button class="btn arrow">→</button>
+                <button class="btn">尾页</button>
+            </div>
+        </div>
     </div>
 </div>
 </body>

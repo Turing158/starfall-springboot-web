@@ -80,6 +80,35 @@ div{
     width: 90vw;
     padding: 10px 20px;
 }
+.page .welcome{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 150px;
+    font-size: 40px;
+    font-weight: bold;
+    border: 4px solid #313131;
+    border-radius: 10px;
+    margin: 10px 20px;
+}
+.page .sum{
+    position: relative;
+    width: 400px;
+    height: 150px;
+    font-size: 18px;
+    border: 4px solid #313131;
+    border-radius: 10px;
+    margin: 10px 20px;
+    overflow: hidden;
+}
+.page .sum .online{
+    position: relative;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+}
 .page div{
     border: 0;
 }
@@ -125,4 +154,12 @@ div{
     top: 20px;
     scale: 0;
     transform-origin: 0 0;
+}
+.changePage{
+    display: flex;
+    justify-content: center;
+}
+.arrow{
+    margin: 0 10px;
+    font-size: 20px;
 }

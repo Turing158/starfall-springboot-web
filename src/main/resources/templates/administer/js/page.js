@@ -1,7 +1,22 @@
 function start(){
+    // 此部分为接收之前点击过的页面代码===================================================
     let input = document.querySelector('.pageHide').value;
     if(input !== ''){
         pageTransform(parseInt(input));
+    }
+    // =================================================================================
+    getOnline();
+}
+
+function getOnline(){
+    let ajax = new XMLHttpRequest();
+    let onlineCount = document.querySelector('.onlineCount');
+    ajax.open('get','/administer/getOnline',true);
+    ajax.send();
+    ajax.onreadystatechange = function(){
+        if(ajax.readyState === 4 && ajax.status === 200){
+            onlineCount.innerHTML = ajax.responseText;
+        }
     }
 }
 function pageTransform(page){

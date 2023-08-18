@@ -4,6 +4,7 @@ import com.starfall.dao.CommentDao;
 import com.starfall.dao.NoticeDao;
 import com.starfall.dao.TopicDao;
 import com.starfall.dao.UserDao;
+import com.starfall.util.OnlineUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 @Controller
 public class EditController {
@@ -55,6 +56,13 @@ public class EditController {
             @RequestBody(required = false)String page
     ){
         session.setAttribute("administerPage",page);
+    }
+    @RequestMapping("/administer/getOnline")
+    @ResponseBody
+    public int getOnlineCount(
+        HttpSession session
+    ){
+        return OnlineUtil.list.size();
     }
 }
 

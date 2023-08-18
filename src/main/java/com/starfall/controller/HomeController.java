@@ -4,6 +4,7 @@ import com.starfall.Application;
 import com.starfall.dao.NoticeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,6 +27,12 @@ public class HomeController{
     ) {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
 //        DiscussService discussService = context.getBean("discussService", DiscussService.class);
+//        测试用
+//        session.setMaxInactiveInterval(1);
+        session.setMaxInactiveInterval(60);
+        if(session.getAttribute("user") != null){
+            session.setMaxInactiveInterval(60*60*24*7);
+        }
         session.setAttribute("noticeLength",noticeDao.count());
         session.setAttribute("notices",noticeDao.findAll());
         return "index";
