@@ -63,11 +63,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn">首页</button>
-                <button class="btn arrow">←</button>
-                <span>1/1</span>
-                <button class="btn arrow">→</button>
-                <button class="btn">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageULast},1)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageUNum}-1,${session.adminPageULast},1)|">←</button>
+                <span th:text="${session.adminPageUNum}+'/'+${session.adminPageULast}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageUNum}+1,${session.adminPageULast},1)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageULast},${session.adminPageULast},1)|">尾页</button>
             </div>
         </div>
     </div>
@@ -110,11 +110,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn">首页</button>
-                <button class="btn arrow">←</button>
-                <span>1/1</span>
-                <button class="btn arrow">→</button>
-                <button class="btn">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageTLast},2)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageTNum}-1,${session.adminPageTLast},2)|">←</button>
+                <span th:text="${session.adminPageTNum}+'/'+${session.adminPageTLast}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageTNum}+1,${session.adminPageTLast},2)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageTLast},${session.adminPageTLast},2)|">尾页</button>
             </div>
         </div>
     </div>
@@ -137,11 +137,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn">首页</button>
-                <button class="btn arrow">←</button>
-                <span>1/1</span>
-                <button class="btn arrow">→</button>
-                <button class="btn">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageNLast},3)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageNNum}-1,${session.adminPageNLast},3)|">←</button>
+                <span th:text="${session.adminPageNNum}+'/'+${session.adminPageNLast}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageNNum}+1,${session.adminPageNLast},3)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageNLast},${session.adminPageNLast},3)|">尾页</button>
             </div>
         </div>
     </div>
@@ -168,11 +168,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn">首页</button>
-                <button class="btn arrow">←</button>
-                <span>1/1</span>
-                <button class="btn arrow">→</button>
-                <button class="btn">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageCLast},4)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageCNum}-1,${session.adminPageCLast},4)|">←</button>
+                <span th:text="${session.adminPageCNum}+'/'+${session.adminPageCLast}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageCNum}+1,${session.adminPageCLast},4)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageCLast},${session.adminPageCLast},4)|">尾页</button>
             </div>
         </div>
     </div>

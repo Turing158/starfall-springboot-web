@@ -42,7 +42,6 @@ function pageTransform(page){
             topic.style.scale='0';
             notice.style.scale='0';
             comment.style.scale='0';
-            console.log("q");
             break;
         case 3:
             square.style.top = '184px';
@@ -76,4 +75,31 @@ function setPage(num){
     ajax.setRequestHeader("page",num);
     ajax.send(num);
 
+}
+
+function Page(pageNum,lastPage,page){
+    let pageStr = '';
+    switch (page){
+        case 1:
+            pageStr = 'U';
+            break;
+        case 2:
+            pageStr = 'T';
+            break;
+        case 3:
+            pageStr = 'N';
+            break;
+        case 4:
+            pageStr = 'C';
+            break;
+    }
+    if(pageNum <= 0){
+        alert('已经是第一页了');
+    }
+    else if(pageNum > lastPage){
+        alert('已经是最后一页了');
+    }
+    else{
+        window.location.href= '/administer/html?page'+pageStr+'=' + pageNum;
+    }
 }

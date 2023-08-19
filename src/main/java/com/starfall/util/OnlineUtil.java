@@ -24,6 +24,5 @@ public class OnlineUtil implements HttpSessionListener {
     public synchronized void sessionDestroyed(HttpSessionEvent httpSessionEvent) {//监听session的撤销
         HttpSession session = httpSessionEvent.getSession();
         list.remove(session.getId());
-        System.out.println("-");
     }
 }

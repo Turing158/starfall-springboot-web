@@ -41,10 +41,22 @@ public class EditController {
         Pageable pageableT = PageRequest.of(pageT-1,20, Sort.by("id").ascending());
         Pageable pageableN = PageRequest.of(pageN-1,20, Sort.by("id").ascending());
         Pageable pageableC = PageRequest.of(pageC-1,20, Sort.by("id").ascending());
+
         session.setAttribute("adminUsers",userDao.findAll(pageableU));
+        session.setAttribute("adminPageUNum",pageU);
+        session.setAttribute("adminPageULast",topicDao.count()/21+1);
+
         session.setAttribute("adminTopics",topicDao.findAll(pageableT));
+        session.setAttribute("adminPageTNum",pageT);
+        session.setAttribute("adminPageTLast",topicDao.count()/21+1);
+
         session.setAttribute("adminNotices",noticeDao.findAll(pageableN));
+        session.setAttribute("adminPageNNum",pageN);
+        session.setAttribute("adminPageNLast",noticeDao.count()/21+1);
+
         session.setAttribute("adminComments",commentDao.findAll(pageableC));
+        session.setAttribute("adminPageCNum",pageC);
+        session.setAttribute("adminPageCLast",commentDao.count()/21+1);
         return "administer/edit";
     }
 
