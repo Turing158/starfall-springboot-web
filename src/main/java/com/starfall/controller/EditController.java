@@ -76,5 +76,16 @@ public class EditController {
     ){
         return OnlineUtil.list.size();
     }
+
+
+
+    @RequestMapping("/administer/modify")
+    public String modify(
+            HttpSession session
+    ){
+        session.setAttribute("administerModify",null);
+        return "administer/modify";
+    }
 }
+
 

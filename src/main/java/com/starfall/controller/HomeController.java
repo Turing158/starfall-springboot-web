@@ -29,7 +29,7 @@ public class HomeController{
 //        DiscussService discussService = context.getBean("discussService", DiscussService.class);
 //        测试用
 //        session.setMaxInactiveInterval(1);
-        session.setMaxInactiveInterval(60);
+        session.setMaxInactiveInterval(10);
         if(session.getAttribute("user") != null){
             session.setMaxInactiveInterval(60*60*24*7);
         }

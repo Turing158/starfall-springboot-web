@@ -56,7 +56,7 @@
                         <img class="minImg" th:src="'../head_img/'+${user.head}" alt="">
                     </td>
                     <td style="text-align: center;">
-                        <button class="btn">编辑</button>
+                        <button class="btn" th:onclick="href('/administer/modify?user='+[[${user.user}]])">编辑</button>
                         &nbsp;
                         <button class="btn">删除</button>
                     </td>
@@ -103,7 +103,7 @@
                     <td><div th:text="${topic.version}" style="width: 50px;">0.00.0</div></td>
                     <td><div th:text="${topic.language}" style="width: 100px;">简体中文</div></td>
                     <td style="text-align: center;">
-                        <button class="btn">编辑</button>
+                        <button class="btn" th:onclick="href('/administer/modify?topic='+[[${topic.id}]])">编辑</button>
                         &nbsp;
                         <button class="btn">删除</button>
                     </td>
@@ -130,7 +130,7 @@
                     <td><div th:text="${notice.id}">id</div></td>
                     <td><div th:text="${notice.content}" style="width: 1000px;">content</div></td>
                     <td style="text-align: center;">
-                        <button class="btn">编辑</button>
+                        <button class="btn" th:onclick="href('/administer/modify?notice='+[[${notice.id}]])">编辑</button>
                         &nbsp;
                         <button class="btn">删除</button>
                     </td>
@@ -161,7 +161,7 @@
                     <td><div th:text="${comment.user}">user</div></td>
                     <td><div th:text="${comment.content}">content</div></td>
                     <td style="text-align: center;">
-                        <button class="btn">编辑</button>
+                        <button class="btn" th:onclick="href('/administer/modify?comment='+[[${comment.id}]])">编辑</button>
                         &nbsp;
                         <button class="btn">删除</button>
                     </td>

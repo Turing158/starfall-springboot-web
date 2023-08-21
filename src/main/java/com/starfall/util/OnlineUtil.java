@@ -18,11 +18,13 @@ public class OnlineUtil implements HttpSessionListener {
     public synchronized void sessionCreated(HttpSessionEvent httpSessionEvent) {
         HttpSession session = httpSessionEvent.getSession();
         list.add(session.getId());
+//        System.out.println("+");
     }
 
     @Override
     public synchronized void sessionDestroyed(HttpSessionEvent httpSessionEvent) {//监听session的撤销
         HttpSession session = httpSessionEvent.getSession();
         list.remove(session.getId());
+//        System.out.println("-");
     }
 }

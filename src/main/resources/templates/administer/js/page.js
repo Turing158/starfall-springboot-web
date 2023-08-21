@@ -103,3 +103,6 @@ function Page(pageNum,lastPage,page){
         window.location.href= '/administer/html?page'+pageStr+'=' + pageNum;
     }
 }
+function href(href){
+    window.location.href = href;
+}
