@@ -4,6 +4,10 @@ import com.starfall.dao.CommentDao;
 import com.starfall.dao.NoticeDao;
 import com.starfall.dao.TopicDao;
 import com.starfall.dao.UserDao;
+import com.starfall.entity.Comment;
+import com.starfall.entity.Notice;
+import com.starfall.entity.Topic;
+import com.starfall.entity.User;
 import com.starfall.util.OnlineUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.*;
+import java.util.Optional;
 
 @Controller
 public class EditController {
@@ -57,6 +62,7 @@ public class EditController {
         session.setAttribute("adminComments",commentDao.findAll(pageableC));
         session.setAttribute("adminPageCNum",pageC);
         session.setAttribute("adminPageCLast",commentDao.count()/21+1);
+
         return "administer/edit";
     }
 
@@ -81,8 +87,56 @@ public class EditController {
 
     @RequestMapping("/administer/modify")
     public String modify(
-            HttpSession session
+            HttpSession session,
+            @RequestParam(required = false) String user,
+            @RequestParam(required = false) String topic,
+            @RequestParam(required = false) String notice,
+            @RequestParam(required = false) String comment
     ){
+        if(user != null){
+            Optional<User> userObj = userDao.findById(user);
+            if(userObj.isPresent()){
+                session.setAttribute("administerModifyInfU",userObj.get());
+                session.setAttribute("administerModify",userObj.get().getUser());
+            }
+            else {
+                session.setAttribute("administerModify","not exist");
+            }
+        }
+        else if(topic != null){
+            Long topicId = (long) Integer.parseInt(topic);
+            Optional<Topic> topicObj = topicDao.findById(topicId);
+            if(topicObj.isPresent()){
+                session.setAttribute("administerModifyInfT",topicObj.get());
+                session.setAttribute("administerModify",topicObj.get().getId());
+            }
+            else {
+                session.setAttribute("administerModify","not exist");
+            }
+        }
+        else if(notice != null){
+            Long noticeId = (long) Integer.parseInt(notice);
+            Optional<Notice> noticeObj = noticeDao.findById(noticeId);
+            if(noticeObj.isPresent()){
+                session.setAttribute("administerModifyInfN",noticeObj.get());
+                session.setAttribute("administerModify",noticeObj.get().getId());
+            }
+            else {
+                session.setAttribute("administerModify","not exist");
+            }
+        }
+        else if(comment != null){
+            Long commentId = (long) Integer.parseInt(comment);
+            Optional<Comment> commentObj = commentDao.findById(commentId);
+            if(commentObj.isPresent()){
+                session.setAttribute("administerModifyInfC",commentObj.get());
+                session.setAttribute("administerModify",commentObj.get().getId());
+            }
+            else {
+                session.setAttribute("administerModify","not exist");
+            }
+
+        }
         session.setAttribute("administerModify",null);
         return "administer/modify";
     }

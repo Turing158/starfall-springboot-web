@@ -273,19 +273,19 @@ public class TopicController {
             //更新主题一些与user相关的信息
             topicDao.updateData();
             //清除session
-            session.setAttribute("editBigTitle",null);
-            session.setAttribute("editLabel",null);
-            session.setAttribute("editTitle",null);
-            session.setAttribute("editTitleName",null);
-            session.setAttribute("editSource",null);
-            session.setAttribute("editVersion",null);
-            session.setAttribute("editAuthorName",null);
-            session.setAttribute("editLanguage",null);
-            session.setAttribute("editAddress",null);
-            session.setAttribute("editDownload",null);
-            session.setAttribute("editContent",null);
-            session.setAttribute("editErrorColor",null);
-            session.setAttribute("editErrorTips",null);
+            session.removeAttribute("editBigTitle");
+            session.removeAttribute("editLabel");
+            session.removeAttribute("editTitle");
+            session.removeAttribute("editTitleName");
+            session.removeAttribute("editSource");
+            session.removeAttribute("editVersion");
+            session.removeAttribute("editAuthorName");
+            session.removeAttribute("editLanguage");
+            session.removeAttribute("editAddress");
+            session.removeAttribute("editDownload");
+            session.removeAttribute("editContent");
+            session.removeAttribute("editErrorColor");
+            session.removeAttribute("editErrorTips");
             return "redirect:"+href;
         }
         else{
