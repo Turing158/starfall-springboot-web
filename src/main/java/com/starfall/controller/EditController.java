@@ -140,6 +140,69 @@ public class EditController {
         session.setAttribute("administerModify",null);
         return "administer/modify";
     }
+    @RequestMapping("/administer/delete")
+    public String delete(
+            HttpSession session,
+            @RequestParam(required = false) String user,
+            @RequestParam(required = false) String topic,
+            @RequestParam(required = false) String notice,
+            @RequestParam(required = false) String comment
+    ){
+        if(user != null){
+            Optional<User> userObj = userDao.findById(user);
+            if(userObj.isPresent()){
+                userDao.deleteById(user);
+                session.setAttribute("administerTips","删除成功！已删除User："+user);
+            }
+            else {
+                session.setAttribute("administerModify","not exist");
+            }
+        }
+        else if(topic != null){
+            Long topicId = (long) Integer.parseInt(topic);
+            Optional<Topic> topicObj = topicDao.findById(topicId);
+            if(topicObj.isPresent()){
+                topicDao.deleteById(topicId);
+                session.setAttribute("administerTips","删除成功！已删除Topic："+topic);
+            }
+            else {
+                session.setAttribute("administerModify","not exist");
+            }
+        }
+        else if(notice != null){
+            Long noticeId = (long) Integer.parseInt(notice);
+            Optional<Notice> noticeObj = noticeDao.findById(noticeId);
+            if(noticeObj.isPresent()){
+                noticeDao.deleteById(noticeId);
+                session.setAttribute("administerTips","删除成功！已删除Notice："+notice);
+            }
+            else {
+                session.setAttribute("administerModify","not exist");
+            }
+        }
+        else if(comment != null){
+            Long commentId = (long) Integer.parseInt(comment);
+            Optional<Comment> commentObj = commentDao.findById(commentId);
+            if(commentObj.isPresent()){
+                commentDao.deleteById(commentId);
+                session.setAttribute("administerTips","删除成功！已删除Comment："+comment);
+            }
+            else {
+                session.setAttribute("administerModify","not exist");
+            }
+
+        }
+        session.setAttribute("administerModify",null);
+        return "redirect:/administer/html";
+    }
+    @RequestMapping("/administer/clearTips")
+    @ResponseBody
+    public void clearTips(
+            HttpSession session
+    ){
+        session.setAttribute("administerTips",null);
+    }
+
 }
 
 

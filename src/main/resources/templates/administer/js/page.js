@@ -106,3 +106,11 @@ function Page(pageNum,lastPage,page){
 function href(href){
     window.location.href = href;
 }
+
+function hideTips(){
+    let tips = document.querySelector('.tips');
+    let ajax = new XMLHttpRequest();
+    tips.style.display = 'none';
+    ajax.open('get','/administer/clearTips',true);
+    ajax.send();
+}

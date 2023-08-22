@@ -30,6 +30,42 @@ div{
     background-color: #f2f2f2;
     border: 2px solid #313131;
 }
+.tips{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background-color: #313131c2;
+    z-index: 100;
+}
+.tips .tipsDiv{
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    border-radius: 10px;
+}
+.tips .tipsDiv p{
+    margin: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+.tips .tipsDiv span{
+    margin: 50px;
+    font-size: 20px;
+}
+.tipsBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 20px;
+    height: 40px;
+    width: 80px;
+}
 .labelBar{
     flex-shrink: 0;
     margin-top: 5px;

@@ -8,6 +8,13 @@
 </head>
 <script src="./js/page.js"></script>
 <body onload="start()">
+    <div class="tips" th:if="${session.administerTips} != null">
+        <div class="tipsDiv">
+            <p>提示:</p>
+            <span th:text="${session.administerTips}">...</span>
+            <button class="btn tipsBtn" onclick="hideTips()">确认</button>
+        </div>
+    </div>
 <input class="pageHide" type="hidden" th:value="${session.administerPage}">
 <div class="labelBar">
     <ul>
@@ -58,7 +65,7 @@
                     <td style="text-align: center;">
                         <button class="btn" th:onclick="href('/administer/modify?user='+[[${user.user}]])">编辑</button>
                         &nbsp;
-                        <button class="btn">删除</button>
+                        <button class="btn" th:onclick="href('/administer/delete?user='+[[${user.user}]])">删除</button>
                     </td>
                 </tr>
             </table>
@@ -105,7 +112,7 @@
                     <td style="text-align: center;">
                         <button class="btn" th:onclick="href('/administer/modify?topic='+[[${topic.id}]])">编辑</button>
                         &nbsp;
-                        <button class="btn">删除</button>
+                        <button class="btn" th:onclick="href('/administer/delete?topic='+[[${topic.id}]])">删除</button>
                     </td>
                 </tr>
             </table>
@@ -132,7 +139,7 @@
                     <td style="text-align: center;">
                         <button class="btn" th:onclick="href('/administer/modify?notice='+[[${notice.id}]])">编辑</button>
                         &nbsp;
-                        <button class="btn">删除</button>
+                        <button class="btn" th:onclick="href('/administer/delete?notice='+[[${notice.id}]])">删除</button>
                     </td>
                 </tr>
             </table>
@@ -163,7 +170,7 @@
                     <td style="text-align: center;">
                         <button class="btn" th:onclick="href('/administer/modify?comment='+[[${comment.id}]])">编辑</button>
                         &nbsp;
-                        <button class="btn">删除</button>
+                        <button class="btn" th:onclick="href('/administer/delete?comment='+[[${comment.id}]])">删除</button>
                     </td>
                 </tr>
             </table>
