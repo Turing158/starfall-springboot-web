@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="Modify" th:if="${session.administerPage} == 2">
-        <form action="">
+        <form action="/administer/modify/modifyData" method="post">
             <table class="modifyContent">
                 <tr>
                     <td>用户名</td>
@@ -44,7 +44,7 @@
         </form>
     </div>
     <div class="Modify" th:if="${session.administerPage} == 4">
-        <form action="">
+        <form action="/administer/modify/modifyData" method="post">
             <table class="modifyContent">
                 <tr>
                     <td>公告ID</td>
@@ -65,7 +65,7 @@
         </form>
     </div>
     <div class="Modify" th:if="${session.administerPage} == 5">
-        <form action="">
+        <form action="/administer/modify/modifyData" method="post">
             <table class="modifyContent">
                 <tr>
                     <td>评论编号</td>

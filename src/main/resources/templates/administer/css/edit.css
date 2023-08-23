@@ -1,0 +1,180 @@
+button{
+    outline: 0;
+    border: 0;
+    background-color: rgb(243, 225, 188);
+    font-size: 13px;
+    color: rgb(54, 54, 54);
+    cursor: pointer;
+    margin: 0 2px;
+}
+button:hover{
+    background-color: rgb(223, 192, 134);
+}
+.editShow{
+    position: absolute;
+    top: 2px;
+    right: 0;
+    z-index: 100;
+}
+input[type=text]{
+    font-size: 12px;
+    font-weight: bold;
+    outline: 0;
+    border: 0;
+    background-color: initial;
+    border-bottom: 1px solid rgba(54, 54, 54, 0);
+    width: 600px;
+}
+input[type=text]:hover{
+    border-bottom: 1px solid rgb(143, 143, 143);
+}
+input[type=text]:focus{
+    border-bottom: 1px solid rgb(48, 48, 48);
+}
+input.editTitleName{
+    font-size:20px;
+    font-weight: bold;
+    border-bottom: 2px solid rgba(54, 54, 54, 0);
+}
+input.editTitleName:hover{
+    border-bottom: 2px solid rgb(143, 143, 143);
+}
+input.editTitleName:focus{
+    border-bottom: 2px solid rgb(48, 48, 48);
+}
+.editTd{
+    background-color: initial;
+    border: 0;
+}
+select{
+    outline: 0;
+    border: 0;
+    background-color: initial;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(88, 88, 88, 0);
+}
+select:hover{
+    border-bottom: 1px solid rgb(88, 88, 88);
+}
+select.editSource{
+    font-size: 12px;
+}
+.editContent{
+    position: absolute;
+    top: 305px;
+    left: 20px;
+    width: 740px;
+}
+.editTools{
+    width: 740px;
+    height: 22px;
+}
+textarea{
+    outline: 0;
+    border: 0;
+    width: 738px;
+    height: 800px;
+    border-top: 1px dotted black;
+    background-color: initial;
+    resize: none;
+    font-size: 15px;
+    font-family: 微软雅黑;
+    z-index: 100;
+}
+textarea:hover{
+    background-color: rgb(250, 238, 218);
+}
+textarea:focus{
+    background-color: rgb(245, 233, 215);
+}
+.selectHspan,.selectCspan,.selectFspan,.selectSspan{
+    position: relative;
+    height: 17px;
+    font-size: 13px;
+    background-color: rgb(243, 225, 188);;
+}
+.selectH,.selectC,.selectF,.selectS{
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 103px;
+    height: 15px;
+    border: 1px solid rgb(165, 140, 100);
+    background-color: rgb(243, 225, 188);
+    z-index: 100;
+    display: none;
+}
+.selectC,.selectF{
+    width: 245px;
+    height: 17px;
+}
+.selectF{
+    width: 175px;
+}
+.selectS{
+    width: 170px;
+}
+.selectH button,.selectS button{
+    position: relative;
+    margin: 0 2px;
+    top: -2px;
+}
+.selectC button{
+    position: relative;
+    margin: 0 2px;
+    top: 0px;
+}
+.selectHspan:hover .selectH{
+    display: block;
+}
+.selectCspan:hover .selectC{
+    display: block;
+}
+.selectFspan:hover .selectF{
+    display: block;
+}
+.selectSspan:hover .selectS{
+    display: block;
+}
+.contentTop{
+    position: relative;
+    top: 5px;
+    height: 47px;
+}
+.submit{
+    position: absolute;
+    bottom: 2px;
+    right: 0;
+    width: 78px;
+    height: 30px;
+    border: 2px solid rgba(255, 255, 255, 0);
+    border-radius: 5px;
+    background-color: rgb(182, 146, 99);
+    color: aliceblue;
+    font-size: 18px;
+    transition: all 0.2s;
+}
+.submit:hover{
+    background-color: rgb(148, 115, 68);
+    border-top: 2px solid rgb(231, 210, 181);
+    border-left: 2px solid rgb(231, 210, 181);
+    border-right: 2px solid rgb(75, 56, 29);
+    border-bottom: 2px solid rgb(75, 56, 29);
+}
+.submit:active{
+    background-color: rgb(122, 88, 35);
+    border-top: 2px solid rgb(75, 56, 29);
+    border-left: 2px solid rgb(75, 56, 29);
+    border-right: 2px solid rgb(231, 210, 181);
+    border-bottom: 2px solid rgb(231, 210, 181);
+}
+.verifyCode{
+    position: relative;
+    top: 5px;
+    width: 80px;
+    height: 30px;
+}
+input.verifyInput{
+    font-size: 18px;
+    width: 55px;
+}
