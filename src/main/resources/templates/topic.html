@@ -121,7 +121,7 @@
                     <tr class="topic" th:each="topic : ${session.topics}">
                         <td class="icon"><img th:src="'./img/topic/icon/'+${topic.icon}" alt="文章图标"></td>
                         <td class="lab"><a th:href="'/topic?label='+${topic.labelHref}"><span th:text="'['+${topic.label}+']'">标签</span></a></td>
-                        <td class="title"><a th:href="${topic.href}" style="color: black;font-weight: bold;" th:text="${topic.title}">title标题</a></td>
+                        <td class="title"><a th:href="'/topic/html?html='+${topic.id}" style="color: black;font-weight: bold;" th:text="${topic.title}">title标题</a></td>
                         <td class="author"><span class="span1" th:text="${topic.username}">author</span><span class="date" th:text="${topic.date}">0000-00-00</span></td>
                         <td class="number"><span class="up" th:text="${topic.comment}">10</span><span class="down" th:text="${topic.view}">100</span></td>
                         <td class="head"><img th:src="'./head_img/'+${topic.userhead}" alt="头像"></td>

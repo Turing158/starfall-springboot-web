@@ -30,8 +30,6 @@ public class Topic implements Serializable {
     @Column()
     int view;
     @Column(nullable = false)
-    String href;
-    @Column(nullable = false)
     String labelHref;
     @Column(nullable = false)
     String titlename;
@@ -57,7 +55,7 @@ public class Topic implements Serializable {
     String userhead;
     @Column()
     String userinformation;
-    public Topic(Long id, String icon, String label, String title, String user, String date, int comment, int view, String href, String labelHref, String titlename, String titleenglishname, String source, String version, String language, String address, String download, String content, String authorname) {
+    public Topic(Long id, String icon, String label, String title, String user, String date, int comment, int view, String labelHref, String titlename, String titleenglishname, String source, String version, String language, String address, String download, String content, String authorname) {
         this.id = id;
         this.icon = icon;
         this.label = label;
@@ -66,7 +64,6 @@ public class Topic implements Serializable {
         this.date = date;
         this.comment = comment;
         this.view = view;
-        this.href = href;
         this.labelHref = labelHref;
         this.titlename = titlename;
         this.titleenglishname = titleenglishname;

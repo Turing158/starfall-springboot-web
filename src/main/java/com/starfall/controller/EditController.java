@@ -259,6 +259,7 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "null") String user,
             @RequestParam(required = false,defaultValue = "") String titleName,
             @RequestParam(required = false,defaultValue = "") String titleEnglishName,
+            @RequestParam(required = false,defaultValue = "") String source,
             @RequestParam(required = false,defaultValue = "") String version,
             @RequestParam(required = false,defaultValue = "") String authorName,
             @RequestParam(required = false,defaultValue = "") String language,
@@ -266,6 +267,7 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String download,
             @RequestParam(required = false,defaultValue = "") String content
     ){
+        topicDao.save(new Topic((long) Integer.parseInt(id),"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName));
         session.setAttribute("administerTips","添加成功！已添加Topic：");
         return "redirect:/administer/html";
     }
@@ -311,6 +313,29 @@ public class EditController {
     }
 
     //  有关添加功能========================================================================================
+//处理label字符串
+    public String labelEC(String label){
+        switch(label){
+            case "serve": return "服务端";
+            case "Client":return "客户端";
+            case "video": return "视频";
+            case "article":return "文章";
+            case "plug_in":return "插件";
+            case "notice": return "公告";
+        }
+        return "no";
+    }
+    public String labelCE(String label){
+        switch(label){
+            case "服务端": return "serve";
+            case "客户端":return "Client";
+            case "视频": return "video";
+            case "文章":return "article";
+            case "插件":return "plug_in";
+            case "公告": return "notice";
+        }
+        return "no";
+    }
 }
 
 

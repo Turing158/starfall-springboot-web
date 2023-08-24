@@ -266,10 +266,8 @@ public class TopicController {
             //获取主题id
             List<Topic> topics = topicDao.findAll(Sort.by("id").descending());
             Long id = topics.get(0).getId()+1;
-            //获取href变量[详细看数据库]
-            String href = "/topic/html?html="+id;
             //添加主题
-            topicDao.save(new Topic(id,null,label,bigTitle,user,date,0,0,href,labelHref,titleName,titleEnglishName,source,version,language,address,download,content,authorName));
+            topicDao.save(new Topic(id,null,label,bigTitle,user,date,0,0,labelHref,titleName,titleEnglishName,source,version,language,address,download,content,authorName));
             //更新主题一些与user相关的信息
             topicDao.updateData();
             //清除session
@@ -286,7 +284,7 @@ public class TopicController {
             session.removeAttribute("editContent");
             session.removeAttribute("editErrorColor");
             session.removeAttribute("editErrorTips");
-            return "redirect:"+href;
+            return "redirect:/topic/html?html="+id;
         }
         else{
             session.setAttribute("editErrorTips","验证码错误");
