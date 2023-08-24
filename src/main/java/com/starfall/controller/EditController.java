@@ -229,7 +229,71 @@ public class EditController {
 
 //    添加用户
     @RequestMapping("/administer/addUserData")
-    public String modifyUser(
+    public String addUser(
+            HttpSession session,
+            @RequestParam(required = false,defaultValue = "null") String user,
+            @RequestParam(required = false,defaultValue = "") String password,
+            @RequestParam(required = false,defaultValue = "") String email,
+            @RequestParam(required = false,defaultValue = "0") String level,
+            @RequestParam(required = false,defaultValue = "") String date,
+            @RequestParam(required = false,defaultValue = "") String name,
+            @RequestParam(required = false,defaultValue = "") String head,
+            @RequestParam(required = false,defaultValue = "0") String promise,
+            @RequestParam(required = false,defaultValue = "") String introduce
+    ){
+        userDao.save(new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise)));
+        session.setAttribute("administerTips","添加成功！已添加User："+user);
+        return "redirect:/administer/html";
+    }
+
+
+    @RequestMapping("/administer/addTopicData")
+    public String addTopic(
+            HttpSession session,
+            @RequestParam(required = false,defaultValue = "0") String id,
+            @RequestParam(required = false,defaultValue = "0") String view,
+            @RequestParam(required = false,defaultValue = "0") String comment,
+            @RequestParam(required = false,defaultValue = "") String label,
+            @RequestParam(required = false,defaultValue = "") String bigTitle,
+            @RequestParam(required = false,defaultValue = "0000-00-00") String date,
+            @RequestParam(required = false,defaultValue = "null") String user,
+            @RequestParam(required = false,defaultValue = "") String titleName,
+            @RequestParam(required = false,defaultValue = "") String titleEnglishName,
+            @RequestParam(required = false,defaultValue = "") String version,
+            @RequestParam(required = false,defaultValue = "") String authorName,
+            @RequestParam(required = false,defaultValue = "") String language,
+            @RequestParam(required = false,defaultValue = "") String address,
+            @RequestParam(required = false,defaultValue = "") String download,
+            @RequestParam(required = false,defaultValue = "") String content
+    ){
+        session.setAttribute("administerTips","添加成功！已添加Topic：");
+        return "redirect:/administer/html";
+    }
+
+
+    @RequestMapping("/administer/addNoticeData")
+    public String addNotice(
+            HttpSession session,
+            @RequestParam(required = false,defaultValue = "null") String user,
+            @RequestParam(required = false,defaultValue = "") String password,
+            @RequestParam(required = false,defaultValue = "") String email,
+            @RequestParam(required = false,defaultValue = "0") String level,
+            @RequestParam(required = false,defaultValue = "") String date,
+            @RequestParam(required = false,defaultValue = "") String name,
+            @RequestParam(required = false,defaultValue = "") String head,
+            @RequestParam(required = false,defaultValue = "0") String promise,
+            @RequestParam(required = false,defaultValue = "") String introduce
+    ){
+        userDao.save(new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise)));
+        session.setAttribute("administerTips","添加成功！已添加User："+user);
+        return "redirect:/administer/html";
+    }
+
+
+
+
+    @RequestMapping("/administer/addCommentData")
+    public String addComment(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "null") String user,
             @RequestParam(required = false,defaultValue = "") String password,
@@ -248,5 +312,9 @@ public class EditController {
 
     //  有关添加功能========================================================================================
 }
+
+
+
+
 
 
