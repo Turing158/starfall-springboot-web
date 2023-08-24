@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     user-select: none;
-    transition: all 500ms;
+    transition: all 500ms,font 0s;
 }
 html{
     overflow-x: hidden;

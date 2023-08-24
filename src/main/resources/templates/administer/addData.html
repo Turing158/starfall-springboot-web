@@ -9,83 +9,89 @@
 </head>
 <body>
     <div class="Modify" th:if="${session.administerPage} == 2">
-        <form action="">
+        <form action="/administer/addUserData" method="post">
             <table class="modifyContent">
                 <tr>
                     <td>用户名</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfU.getUser()}">&emsp;</td>
+                    <td>:<input type="text" name="user" placeholder="默认值null">&emsp;</td>
                     <td>等级</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfU.getLevel()}">&emsp;</td>
+                    <td>:<input type="text" name="level" placeholder="默认值0">&emsp;</td>
                 </tr>
                 <tr>
                     <td>密码</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfU.getPassword()}">&emsp;</td>
+                    <td>:<input type="text" name="password">&emsp;</td>
                     <td>名称</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfU.getName()}">&emsp;</td>
+                    <td>:<input type="text" name="name">&emsp;</td>
                 </tr>
                 <tr>
                     <td>邮箱</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfU.getEmail()}">&emsp;</td>
+                    <td>:<input type="text" name="email">&emsp;</td>
                     <td>注册日期</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfU.getDate()}">&emsp;</td>
+                    <td>:<input type="text" name="date">&emsp;</td>
+                </tr>
+                <tr>
+                    <td>头像</td>
+                    <td>:<input type="text" name="head">&emsp;</td>
+                    <td>权限</td>
+                    <td>:<input type="text" name="promise" placeholder="默认值0">&emsp;</td>
                 </tr>
                 <tr>
                     <td>介绍</td>
                 </tr>
                 <tr>
-                    <td colspan="4"><textarea name="" style="width: 575px;height: 100px;" th:text="${session.administerModifyInfU.getIntroduce()}"></textarea></td>
+                    <td colspan="4"><textarea style="width: 575px;height: 100px;" name="introduce"></textarea></td>
                 </tr>
             </table>
             <div style="border:0;">
-                <button class="btn right" style="margin: 5px 5px;">添加</button>
+                <button class="btn right" style="margin: 5px 5px;" type="submit">添加</button>
                 &emsp;
-                <button class="btn right" style="margin: 5px 5px;" onclick="window.location.href = '/administer/html'">取消</button>
+                <button class="btn right" style="margin: 5px 5px;" type="button" onclick="window.location.href = '/administer/html'">取消</button>
             </div>
         </form>
     </div>
     <div class="Modify" th:if="${session.administerPage} == 4">
-        <form action="">
+        <form action="/administer/addNoticeData" method="post">
             <table class="modifyContent">
                 <tr>
                     <td>公告ID</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfN.getId()}">&emsp;</td>
+                    <td>:<input type="text" name="id">&emsp;</td>
                 </tr>
                 <tr>
                     <tr>
                         <td>内容:</td>
-                        <td><textarea name="" style="width:210px;height: 100px;" th:text="${session.administerModifyInfN.getContent()}"></textarea></td>
+                        <td><textarea name="content" style="width:210px;height: 100px;"></textarea></td>
                     </tr>
                 </tr>
             </table>
             <div style="border:0;">
-                <button class="btn right" style="margin: 5px 5px;">添加</button>
+                <button class="btn right" style="margin: 5px 5px;" type="submit">添加</button>
                 &emsp;
-                <button class="btn right" style="margin: 5px 5px;" onclick="window.location.href = '/administer/html'">取消</button>
+                <button class="btn right" style="margin: 5px 5px;" type="button" onclick="window.location.href = '/administer/html'">取消</button>
             </div>
         </form>
     </div>
     <div class="Modify" th:if="${session.administerPage} == 5">
-        <form action="">
+        <form action="/administer/addCommentData" method="post">
             <table class="modifyContent">
                 <tr>
                     <td>评论编号</td>
-                    <td>:<input type="text" style="width: 50px;" th:value="${session.administerModifyInfC.getId()}">&emsp;</td>
+                    <td>:<input type="text" style="width: 50px;" name="id">&emsp;</td>
                     <td>主题编号</td>
-                    <td>:<input type="text" style="width: 50px; " th:value="${session.administerModifyInfC.getTopicid()}">&emsp;</td>
+                    <td>:<input type="text" style="width: 50px; " name="topicid">&emsp;</td>
                     <td>用户</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfC.getUser()}">&emsp;</td>
+                    <td>:<input type="text" name="user">&emsp;</td>
                 </tr>
                 <tr>
                     <td>内容</td>
                 </tr>
                 <tr>
-                    <td colspan="6"><textarea name="" style="width: 575px;height: 100px;" th:text="${session.administerModifyInfC.getContent()}"></textarea></td>
+                    <td colspan="6"><textarea name="content" style="width: 575px;height: 100px;"></textarea></td>
                 </tr>
             </table>
             <div style="border:0;">
-                <button class="btn right" style="margin: 5px 5px;">添加</button>
+                <button class="btn right" style="margin: 5px 5px;" type="submit">添加</button>
                 &emsp;
-                <button class="btn right" style="margin: 5px 5px;" onclick="window.location.href = '/administer/html'">取消</button>
+                <button class="btn right" style="margin: 5px 5px;" type="button" onclick="window.location.href = '/administer/html'">取消</button>
             </div>
         </form>
     </div>

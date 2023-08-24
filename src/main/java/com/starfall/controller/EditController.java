@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.*;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -67,6 +68,9 @@ public class EditController {
     }
 
 
+
+
+//存储当前页面
     @RequestMapping("/administer/setPage")
     @ResponseBody
     public void setPage(
@@ -84,7 +88,7 @@ public class EditController {
     }
 
 
-
+//进入修改页面
     @RequestMapping("/administer/modify")
     public String modify(
             HttpSession session,
@@ -140,6 +144,8 @@ public class EditController {
         session.setAttribute("administerModify",null);
         return "administer/modify";
     }
+
+//    删除功能
     @RequestMapping("/administer/delete")
     public String delete(
             HttpSession session,
@@ -195,6 +201,9 @@ public class EditController {
         session.setAttribute("administerModify",null);
         return "redirect:/administer/html";
     }
+
+
+//    清除提示消息
     @RequestMapping("/administer/clearTips")
     @ResponseBody
     public void clearTips(
@@ -203,6 +212,41 @@ public class EditController {
         session.setAttribute("administerTips",null);
     }
 
+
+
+//  有关添加功能========================================================================================
+//    添加数据页面
+    @RequestMapping("/administer/addData")
+    public String addDataPage(
+            @RequestParam(required = false) String type
+    ){
+        if(!Objects.equals(type, "topic")){
+            return "administer/addData";
+        }
+        return "administer/addTopic";
+    }
+
+
+//    添加用户
+    @RequestMapping("/administer/addUserData")
+    public String modifyUser(
+            HttpSession session,
+            @RequestParam(required = false,defaultValue = "null") String user,
+            @RequestParam(required = false,defaultValue = "") String password,
+            @RequestParam(required = false,defaultValue = "") String email,
+            @RequestParam(required = false,defaultValue = "0") String level,
+            @RequestParam(required = false,defaultValue = "") String date,
+            @RequestParam(required = false,defaultValue = "") String name,
+            @RequestParam(required = false,defaultValue = "") String head,
+            @RequestParam(required = false,defaultValue = "0") String promise,
+            @RequestParam(required = false,defaultValue = "") String introduce
+    ){
+        userDao.save(new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise)));
+        session.setAttribute("administerTips","添加成功！已添加User："+user);
+        return "redirect:/administer/html";
+    }
+
+    //  有关添加功能========================================================================================
 }
 
 
