@@ -37,14 +37,14 @@
                 <table class="title">
                     <th class="titleLeft">
                         <div>
-                            <span style="color: #7c6229">查看：</span><input type="text" style="width: 40px" name="view">
-                            <span style="color: #7c6229">评论：</span><input type="text" style="width: 40px" name="comment">
+                            <span style="color: #7c6229">查看：</span><input type="text" style="width: 40px" name="view" th:value="${session.administerModifyInfT.getView()}">
+                            <span style="color: #7c6229">评论：</span><input type="text" style="width: 40px" name="comment" th:value="${session.administerModifyInfT.getComment()}">
                         </div>
                     </th>
                     <th class="titleRight">
                         <h1>
                             [<select name="label">
-                                <option value="">请选择</option>
+                                <option value="" th:value="${session.administerModifyInfT.getLabel()}" th:text="${session.administerModifyInfT.getLabel()}">请选择</option>
                                 <option value="服务端">服务端</option>
                                 <option value="客户端">客户端</option>
                                 <option value="视频">视频</option>
@@ -52,7 +52,7 @@
                                 <option value="插件">插件</option>
                                 <option value="公告">公告</option>
                             </select>]
-                            <input type="text"  class="editTitleName" maxlength="30" placeholder="标题title" name="bigTitle">
+                            <input type="text"  class="editTitleName" maxlength="30" placeholder="标题title" name="bigTitle" th:value="${session.administerModifyInfT.getTitle()}">
                         </h1>
                         <input type="submit" class="submit" value="提 交">
                     </th>
@@ -65,7 +65,7 @@
                     <td class="author">
                         <div class="authorContent">
                             <div class="authorName">
-                                <span>用户名：<input type="text" name="user" placeholder=" 默认值null" style="width: 100px"></span>
+                                <span>用户名：<input type="text" name="user" placeholder=" 默认值null" style="width: 100px" th:value="${session.administerModifyInfT.user}"></span>
                             </div>
                             <div class="authorHead">
                                 <img alt="">
@@ -83,7 +83,7 @@
                         <table class="contentTable">
                             <tr>
                                 <td class="contentTop">
-                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="user" placeholder="默认值0000-00-00" style="width: 100px"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
+                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="user" placeholder="默认值0000-00-00" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
                                 </td>
                             </tr>
                             <tr>
@@ -208,11 +208,4 @@
         <p>StarFall<br>始于2016</p>
     </div>
 </body>
-<script>
-    function change() {
-        let img = document.querySelector(".verifyCode");
-        let date = new Date().getTime();
-        img.src="/jpegCode?"+date;
-    }
-</script>
 </html>

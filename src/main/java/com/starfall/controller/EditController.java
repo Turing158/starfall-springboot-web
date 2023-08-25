@@ -218,11 +218,29 @@ public class EditController {
 //    添加数据页面
     @RequestMapping("/administer/addData")
     public String addDataPage(
+            HttpSession session,
             @RequestParam(required = false) String type
     ){
+        User user = new User();
+        if (session.getAttribute("administerModifyInfU") == null){
+            session.setAttribute("administerModifyInfU",user);
+        }
+        Topic topic = new Topic();
+        if (session.getAttribute("administerModifyInfT") == null){
+            session.setAttribute("administerModifyInfT",topic);
+        }
+        Notice notice = new Notice();
+        if (session.getAttribute("administerModifyInfN") == null){
+            session.setAttribute("administerModifyInfN",notice);
+        }
+        Comment comment = new Comment();
+        if (session.getAttribute("administerModifyInfC") == null){
+            session.setAttribute("administerModifyInfC",comment);
+        }
         if(!Objects.equals(type, "topic")){
             return "administer/addData";
         }
+        session.setAttribute("administerModifyInfT","");
         return "administer/addTopic";
     }
 
@@ -241,8 +259,15 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "0") String promise,
             @RequestParam(required = false,defaultValue = "") String introduce
     ){
-        userDao.save(new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise)));
+        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise));
+        if(userDao.existsById(user)){
+            session.setAttribute("administerTips","添加失败！已存在User："+user);
+            session.setAttribute("administerModifyInfU",userObj);
+            return "redirect:/administer/addData?type=user";
+        }
+        userDao.save(userObj);
         session.setAttribute("administerTips","添加成功！已添加User："+user);
+        session.removeAttribute("administerModifyInfU");
         return "redirect:/administer/html";
     }
 
@@ -267,8 +292,16 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String download,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        topicDao.save(new Topic((long) Integer.parseInt(id),"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName));
+        Topic topicObj = new Topic((long) Integer.parseInt(id),"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
+        if(topicDao.existsById((long) Integer.parseInt(id))){
+            session.setAttribute("administerTips","添加失败！已存在Topic："+id);
+            session.setAttribute("administerModifyInfT",topicObj);
+            return "redirect:/administer/addData?type=topic";
+        }
+        topicDao.save(topicObj);
+        topicDao.updateData();
         session.setAttribute("administerTips","添加成功！已添加Topic：");
+        session.removeAttribute("administerModifyInfT");
         return "redirect:/administer/html";
     }
 
@@ -276,18 +309,18 @@ public class EditController {
     @RequestMapping("/administer/addNoticeData")
     public String addNotice(
             HttpSession session,
-            @RequestParam(required = false,defaultValue = "null") String user,
-            @RequestParam(required = false,defaultValue = "") String password,
-            @RequestParam(required = false,defaultValue = "") String email,
-            @RequestParam(required = false,defaultValue = "0") String level,
-            @RequestParam(required = false,defaultValue = "") String date,
-            @RequestParam(required = false,defaultValue = "") String name,
-            @RequestParam(required = false,defaultValue = "") String head,
-            @RequestParam(required = false,defaultValue = "0") String promise,
-            @RequestParam(required = false,defaultValue = "") String introduce
+            @RequestParam(required = false,defaultValue = "0") String id,
+            @RequestParam(required = false,defaultValue = "") String content
     ){
-        userDao.save(new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise)));
-        session.setAttribute("administerTips","添加成功！已添加User："+user);
+        Notice noticeObj = new Notice((long) Integer.parseInt(id),content);
+        if(noticeDao.existsById((long) Integer.parseInt(id))){
+            session.setAttribute("administerTips","添加失败！已存在Notice："+id);
+            session.setAttribute("administerModifyInfN",noticeObj);
+            return "redirect:/administer/addData?type=notice";
+        }
+        noticeDao.save(noticeObj);
+        session.setAttribute("administerTips","添加成功！已添加公告："+id);
+        session.removeAttribute("administerModifyInfN");
         return "redirect:/administer/html";
     }
 
@@ -297,18 +330,22 @@ public class EditController {
     @RequestMapping("/administer/addCommentData")
     public String addComment(
             HttpSession session,
-            @RequestParam(required = false,defaultValue = "null") String user,
-            @RequestParam(required = false,defaultValue = "") String password,
-            @RequestParam(required = false,defaultValue = "") String email,
-            @RequestParam(required = false,defaultValue = "0") String level,
+            @RequestParam(required = false,defaultValue = "0") String id,
+            @RequestParam(required = false,defaultValue = "0") String topicid,
+            @RequestParam(required = false,defaultValue = "") String user,
             @RequestParam(required = false,defaultValue = "") String date,
-            @RequestParam(required = false,defaultValue = "") String name,
-            @RequestParam(required = false,defaultValue = "") String head,
-            @RequestParam(required = false,defaultValue = "0") String promise,
-            @RequestParam(required = false,defaultValue = "") String introduce
+            @RequestParam(required = false,defaultValue = "") String content
     ){
-        userDao.save(new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise)));
-        session.setAttribute("administerTips","添加成功！已添加User："+user);
+        Comment commentObj = new Comment((long) Integer.parseInt(id),content,date,user,Integer.parseInt(topicid));
+        if(commentDao.existsById((long) Integer.parseInt(id))){
+            session.setAttribute("administerTips","添加失败！已存在Comment："+id);
+            session.setAttribute("administerModifyInfC",commentObj);
+            return "redirect:/administer/addData?type=comment";
+        }
+        commentDao.save(commentObj);
+        commentDao.updateData();
+        session.setAttribute("administerTips","添加成功！已添加评论："+id);
+        session.removeAttribute("administerModifyInfC");
         return "redirect:/administer/html";
     }
 

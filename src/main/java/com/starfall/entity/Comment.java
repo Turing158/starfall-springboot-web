@@ -37,5 +37,13 @@ public class Comment implements Serializable {
         this.user = user;
         this.topicid = topicid;
     }
+
+    public Comment(Long id, String content, String date, String user, int topicid) {
+        this.id = id;
+        this.content = content;
+        this.date = date;
+        this.user = user;
+        this.topicid = topicid;
+    }
 }
 
