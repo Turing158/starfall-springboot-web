@@ -1,5 +1,6 @@
 package com.starfall.controller;
 
+import com.fasterxml.jackson.core.JsonToken;
 import com.starfall.dao.CommentDao;
 import com.starfall.dao.NoticeDao;
 import com.starfall.dao.TopicDao;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -221,6 +223,7 @@ public class EditController {
             HttpSession session,
             @RequestParam(required = false) String type
     ){
+//        初始化session，不然无法访问，会使渲染层报空指针异常
         User user = new User();
         if (session.getAttribute("administerModifyInfU") == null){
             session.setAttribute("administerModifyInfU",user);
@@ -237,10 +240,10 @@ public class EditController {
         if (session.getAttribute("administerModifyInfC") == null){
             session.setAttribute("administerModifyInfC",comment);
         }
+//        判断类型
         if(!Objects.equals(type, "topic")){
             return "administer/addData";
         }
-        session.setAttribute("administerModifyInfT","");
         return "administer/addTopic";
     }
 
@@ -271,7 +274,7 @@ public class EditController {
         return "redirect:/administer/html";
     }
 
-
+//    添加话题
     @RequestMapping("/administer/addTopicData")
     public String addTopic(
             HttpSession session,
@@ -280,8 +283,8 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "0") String comment,
             @RequestParam(required = false,defaultValue = "") String label,
             @RequestParam(required = false,defaultValue = "") String bigTitle,
-            @RequestParam(required = false,defaultValue = "0000-00-00") String date,
-            @RequestParam(required = false,defaultValue = "null") String user,
+            @RequestParam(required = false,defaultValue = "1000-01-01") String date,
+            @RequestParam(required = false,defaultValue = "") String user,
             @RequestParam(required = false,defaultValue = "") String titleName,
             @RequestParam(required = false,defaultValue = "") String titleEnglishName,
             @RequestParam(required = false,defaultValue = "") String source,
@@ -292,41 +295,56 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String download,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        Topic topicObj = new Topic((long) Integer.parseInt(id),"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
-        if(topicDao.existsById((long) Integer.parseInt(id))){
+        long idLong = Integer.parseInt(id);
+        Topic topicObj = new Topic(idLong,"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
+        if(topicDao.existsById(idLong)){
             session.setAttribute("administerTips","添加失败！已存在Topic："+id);
             session.setAttribute("administerModifyInfT",topicObj);
             return "redirect:/administer/addData?type=topic";
         }
+//        如果id为0，说明是新添加的，需要重新设置id
+        if(idLong == 0){
+            List<Topic> topics = topicDao.findAll();
+            idLong = topics.get(topics.size()-1).getId()+1;
+            System.out.println("-1id:"+idLong);
+            topicObj.setId(idLong);
+            System.out.println("0id:"+idLong);
+        }
         topicDao.save(topicObj);
         topicDao.updateData();
-        session.setAttribute("administerTips","添加成功！已添加Topic：");
+        session.setAttribute("administerTips","添加成功！已添加Topic："+idLong);
         session.removeAttribute("administerModifyInfT");
         return "redirect:/administer/html";
     }
 
-
+//    添加公告
     @RequestMapping("/administer/addNoticeData")
     public String addNotice(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "0") String id,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        Notice noticeObj = new Notice((long) Integer.parseInt(id),content);
-        if(noticeDao.existsById((long) Integer.parseInt(id))){
+        long idLong = Integer.parseInt(id);
+        Notice noticeObj = new Notice(idLong,content);
+        if(noticeDao.existsById(idLong)){
             session.setAttribute("administerTips","添加失败！已存在Notice："+id);
             session.setAttribute("administerModifyInfN",noticeObj);
             return "redirect:/administer/addData?type=notice";
         }
+//        如果id为0，说明是新添加的，需要重新设置id
+        if(idLong == 0){
+            List<Notice> notices = noticeDao.findAll();
+            idLong = notices.get(notices.size()-1).getId()+1;
+            noticeObj.setId(idLong);
+        }
         noticeDao.save(noticeObj);
-        session.setAttribute("administerTips","添加成功！已添加公告："+id);
+        session.setAttribute("administerTips","添加成功！已添加公告："+idLong);
         session.removeAttribute("administerModifyInfN");
         return "redirect:/administer/html";
     }
 
 
-
-
+//    添加评论
     @RequestMapping("/administer/addCommentData")
     public String addComment(
             HttpSession session,
@@ -336,15 +354,22 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String date,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        Comment commentObj = new Comment((long) Integer.parseInt(id),content,date,user,Integer.parseInt(topicid));
+        long idLong = Integer.parseInt(id);
+        Comment commentObj = new Comment(idLong,content,date,user,Integer.parseInt(topicid));
         if(commentDao.existsById((long) Integer.parseInt(id))){
             session.setAttribute("administerTips","添加失败！已存在Comment："+id);
             session.setAttribute("administerModifyInfC",commentObj);
             return "redirect:/administer/addData?type=comment";
         }
+//        如果id为0，说明是新添加的，需要重新设置id
+        if(idLong == 0){
+            List<Comment> comments = commentDao.findAll();
+            idLong = comments.get(comments.size()-1).getId()+1;
+            commentObj.setId(idLong);
+        }
         commentDao.save(commentObj);
         commentDao.updateData();
-        session.setAttribute("administerTips","添加成功！已添加评论："+id);
+        session.setAttribute("administerTips","添加成功！已添加评论："+idLong);
         session.removeAttribute("administerModifyInfC");
         return "redirect:/administer/html";
     }
