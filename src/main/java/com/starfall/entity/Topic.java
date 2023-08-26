@@ -12,8 +12,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Topic implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//            不注释掉不能自主设置id，管理面板需要用到
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @Column()
     String icon;

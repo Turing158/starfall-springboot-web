@@ -304,11 +304,9 @@ public class EditController {
         }
 //        如果id为0，说明是新添加的，需要重新设置id
         if(idLong == 0){
-            List<Topic> topics = topicDao.findAll();
-            idLong = topics.get(topics.size()-1).getId()+1;
-            System.out.println("-1id:"+idLong);
+            List<Topic> topics = topicDao.findAll(Sort.by("id").descending());
+            idLong = topics.get(0).getId()+1;
             topicObj.setId(idLong);
-            System.out.println("0id:"+idLong);
         }
         topicDao.save(topicObj);
         topicDao.updateData();
@@ -333,8 +331,8 @@ public class EditController {
         }
 //        如果id为0，说明是新添加的，需要重新设置id
         if(idLong == 0){
-            List<Notice> notices = noticeDao.findAll();
-            idLong = notices.get(notices.size()-1).getId()+1;
+            List<Notice> notices = noticeDao.findAll(Sort.by("id").descending());
+            idLong = notices.get(0).getId()+1;
             noticeObj.setId(idLong);
         }
         noticeDao.save(noticeObj);
@@ -363,8 +361,8 @@ public class EditController {
         }
 //        如果id为0，说明是新添加的，需要重新设置id
         if(idLong == 0){
-            List<Comment> comments = commentDao.findAll();
-            idLong = comments.get(comments.size()-1).getId()+1;
+            List<Comment> comments = commentDao.findAll(Sort.by("id").descending());
+            idLong = comments.get(0).getId()+1;
             commentObj.setId(idLong);
         }
         commentDao.save(commentObj);

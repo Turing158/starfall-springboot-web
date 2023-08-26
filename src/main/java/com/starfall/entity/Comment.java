@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Comment implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     Long id;
     @Column(nullable = false)
     String content;
