@@ -6,8 +6,16 @@
     <title th:text="'正在修改-'+${session.administerModify}">正在修改-?</title>
     <link rel="stylesheet" href="./css/editHome.css">
     <link rel="stylesheet" href="./css/modify.css">
+    <script src="./js/page.js"></script>
 </head>
 <body>
+    <div class="tips" th:if="${session.administerTips} != null">
+        <div class="tipsDiv">
+            <p>提示:</p>
+            <span th:text="${session.administerTips}">...</span>
+            <button class="btn tipsBtn" onclick="hideTips()">确认</button>
+        </div>
+    </div>
     <div class="Modify" th:if="${session.administerPage} == 2">
         <form action="/administer/modify/modifyUserData" method="post">
             <table class="modifyContent">
@@ -43,9 +51,9 @@
                 </tr>
             </table>
             <div style="border:0;">
-                <button class="btn right" style="margin: 5px 5px;">确认</button>
+                <button class="btn right" style="margin: 5px 5px;" type="submit">确认</button>
                 &emsp;
-                <button class="btn right" style="margin: 5px 5px;" onclick="window.location.href = '/administer/html'">取消</button>
+                <button class="btn right" style="margin: 5px 5px;" type="button" onclick="window.location.href = '/administer/html'">取消</button>
             </div>
         </form>
     </div>
@@ -54,19 +62,19 @@
             <table class="modifyContent">
                 <tr>
                     <td>公告ID</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfN.getId()}">&emsp;</td>
+                    <td>:<input type="text" th:value="${session.administerModifyInfN.getId()}" name="id">&emsp;</td>
                 </tr>
                 <tr>
                     <tr>
                         <td>内容:</td>
-                        <td><textarea name="" style="width:210px;height: 100px;" th:text="${session.administerModifyInfN.getContent()}"></textarea></td>
+                        <td><textarea name="content" style="width:210px;height: 100px;" th:text="${session.administerModifyInfN.getContent()}"></textarea></td>
                     </tr>
                 </tr>
             </table>
             <div style="border:0;">
-                <button class="btn right" style="margin: 5px 5px;">确认</button>
+                <button class="btn right" style="margin: 5px 5px;" type="submit">确认</button>
                 &emsp;
-                <button class="btn right" style="margin: 5px 5px;" onclick="window.location.href = '/administer/html'">取消</button>
+                <button class="btn right" style="margin: 5px 5px;" type="button" onclick="window.location.href = '/administer/html'">取消</button>
             </div>
         </form>
     </div>
@@ -75,23 +83,29 @@
             <table class="modifyContent">
                 <tr>
                     <td>评论编号</td>
-                    <td>:<input type="text" style="width: 50px;" th:value="${session.administerModifyInfC.getId()}">&emsp;</td>
+                    <td>:<input type="text" style="width: 50px;" name="id" th:value="${session.administerModifyInfC.getId()}">&emsp;</td>
                     <td>主题编号</td>
-                    <td>:<input type="text" style="width: 50px; " th:value="${session.administerModifyInfC.getTopicid()}">&emsp;</td>
+                    <td>:<input type="text" style="width: 50px; " name="topicid" th:value="${session.administerModifyInfC.getTopicid()}">&emsp;</td>
+                </tr>
+                <tr>
                     <td>用户</td>
-                    <td>:<input type="text" th:value="${session.administerModifyInfC.getUser()}">&emsp;</td>
+                    <td colspan="3">:<input type="text" name="user" th:value="${session.administerModifyInfC.getUser()}">&emsp;</td>
+                </tr>
+                <tr>
+                    <td>日期</td>
+                    <td colspan="3">:<input type="text" name="date" th:value="${session.administerModifyInfC.getDate()}">&emsp;</td>
                 </tr>
                 <tr>
                     <td>内容</td>
                 </tr>
                 <tr>
-                    <td colspan="6"><textarea name="" style="width: 575px;height: 100px;" th:text="${session.administerModifyInfC.getContent()}"></textarea></td>
+                    <td colspan="4"><textarea name="content" style="width: 300px;height: 100px;" th:text="${session.administerModifyInfC.getContent()}"></textarea></td>
                 </tr>
             </table>
             <div style="border:0;">
-                <button class="btn right" style="margin: 5px 5px;">确认</button>
+                <button class="btn right" style="margin: 5px 5px;" type="submit">确认</button>
                 &emsp;
-                <button class="btn right" style="margin: 5px 5px;" onclick="window.location.href = '/administer/html'">取消</button>
+                <button class="btn right" style="margin: 5px 5px;" type="button" onclick="window.location.href = '/administer/html'">取消</button>
             </div>
         </form>
     </div>
