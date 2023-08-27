@@ -37,6 +37,8 @@ public class EditController {
     @Autowired
     private CommentDao commentDao;
 
+
+//    进入编辑页面
     @RequestMapping("/administer/html")
     public String toEdit(
             HttpSession session,
@@ -52,19 +54,19 @@ public class EditController {
 
         session.setAttribute("adminUsers",userDao.findAll(pageableU));
         session.setAttribute("adminPageUNum",pageU);
-        session.setAttribute("adminPageULast",topicDao.count()/21+1);
+        session.setAttribute("adminPageULast",topicDao.count()/20+1);
 
         session.setAttribute("adminTopics",topicDao.findAll(pageableT));
         session.setAttribute("adminPageTNum",pageT);
-        session.setAttribute("adminPageTLast",topicDao.count()/21+1);
+        session.setAttribute("adminPageTLast",topicDao.count()/20+1);
 
         session.setAttribute("adminNotices",noticeDao.findAll(pageableN));
         session.setAttribute("adminPageNNum",pageN);
-        session.setAttribute("adminPageNLast",noticeDao.count()/21+1);
+        session.setAttribute("adminPageNLast",noticeDao.count()/20+1);
 
         session.setAttribute("adminComments",commentDao.findAll(pageableC));
         session.setAttribute("adminPageCNum",pageC);
-        session.setAttribute("adminPageCLast",commentDao.count()/21+1);
+        session.setAttribute("adminPageCLast",commentDao.count()/20+1);
 
         return "administer/edit";
     }
@@ -212,6 +214,7 @@ public class EditController {
             idLong = topics.get(0).getId()+1;
             topicObj.setId(idLong);
         }
+        topicDao.deleteById(oldId);
         topicDao.save(topicObj);
         topicDao.updateData();
         session.setAttribute("administerTips","修改成功！已修改Topic："+idLong);
@@ -241,6 +244,7 @@ public class EditController {
             noticeObj.setId(idLong);
         }
         noticeDao.save(noticeObj);
+        noticeDao.deleteById(oldId);
         session.setAttribute("administerTips","修改成功！已修改公告："+idLong);
         session.removeAttribute("administerModifyInfN");
         return "redirect:/administer/html";
@@ -271,6 +275,7 @@ public class EditController {
             idLong = comments.get(0).getId()+1;
             commentObj.setId(idLong);
         }
+        commentDao.deleteById(oldId);
         commentDao.save(commentObj);
         commentDao.updateData();
         session.setAttribute("administerTips","修改成功！已修改评论："+idLong);

@@ -198,10 +198,12 @@ public class TopicController {
         return "redirect:/topic/html?html="+html+"&page="+lastPage;
     }
 
+    //进入编辑主题
     @RequestMapping("/topic/publish")
     public String publish(
             HttpSession session
     ){
+//        调试时注释掉下面，使用时不要注释
 //        if(!Objects.equals(session.getAttribute("promise"),null)){
 //            int promise = (int) session.getAttribute("promise");
 //            if(promise == 10){
