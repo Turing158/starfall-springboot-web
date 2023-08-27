@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.parser.Entity;
 import javax.transaction.Transactional;
 
 @Transactional
@@ -25,4 +26,5 @@ public interface UserDao extends JpaRepository<User,String> {
     @Modifying
     @Query(value = "update user set user.head = :head where user.user = :user",nativeQuery = true)
     void setHead(@Param("user") String user, @Param("head") String head);
+
 }

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/book.css">
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/edit.css">
-    <title>StatFall->|帖子编辑器|</title>
+    <title>正在添加...</title>
     <script src="./js/marked.js" type="text/javascript"></script>
     <script src="https://cdn.staticfile.org/vue/3.0.5/vue.global.js"></script>
     
@@ -33,7 +33,7 @@
             <div class="left"></div>
             <div class="right"></div>
             <div class="bookCenter">
-                <form action="/administer/addTopicData" method="post">
+                <form action="/administer/addData/addTopicData" method="post">
                 <table class="title">
                     <th class="titleLeft">
                         <div>
@@ -83,7 +83,7 @@
                         <table class="contentTable">
                             <tr>
                                 <td class="contentTop">
-                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="user" placeholder="默认值0000-00-00" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
+                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="date" placeholder="默认值1000-01-01" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
                                 </td>
                             </tr>
                             <tr>

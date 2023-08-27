@@ -121,6 +121,7 @@ public class EditController {
             if(topicObj.isPresent()){
                 session.setAttribute("administerModifyInfT",topicObj.get());
                 session.setAttribute("administerModify",topicObj.get().getId());
+                return "administer/modifyTopic";
             }
             else {
                 session.setAttribute("administerModify","not exist");
@@ -154,25 +155,22 @@ public class EditController {
     }
 
     //    添加用户
-    @RequestMapping("/administer/modifyUserData")
+    @RequestMapping("/administer/modify/modifyUserData")
     public String modifyUser(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "null") String user,
             @RequestParam(required = false,defaultValue = "") String password,
             @RequestParam(required = false,defaultValue = "") String email,
             @RequestParam(required = false,defaultValue = "0") String level,
-            @RequestParam(required = false,defaultValue = "") String date,
+            @RequestParam(required = false,defaultValue = "1000-01-01") String date,
             @RequestParam(required = false,defaultValue = "") String name,
             @RequestParam(required = false,defaultValue = "") String head,
             @RequestParam(required = false,defaultValue = "0") String promise,
             @RequestParam(required = false,defaultValue = "") String introduce
     ){
         User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise));
-        if(userDao.existsById(user)){
-            session.setAttribute("administerTips","修改失败！已存在User："+user);
-            session.setAttribute("administerModifyInfU",userObj);
-            return "redirect:/administer/addData?type=user";
-        }
+        userDao.deleteById(((User) session.getAttribute("administerModifyInfU")).getUser());
+        System.out.println(((User) session.getAttribute("administerModifyInfU")).getUser());
         userDao.save(userObj);
         session.setAttribute("administerTips","修改成功！已修改User："+user);
         session.removeAttribute("administerModifyInfU");
@@ -180,7 +178,7 @@ public class EditController {
     }
 
     //    添加话题
-    @RequestMapping("/administer/modifyTopicData")
+    @RequestMapping("/administer/modify/modifyTopicData")
     public String modifyTopic(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "0") String id,
@@ -201,11 +199,12 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String content
     ){
         long idLong = Integer.parseInt(id);
+        long oldId = ((Topic) session.getAttribute("administerModifyInfT")).getId();
         Topic topicObj = new Topic(idLong,"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
-        if(topicDao.existsById(idLong)){
+        if(topicDao.existsById(idLong) && oldId != idLong){
             session.setAttribute("administerTips","修改失败！已存在Topic："+id);
             session.setAttribute("administerModifyInfT",topicObj);
-            return "redirect:/administer/addData?type=topic";
+            return "redirect:/administer/modifyData?topic="+oldId;
         }
 //        如果id为0，说明是新添加的，需要重新设置id
         if(idLong == 0){
@@ -221,18 +220,19 @@ public class EditController {
     }
 
     //    添加公告
-    @RequestMapping("/administer/modifyNoticeData")
+    @RequestMapping("/administer/modify/modifyNoticeData")
     public String modifyNotice(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "0") String id,
             @RequestParam(required = false,defaultValue = "") String content
     ){
         long idLong = Integer.parseInt(id);
+        long oldId = ((Notice) session.getAttribute("administerModifyInfN")).getId();
         Notice noticeObj = new Notice(idLong,content);
-        if(noticeDao.existsById(idLong)){
+        if(noticeDao.existsById(idLong) && oldId != idLong){
             session.setAttribute("administerTips","修改失败！已存在Notice："+id);
             session.setAttribute("administerModifyInfN",noticeObj);
-            return "redirect:/administer/addData?type=notice";
+            return "redirect:/administer/modifyData?notice="+oldId;
         }
 //        如果id为0，说明是新添加的，需要重新设置id
         if(idLong == 0){
@@ -248,7 +248,7 @@ public class EditController {
 
 
     //    添加评论
-    @RequestMapping("/administer/modifyCommentData")
+    @RequestMapping("/administer/modify/modifyCommentData")
     public String modifyComment(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "0") String id,
@@ -258,11 +258,12 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String content
     ){
         long idLong = Integer.parseInt(id);
+        long oldId = ((Comment) session.getAttribute("administerModifyInfC")).getId();
         Comment commentObj = new Comment(idLong,content,date,user,Integer.parseInt(topicid));
-        if(commentDao.existsById((long) Integer.parseInt(id))){
+        if(commentDao.existsById(idLong) && oldId != idLong){
             session.setAttribute("administerTips","修改失败！已存在Comment："+id);
             session.setAttribute("administerModifyInfC",commentObj);
-            return "redirect:/administer/addData?type=comment";
+            return "redirect:/administer/modifyData?comment="+oldId;
         }
 //        如果id为0，说明是新添加的，需要重新设置id
         if(idLong == 0){
@@ -380,7 +381,7 @@ public class EditController {
 
 
 //    添加用户
-    @RequestMapping("/administer/addUserData")
+    @RequestMapping("/administer/addData/addUserData")
     public String addUser(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "null") String user,
@@ -406,7 +407,7 @@ public class EditController {
     }
 
 //    添加话题
-    @RequestMapping("/administer/addTopicData")
+    @RequestMapping("/administer/addData/addTopicData")
     public String addTopic(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "0") String id,
@@ -447,7 +448,7 @@ public class EditController {
     }
 
 //    添加公告
-    @RequestMapping("/administer/addNoticeData")
+    @RequestMapping("/administer/addData/addNoticeData")
     public String addNotice(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "0") String id,
@@ -474,13 +475,13 @@ public class EditController {
 
 
 //    添加评论
-    @RequestMapping("/administer/addCommentData")
+    @RequestMapping("/administer/addData/addCommentData")
     public String addComment(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "0") String id,
             @RequestParam(required = false,defaultValue = "0") String topicid,
             @RequestParam(required = false,defaultValue = "") String user,
-            @RequestParam(required = false,defaultValue = "") String date,
+            @RequestParam(required = false,defaultValue = "1000-01-01") String date,
             @RequestParam(required = false,defaultValue = "") String content
     ){
         long idLong = Integer.parseInt(id);

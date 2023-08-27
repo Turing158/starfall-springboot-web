@@ -40,12 +40,12 @@
             <div class="left"></div>
             <div class="right"></div>
             <div class="bookCenter">
-                <form action="/administer/modifyTopicData" method="post">
+                <form action="/administer/modify/modifyTopicData" method="post">
                 <table class="title">
                     <th class="titleLeft">
                         <div>
-                            <span style="color: #7c6229">查看：</span><input type="text" style="width: 40px" th:text="${session.administerModifyInfT.getView()}">
-                            <span style="color: #7c6229">评论：</span><input type="text" style="width: 40px" th:text="${session.administerModifyInfT.getComment()}">
+                            <span style="color: #7c6229">查看：</span><input type="text" name="view" style="width: 40px" th:value="${session.administerModifyInfT.getView()}">
+                            <span style="color: #7c6229">评论：</span><input type="text" name="comment" style="width: 40px" th:value="${session.administerModifyInfT.getComment()}">
                         </div>
                     </th>
                     <th class="titleRight">
@@ -72,7 +72,7 @@
                     <td class="author">
                         <div class="authorContent">
                             <div class="authorName">
-                                <span>用户名:<input type="text" style="width: 100px" th:value="${session.administerModifyInfT.getUser()}"></span>
+                                <span>用户名:<input type="text" name="user" style="width: 100px" th:value="${session.administerModifyInfT.getUser()}"></span>
                             </div>
                             <div class="authorHead">
                                 <img th:src="'../head_img/'+${session.administerModifyInfT.getUserhead()}" alt="">
@@ -90,7 +90,7 @@
                         <table class="contentTable">
                             <tr>
                                 <td class="contentTop">
-                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="user" placeholder="默认值0000-00-00" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
+                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="date" placeholder="默认值1000-01-01" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
                                 </td>
                             </tr>
                             <tr>
