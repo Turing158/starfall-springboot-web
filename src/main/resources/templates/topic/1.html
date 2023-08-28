@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./css/font.css">
     <title th:text="${session.topic.title}">StatFall</title>
     <script src="./js/marked.js" type="text/javascript"></script>
+    
 </head>
 <body background="./img/bg.png">
     <ul class="ul">
@@ -25,6 +26,22 @@
             </div>
         </li>
     </ul>
+    <div class="windows">
+        <script>
+            function close(){
+                let window = document.querySelector(".windows");
+                window.style.display = 'none';
+            }
+            function btn(){
+                close();
+            }
+        </script>
+        <a class="close" href="javascript:close()">×</a>
+        <p class="windowsTitle" style="font-size: 30px;">aaa</p>
+        <br><br>
+        <span class="windowsContent">aaa</span>
+        <button class="btn" onclick="btn()">确认</button>
+    </div>
     <div class="main">
         <div class="book">
             <div class="top"></div>
@@ -68,18 +85,22 @@
                             <tr>
                                 <td class="contentTop" style="height: 47px">
                                     &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于<span th:text="${session.topic.date}">0000-00-00</span></span>
-                                    <div class="likeDiv">
-                                        <a href="" class="like"></a>
-                                        <a href="" class="dislike"></a>
+                                    <div class="likeDiv" th:if="${session.user == null}">
+                                        <a href="javascript:like(0)" class="like"></a>
+                                        <a href="javascript:like(0)" class="dislike"></a>
                                     </div>
-                                    <div class="alreadyLike likeDiv">
-                                        <a href="" class="like"></a>
-                                        <span>1000</span>
-                                        <a href="" class="dislike"></a>
+                                    <div class="likeDiv" th:if="${session.user != null && (session.topicUserLike == null || session.topicUserLike.getGood() == 0)}">
+                                        <a href="javascript:like(1)" class="like"></a>
+                                        <a href="javascript:like(2)" class="dislike"></a>
                                     </div>
-                                    <div class="alreadyDislike likeDiv">
-                                        <a href="" class="like"></a>
-                                        <a href="" class="dislike"></a>
+                                    <div class="alreadyLike likeDiv" th:if="${session.topicUserLike.getGood() == 1}">
+                                        <a href="javascript:like(3)" class="like"></a>
+                                        <span th:text="${session.topicLikeCount}">1000</span>
+                                        <a href="javascript:like(2)" class="dislike"></a>
+                                    </div>
+                                    <div class="alreadyDislike likeDiv" th:if="${session.topicUserLike.getGood() == 2}">
+                                        <a href="javascript:like(1)" class="like"></a>
+                                        <a href="javascript:like(4)" class="dislike"></a>
                                     </div>
                                 </td>
                             </tr>
@@ -252,4 +273,5 @@
         img.src="/jpegCode?"+date;
     }
 </script>
+<script src="./js/topic.js" type="text/javascript"></script>
 </html>

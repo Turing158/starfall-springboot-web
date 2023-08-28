@@ -120,3 +120,50 @@ body{
     font-weight: bold;
     top: 25px;
 }
+.windows{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    height: 300px;
+    outline: 8px solid rgba(0, 0, 0, 0.288);
+    border-radius: 10px;
+    background-color: rgb(243, 230, 205);
+    z-index: 999;
+    display: none;
+    text-align: center;
+}
+.windows .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    font-size: 25px;
+    color: rgb(54, 54, 54);
+    cursor: pointer;
+}
+.windows .close:hover{
+    color: rgb(139, 0, 0);
+    text-decoration: none;
+}
+.windows .btn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 40px;
+    border: 0;
+    background-color: rgb(227, 201, 158);
+    color: #131313;
+    outline: 2px solid rgb(207, 183, 142);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.windows .btn:hover{
+    background-color: rgb(122, 108, 84);
+    color: #f1f1f1;
+}

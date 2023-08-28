@@ -1,11 +1,13 @@
 package com.starfall.controller;
 
 import com.starfall.Application;
+import com.starfall.dao.GoodDao;
 import com.starfall.dao.NoticeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,8 @@ public class HomeController{
 
     @Autowired
     private NoticeDao noticeDao;
+    @Autowired
+    private GoodDao goodDao;
 
 
 //进入主页与返回主页的控制
@@ -36,7 +40,6 @@ public class HomeController{
         session.setAttribute("notices",noticeDao.findAll());
         return "index";
     }
-
     //退出，将session清空
     @RequestMapping("/exit")
     public String exit(
@@ -45,5 +48,8 @@ public class HomeController{
         session.invalidate();
         return "redirect:/home";
     }
+
+
+
 }
 

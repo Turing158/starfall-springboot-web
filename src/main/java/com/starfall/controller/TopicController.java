@@ -4,6 +4,7 @@ import com.mysql.cj.util.StringUtils;
 import com.starfall.Application;
 import com.starfall.dao.*;
 import com.starfall.entity.Comment;
+import com.starfall.entity.Good;
 import com.starfall.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @SpringBootApplication(scanBasePackageClasses = Application.class)
@@ -32,7 +34,7 @@ public class TopicController {
     @Autowired
     private UserDao userDao;
     @Autowired
-    private GoodDao likeGoodDao;
+    private GoodDao goodDao;
 
     //前往主题区
     @RequestMapping("/topic")
@@ -96,6 +98,7 @@ public class TopicController {
             @RequestParam(value = "page",required = false) String page,
             @RequestParam(value = "user",required = false) String user
     ){
+
         int page_int = 0;
         int html_int = 0;
         //初始化session，只看ta
@@ -121,6 +124,16 @@ public class TopicController {
             session.setAttribute("topic",topic);
             session.setAttribute("topicContent",topic.getContent());
 
+            //初始化session，主题的点赞数
+            session.setAttribute("topicLikeCount",goodDao.countAllByTopicidAndGood(html_int,1));
+            //初始化session，此session用于判断用户是否点赞过
+            Good goodNull = new Good();
+            session.setAttribute("topicUserLike",goodNull);
+            if(session.getAttribute("user") != null){
+                if(goodDao.existsGoodByTopicidAndUser(html_int,session.getAttribute("user").toString())){
+                    session.setAttribute("topicUserLike",goodDao.findByTopicidAndUser(html_int,session.getAttribute("user").toString()));
+                }
+            }
             //设置进入了哪个主题
             session.setAttribute("html",html_int);
 
@@ -150,6 +163,49 @@ public class TopicController {
         }
         //防止找不到主题，直接返回 null.html
         return "topic/null";
+    }
+
+
+    @RequestMapping("/topic/like")
+    @ResponseBody
+    public String like(
+            HttpSession session
+    ){
+        LocalDateTime ldt = LocalDateTime.now();
+        String date = ldt.getYear()+"-"+ldt.getMonthValue()+"-"+ldt.getDayOfMonth();
+        int html = (int) session.getAttribute("html");
+        String user = session.getAttribute("user").toString();
+        Good goodOld = goodDao.findByTopicidAndUser(html,user);
+        long id;
+        if(goodOld == null){
+            id = goodDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
+        }
+        else{
+            id = goodOld.getId();
+        }
+        Good goodNew = new Good(id,html,user,1,date);
+        goodDao.save(goodNew);
+        return "redirect:/topic/html?html="+html;
+    }
+    @RequestMapping("/topic/dislike")
+    public String dislike(
+            HttpSession session
+    ){
+        LocalDateTime ldt = LocalDateTime.now();
+        String date = ldt.getYear()+"-"+ldt.getMonthValue()+"-"+ldt.getDayOfMonth();
+        int html = (int) session.getAttribute("html");
+        String user = session.getAttribute("user").toString();
+        Good goodOld = goodDao.findByTopicidAndUser(html,user);
+        long id;
+        if(goodOld != null){
+            id = goodOld.getId();
+        }
+        else{
+            id = goodDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
+        }
+        Good goodNew = new Good(id,html,user,2,date);
+        goodDao.save(goodNew);
+        return "redirect:/topic/html?html="+html;
     }
 
 
@@ -211,16 +267,7 @@ public class TopicController {
 //        }
         return "topic/edit";
     }
-    @RequestMapping("/topic/like")
-    @ResponseBody
-    public int like(){
-        return 1;
-    }
-    @RequestMapping("/topic/dislike")
-    @ResponseBody
-    public int dislike(){
-        return 1;
-    }
+
 
     //发布主题
     @RequestMapping("/topic/submitTopic")
