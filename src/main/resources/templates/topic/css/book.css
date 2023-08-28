@@ -38,7 +38,6 @@ a:hover{
 }
 .bookCenter{
     position: relative;
-    background-color: aquamarine;
     top: -59px;
     width: 961px;
     left: 84px;
@@ -287,4 +286,53 @@ table th{
 table td{
     background-color:#f5dfbd;
 
+}
+.likeDiv{
+    position: absolute;
+    top: 10px;
+    right: 0;
+    /* background-color: #7c6229; */
+    height: 35px;
+    width: 300px;
+    display: flex;
+    justify-content: right;
+}
+.likeDiv a{
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.like{
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/icon/like0.png);
+}
+.like:hover{
+    background-image: url(../img/icon/like1.png);
+}
+.like:active{
+    background-image: url(../img/icon/like2.png);
+}
+.dislike{
+    top: 5px;
+    margin-left: 20px;
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/icon/dislike0.png);
+}
+.dislike:hover{
+    background-image: url(../img/icon/dislike1.png);
+}
+.dislike:active{
+    background-image: url(../img/icon/dislike2.png);
+}
+.alreadyLike span{
+    color: #531d14;
+    font-weight: bold;
+}
+.alreadyLike .like{
+    background-image: url(../img/icon/like1.png);
+}
+.alreadyDislike .dislike{
+    background-image: url(../img/icon/dislike1.png);
 }

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -209,6 +210,16 @@ public class TopicController {
 //            }
 //        }
         return "topic/edit";
+    }
+    @RequestMapping("/topic/like")
+    @ResponseBody
+    public int like(){
+        return 1;
+    }
+    @RequestMapping("/topic/dislike")
+    @ResponseBody
+    public int dislike(){
+        return 1;
     }
 
     //发布主题
