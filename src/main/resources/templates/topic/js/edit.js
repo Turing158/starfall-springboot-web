@@ -79,6 +79,17 @@ function fontSize(s){
     let str = '<font size="'+s+'">'+select.toString()+'</font>';
     replaceText(str);
 }
+function picture(){
+    let window = document.querySelector('.windows');
+    window.style.display = 'block';
+}
+function selectPicture(){
+    let href = document.querySelector('.pictureHref').value;
+    let str = '![可输入文字]('+href+')';
+    replaceText(str);
+    let window = document.querySelector('.windows');
+    window.style.display = 'none';
+}
 function table(){
 
 }

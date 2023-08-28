@@ -34,6 +34,29 @@
             </div>
         </li>
     </ul>
+    <div class="windows">
+        <a class="close" href="javascript:close()">X</a>
+        <p style="font-size: 30px;">插入图片</p>
+        <br><br><br>
+        <span>仅支持其他网站图床
+            <br>
+            <a href="sm.ms">[sm.ms-免费|登陆]</a>
+            <a href="https://imgse.com/">[路过图床-免费]</a>
+            <a href="https://z4a.net/">[Z4a-免费|登录]</a>
+        </span>
+        <br>
+        <input class="pictureHref" type="text" placeholder="请复制图床的href粘贴至此[注意：是图片的URL]" style="text-align: center;width: 500px;">
+        <br>
+        <button onclick="selectPicture()">&nbsp;插入图片&nbsp;</button>
+        <br>
+        <span style="font-size: 12px;color: brown;">tips:插入图片前请确认没有选中任何文字</span>
+    </div>
+    <script>
+        function close(){
+            let window = document.querySelector(".windows");
+            window.style.display = 'none';
+        }
+    </script>
     <div class="main">
         <div class="book">
             <div class="top"></div>
@@ -193,6 +216,7 @@
                                             </span>
                                             <button type="button" onclick="code()">&nbsp;代码&nbsp;</button>
                                             <button type="button" onclick="center()">&nbsp;居中&nbsp;</button>
+                                            <button type="button" onclick="picture()">&nbsp;图片&nbsp;</button>
                                         </div>
                                         <textarea placeholder="请输入你想发布的内容" onfocusout="transformToMd()" v-show="!flag" name="content" th:text="${session.administerModifyInfT.getContent()}"></textarea>
                                     </div>

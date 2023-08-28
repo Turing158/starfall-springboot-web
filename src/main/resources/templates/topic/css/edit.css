@@ -1,3 +1,4 @@
+
 button{
     outline: 0;
     border: 0;
@@ -177,4 +178,33 @@ textarea:focus{
 input.verifyInput{
     font-size: 18px;
     width: 55px;
+}
+.windows{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    height: 300px;
+    outline: 8px solid rgba(0, 0, 0, 0.288);
+    border-radius: 10px;
+    background-color: rgb(243, 230, 205);
+    z-index: 999;
+    display: none;
+    text-align: center;
+}
+.windows .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    font-size: 25px;
+    color: rgb(54, 54, 54);
+    cursor: pointer;
+}
+.windows .close:hover{
+    color: rgb(139, 0, 0);
+    text-decoration: none;
 }
