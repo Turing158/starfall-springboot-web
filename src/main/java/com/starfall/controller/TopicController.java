@@ -2,10 +2,7 @@ package com.starfall.controller;
 
 import com.mysql.cj.util.StringUtils;
 import com.starfall.Application;
-import com.starfall.dao.CommentDao;
-import com.starfall.dao.NoticeDao;
-import com.starfall.dao.TopicDao;
-import com.starfall.dao.UserDao;
+import com.starfall.dao.*;
 import com.starfall.entity.Comment;
 import com.starfall.entity.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @SpringBootApplication(scanBasePackageClasses = Application.class)
@@ -34,6 +30,8 @@ public class TopicController {
     private CommentDao commentDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private GoodDao likeGoodDao;
 
     //前往主题区
     @RequestMapping("/topic")
@@ -304,6 +302,8 @@ public class TopicController {
         session.setAttribute("editContent",content);
         return "redirect:/topic/publish";
     }
+
+
 
     //处理label字符串
     public String labelEC(String label){

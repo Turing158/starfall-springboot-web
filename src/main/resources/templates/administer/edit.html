@@ -24,6 +24,7 @@
         <li><a href="javascript:pageTransform(3);setPage(3)">主题</a></li>
         <li><a href="javascript:pageTransform(4);setPage(4)">公告</a></li>
         <li><a href="javascript:pageTransform(5);setPage(5)">评论</a></li>
+        <li><a href="javascript:pageTransform(6);setPage(6)">喜欢</a></li>
     </ul>
 </div>
 <div class="square"></div>
@@ -184,6 +185,38 @@
                 <span th:text="${session.adminPageCNum}+'/'+${session.adminPageCLast}">1/1</span>
                 <button class="btn arrow" th:onclick="|Page(${session.adminPageCNum}+1,${session.adminPageCLast},4)|">→</button>
                 <button class="btn" th:onclick="|Page(${session.adminPageCLast},${session.adminPageCLast},4)|">尾页</button>
+            </div>
+        </div>
+    </div>
+    <div class="likePage">
+        <div>
+            <button class="btn addBtn" onclick="href('/administer/addData?type=good')">添加</button>
+            <table>
+                <tr class="EditTh">
+                    <th><div><span>编号<br>Id</span></div></th>
+                    <th><div><span>主题<br>Topic</span></div></th>
+                    <th><div><span>用户<br>User</span></div></th>
+                    <th><div><span>喜欢<br>Like</span></div></th>
+                    <th><div style="width: 120px;"><span>操作<br>Operate</span></div></th>
+                </tr>
+                <tr class="EditTd" th:each="good : ${session.adminGoods}">
+                    <td><div th:text="${good.id}">id</div></td>
+                    <td><div th:text="${good.topicid}">topic</div></td>
+                    <td><div th:text="${good.user}">user</div></td>
+                    <td><div th:text="${good.good}">like</div></td>
+                    <td style="text-align: center;">
+                        <button class="btn" th:onclick="href('/administer/modify?good='+[[${good.id}]])">编辑</button>
+                        &nbsp;
+                        <button class="btn" th:onclick="href('/administer/delete?good='+[[${good.id}]])">删除</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="changePage">
+                <button class="btn" th:onclick="|Page(1,${session.adminPageGLast},4)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageGNum}-1,${session.adminPageGLast},4)|">←</button>
+                <span th:text="${session.adminPageGNum}+'/'+${session.adminPageGLast}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageGNum}+1,${session.adminPageGLast},4)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageGLast},${session.adminPageGLast},4)|">尾页</button>
             </div>
         </div>
     </div>

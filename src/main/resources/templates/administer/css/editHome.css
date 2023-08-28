@@ -185,7 +185,7 @@ div{
     scale: 1;
     transform-origin: 0 0;
 }
-.userPage,.topicPage,.noticePage,.commentPage{
+.userPage,.topicPage,.noticePage,.commentPage,.likePage{
     position: absolute;
     top: 20px;
     scale: 0;

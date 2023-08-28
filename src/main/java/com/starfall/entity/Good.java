@@ -13,13 +13,18 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Like implements Serializable {
+//对于这个文件命名的问题，不能直接命名为Like，因为Like是mysql的关键字，会报错
+public class Good implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    int like;
+    Long id;
+    @Column()
+    int good;
     @Column()
     String user;
-    @Column
-    long topicid;
+    @Column()
+    int topicid;
+    @Column()
+    String date;
 
 }

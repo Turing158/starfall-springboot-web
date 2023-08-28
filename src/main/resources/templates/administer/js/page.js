@@ -26,6 +26,7 @@ function pageTransform(page){
     let topic = document.querySelector('.topicPage');
     let notice = document.querySelector('.noticePage');
     let comment = document.querySelector('.commentPage');
+    let like = document.querySelector('.likePage');
     switch(page){
         case 1:
             square.style.top = '90px';
@@ -34,6 +35,7 @@ function pageTransform(page){
             topic.style.scale='0';
             notice.style.scale='0';
             comment.style.scale='0';
+            like.style.scale='0';
             break;
         case 2:
             square.style.top = '137px';
@@ -42,6 +44,7 @@ function pageTransform(page){
             topic.style.scale='0';
             notice.style.scale='0';
             comment.style.scale='0';
+            like.style.scale='0';
             break;
         case 3:
             square.style.top = '184px';
@@ -50,6 +53,7 @@ function pageTransform(page){
             topic.style.scale='1';
             notice.style.scale='0';
             comment.style.scale='0';
+            like.style.scale='0';
             break;
         case 4:
             square.style.top = '231px';
@@ -58,6 +62,7 @@ function pageTransform(page){
             topic.style.scale='0';
             notice.style.scale='1';
             comment.style.scale='0';
+            like.style.scale='0';
             break;
         case 5:
             square.style.top = '278px';
@@ -66,6 +71,16 @@ function pageTransform(page){
             topic.style.scale='0';
             notice.style.scale='0';
             comment.style.scale='1';
+            like.style.scale='0';
+            break;
+        case 6:
+            square.style.top = '325px';
+            home.style.scale='0';
+            user.style.scale='0';
+            topic.style.scale='0';
+            notice.style.scale='0';
+            comment.style.scale='0';
+            like.style.scale='1';
             break;
     }
 }
@@ -91,6 +106,9 @@ function Page(pageNum,lastPage,page){
             break;
         case 4:
             pageStr = 'C';
+            break;
+        case 5:
+            pageStr = 'L';
             break;
     }
     if(pageNum <= 0){
