@@ -41,7 +41,6 @@ create table topic
     date             date         null comment '发帖日期',
     comment          int          null comment '评论数量',
     view             int          null comment '点击查看人数',
-    href             varchar(255) null comment '前往指定主题贴的链接',
     label_href       varchar(255) null comment '标签链接[此列相当于lable列的翻译]',
     titlename        varchar(255) null comment '标题名称[中文]',
     titleenglishname varchar(255) null comment '标题名称[英文]',
@@ -59,6 +58,7 @@ create table topic
 
 
 
+
 #新建评论表结构
 create table comment
 (
@@ -72,3 +72,15 @@ create table comment
         primary key,
     introduce varchar(255) null comment '评论用户的介绍'
 );
+
+# 新建点赞表结构
+create table good
+(
+    id      int auto_increment
+        primary key,
+    good    int          null,
+    user    varchar(255) null,
+    topicid int          null,
+    date    date         null
+)
+    comment '喜欢，对于这个文件命名的问题，不能直接命名为Like，因为Like是mysql的关键字，会报错';
