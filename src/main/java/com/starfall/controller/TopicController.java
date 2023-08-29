@@ -132,6 +132,7 @@ public class TopicController {
             if(session.getAttribute("user") != null){
                 if(goodDao.existsGoodByTopicidAndUser(html_int,session.getAttribute("user").toString())){
                     session.setAttribute("topicUserLike",goodDao.findByTopicidAndUser(html_int,session.getAttribute("user").toString()));
+
                 }
             }
             //设置进入了哪个主题
@@ -167,7 +168,6 @@ public class TopicController {
 
 
     @RequestMapping("/topic/like")
-    @ResponseBody
     public String like(
             HttpSession session
     ){
@@ -177,13 +177,17 @@ public class TopicController {
         String user = session.getAttribute("user").toString();
         Good goodOld = goodDao.findByTopicidAndUser(html,user);
         long id;
-        if(goodOld == null){
-            id = goodDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
-        }
-        else{
+        if(goodOld != null){
+            if(goodOld.getGood() == 1){
+                return "redirect:/topic/html?html="+html;
+            }
             id = goodOld.getId();
         }
-        Good goodNew = new Good(id,html,user,1,date);
+        else{
+            id = goodDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
+
+        }
+        Good goodNew = new Good(id,1,user,html,date);
         goodDao.save(goodNew);
         return "redirect:/topic/html?html="+html;
     }
@@ -198,12 +202,15 @@ public class TopicController {
         Good goodOld = goodDao.findByTopicidAndUser(html,user);
         long id;
         if(goodOld != null){
+            if(goodOld.getGood() == 2){
+                return "redirect:/topic/html?html="+html;
+            }
             id = goodOld.getId();
         }
         else{
             id = goodDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
         }
-        Good goodNew = new Good(id,html,user,2,date);
+        Good goodNew = new Good(id,2,user,html,date);
         goodDao.save(goodNew);
         return "redirect:/topic/html?html="+html;
     }
@@ -240,12 +247,15 @@ public class TopicController {
             //获取调整时间
             String date = ldt.toLocalDate()+" "+ldt.getHour()+":"+ldt.getMinute()+":"+ldt.getSecond();
             //保存评论
-            commentDao.save(new Comment(content,date,user,html));
+            long id  = commentDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
+            commentDao.save(new Comment(id,content,date,user,html));
             //更新评论其他信息
             commentDao.updateData();
-
             //为了直接跳转最后一页
             lastPage = commentDao.countAllByTopicid(html);
+//            更新评论数
+            topicDao.updateCommentNum(html,lastPage);
+//            处理最后一页
             lastPage=(lastPage+4)/5;
             //发布提示成功
             session.setAttribute("commentTips","success");

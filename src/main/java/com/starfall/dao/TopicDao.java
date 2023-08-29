@@ -18,6 +18,9 @@ public interface TopicDao extends JpaRepository<Topic,Long> {
     int countAllBy();
     int countAllByLabel(String label);
 //    Topic findById(int num);
+    @Modifying
+    @Query(value = "UPDATE web.topic SET comment = ?2 WHERE id = ?1",nativeQuery = true)
+    void updateCommentNum(int id,int num);
     @Override
     Optional<Topic> findById(Long aLong);
     @Modifying

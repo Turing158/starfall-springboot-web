@@ -19,7 +19,7 @@
         <form action="confirm_login" method="get">
             <br><br>
             <h1>登&emsp;录</h1><br><br>
-        <input type="search" class="user_input" th:value="${session.user}" name="user" required>
+        <input type="text" class="user_input" th:value="${session.userLogin}" name="user" required>
         <span class="user_span">用户名：</span>
         <div class="user_underline"></div>
         <br>
@@ -27,7 +27,7 @@
         <span class="pass_span">密&emsp;码：</span>
         <div class="pass_underline"></div>
         <br>
-        <input type="search" class="code_input" name="login_code" required>
+        <input type="text" class="code_input" name="login_code" required>
         <span class="code_span">验证码：</span>
         <div class="code_underline"></div>
         <img src="/jpegCode" alt="VerifyCode" onclick="Change()" id="img_code">

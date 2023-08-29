@@ -67,7 +67,7 @@ public class LoginRegController {
     ){
 
 //        code = "aaaa";
-        session.setAttribute("user",user);
+        session.setAttribute("userLogin",user);
         //判断用户是否存在，及获取用户密码方便判断
         String flag;
         try{
@@ -78,13 +78,11 @@ public class LoginRegController {
         //验证码为空
         if(Objects.equals(code, "")){
             session.setAttribute("tips","验证码不能为空");
-            session.setAttribute("user",user);
             session.setAttribute("password",password);
         }
         //验证码错误[性能测试注释掉]
         else if(!Objects.equals(code,session.getAttribute("code"))){
             session.setAttribute("tips","验证码错误");
-            session.setAttribute("user",user);
             session.setAttribute("password",password);
 
         }
@@ -96,7 +94,6 @@ public class LoginRegController {
         //密码错误
         else if(!Objects.equals(flag, password)){
             session.setAttribute("tips","密码错误!");
-            session.setAttribute("user",user);
 
         }
         //成功[性能测试换第一个]
@@ -107,7 +104,7 @@ public class LoginRegController {
             session.setAttribute("head",userDao.findByUser(user).getHead());
             session.setAttribute("promise",userDao.findByUser(user).getPromise());
             session.setAttribute("password",password);
-//            session.setAttribute("login","1");
+            session.setAttribute("userLogin",null);
             session.setAttribute("introduce",userDao.findByUser(user).getIntroduce());
             session.setAttribute("name",name);
             session.setAttribute("code",null);

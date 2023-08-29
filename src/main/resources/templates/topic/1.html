@@ -89,7 +89,7 @@
                                         <a href="javascript:like(0)" class="like"></a>
                                         <a href="javascript:like(0)" class="dislike"></a>
                                     </div>
-                                    <div class="likeDiv" th:if="${session.user != null && (session.topicUserLike == null || session.topicUserLike.getGood() == 0)}">
+                                    <div class="likeDiv" th:if="${(session.user != null && session.topicUserLike.getGood() == 0) || session.topicUserLike == null}" th:value="${(session.user != null && session.topicUserLike.getGood() == 0) || session.topicUserLike == null}">
                                         <a href="javascript:like(1)" class="like"></a>
                                         <a href="javascript:like(2)" class="dislike"></a>
                                     </div>

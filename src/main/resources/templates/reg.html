@@ -20,19 +20,19 @@
         <form action="/verify_code" method="get">
             <br><br>
             <h1>注&emsp;册</h1><br><br>
-            <input type="search" class="user_input" name="vreg_user" onfocusout="checkUser()" maxlength="15" required>
+            <input type="text" class="user_input" name="vreg_user" th:value="${session.reg_user}" onfocusout="checkUser()" maxlength="15" required>
             <span class="user_span">用户名：</span>
             <div class="user_underline"></div>
             <br>
-            <input type="password" class="pass_input" name="vreg_password" onfocusout="checkPwd()" required>
+            <input type="password" class="pass_input" name="vreg_password" th:value="${session.reg_password}" onfocusout="checkPwd()" required>
             <span class="pass_span">密&emsp;码：</span>
             <div class="pass_underline"></div>
             <br>
-            <input type="search" class="email_input" name="vreg_email" onfocusout="checkEmail()" required>
+            <input type="text" class="email_input" name="vreg_email" th:value="${session.reg_email}" onfocusout="checkEmail()" required>
             <span class="email_span">邮&emsp;箱：</span>
             <div class="email_underline"></div>
             <br>
-            <input type="search" class="code_input" name="vreg_code" maxlength="4" required>
+            <input type="text" class="code_input" name="vreg_code" maxlength="4" required>
             <span class="code_span">验证码：</span>
             <div class="code_underline"></div>
             <img src="/jpegCode" alt="VerifyCode" onclick="Change()" id="img_code">
