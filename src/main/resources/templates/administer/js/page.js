@@ -108,7 +108,7 @@ function Page(pageNum,lastPage,page){
             pageStr = 'C';
             break;
         case 5:
-            pageStr = 'L';
+            pageStr = 'G';
             break;
     }
     if(pageNum <= 0){

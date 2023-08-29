@@ -25,6 +25,7 @@
         <li><a href="javascript:pageTransform(4);setPage(4)">公告</a></li>
         <li><a href="javascript:pageTransform(5);setPage(5)">评论</a></li>
         <li><a href="javascript:pageTransform(6);setPage(6)">喜欢</a></li>
+        <li><a href="/home">返回</a></li>
     </ul>
 </div>
 <div class="square"></div>
@@ -212,11 +213,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn" th:onclick="|Page(1,${session.adminPageGLast},4)|">首页</button>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageGNum}-1,${session.adminPageGLast},4)|">←</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageGLast},5)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageGNum}-1,${session.adminPageGLast},5)|">←</button>
                 <span th:text="${session.adminPageGNum}+'/'+${session.adminPageGLast}">1/1</span>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageGNum}+1,${session.adminPageGLast},4)|">→</button>
-                <button class="btn" th:onclick="|Page(${session.adminPageGLast},${session.adminPageGLast},4)|">尾页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageGNum}+1,${session.adminPageGLast},5)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageGLast},${session.adminPageGLast},5)|">尾页</button>
             </div>
         </div>
     </div>

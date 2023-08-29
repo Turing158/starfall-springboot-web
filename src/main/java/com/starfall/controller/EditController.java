@@ -44,13 +44,17 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "1") int pageT,
             @RequestParam(required = false,defaultValue = "1") int pageN,
             @RequestParam(required = false,defaultValue = "1") int pageC,
-            @RequestParam(required = false,defaultValue = "1") int pageL
+            @RequestParam(required = false,defaultValue = "1") int pageG
     ){
+        int promise = (int) session.getAttribute("promise");
+        if(promise != 100){
+            return "redirect:/home";
+        }
         Pageable pageableU = PageRequest.of(pageU-1,20, Sort.by("user").ascending());
         Pageable pageableT = PageRequest.of(pageT-1,20, Sort.by("id").ascending());
         Pageable pageableN = PageRequest.of(pageN-1,20, Sort.by("id").ascending());
         Pageable pageableC = PageRequest.of(pageC-1,20, Sort.by("id").ascending());
-        Pageable pageableL = PageRequest.of(pageL-1,20, Sort.by("id").ascending());
+        Pageable pageableG = PageRequest.of(pageG-1,20, Sort.by("id").ascending());
 
         session.setAttribute("adminUsers",userDao.findAll(pageableU));
         session.setAttribute("adminPageUNum",pageU);
@@ -68,8 +72,8 @@ public class EditController {
         session.setAttribute("adminPageCNum",pageC);
         session.setAttribute("adminPageCLast",commentDao.count()/20+1);
 
-        session.setAttribute("adminGoods", goodDao.findAll(pageableL));
-        session.setAttribute("adminPageGNum",pageL);
+        session.setAttribute("adminGoods", goodDao.findAll(pageableG));
+        session.setAttribute("adminPageGNum",pageG);
         session.setAttribute("adminPageGLast", goodDao.count()/20+1);
 
         return "administer/edit";

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -283,14 +284,15 @@ public class TopicController {
     public String publish(
             HttpSession session
     ){
+//        return "topic/edit";
 //        调试时注释掉下面，使用时不要注释
-//        if(!Objects.equals(session.getAttribute("promise"),null)){
-//            int promise = (int) session.getAttribute("promise");
-//            if(promise == 10){
-//                return "topic/edit";
-//            }
-//        }
-        return "topic/edit";
+        if(!Objects.equals(session.getAttribute("promise"),null)){
+            int promise = (int) session.getAttribute("promise");
+            if( session.getAttribute("promise") == null || promise == 10){
+                return "topic/edit";
+            }
+        }
+        return "topic/noEdit";
     }
 
 
