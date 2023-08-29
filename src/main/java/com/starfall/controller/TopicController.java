@@ -6,6 +6,7 @@ import com.starfall.dao.*;
 import com.starfall.entity.Comment;
 import com.starfall.entity.Good;
 import com.starfall.entity.Topic;
+import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.PageRequest;
@@ -214,7 +215,21 @@ public class TopicController {
         goodDao.save(goodNew);
         return "redirect:/topic/html?html="+html;
     }
-
+    @RequestMapping("/topic/cancelLike")
+    public String cancelLike(
+            HttpSession session
+    ){
+        int html = (int) session.getAttribute("html");
+        String user = session.getAttribute("user").toString();
+        Good goodOld = goodDao.findByTopicidAndUser(html,user);
+        if(goodOld != null){
+//            这里两种方式都可以取消掉点赞，但是第二种会导致数据库中有很多无用的数据
+            goodDao.deleteById(goodOld.getId());
+//            goodOld.setGood(0);
+//            goodDao.save(goodOld);
+        }
+        return "redirect:/topic/html?html="+html;
+    }
 
     //发布评论
     @RequestMapping("/saveComment")
