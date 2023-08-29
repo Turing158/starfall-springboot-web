@@ -1,8 +1,8 @@
 -- 用户User
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head) VALUES ('1322621134', '123123', '2023-06-05', 1, '新用户19429E', null, '1322621134@qq.com', 'null.jpg');
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head) VALUES ('admin', 'admin', '0000-00-00', 9981, '管理员', '我是管理员!', 'admin@sf.com', '20230603103044829864061.jpg');
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head) VALUES ('asd', 'asd', '0000-00-00', 1, 'asd', 'asdasdasd', 'test@t.com', 'null.png');
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head) VALUES ('qwe', '123456', '0000-00-00', 10, 'qwenba', '我叫qwe，一个用户a', '123@qq.com', 'qwe.jpg');
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise) VALUES ('1322621134', '123123', '2023-06-05', 1, '新用户19429E', null, '1322621134@qq.com', 'null.jpg', 0);
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise) VALUES ('admin', 'admin', '0000-00-00', 9981, '管理员', '我是管理员!', 'admin@sf.com', 'admin.jpg', 100);
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise) VALUES ('asd', 'asd', '1000-01-01', 1, 'asd', 'asdasd', 'asd@asd.com', 'null.png', 0);
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise) VALUES ('qwe', '123456', '0000-00-00', 10, 'qwenba', '我叫qwe，一个用户a', '123@qq.com', 'qwe.jpg', 0);
 
 -- 主题topic
 INSERT INTO web.topic (id, icon, label, title, user, date, comment, view, label_href, titlename, titleenglishname, source, version, language, address, download, content, authorname, username, userhead, userinformation) VALUES (1, 'skyblock.png', '服务端', '[1.8.x-1.9.x][Spigot]StarFall空岛生存>巨大更新[物品扩展|粘液科技]', 'Turing_ICE', '2023-07-06', 1, 100, 'serve', 'StarFall空岛生存', 'StarFall-Skyblock', '原创', '1.8.x-1.9.x', '简体中文', 'https://www.mcbbs.net/thread-792740-1-1.html', 'http://某.盘.com', '# StarFall空岛生存

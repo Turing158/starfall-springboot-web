@@ -13,13 +13,14 @@ create table user
     introduce varchar(255) null comment '用户介绍',
     email     varchar(255) null comment '用户邮箱[独一无二]',
     head      varchar(255) not null,
-    promise   int          null comment '用户',
+    promise   int          null comment '用户权限',
     constraint user
         unique (user)
 );
 
 create index head
     on user (head);
+
 
 #新建公告表结构
 create table notice
