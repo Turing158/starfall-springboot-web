@@ -129,10 +129,14 @@ public class TopicController {
             //初始化session，主题的点赞数
             session.setAttribute("topicLikeCount",goodDao.countAllByTopicidAndGood(html_int,1));
             //初始化session，此session用于判断用户是否点赞过
+//            空对象是为了防止空指针
             Good goodNull = new Good();
             session.setAttribute("topicUserLike",goodNull);
+//            为了防止空指针，先判断是否登录
             if(session.getAttribute("user") != null){
+                //如果登录，就判断是否有点过此主题的赞或踩
                 if(goodDao.existsGoodByTopicidAndUser(html_int,session.getAttribute("user").toString())){
+                    //如果点赞过，就把点赞信息放入session
                     session.setAttribute("topicUserLike",goodDao.findByTopicidAndUser(html_int,session.getAttribute("user").toString()));
 
                 }
@@ -168,28 +172,37 @@ public class TopicController {
         return "topic/null";
     }
 
-
+//点赞
     @RequestMapping("/topic/like")
     public String like(
             HttpSession session
     ){
+//        获取时间
         LocalDateTime ldt = LocalDateTime.now();
         String date = ldt.getYear()+"-"+ldt.getMonthValue()+"-"+ldt.getDayOfMonth();
+//        获取点赞主题
         int html = (int) session.getAttribute("html");
+//        获取点赞用户
         String user = session.getAttribute("user").toString();
+//        先将点赞信息查出来
         Good goodOld = goodDao.findByTopicidAndUser(html,user);
         long id;
+//        如果点赞信息存在，就通过id修改点赞状态，防止数据库数据过多
         if(goodOld != null){
+//            如果点赞状态为1，即点过，直接返回页面，不执行接下来的代码
             if(goodOld.getGood() == 1){
                 return "redirect:/topic/html?html="+html;
             }
             id = goodOld.getId();
         }
         else{
+//            因为点赞信息不存在，数据库中存在主键，所以通过最后数据的id+1来创建新的点赞信息
             id = goodDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
 
         }
+//        创建新的点赞信息对象
         Good goodNew = new Good(id,1,user,html,date);
+//        通过jpa保存
         goodDao.save(goodNew);
         return "redirect:/topic/html?html="+html;
     }
@@ -197,22 +210,31 @@ public class TopicController {
     public String dislike(
             HttpSession session
     ){
+//        获取时间
         LocalDateTime ldt = LocalDateTime.now();
         String date = ldt.getYear()+"-"+ldt.getMonthValue()+"-"+ldt.getDayOfMonth();
+//        获取点赞主题
         int html = (int) session.getAttribute("html");
+//        获取点赞用户
         String user = session.getAttribute("user").toString();
+//        先将点赞信息查出来
         Good goodOld = goodDao.findByTopicidAndUser(html,user);
         long id;
+//        如果点赞信息存在，就通过id修改点赞状态，防止数据库数据过多
         if(goodOld != null){
+//            如果点赞状态为2，即踩过，直接返回页面，不执行接下来的代码
             if(goodOld.getGood() == 2){
                 return "redirect:/topic/html?html="+html;
             }
             id = goodOld.getId();
         }
         else{
+//            因为点赞信息不存在，数据库中存在主键，所以通过最后数据的id+1来创建新的点赞信息
             id = goodDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
         }
+//        创建新的点赞信息对象
         Good goodNew = new Good(id,2,user,html,date);
+//        通过jpa保存
         goodDao.save(goodNew);
         return "redirect:/topic/html?html="+html;
     }
