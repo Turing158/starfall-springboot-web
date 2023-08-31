@@ -81,7 +81,7 @@ let fileInput = document.getElementById('file');
 let preview1 = document.getElementById('img_preview1');
 let preview2 = document.getElementById('img_preview2');
 let preview3 = document.getElementById('img_preview3');
-let submit = document.getElementById("submit_head");
+let submit = document.getElementById("submitHead");
 // 监听change事件:
 window.onload=function(){
     fileInput.addEventListener('change', function() {

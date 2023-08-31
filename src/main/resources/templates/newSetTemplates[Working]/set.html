@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${session.name}+'-|StarFall|'">用户设置</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/set.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
+    <script src="js/jquery.js" type="text/javascript"></script>
+</head>
+<body>
+<ul>
+    <li><img th:src="@{'/head_img/'+${session.head}}" alt="" class="head_img"><a class="head_set" href="javascript:display_me();" onclick="moveSqurt(5)">修改头像</a></li>
+    <li><a href="javascript:display_me();" class="ul_me" onclick="moveSqurt(1)">我的</a></li>
+    <li><a href="javascript:display_information();" onclick="moveSqurt(2);seti_Change();" class="ul_inf">修改信息</a></li>
+    <li><a href="javascript:display_password();" onclick="moveSqurt(3);setp_Change();" class="ul_pass">修改密码</a></li>
+    <li><a href="/home">返回主页</a></li>
+</ul>
+<div class="square" id="square"></div>
+<div class="me" id="me" th:style="'display:'+${session.display_me}+';'">
+    
+</div>
+<div class="information" id="information" th:style="'display:'+${session.display_i}+';'">
+
+</div>
+<div class="password" id="password" th:style="'display:'+${session.display_p}+';'">
+    
+</div>
+<div class="head_page" id="head_page" th:style="'display:'+${session.display_h}+';'">
+    <form method="post" action="/upload_head" enctype="multipart/form-data" id="upload_head">
+        <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview1" id="img_preview1">&emsp;
+        <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview2" id="img_preview2">&emsp;
+        <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview3" id="img_preview3">
+        <br>
+        <span class="span32">32x32</span>&emsp;&nbsp;
+        <span class="span64">64x64</span>&emsp;&emsp;&emsp;&nbsp;
+        <span class="span128">128x128</span>
+        <br><br>
+        <input type="file" accept="image/jpeg, image/png, image/jpg" id="file" name="head_img">
+        <p class="info" id="info"></p>
+        <input type="button" id="submitHead" value="确认修改">
+    </form>
+</div>
+</body>
+<script src="js/set.js" type="text/javascript"></script>
+</html>

@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    transition: all 0.5s,font 0s;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+}
+ul{
+    position: relative;
+    background-image: url(../img/set/woodBlack.png);
+    width: 100px;
+    height: 100vh;
+    list-style: none;
+    text-align: center;
+    border-right: 2px solid #131313;
+}
+ul li{
+    margin-top: 10px;
+}
+ul li a{
+    text-align: center;
+    line-height: 50px;
+    display: block;
+    width: 100px;
+    height: 50px;
+    background-image: url(../img/set/billboard.png);
+    background-size: 100%;
+    text-decoration: none;
+    color: #131313;
+    font-weight: bold;
+}
+ul li a:hover{
+    color: #f1f1f1;
+    background-image: url(../img/set/billboardGray.png);
+}
+.head_img{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.head_set{
+    position: relative;
+    left: 10px;
+    width: 80px;
+    height: 80px;
+    background-image: none;
+    font-size: 15px;
+    opacity: 0;
+    border-radius: 50%;
+    line-height: 80px;
+}
+.head_set:hover{
+    opacity: 1;
+    background-color: rgba(128, 128, 128, 0.479);
+    color: #f1f1f1;
+    background-image: none;
+}
