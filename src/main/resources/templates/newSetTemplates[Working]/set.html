@@ -16,17 +16,51 @@
     <li><a href="javascript:" class="ul_pass">修改密码</a></li>
     <li><a href="/home">返回主页</a></li>
 </ul>
+<input type="hidden">
 <div class="square" id="square"></div>
-<div class="me page" id="me" th:style="'display:'+${session.display_me}+';'">
-    
+<div class="me page" id="me">
+    <div class="content">
+        <table class="eleTable">
+            <tr>
+                <th colspan="2">你好！name</th>
+            </tr>
+            <tr>
+                <td>用户名</td>
+                <td class="infTd">：user</td>
+            </tr>
+            <tr>
+                <td>名称</td>
+                <td class="infTd">：name</td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td class="infTd">：123@163.com</td>
+            </tr>
+            <tr>
+                <td>等级</td>
+                <td class="infTd">：1</td>
+            </tr>
+            <tr>
+                <td>权限</td>
+                <td class="infTd">：1</td>
+            </tr>
+            <tr>
+                <td>介绍</td>
+                <td class="infTd">：</td>
+            </tr>
+            <tr>
+                <td colspan="2"><textarea disabled>介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf</textarea></td>
+            </tr>
+        </table>
+    </div>
 </div>
-<div class="information page" id="information" th:style="'display:'+${session.display_i}+';'">
+<div class="information page" id="information">
 
 </div>
-<div class="password page" id="password" th:style="'display:'+${session.display_p}+';'">
+<div class="password page" id="password">
     
 </div>
-<div class="head_page page" id="head_page" th:style="'display:'+${session.display_h}+';'">
+<div class="head_page page" id="head_page">
     <form method="post" action="/upload_head" enctype="multipart/form-data" id="upload_head">
         <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview1" id="img_preview1">&emsp;
         <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview2" id="img_preview2">&emsp;

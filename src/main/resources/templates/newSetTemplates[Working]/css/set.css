@@ -1,4 +1,5 @@
 *{
+    user-select: none;
     margin: 0;
     padding: 0;
     transition: all 0.5s,font 0s;
@@ -7,11 +8,11 @@ body{
     height: 100vh;
     width: 100vw;
     display: flex;
-    background-image: url(../img/set/woodWhite.png);
+    background-image: url(../img/set/wood.png);
 }
 ul{
     position: relative;
-    background-image: url(../img/set/woodBlack.png);
+    background-image: url(../img/set/log.png);
     width: 100px;
     height: 100vh;
     list-style: none;
@@ -27,7 +28,7 @@ ul li a{
     display: block;
     width: 100px;
     height: 50px;
-    background-image: url(../img/set/billboard.png);
+    background-image: url(../img/set/birchSign.png);
     background-size: 100%;
     text-decoration: none;
     color: #131313;
@@ -35,7 +36,25 @@ ul li a{
 }
 ul li a:hover{
     color: #f1f1f1;
-    background-image: url(../img/set/billboardGray.png);
+    background-image: url(../img/set/spruceSign.png);
+}
+textarea{
+    width: 250px;
+    height: 150px;
+    overflow-y: auto;
+    resize: none;
+    outline: 0;
+    border: 0;
+    background-image: url(../img/set/spruceSign.png);
+    color: #f1f1f1;
+    font-size: 18px;
+    font-family:Arial, Helvetica, sans-serif;
+    outline: 2px solid #f1f1f100;
+    padding: 8px;
+    border-radius: 10px;
+}
+textarea:hover{
+    outline: 2px solid #131313;
 }
 .head_img{
     position: absolute;
@@ -78,7 +97,26 @@ ul li a:hover{
     left: 18px;
     width: 90vw;
     height: 90vh;
-    background-color: #f1f1f1;
     outline: 2px solid #131313;
     border-radius: 5px;
+    background-image: url(../img/set/woodWhite.png);
+    background-size: 5%;
+}
+.head_page,.password,.information{
+    display: none;
+}
+.content{
+    margin: 10px 20px;
+}
+.eleTable{
+    font-size: 18px;
+    font-weight: bold;
+    border-collapse: collapse;
+}
+.eleTable tr td{
+    padding: 5px 0px;
+    text-align: center;
+}
+.eleTable tr .infTd{
+    text-align: left;
 }
