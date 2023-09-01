@@ -1,39 +1,46 @@
+function moveSquare(i){
+    var s = document.getElementById("square");
+    switch(i){
+        case 1:s.style.top = 110+'px';break;
+        case 2:s.style.top = 170+'px';break;
+        case 3:s.style.top = 230+'px';break;
+        case 4:s.style.top = 40+'px';break;
+    }
+
+}
 $(document).ready(function(){
     $(".ul_me").click(function(){
         $("#information").hide();
         $("#password").hide();
         $("#me").show();
         $("#head_page").hide();
+        moveSquare(1);
     });
     $(".ul_inf").click(function(){
         $("#information").show();
         $("#password").hide();
         $("#me").hide();
         $("#head_page").hide();
+        moveSquare(2);
+        seti_Change();
     });
     $(".ul_pass").click(function(){
         $("#information").hide();
         $("#password").show();
         $("#me").hide();
         $("#head_page").hide();
+        moveSquare(3);
+        setp_Change();
     });
     $(".head_set").click(function(){
         $("#information").hide();
         $("#password").hide();
         $("#me").hide();
         $("#head_page").show();
+        moveSquare(4);
     });
 });
-function moveSqurt(i){
-    var s = document.getElementById("square");
-    switch(i){
-        case 1:s.style.top = 125+'px';break;
-        case 2:s.style.top = 190+'px';break;
-        case 3:s.style.top = 250+'px';break;
-        case 4:s.style.top = 45+'px';break;
-    }
 
-}
 function check_password_length(){
     var new_p = document.getElementById("new_password").value;
     var tips = document.getElementById("tips_password");

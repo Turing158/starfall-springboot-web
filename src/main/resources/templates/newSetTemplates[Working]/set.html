@@ -10,23 +10,23 @@
 </head>
 <body>
 <ul>
-    <li><img th:src="@{'/head_img/'+${session.head}}" alt="" class="head_img"><a class="head_set" href="javascript:display_me();" onclick="moveSqurt(5)">修改头像</a></li>
-    <li><a href="javascript:display_me();" class="ul_me" onclick="moveSqurt(1)">我的</a></li>
-    <li><a href="javascript:display_information();" onclick="moveSqurt(2);seti_Change();" class="ul_inf">修改信息</a></li>
-    <li><a href="javascript:display_password();" onclick="moveSqurt(3);setp_Change();" class="ul_pass">修改密码</a></li>
+    <li><img th:src="@{'/head_img/'+${session.head}}" alt="" class="head_img"><a class="head_set" href="javascript:">修改头像</a></li>
+    <li><a href="javascript:" class="ul_me" onclick="moveSqurt(1)">我的</a></li>
+    <li><a href="javascript:" class="ul_inf">修改信息</a></li>
+    <li><a href="javascript:" class="ul_pass">修改密码</a></li>
     <li><a href="/home">返回主页</a></li>
 </ul>
 <div class="square" id="square"></div>
-<div class="me" id="me" th:style="'display:'+${session.display_me}+';'">
+<div class="me page" id="me" th:style="'display:'+${session.display_me}+';'">
     
 </div>
-<div class="information" id="information" th:style="'display:'+${session.display_i}+';'">
+<div class="information page" id="information" th:style="'display:'+${session.display_i}+';'">
 
 </div>
-<div class="password" id="password" th:style="'display:'+${session.display_p}+';'">
+<div class="password page" id="password" th:style="'display:'+${session.display_p}+';'">
     
 </div>
-<div class="head_page" id="head_page" th:style="'display:'+${session.display_h}+';'">
+<div class="head_page page" id="head_page" th:style="'display:'+${session.display_h}+';'">
     <form method="post" action="/upload_head" enctype="multipart/form-data" id="upload_head">
         <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview1" id="img_preview1">&emsp;
         <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview2" id="img_preview2">&emsp;
