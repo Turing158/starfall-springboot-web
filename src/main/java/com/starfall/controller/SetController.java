@@ -43,19 +43,7 @@ public class SetController extends HttpServlet {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
 //        UserService userService = context.getBean("userService", UserService.class);
 //        HttpSession session = req.getSession();
-        if (session.getAttribute("display_me") == null){
-            session.setAttribute("display_me","block");
-            session.setAttribute("display_i","none");
-            session.setAttribute("display_p","none");
-            session.setAttribute("display_h","none");
-        }
-        String user_session = (String) session.getAttribute("user");
-        User user = userDao.findByUser(user_session);
-        session.setAttribute("name",user.getName());
-        session.setAttribute("date",user.getDate());
-        session.setAttribute("introduce",user.getIntroduce());
-        session.setAttribute("email",user.getEmail());
-        session.setAttribute("level",user.getLevel());
+
         return "set";
     }
 
@@ -73,10 +61,6 @@ public class SetController extends HttpServlet {
 //        UserService userService = context.getBean("userService", UserService.class);
 //        DiscussService discussService = context.getBean("discussService", DiscussService.class);
 //        HttpSession session = req.getSession();
-        session.setAttribute("display_me","none");
-        session.setAttribute("display_i","none");
-        session.setAttribute("display_p","none");
-        session.setAttribute("display_h","block");
 //        改编码，以免乱码
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
@@ -88,7 +72,7 @@ public class SetController extends HttpServlet {
         Part part = req.getPart("head_img");
 //        这个是保存头像的，现在保存只能临时的，这个填存服务器头像的存储位置，可永久保存
 //        String savePath = "D:/data/head_img";
-        String user = (String) session.getAttribute("user");
+        String user =((User) session.getAttribute("user")).getUser();
         String filename = sdf.format(date) + r.nextInt();
         //        获取文件后缀
         String fileType = part.getSubmittedFileName().substring(part.getSubmittedFileName().lastIndexOf("."));
@@ -104,7 +88,10 @@ public class SetController extends HttpServlet {
 //        更新数据库里头像的名字
         commentDao.updateData();
         topicDao.updateData();
-        session.setAttribute("head",filename+fileType);
+//        刷新session里的头像
+        User userObj = userDao.findByUser(user);
+        userObj.setHead(filename+fileType);
+        session.setAttribute("user",userObj);
         return "redirect:/set";
     }
 
@@ -120,14 +107,8 @@ public class SetController extends HttpServlet {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
 //        UserService userService = context.getBean("userService", UserService.class);
 //        HttpSession session = req.getSession();
-        session.setAttribute("display_me","none");
-        session.setAttribute("display_p","none");
-        session.setAttribute("display_i","block");
         req.setCharacterEncoding("utf-8");
-        String user = (String) session.getAttribute("user");
-//        String name = req.getParameter("name");
-//        String introduce = req.getParameter("introduce");
-//        String code = req.getParameter("seti_code");
+        String user = ((User) session.getAttribute("user")).getUser();
         if(Objects.equals(code,"")){
             session.setAttribute("i_tips","验证码不能为空");
         }
@@ -159,14 +140,9 @@ public class SetController extends HttpServlet {
 //        UserService userService = context.getBean("userService", UserService.class);
 //        HttpSession session = req.getSession();
         req.setCharacterEncoding("utf-8");
-        String user = (String) session.getAttribute("user");
-//        String old_password = req.getParameter("old_password");
-//        String new_password = req.getParameter("new_password");
-//        String code = req.getParameter("seti_VerifyCode");
-        session.setAttribute("display_me","none");
-        session.setAttribute("display_p","block");
-        session.setAttribute("display_i","none");
-        boolean flag = old_password.equals(userDao.findByUser(user).getPassword());
+        User userObj = (User) session.getAttribute("user");
+        String user = userObj.getUser();
+        boolean flag = old_password.equals(userObj.getPassword());
         if(flag && Objects.equals(code,session.getAttribute("code"))){
             session.setAttribute("p_tips","密码修改成功");
             session.setAttribute("p_tips_color","lightgreen");

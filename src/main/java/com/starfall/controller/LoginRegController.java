@@ -99,14 +99,9 @@ public class LoginRegController {
         //成功[性能测试换第一个]
 //        else if(Objects.equals(flag, password)){
         else if(Objects.equals(flag, password) && Objects.equals(code,session.getAttribute("code"))){
-            String name = userDao.findByUser(user).getName();
-            session.setAttribute("user",user);
-            session.setAttribute("head",userDao.findByUser(user).getHead());
-            session.setAttribute("promise",userDao.findByUser(user).getPromise());
-            session.setAttribute("password",password);
-            session.setAttribute("userLogin",null);
-            session.setAttribute("introduce",userDao.findByUser(user).getIntroduce());
-            session.setAttribute("name",name);
+            session.setAttribute("user",userDao.findByUser(user));
+            session.removeAttribute("password");
+            session.removeAttribute("userLogin");
             session.setAttribute("code",null);
             return "redirect:/home";
         }

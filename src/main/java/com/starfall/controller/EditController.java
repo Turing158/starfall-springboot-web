@@ -46,7 +46,7 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "1") int pageC,
             @RequestParam(required = false,defaultValue = "1") int pageG
     ){
-        int promise = (int) session.getAttribute("promise");
+        int promise = ((User) session.getAttribute("user")).getPromise();
         if(promise != 100){
             return "redirect:/home";
         }

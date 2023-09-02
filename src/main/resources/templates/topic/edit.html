@@ -20,9 +20,9 @@
         <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
         <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
         <li th:if="${session.user == null}" class="li_user" style="border: 2px solid rgb(97, 97, 97); height: 48px;"><a href="/login">! 请登录 !</a></li>
-        <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.head}}" alt="">
+        <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.user.head}}" alt="">
             <div class="div_user">
-                <p class="username" th:text="${session.name}">用户名user</p>
+                <p class="username" th:text="${session.user.name}">用户名user</p>
                 <a href="/set">设置 Setting</a>
                 <a href="/exit">退出 Exit</a>
             </div>
@@ -90,17 +90,17 @@
                     <td class="author">
                         <div class="authorContent">
                             <div class="authorName">
-                                <span th:text="${session.name}">TuringICE</span>
+                                <span th:text="${session.user.name}">TuringICE</span>
                             </div>
                             <div class="authorHead">
-                                <img th:src="'../head_img/'+${session.head}" alt="">
+                                <img th:src="'../head_img/'+${session.user.head}" alt="">
                                 
                             </div>
                             <div class="authorInf">
                                 <!-- <p class="authorInfP">&ensp;作者信息：</p> -->
                                 <span class="authorInfSpan">&emsp;Information</span>
                                 <br>
-                                <span class="authorInfText" th:text="${session.introduce}">哈嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</span>
+                                <span class="authorInfText" th:text="${session.user.introduce}">哈嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</span>
                             </div>
                         </div>
                     </td>

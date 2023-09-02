@@ -6,6 +6,7 @@ import com.starfall.dao.*;
 import com.starfall.entity.Comment;
 import com.starfall.entity.Good;
 import com.starfall.entity.Topic;
+import com.starfall.entity.User;
 import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -131,13 +132,14 @@ public class TopicController {
             //初始化session，此session用于判断用户是否点赞过
 //            空对象是为了防止空指针
             Good goodNull = new Good();
+            User userObj =(User) session.getAttribute("user");
             session.setAttribute("topicUserLike",goodNull);
 //            为了防止空指针，先判断是否登录
             if(session.getAttribute("user") != null){
                 //如果登录，就判断是否有点过此主题的赞或踩
-                if(goodDao.existsGoodByTopicidAndUser(html_int,session.getAttribute("user").toString())){
+                if(goodDao.existsGoodByTopicidAndUser(html_int,userObj.getUser())){
                     //如果点赞过，就把点赞信息放入session
-                    session.setAttribute("topicUserLike",goodDao.findByTopicidAndUser(html_int,session.getAttribute("user").toString()));
+                    session.setAttribute("topicUserLike",goodDao.findByTopicidAndUser(html_int,userObj.getUser()));
 
                 }
             }
@@ -183,7 +185,7 @@ public class TopicController {
 //        获取点赞主题
         int html = (int) session.getAttribute("html");
 //        获取点赞用户
-        String user = session.getAttribute("user").toString();
+        String user = ((User) session.getAttribute("user")).getUser();
 //        先将点赞信息查出来
         Good goodOld = goodDao.findByTopicidAndUser(html,user);
         long id;
@@ -216,7 +218,7 @@ public class TopicController {
 //        获取点赞主题
         int html = (int) session.getAttribute("html");
 //        获取点赞用户
-        String user = session.getAttribute("user").toString();
+        String user = ((User) session.getAttribute("user")).getUser();
 //        先将点赞信息查出来
         Good goodOld = goodDao.findByTopicidAndUser(html,user);
         long id;
@@ -243,7 +245,7 @@ public class TopicController {
             HttpSession session
     ){
         int html = (int) session.getAttribute("html");
-        String user = session.getAttribute("user").toString();
+        String user = ((User) session.getAttribute("user")).getUser();
         Good goodOld = goodDao.findByTopicidAndUser(html,user);
         if(goodOld != null){
 //            这里两种方式都可以取消掉点赞，但是第二种会导致数据库中有很多无用的数据
@@ -281,7 +283,7 @@ public class TopicController {
             //获取时间
             LocalDateTime ldt = LocalDateTime.now();
             //获取用户
-            String user = (String) session.getAttribute("user");
+            String user = ((User) session.getAttribute("user")).getUser();
             //获取调整时间
             String date = ldt.toLocalDate()+" "+ldt.getHour()+":"+ldt.getMinute()+":"+ldt.getSecond();
             //保存评论
@@ -308,9 +310,10 @@ public class TopicController {
     ){
 //        return "topic/edit";
 //        调试时注释掉下面，使用时不要注释
-        if(!Objects.equals(session.getAttribute("promise"),null)){
-            int promise = (int) session.getAttribute("promise");
-            if( session.getAttribute("promise") == null || promise == 10){
+        User user = (User) session.getAttribute("user");
+        if(!Objects.equals(user,null)){
+            int promise = user.getPromise();
+            if( user == null || promise == 10){
                 return "topic/edit";
             }
         }
@@ -369,7 +372,7 @@ public class TopicController {
             //获取labelHref变量[详细看数据库]
             String labelHref = labelCE(label);
             //获取用户名称，及发帖作者
-            String user = (String) session.getAttribute("user");
+            String user = ((User) session.getAttribute("user")).getUser();
             //获取主题id
             List<Topic> topics = topicDao.findAll(Sort.by("id").descending());
             Long id = topics.get(0).getId()+1;

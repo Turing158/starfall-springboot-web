@@ -241,6 +241,20 @@ button:active{
     text-decoration: underline;
     color: #024b86;
 }
+.topic .date{
+    width: 50px;
+}
+.topic .date span:nth-child(1){
+    position: relative;
+    font-size: 13px;
+    color: #666666;
+}
+.topic .date span:nth-child(3){
+    position: relative;
+    font-size: 13px;
+    top: -10px;
+    
+}
 .topic .vc span:nth-child(1){
     position: absolute;
     margin-top: -15px;
@@ -250,4 +264,16 @@ button:active{
     position: absolute;
     margin-top: -3px;
     font-size: 13px;
+    color: #666666;
+}
+.topic .label a{
+    color: #666666;
+    text-decoration: none;
+}
+.topic .label a:hover{
+    text-decoration: underline;
+    color: #024b86;
+}
+.operate{
+    width: 150px;
 }
