@@ -2,7 +2,7 @@
     user-select: none;
     margin: 0;
     padding: 0;
-    transition: all 0.5s,font 0s;
+    transition: all 0.3s,font 0s;
 }
 body{
     height: 100vh;
@@ -108,7 +108,7 @@ textarea:focus{
     background-size: 5%;
     padding: 50px;
 }
-.head_page,.information,.me{
+.head_page,.information,.password{
     display: none;
 }
 .content{
@@ -125,6 +125,14 @@ textarea:focus{
 }
 .eleTable tr .infTd{
     text-align: left;
+}
+.eleTable .tableTop{
+    font-size: 12px;
+    font-weight: 500;
+}
+.eleTable .tableContent{
+    font-size: 18px;
+    font-weight: 500;
 }
 .img_preview1{
     width: 32px;
@@ -210,4 +218,36 @@ button:active{
     background-color: #131313;
     width: 80px;
     height: 30px;
+}
+.topic .icon{
+    background-color: #131313;
+    width: 30px;
+    height: 30px;
+    transform: scale(1);
+    transform-origin: 100% 0;
+}
+.topic .icon:hover{
+    transform: scale(2);
+}
+.topic .title{
+    text-align: left;
+    width: 500px;
+}
+.topic .title a{
+    color: #131313;
+    text-decoration: none;
+}
+.topic .title a:hover{
+    text-decoration: underline;
+    color: #024b86;
+}
+.topic .vc span:nth-child(1){
+    position: absolute;
+    margin-top: -15px;
+    font-size: 13px;
+}
+.topic .vc span:nth-child(2){
+    position: absolute;
+    margin-top: -3px;
+    font-size: 13px;
 }
