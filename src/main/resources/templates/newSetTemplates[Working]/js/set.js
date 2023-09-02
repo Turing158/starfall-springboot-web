@@ -46,11 +46,13 @@ function check_password_length(){
     var tips = document.getElementById("tips_password");
     if(new_p.length < 6){
         tips.innerHTML = new_p.length+" 密码不得小于6个字符";
-        tips.style.color = "rgb(255, 125, 125)";
+        tips.style.color = "darkred";
+        return false;
     }
     else{
         tips.innerHTML = new_p.length+" ✔";
-        tips.style.color = "rgb(120, 255, 138)";
+        tips.style.color = "green";
+        return true;
     }
 }
 function check_password_equal(){
@@ -60,26 +62,32 @@ function check_password_equal(){
     var submit = document.getElementById("confirm_password");
     if(again_p === new_p && again_p != ""){
         tips.innerHTML = "✔";
-        tips.style.color = "rgb(120, 255, 138)";
-        submit.type = "submit";
+        tips.style.color = "green";
+        if(check_password_length()){
+            submit.type = "submit";
+        }
     }
     else{
         tips.innerHTML = "× 两次密码不一样";
-        tips.style.color = "rgb(255, 125, 125)";
+        tips.style.color = "darkred";
         submit.type = "button";
     }
 }
 function seti_Change(){
-    var img = document.getElementById("seti_img_code")
+    var img = document.getElementById("seti_img_code");
+    var input = document.getElementById("varifyInputI");
     //设置时间戳
     var date = new Date().getTime();
     img.src="jpegCode?"+date;
+    input.focus();
 }
 function setp_Change(){
-    var img = document.getElementById("setp_img_code")
+    var img = document.getElementById("setp_img_code");
+    var input = document.getElementById("varifyInputP");
     //设置时间戳
     var date = new Date().getTime();
     img.src="jpegCode?"+date;
+    input.focus();
 }
 
 

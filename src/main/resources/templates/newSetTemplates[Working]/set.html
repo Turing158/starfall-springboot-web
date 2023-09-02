@@ -27,6 +27,7 @@
             <tr>
                 <td>用户名</td>
                 <td class="infTd">：user</td>
+                <td rowspan="5">&nbsp;<textarea disabled>介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf</textarea></td>
             </tr>
             <tr>
                 <td>名称</td>
@@ -44,21 +45,68 @@
                 <td>权限</td>
                 <td class="infTd">：1</td>
             </tr>
+        </table>
+        <br><br>
+        <table>
             <tr>
-                <td>介绍</td>
-                <td class="infTd">：</td>
-            </tr>
-            <tr>
-                <td colspan="2"><textarea disabled>介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf</textarea></td>
+                <th>主题[未完工]</th>
             </tr>
         </table>
     </div>
 </div>
 <div class="information page" id="information">
-
+    <form action="">
+        <div class="content">
+            <table class="eleTable">
+                <tr>
+                    <th colspan="2">哟！来改名字啦！别改的见不得人喔！</th>
+                </tr>
+                <tr>
+                    <td>名称</td>
+                    <td class="infTd">：<input type="text"></td>
+                </tr>
+            </table>
+            <table class="eleTable">
+                <tr>
+                    <td style="vertical-align: top;">介绍 ：</td>
+                    <td class="infTd">
+                        <textarea></textarea>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit">确认修改</button>
+            &nbsp;&nbsp;&nbsp;
+        <input class="varifyInput" type="text" maxlength="4" id="varifyInputI">
+        <img class="vartifyImg" src="/jpegCode" alt="" id="seti_img_code" onclick="seti_Change()">
+        </div>
+    </form>
 </div>
 <div class="password page" id="password">
-    
+    <div class="content">
+        <table class="eleTable">
+            <tr>
+                <th colspan="3" style="width: 500px;">改了密码记得记好，勤改密码，会减少盗号风险</th>
+            </tr>
+            <tr>
+                <td style="width: 80px;">原密码</td>
+                <td class="infTd" style="width: 230px;">：<input type="password"></td>
+            </tr>
+            <tr>
+                <td>新密码</td>
+                <td class="infTd">：<input type="password" id="new_password" onkeyup="check_password_length()"></td>
+                <td class="infTd"><span id="tips_password"></span></td>
+            </tr>
+            <tr>
+                <td>确认密码</td>
+                <td class="infTd">：<input type="password" id="again_password" onkeyup="check_password_equal()"></td>
+                <td class="infTd"><span id="tips_again_password"></span></td>
+            </tr>
+        </table>
+        <button type="button" id="confirm_password">确认修改</button>
+        &nbsp;&nbsp;&nbsp;
+        <input class="varifyInput" type="text" maxlength="4" id="varifyInputP">
+        <img class="vartifyImg" src="/jpegCode" alt="" id="setp_img_code" onclick="setp_Change()">
+    </div>
 </div>
 <div class="head_page page" id="head_page">
     <form method="post" action="/upload_head" enctype="multipart/form-data" id="upload_head">
@@ -66,12 +114,9 @@
         <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview2" id="img_preview2">&emsp;
         <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview3" id="img_preview3">
         <br>
-        <span class="span32">32x32</span>&emsp;&nbsp;
-        <span class="span64">64x64</span>&emsp;&emsp;&emsp;&nbsp;
-        <span class="span128">128x128</span>
         <br><br>
         <input type="file" accept="image/jpeg, image/png, image/jpg" id="file" name="head_img">
-        <p class="info" id="info"></p>
+        <br><br>
         <input type="button" id="submitHead" value="确认修改">
     </form>
 </div>
