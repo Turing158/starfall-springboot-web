@@ -17,6 +17,13 @@
     <li><a href="/home">返回主页</a></li>
 </ul>
 <input class="pageValue" type="hidden" th:value="${session.setPage}">
+<div class="grayTips">
+    <div class="tips">
+        <p>提示</p>
+        <div class="tipsContent" th:text="${session.setTips}"></div>
+        <button class="tipsBtn" onclick="closeTips()">确定</button>
+    </div>
+</div>
 <div class="square" id="square"></div>
 <div class="me page" id="me">
     <div class="content">

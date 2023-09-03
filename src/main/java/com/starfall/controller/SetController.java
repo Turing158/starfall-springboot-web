@@ -7,6 +7,9 @@ import com.starfall.dao.UserDao;
 import com.starfall.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,12 +43,14 @@ public class SetController extends HttpServlet {
 
     @RequestMapping("/set")
     public String Set(
-            HttpSession session
+            HttpSession session,
+            @RequestParam(required = false) String page_str
     ){
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        HttpSession session = req.getSession();
-
+        int page = 1;
+        if(page_str != null){
+            page = Integer.parseInt(page_str);
+        }
+        Pageable pageable = PageRequest.of(page-1,10, Sort.by("date").descending());
         return "set";
     }
 
@@ -107,6 +112,7 @@ public class SetController extends HttpServlet {
         User userObj = userDao.findByUser(user);
         userObj.setHead(filename+fileType);
         session.setAttribute("user",userObj);
+        session.setAttribute("setTips","头像修改成功");
         return "redirect:/set";
     }
 

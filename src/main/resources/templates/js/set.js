@@ -1,5 +1,13 @@
 let page = document.querySelector('.pageValue').value;
 let pageNum = Number(page);
+let tips = document.querySelector('.grayTips');
+let tipsContent = document.querySelector('.tipsContent').textContent;
+if(tipsContent !== ""){
+    tips.style.display = "flex";
+}
+else{
+    tips.style.display = "none";
+}
 showPage(1);
 if(pageNum >= 1 && pageNum <= 4){
     showPage(pageNum);
@@ -158,5 +166,11 @@ window.onload=function(){
 
     });
 }
-
+function closeTips(){
+    let tips = document.querySelector('.grayTips');
+    tips.style.display = "none";
+    let ajax = new XMLHttpRequest();
+    ajax.open("post","/set/clearTips");
+    ajax.send();
+}
 

@@ -280,3 +280,48 @@ button:active{
 .head{
     object-fit: cover;
 }
+.grayTips{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.grayTips .tips{
+    background-image: url(../img/set/woodWhite.png);
+    width: 600px;
+    height: 250px;
+    border-radius: 10px;
+    border: 2px solid #131313;
+    display: block;
+}
+.grayTips .tips p{
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+}
+.grayTips .tips .tipsContent{
+    position: relative;
+    width: 500px;
+    height: 160px;
+    margin: 0 auto;
+    top: 20px;
+    text-align: center;
+    line-height: 25px;
+    overflow-x: hidden;
+    white-space:pre-wrap;
+    word-break: break-all;
+}
+.grayTips .tips .tipsBtn{
+    position: relative;
+    float: right;
+    width: 80px;
+    height: 40px;
+    right: 10px;
+    bottom: 10px;
+}
