@@ -4,6 +4,7 @@ import com.starfall.Application;
 import com.starfall.dao.CommentDao;
 import com.starfall.dao.TopicDao;
 import com.starfall.dao.UserDao;
+import com.starfall.entity.Page;
 import com.starfall.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -44,13 +45,18 @@ public class SetController extends HttpServlet {
     @RequestMapping("/set")
     public String Set(
             HttpSession session,
-            @RequestParam(required = false) String page_str
+            @RequestParam(value = "page",required = false) String page_str
     ){
         int page = 1;
         if(page_str != null){
             page = Integer.parseInt(page_str);
         }
+        User userObj = (User) session.getAttribute("user");
+        int lastPage = (topicDao.countAllByUser(userObj.getUser())+9)/10;
+        Page pageObj = new Page(page,lastPage);
         Pageable pageable = PageRequest.of(page-1,10, Sort.by("date").descending());
+        session.setAttribute("userTopic",topicDao.findAllByUser(pageable,userObj.getUser()));
+        session.setAttribute("userTopicPage",pageObj);
         return "set";
     }
 

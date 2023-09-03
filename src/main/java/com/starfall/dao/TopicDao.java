@@ -14,7 +14,9 @@ import java.util.Optional;
 @Transactional
 public interface TopicDao extends JpaRepository<Topic,Long> {
     Page<Topic> findAll(Pageable pageable);
+    Page<Topic> findAllByUser(Pageable pageable,String user);
     Page<Topic> findAllByLabel(String label,Pageable pageable);
+    int countAllByUser(String user);
     int countAllBy();
     int countAllByLabel(String label);
 //    Topic findById(int num);

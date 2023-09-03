@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/set.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font.css">
     <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
     <script src="js/jquery.js" type="text/javascript"></script>
 </head>
@@ -63,18 +64,25 @@
                 <th>查看/评论</th>
                 <th class="operate">操作</th>
             </tr>
-            <tr class="tableContent">
-                <td><img src="" alt="" class="icon"></td>
-                <td class="title"><a href="">title</a></td>
-                <td class="label"><a href="">label</a></td>
-                <td class="date"><span>0000</span><br><span>00-00</span></td>
-                <td class="vc"><span>1</span><span>2</span></td>
+            <tr class="tableContent" th:each="topic : ${session.userTopic}">
+                <td><img th:src="'./img/topic/icon/'+${topic.icon}" alt="" class="icon"></td>
+                <td class="title"><a th:href="'/topic/html?html='+${topic.id}" th:text="${topic.title}">title</a></td>
+                <td class="label"><a th:href="'/topic?label='+${topic.labelHref}" th:text="'['+${topic.label}+']'">label</a></td>
+                <td class="date"><span th:text="${topic.date.split('-')[0]}">0000</span><br><span th:text="${topic.date.split('-')[1]}+'-'+${topic.date.split('-')[2]}">00-00</span></td>
+                <td class="vc"><span th:text="${topic.view}">1</span><span th:text="${topic.comment}">2</span></td>
                 <td>
                     <button>编辑</button>
                     <button>删除</button>
                 </td>
             </tr>
         </table>
+        <div class="topicPage">
+            <a th:href="'javascript:'+|pageChange(1,${session.userTopicPage.getLastPage()})|" class="back"></a>
+            <a th:href="'javascript:'+|pageChange(${session.userTopicPage.getPage()-1},${session.userTopicPage.getLastPage()})|" class="pre"></a>
+            <span th:text="${session.userTopicPage.getPage()}+'/'+${session.userTopicPage.getLastPage()}">1/2</span>
+            <a th:href="'javascript:'+|pageChange(${session.userTopicPage.getPage()+1},${session.userTopicPage.getLastPage()})|" class="next"></a>
+            <a th:href="'javascript:'+|pageChange(${session.userTopicPage.getLastPage()},${session.userTopicPage.getLastPage()})|" class="last"></a>
+        </div>
     </div>
 </div>
 <div class="information page" id="information">
@@ -115,6 +123,7 @@
                     <td style="width: 80px;">原密码</td>
                     <td class="infTd" style="width: 230px;">：<input type="password" name="oldPassword"></td>
                 </tr>
+                <tr></tr>
                 <tr>
                     <td>新密码</td>
                     <td class="infTd">：<input type="password" id="new_password" onkeyup="check_password_length()"></td>

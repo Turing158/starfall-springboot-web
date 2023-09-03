@@ -58,23 +58,23 @@ public class EditController {
 
         session.setAttribute("adminUsers",userDao.findAll(pageableU));
         session.setAttribute("adminPageUNum",pageU);
-        session.setAttribute("adminPageULast",topicDao.count()/20+1);
+        session.setAttribute("adminPageULast",(userDao.count()+19)/20);
 
         session.setAttribute("adminTopics",topicDao.findAll(pageableT));
         session.setAttribute("adminPageTNum",pageT);
-        session.setAttribute("adminPageTLast",topicDao.count()/20+1);
+        session.setAttribute("adminPageTLast",(topicDao.count()+19)/20);
 
         session.setAttribute("adminNotices",noticeDao.findAll(pageableN));
         session.setAttribute("adminPageNNum",pageN);
-        session.setAttribute("adminPageNLast",noticeDao.count()/20+1);
+        session.setAttribute("adminPageNLast",(noticeDao.count()+19)/20);
 
         session.setAttribute("adminComments",commentDao.findAll(pageableC));
         session.setAttribute("adminPageCNum",pageC);
-        session.setAttribute("adminPageCLast",commentDao.count()/20+1);
+        session.setAttribute("adminPageCLast",(commentDao.count()+19)/20);
 
         session.setAttribute("adminGoods", goodDao.findAll(pageableG));
         session.setAttribute("adminPageGNum",pageG);
-        session.setAttribute("adminPageGLast", goodDao.count()/20+1);
+        session.setAttribute("adminPageGLast", (goodDao.count()+19)/20);
 
         return "administer/edit";
     }

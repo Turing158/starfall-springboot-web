@@ -5,7 +5,7 @@
     transition: all 0.3s,font 0s;
 }
 body{
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     display: flex;
     background-image: url(../img/set/wood.png);
@@ -19,6 +19,7 @@ ul{
     list-style: none;
     text-align: center;
     border-right: 1px solid #131313;
+    
 }
 ul li{
     margin-top: 10px;
@@ -29,15 +30,17 @@ ul li a{
     display: block;
     width: 100px;
     height: 50px;
-    background-image: url(../img/set/birchSign.png);
+    background-image: url(../img/set/birch.png);
     background-size: 100%;
     text-decoration: none;
     color: #131313;
     font-weight: bold;
+    font-family: block_font;
+    font-size: 20px;
 }
 ul li a:hover{
     color: #f1f1f1;
-    background-image: url(../img/set/spruceSign.png);
+    background-image: url(../img/set/spruce.png);
 }
 textarea{
     width: 750px;
@@ -46,20 +49,21 @@ textarea{
     resize: none;
     outline: 0;
     border: 0;
-    background-image: url(../img/set/wood.png);
+    background-image: url(../img/set/oak.png);
     color: #f1f1f1;
     font-size: 18px;
+    background-size: 15%;
     font-family:Arial, Helvetica, sans-serif;
     border: 2px solid #f1f1f100;
     padding: 8px;
 }
 textarea:hover{
     border: 2px solid #f1f1f1;
-    background-image: url(../img/set/woodBlack.png);
+    background-image: url(../img/set/spruce.png);
 }
 textarea:focus{
     border: 2px solid #f1f1f1;
-    background-image: url(../img/set/woodBlack.png);
+    background-image: url(../img/set/spruce.png);
 }
 .head_img{
     position: absolute;
@@ -101,12 +105,13 @@ textarea:focus{
     top: 35px;
     left: 18px;
     width: 85vw;
-    height: 80vh;
+    height: 750px;
     outline: 2px solid #131313;
     border-radius: 5px;
-    background-image: url(../img/set/woodWhite.png);
-    background-size: 5%;
+    background-image: url(../img/set/birch.png);
+    background-size: 10%;
     padding: 50px;
+    flex-shrink: 0;
 }
 .head_page,.information,.password{
     display: none;
@@ -120,7 +125,7 @@ textarea:focus{
     border-collapse: collapse;
 }
 .eleTable tr td{
-    padding: 5px 0px;
+    padding: 5px 0;
     text-align: center;
 }
 .eleTable tr .infTd{
@@ -151,7 +156,7 @@ textarea:focus{
 }
 input{
     padding: 3px 5px;
-    background-image: url(../img/set/wood.png);
+    background-image: url(../img/set/oak.png);
     color: #f1f1f1;
     font-size: 15px;
     outline: 0;
@@ -159,11 +164,11 @@ input{
 }
 input:hover{
     border: 2px solid #f1f1f1;
-    background-image: url(../img/set/woodBlack.png);
+    background-image: url(../img/set/spruce.png);
 }
 input:focus{
     border: 2px solid #f1f1f1;
-    background-image: url(../img/set/woodBlack.png);
+    background-image: url(../img/set/spruce.png);
 }
 input[type=file]{
     padding: 0;
@@ -188,10 +193,11 @@ input[type=submit]:focus,input[type=button]:focus{
 }
 button{
     padding: 3px 5px;
-    background-image: url(../img/set/wood.png);
+    background-image: url(../img/set/oak.png);
     color: #f1f1f1;
     font-size: 15px;
     outline: 0;
+    font-weight: bold;
     border: 2px solid #f1f1f100;
 }
 button:hover{
@@ -199,14 +205,14 @@ button:hover{
     border-left: 2px solid #cc9f4a;
     border-right: 2px solid #7e5915;
     border-bottom: 2px solid #7e5915;
-    background-image: url(../img/set/woodBlack.png);
+    background-image: url(../img/set/spruce.png);
 }
 button:active{
     border-top: 2px solid #7e5915;
     border-left: 2px solid #7e5915;
     border-right: 2px solid #cc9f4a;
     border-bottom: 2px solid #cc9f4a;
-    background-image: url(../img/set/woodBlack.png);
+    background-image: url(../img/set/spruce.png);
 }
 .varifyInput{
     width: 40px;
@@ -218,6 +224,9 @@ button:active{
     background-color: #131313;
     width: 80px;
     height: 30px;
+}
+.topic tr td{
+    padding: 0;
 }
 .topic .icon{
     background-color: #131313;
@@ -231,9 +240,10 @@ button:active{
 }
 .topic .title{
     text-align: left;
-    width: 500px;
+    width: 600px;
 }
 .topic .title a{
+    font-size: 16px;
     color: #131313;
     text-decoration: none;
 }
@@ -255,6 +265,9 @@ button:active{
     top: -10px;
     
 }
+.topic .vc{
+    width: 60px;
+}
 .topic .vc span:nth-child(1){
     position: absolute;
     margin-top: -15px;
@@ -267,6 +280,7 @@ button:active{
     color: #666666;
 }
 .topic .label a{
+    font-size: 15px;
     color: #666666;
     text-decoration: none;
 }
@@ -324,4 +338,58 @@ button:active{
     height: 40px;
     right: 10px;
     bottom: 10px;
+}
+.topicPage{
+    width: 990px;
+    position: relative;
+    display: flex;
+
+    justify-content: center;
+}
+.topicPage a{
+    width: 50px;
+    height:50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.topicPage .back{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    left: -20px;
+    background-image: url(../img/icon/first.png);
+}
+.topicPage .back:hover{
+    background-image: url(../img/icon/firsthover.png);
+}
+.topicPage .pre{
+    background-image: url(../img/icon/left.png);
+
+}
+.topicPage .pre:hover{
+    background-image: url(../img/icon/lefthover.png);
+
+}
+.topicPage span{
+    position: relative;
+    top: -5px;
+    font-size: 30px;
+    font-family: block_font;
+    margin: 0 20px;
+}
+.topicPage .next{
+    background-image: url(../img/icon/right.png);
+}
+.topicPage .next:hover{
+    background-image: url(../img/icon/righthover.png);
+}
+.topicPage .last{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    left: 20px;
+    background-image: url(../img/icon/last.png);
+}
+.topicPage .last:hover{
+    background-image: url(../img/icon/lasthover.png);
 }

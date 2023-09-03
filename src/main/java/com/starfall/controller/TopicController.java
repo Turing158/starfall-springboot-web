@@ -35,8 +35,6 @@ public class TopicController {
     @Autowired
     private CommentDao commentDao;
     @Autowired
-    private UserDao userDao;
-    @Autowired
     private GoodDao goodDao;
 
     //前往主题区
