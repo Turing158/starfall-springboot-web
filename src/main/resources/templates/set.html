@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${session.name}+'-|StarFall|'">用户设置</title>
+    <title th:text="${session.user.name}+'-|StarFall|'">用户设置</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/set.css" rel="stylesheet">
@@ -10,59 +10,133 @@
 </head>
 <body>
 <ul>
-    <li><img th:src="@{'/head_img/'+${session.head}}" alt=""  class="head_img"><button class="head_set" onclick="moveSqurt(4)">修改头像</li>
-    <li><a href="javascript:display_me();" class="ul_me" onclick="moveSqurt(1)">我的</a></li>
-    <li><a href="javascript:display_information();" onclick="moveSqurt(2);seti_Change();" class="ul_inf">修改信息</a></li>
-    <li><a href="javascript:display_password();" onclick="moveSqurt(3);setp_Change();" class="ul_pass">修改密码</a></li>
-    <li><a href="/edit_admin" th:if="${session.level} == 9981">前往管理</a></li>
+    <li><img th:src="@{'/head_img/'+${session.user.head}}" alt="" class="head head_img"><a class="head_set" href="javascript:">修改头像</a></li>
+    <li><a href="javascript:" class="ul_me">我的</a></li>
+    <li><a href="javascript:" class="ul_inf">修改信息</a></li>
+    <li><a href="javascript:" class="ul_pass">修改密码</a></li>
     <li><a href="/home">返回主页</a></li>
 </ul>
+<input class="pageValue" type="hidden" th:value="${session.setPage}">
 <div class="square" id="square"></div>
-<div class="me" id="me" th:style="'display:'+${session.display_me}+';'">
-    你好！<span th:text="${session.name}">用户名</span>
-    <p>这里是你的信息</p>
-    用户名：<span th:text="${session.user}">user</span><br><br>
-    名&emsp;称：<span th:text="${session.name}">name</span><br><br>
-    邮&emsp;箱：<span th:text="${session.email}">123@email.com</span><br><br>
-    <span class="date_span">注册日期：</span><span th:text="${session.date}">0000-00-00</span><br>
-    <span class="span1">介&emsp;绍：</span><textarea name="" id="" disabled="none" style="color:black;font-size:15px;font-weight: bold " th:utext="${#strings.replace(session.introduce,'\n','&lt;br/&gt;')}">introduce</textarea>
-</div>
-<div class="information" id="information" th:style="'display:'+${session.display_i}+';'">
-    你好！<span th:text="${session.name}">用户名</span>
-    <br><br>
-    <form action="set_information" method="post">
-        <span>名&emsp;字：</span><input type="text" name="name" th:maxlength="9" th:value="${session.name}"><br><br>
-        <span class="span1">介&emsp;绍：</span><textarea type="text" name="introduce" th:maxlength="255" th:utext="${#strings.replace(session.introduce,'\n','&lt;br/&gt;')}"></textarea><br>
-        验证码：<input type="text" id="VerifyCode" class="VerifyCode" name="seti_VerifyCode" th:name="seti_code"><img src="jpegCode" id="seti_img_code" class="code_jpg" th:onclick="|seti_Change();|"/><span class="next_code" th:onclick="|seti_Change();|">看不清，换一张</span><br>
-        <span class="i_tips" th:text="${session.i_tips}">aaa</span><input type="submit" class="confirm_information" value="确定修改">
-    </form>
-</div>
-<div class="password" id="password" th:style="'display:'+${session.display_p}+';'">
-    你好！<span th:text="${session.name}">用户名</span>
-    <br><br>
-    <form action="set_password" method="get">
-        <span>原密码：</span><input type="password" name="old_password" th:maxlength="16" id="old_password" th:onkeypress="this.value=this.value.replace(/\s+/g,'')" th:onkeyup="this.value=this.value.replace(/\s+/g,'')"><br><br>
-        <span>新密码：</span><input type="password" name="" th:maxlength="16" id="new_password"th:onkeypress="this.value=this.value.replace(/\s+/g,'');check_password_length()" th:onkeyup="this.value=this.value.replace(/\s+/g,'');check_password_length()">
-        <span class="tips_password" id="tips_password" ></span><br><br>
-        <span class="span2">再次输入新密码：</span><input type="password" name="new_password" id="again_password" th:maxlength="16" th:onkeypress="this.value=this.value.replace(/\s+/g,'');check_password_equal()" th:onkeyup="this.value=this.value.replace(/\s+/g,'');check_password_equal()"><br><br>
-        验证码：<input type="text" id="VerifyCode" class="VerifyCode" th:name="set_VerifyCode"><img src="jpegCode" id="setp_img_code" class="code_jpg" th:onclick="|setp_Change();|"/><span class="next_code" th:onclick="|setp_Change();|">看不清，换一张</span><br>
-        <span class="tips_again_password" id="tips_again_password">aaa</span><br><br>
-        <span class="p_tips" th:text="${session.p_tips}" th:style="'color:'+${session.p_tips_color}+';'"></span><input th:type="button" name="" class="confirm_password" id="confirm_password" value="确认修改">
-    </form>
-</div>
-<div class="head_page" id="head_page" th:style="'display:'+${session.display_h}+';'">
-    <form method="post" action="/upload_head" enctype="multipart/form-data" id="upload_head">
-        <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview1" id="img_preview1">&emsp;
-        <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview2" id="img_preview2">&emsp;
-        <img th:src="@{'/head_img/'+${session.head}}" alt="" class="img_preview3" id="img_preview3">
-        <br>
-        <span class="span32">32x32</span>&emsp;&nbsp;
-        <span class="span64">64x64</span>&emsp;&emsp;&emsp;&nbsp;
-        <span class="span128">128x128</span>
+<div class="me page" id="me">
+    <div class="content">
+        <table class="eleTable">
+            <tr>
+                <th colspan="2">你好！<span th:text="${session.user.name}">name</span></th>
+            </tr>
+            <tr>
+                <td>用户名</td>
+                <td class="infTd">：<span th:text="${session.user.user}">user</span></td>
+                <td rowspan="5">&nbsp;<textarea disabled th:text="${session.user.introduce}">介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf介绍inf</textarea></td>
+            </tr>
+            <tr>
+                <td>名称</td>
+                <td class="infTd">：<span th:text="${session.user.name}">name</span></td>
+            </tr>
+            <tr>
+                <td>邮箱</td>
+                <td class="infTd">：<span th:text="${session.user.email}">123@163.com</span></td>
+            </tr>
+            <tr>
+                <td>等级</td>
+                <td class="infTd">：<span th:text="${session.user.level}">1</span></td>
+            </tr>
+            <tr>
+                <td>权限</td>
+                <td class="infTd">：<span th:text="${session.user.promise}">1</span></td>
+            </tr>
+        </table>
         <br><br>
+        <table class="eleTable topic">
+            <tr class="tableTop">
+                <th style="width: 50px;">图标</th>
+                <th class="title">标题</th>
+                <th style="width: 80px;"></th>
+                <th class="date"></th>
+                <th>查看/评论</th>
+                <th class="operate">操作</th>
+            </tr>
+            <tr class="tableContent">
+                <td><img src="" alt="" class="icon"></td>
+                <td class="title"><a href="">title</a></td>
+                <td class="label"><a href="">label</a></td>
+                <td class="date"><span>0000</span><br><span>00-00</span></td>
+                <td class="vc"><span>1</span><span>2</span></td>
+                <td>
+                    <button>编辑</button>
+                    <button>删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="information page" id="information">
+    <form action="/set/information" method="post">
+        <div class="content">
+            <table class="eleTable">
+                <tr>
+                    <th colspan="2">哟！来改名字啦！别改的见不得人喔！</th>
+                </tr>
+                <tr>
+                    <td>名称</td>
+                    <td class="infTd">：<input type="text" th:value="${session.user.name}" name="name"></td>
+                </tr>
+            </table>
+            <table class="eleTable">
+                <tr>
+                    <td style="vertical-align: top;">介绍 ：</td>
+                    <td class="infTd">
+                        <textarea th:text="${session.user.introduce}" name="introduce"></textarea>
+                    </td>
+                </tr>
+            </table>
+            <button type="submit">确认修改</button>
+            &nbsp;&nbsp;&nbsp;
+        <input class="varifyInput" type="text" maxlength="4" id="varifyInputI" name="code">
+        <img class="vartifyImg" src="/jpegCode" alt="" id="seti_img_code" onclick="seti_Change()">
+        </div>
+    </form>
+</div>
+<div class="password page" id="password">
+    <form action="/set/password">
+        <div class="content">
+            <table class="eleTable">
+                <tr>
+                    <th colspan="3" style="width: 500px;">改了密码记得记好，勤改密码，会减少盗号风险</th>
+                </tr>
+                <tr>
+                    <td style="width: 80px;">原密码</td>
+                    <td class="infTd" style="width: 230px;">：<input type="password" name="oldPassword"></td>
+                </tr>
+                <tr>
+                    <td>新密码</td>
+                    <td class="infTd">：<input type="password" id="new_password" onkeyup="check_password_length()"></td>
+                    <td class="infTd"><span id="tips_password"></span></td>
+                </tr>
+                <tr>
+                    <td>确认密码</td>
+                    <td class="infTd">：<input type="password" id="again_password" onkeyup="check_password_equal()" name="newPassword"></td>
+                    <td class="infTd"><span id="tips_again_password"></span></td>
+                </tr>
+            </table>
+            <button type="button" id="confirm_password">确认修改</button>
+            &nbsp;&nbsp;&nbsp;
+            <input class="varifyInput" type="text" maxlength="4" id="varifyInputP" name="code">
+            <img class="vartifyImg" src="/jpegCode" alt="" id="setp_img_code" onclick="setp_Change()">
+        </div>
+    </form>
+</div>
+<div class="head_page page" id="head_page">
+    <form method="post" action="/set/head" enctype="multipart/form-data" id="upload_head">
+        <img th:src="@{'/head_img/'+${session.user.head}}" alt="" class="head img_preview1" id="img_preview1">&emsp;
+        <img th:src="@{'/head_img/'+${session.user.head}}" alt="" class="head img_preview2" id="img_preview2">&emsp;
+        <img th:src="@{'/head_img/'+${session.user.head}}" alt="" class="head img_preview3" id="img_preview3">
+        <br>
+        <br>
+        <p id="info"></p>
         <input type="file" accept="image/jpeg, image/png, image/jpg" id="file" name="head_img">
-        <p class="info" id="info"></p>
-        <input type="button" id="submit_head" value="确认修改">
+        <br><br>
+        <input type="button" id="submitHead" value="确认修改">
     </form>
 </div>
 </body>

@@ -8,8 +8,10 @@ import com.starfall.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -47,11 +49,24 @@ public class SetController extends HttpServlet {
         return "set";
     }
 
-
-
+    @RequestMapping("/set/savePage")
+    @ResponseBody
+    public void savePage(
+            HttpSession session,
+            @RequestBody(required = false)String page
+    ){
+        session.setAttribute("setPage",page);
+    }
+    @RequestMapping("/set/clearTips")
+    @ResponseBody
+    public void clearTips(
+            HttpSession session
+    ){
+        session.setAttribute("setTips",null);
+    }
 
 //设置头像暂时不修改为springMVC格式,此方法位于servlet/set_head.java上
-    @RequestMapping("/upload_head")
+    @RequestMapping("/set/head")
     public String setHead(
             HttpSession session,
             HttpServletRequest req,
@@ -79,7 +94,7 @@ public class SetController extends HttpServlet {
         //        设置存储位置
 
 //        String path = getServletContext().getRealPath("head_img/");
-        String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("static/head_img/")).getPath();
+        String path = Objects.requireNonNull(this.getClass().getClassLoader().getResource("templates/head_img/")).getPath();
 //        写入保存的路径
         part.write(path+filename+fileType);
 //        永久保存头像，避免服务器崩溃导致丢失
@@ -96,13 +111,13 @@ public class SetController extends HttpServlet {
     }
 
 
-    @RequestMapping("/set_information")
+    @RequestMapping("/set/information")
     public String setInformation(
             HttpSession session,
             HttpServletRequest req,
             @RequestParam(value = "name",required = false) String name,
             @RequestParam(value = "introduce",required = false) String introduce,
-            @RequestParam(value = "seti_code",required = false) String code
+            @RequestParam(value = "code",required = false) String code
     ) throws IOException {
 //        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
 //        UserService userService = context.getBean("userService", UserService.class);
@@ -110,13 +125,13 @@ public class SetController extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         String user = ((User) session.getAttribute("user")).getUser();
         if(Objects.equals(code,"")){
-            session.setAttribute("i_tips","验证码不能为空");
+            session.setAttribute("setTips","验证码不能为空");
         }
         else if(!Objects.equals(code,session.getAttribute("code"))){
-            session.setAttribute("i_tips","验证码错误");
+            session.setAttribute("setTips","验证码错误");
         }
         else if ((name != null || introduce != null )&& Objects.equals(code,session.getAttribute("code"))){
-            session.setAttribute("i_tips","信息修改成功");
+            session.setAttribute("setTips","信息修改成功");
             userDao.updateInformation(user,name,introduce);
             commentDao.updateData();
             topicDao.updateData();
@@ -127,35 +142,29 @@ public class SetController extends HttpServlet {
 
 
 
-    @RequestMapping("/set_password")
+    @RequestMapping("/set/password")
     public String setPassword(
             HttpSession session,
             HttpServletRequest req,
-            @RequestParam(value = "old_password",required = false) String old_password,
-            @RequestParam(value = "new_password",required = false) String new_password,
-            @RequestParam(value = "set_VerifyCode",required = false) String code
+            @RequestParam(value = "oldPassword",required = false) String oldPassword,
+            @RequestParam(value = "newPassword",required = false) String newPassword,
+            @RequestParam(value = "code",required = false) String code
 
     ) throws IOException {
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        HttpSession session = req.getSession();
         req.setCharacterEncoding("utf-8");
         User userObj = (User) session.getAttribute("user");
         String user = userObj.getUser();
-        boolean flag = old_password.equals(userObj.getPassword());
+        boolean flag = oldPassword.equals(userObj.getPassword());
         if(flag && Objects.equals(code,session.getAttribute("code"))){
-            session.setAttribute("p_tips","密码修改成功");
-            session.setAttribute("p_tips_color","lightgreen");
-            userDao.updatePassword(user,new_password);
+            session.setAttribute("setTips","密码修改成功");
+            userDao.updatePassword(user,newPassword);
             session.setAttribute("code",null);
         }
         else if(!Objects.equals(code,session.getAttribute("code"))){
-            session.setAttribute("p_tips","验证码错误");
-            session.setAttribute("p_tips_color","rgb(255, 125, 125)");
+            session.setAttribute("setTips","验证码错误");
         }
         else{
-            session.setAttribute("p_tips","原密码错误");
-            session.setAttribute("p_tips_color","rgb(255, 125, 125)");
+            session.setAttribute("setTips","原密码错误");
         }
         return "redirect:/set";
     }

@@ -1,49 +1,68 @@
-$(document).ready(function(){
-    $(".ul_me").click(function(){
-        $("#information").hide();
-        $("#password").hide();
-        $("#me").show();
-        $("#head_page").hide();
-    });
-    $(".ul_inf").click(function(){
-        $("#information").show();
-        $("#password").hide();
-        $("#me").hide();
-        $("#head_page").hide();
-    });
-    $(".ul_pass").click(function(){
-        $("#information").hide();
-        $("#password").show();
-        $("#me").hide();
-        $("#head_page").hide();
-    });
-    $(".head_set").click(function(){
-        $("#information").hide();
-        $("#password").hide();
-        $("#me").hide();
-        $("#head_page").show();
-    });
-});
-function moveSqurt(i){
-    var s = document.getElementById("square");
+let page = document.querySelector('.pageValue').value;
+let pageNum = Number(page);
+showPage(1);
+if(pageNum >= 1 && pageNum <= 4){
+    showPage(pageNum);
+}
+function moveSquare(i){
+    let s = document.getElementById("square");
     switch(i){
-        case 1:s.style.top = 125+'px';break;
-        case 2:s.style.top = 190+'px';break;
-        case 3:s.style.top = 250+'px';break;
-        case 4:s.style.top = 45+'px';break;
+        case 1:s.style.top = 110+'px';break;
+        case 2:s.style.top = 170+'px';break;
+        case 3:s.style.top = 230+'px';break;
+        case 4:s.style.top = 40+'px';break;
     }
 
 }
+$(document).ready(function(){
+    $(".ul_me").click(function (){
+        showPage(1);
+        pageSave(1);
+        });
+    $(".ul_inf").click(function(){
+        showPage(2);
+        pageSave(2);
+    });
+    $(".ul_pass").click(function(){
+        showPage(3);
+        pageSave(3);
+    });
+    $(".head_set").click(function(){
+        showPage(4);
+        pageSave(4);
+    });
+});
+function showPage(num){
+    $("#information").hide();
+    $("#password").hide();
+    $("#me").hide();
+    $("#head_page").hide();
+    switch (num) {
+        case 1:$("#me").show();break;
+        case 2:$("#information").show();seti_Change();break;
+        case 3:$("#password").show();setp_Change();break;
+        case 4:$("#head_page").show();break;
+    }
+    switch (num) {
+        case 1:moveSquare(1);break;
+        case 2:moveSquare(2);break;
+        case 3:moveSquare(3);break;
+        case 4:moveSquare(4);break;
+    }
+}
+
 function check_password_length(){
     var new_p = document.getElementById("new_password").value;
     var tips = document.getElementById("tips_password");
     if(new_p.length < 6){
         tips.innerHTML = new_p.length+" 密码不得小于6个字符";
-        tips.style.color = "rgb(255, 125, 125)";
+        tips.style.color = "darkred";
+        return false;
     }
     else{
         tips.innerHTML = new_p.length+" ✔";
-        tips.style.color = "rgb(120, 255, 138)";
+        tips.style.color = "green";
+        return true;
     }
 }
 function check_password_equal(){
@@ -53,35 +72,47 @@ function check_password_equal(){
     var submit = document.getElementById("confirm_password");
     if(again_p === new_p && again_p != ""){
         tips.innerHTML = "✔";
-        tips.style.color = "rgb(120, 255, 138)";
-        submit.type = "submit";
+        tips.style.color = "green";
+        if(check_password_length()){
+            submit.type = "submit";
+        }
     }
     else{
         tips.innerHTML = "× 两次密码不一样";
-        tips.style.color = "rgb(255, 125, 125)";
+        tips.style.color = "darkred";
         submit.type = "button";
     }
 }
 function seti_Change(){
-    var img = document.getElementById("seti_img_code")
+    var img = document.getElementById("seti_img_code");
+    var input = document.getElementById("varifyInputI");
     //设置时间戳
     var date = new Date().getTime();
     img.src="jpegCode?"+date;
+    input.focus();
 }
 function setp_Change(){
-    var img = document.getElementById("setp_img_code")
+    var img = document.getElementById("setp_img_code");
+    var input = document.getElementById("varifyInputP");
     //设置时间戳
     var date = new Date().getTime();
     img.src="jpegCode?"+date;
+    input.focus();
 }
 
-
+function pageSave(num){
+    let ajax = new XMLHttpRequest();
+    ajax.open("post","/set/savePage");
+    ajax.setRequestHeader("page",num);
+    ajax.send(num);
+}
 
 let fileInput = document.getElementById('file');
 let preview1 = document.getElementById('img_preview1');
 let preview2 = document.getElementById('img_preview2');
 let preview3 = document.getElementById('img_preview3');
-let submit = document.getElementById("submit_head");
+let submit = document.getElementById("submitHead");
+let info = document.getElementById('info');
 // 监听change事件:
 window.onload=function(){
     fileInput.addEventListener('change', function() {
