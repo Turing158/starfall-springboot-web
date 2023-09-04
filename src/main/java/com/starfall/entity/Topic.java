@@ -77,4 +77,19 @@ public class Topic implements Serializable {
         this.content = content;
         this.authorname = authorname;
     }
+
+    public Topic( String title, String label, String titlename, String titleenglishname, String source, String version, String language , String authorname, String address, String download, String content) {
+        this.title = title;
+        this.label = label;
+        this.titlename = titlename;
+        this.titleenglishname = titleenglishname;
+        this.source = source;
+        this.version = version;
+        this.language = language;
+        this.authorname = authorname;
+        this.address = address;
+        this.download = download;
+        this.content = content;
+
+    }
 }

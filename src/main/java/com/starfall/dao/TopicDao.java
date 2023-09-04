@@ -23,8 +23,7 @@ public interface TopicDao extends JpaRepository<Topic,Long> {
     @Modifying
     @Query(value = "UPDATE web.topic SET comment = ?2 WHERE id = ?1",nativeQuery = true)
     void updateCommentNum(int id,int num);
-    @Override
-    Optional<Topic> findById(Long aLong);
+    Topic findAllById(Long id);
     @Modifying
     @Query(value = "UPDATE web.topic t INNER JOIN web.user u ON t.user = u.user SET t.userhead = u.head, t.username = u.name, t.userinformation = u.introduce",nativeQuery = true)
     void updateData();

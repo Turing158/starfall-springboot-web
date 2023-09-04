@@ -34,7 +34,7 @@ ul li a{
     background-size: 100%;
     text-decoration: none;
     color: #131313;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-family: block_font;
     font-size: 20px;
 }

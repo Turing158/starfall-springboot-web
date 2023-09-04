@@ -200,11 +200,11 @@
             </div>
             <div class="page">
                 <button class="submit showAll" th:if="${session.lookUser}!=null" th:onclick="|showAll(${session.html})|">&ensp;显示全部&ensp;</button>
-                <a th:href="'javascript:'+|page(1,${session.commentLastPage},${session.lookUser},${session.html})|" class="back"></a>
-                <a th:href="'javascript:'+|page(${session.commentPage}-1,${session.commentLastPage},${session.lookUser},${session.html})|" class="pre"></a>
-                <span th:text="${session.commentPageNum}">1/10</span>
-                <a th:href="'javascript:'+|page(${session.commentPage}+1,${session.commentLastPage},${session.lookUser},${session.html})|" class="next"></a>
-                <a th:href="'javascript:'+|page(${session.commentLastPage},${session.commentLastPage},${session.lookUser},${session.html})|" class="last"></a>
+                <a th:href="'javascript:'+|page(1,${session.commentPage.getLastPage()},${session.lookUser},${session.html})|" class="back"></a>
+                <a th:href="'javascript:'+|page(${session.commentPage.getPage()}-1,${session.commentPage.getLastPage()},${session.lookUser},${session.html})|" class="pre"></a>
+                <span th:text="${session.commentPage.getPage()}+'/'+${session.commentPage.getLastPage()}">1/10</span>
+                <a th:href="'javascript:'+|page(${session.commentPage.getPage()}+1,${session.commentPage.getLastPage()},${session.lookUser},${session.html})|" class="next"></a>
+                <a th:href="'javascript:'+|page(${session.commentPage.getLastPage()},${session.commentPage.getLastPage()},${session.lookUser},${session.html})|" class="last"></a>
             </div>
             <form action="/saveComment" method="post" th:if="${session.user != null}">
                 <table class="sendComment commentTable">

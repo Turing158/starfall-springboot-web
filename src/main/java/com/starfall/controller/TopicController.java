@@ -3,10 +3,7 @@ package com.starfall.controller;
 import com.mysql.cj.util.StringUtils;
 import com.starfall.Application;
 import com.starfall.dao.*;
-import com.starfall.entity.Comment;
-import com.starfall.entity.Good;
-import com.starfall.entity.Topic;
-import com.starfall.entity.User;
+import com.starfall.entity.*;
 import org.apache.tomcat.util.http.parser.HttpParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -44,14 +41,16 @@ public class TopicController {
             @RequestParam(value = "label",required = false) String label,
             @RequestParam(value = "page",required = false) String page
     ){
+        Topic topic = new Topic();
+        topic.setSource("请选择");
+        topic.setLabel("请选择");
+        session.setAttribute("editTopic",topic);//初始化帖子编辑器session
         session.setAttribute("editErrorTips",null);//初始化帖子编辑器session
-        session.setAttribute("editLabel","请选择");
-        session.setAttribute("editSource","请选择");
-        int page_int = 0;
+        int page_int = 1;
         int lastPage;
         //当page不为空指针
         if(!StringUtils.isNullOrEmpty(page)){
-            page_int = Integer.parseInt(page)-1;
+            page_int = Integer.parseInt(page);
         }
         String label_Chinese = null;
         session.setAttribute("labelTF",false);//初始化
@@ -63,11 +62,9 @@ public class TopicController {
             label_Chinese = labelEC(label);
         }
         //分页
-        Pageable pageable =PageRequest.of(page_int,10, Sort.by("id").ascending());
-
+        Pageable pageable =PageRequest.of(page_int-1,10, Sort.by("id").ascending());
         //如果label为空指针，就查全部，否，就查只包含此label的主题
         if (StringUtils.isNullOrEmpty(label)){
-
             //查全部
             lastPage = topicDao.countAllBy();
             session.setAttribute("topics",topicDao.findAll(pageable));
@@ -80,10 +77,9 @@ public class TopicController {
         }
         //最后一页数字的处理
         lastPage = (lastPage+9)/10;
-        //初始化session第几页
-        session.setAttribute("page",page_int+1);
-        //初始化session最后一页
-        session.setAttribute("lastPage",lastPage);
+        Page pageObj = new Page(page_int,lastPage);
+        //初始化session页数
+        session.setAttribute("topicPage",pageObj);
         //初始化session，公告的长度
         session.setAttribute("noticeLength",noticeDao.count());
         //初始化session，公告的内容
@@ -100,13 +96,13 @@ public class TopicController {
             @RequestParam(value = "user",required = false) String user
     ){
 
-        int page_int = 0;
+        int page_int = 1;
         int html_int = 0;
         //初始化session，只看ta
         session.setAttribute("lookUser",null);
         //当page不为空时
         if (!StringUtils.isNullOrEmpty(page)){
-            page_int = Integer.parseInt(page)-1;
+            page_int = Integer.parseInt(page);
         }
         //当html不为空时
         if(!StringUtils.isNullOrEmpty(html)){
@@ -115,16 +111,13 @@ public class TopicController {
         //为了判断是否存在此数据
         boolean topicTF = topicDao.findById((long) html_int).isPresent();
         Topic topic;
-        //初始化session，第几页
-        session.setAttribute("commentPage",page_int+1);
         if (topicTF){
             int lastPage;
             //获取对应主题
-            topic = topicDao.findById((long) html_int).get();
+            topic = topicDao.findAllById((long) html_int);
             //初始化session，主题的信息
             session.setAttribute("topic",topic);
             session.setAttribute("topicContent",topic.getContent());
-
             //初始化session，主题的点赞数
             session.setAttribute("topicLikeCount",goodDao.countAllByTopicidAndGood(html_int,1));
             //初始化session，此session用于判断用户是否点赞过
@@ -161,11 +154,9 @@ public class TopicController {
             }
             //处理最后一页数字
             lastPage=(lastPage+4)/5;
-
-
-            //初始化session，页数展示
-            session.setAttribute("commentPageNum",page_int+1+"/"+lastPage);
-            session.setAttribute("commentLastPage",lastPage);
+            //初始化session，第几页
+            Page pageObj = new Page(page_int,lastPage);
+            session.setAttribute("commentPage",pageObj);
             return "topic/1";
         }
         //防止找不到主题，直接返回 null.html
@@ -269,8 +260,6 @@ public class TopicController {
         session.setAttribute("commentContent",content);
         //初始化发布信息提示
         session.setAttribute("commentTips","error");
-
-
         //如果发布的是空内容，或者内容少于20个字，提示字数不够
         if(StringUtils.isNullOrEmpty(content) || content.length() < 10){
             session.setAttribute("commentTips","formatError");
@@ -311,7 +300,7 @@ public class TopicController {
         User user = (User) session.getAttribute("user");
         if(!Objects.equals(user,null)){
             int promise = user.getPromise();
-            if( user == null || promise == 10){
+            if( user != null || promise == 10){
                 return "topic/edit";
             }
         }
@@ -379,17 +368,7 @@ public class TopicController {
             //更新主题一些与user相关的信息
             topicDao.updateData();
             //清除session
-            session.removeAttribute("editBigTitle");
-            session.removeAttribute("editLabel");
-            session.removeAttribute("editTitle");
-            session.removeAttribute("editTitleName");
-            session.removeAttribute("editSource");
-            session.removeAttribute("editVersion");
-            session.removeAttribute("editAuthorName");
-            session.removeAttribute("editLanguage");
-            session.removeAttribute("editAddress");
-            session.removeAttribute("editDownload");
-            session.removeAttribute("editContent");
+            session.removeAttribute("editTopic");
             session.removeAttribute("editErrorColor");
             session.removeAttribute("editErrorTips");
             return "redirect:/topic/html?html="+id;
@@ -397,17 +376,8 @@ public class TopicController {
         else{
             session.setAttribute("editErrorTips","验证码错误");
         }
-        session.setAttribute("editBigTitle",bigTitle);
-        session.setAttribute("editLabel",label);
-        session.setAttribute("editTitleName",titleName);
-        session.setAttribute("editTitleEnglishName",titleEnglishName);
-        session.setAttribute("editSource",source);
-        session.setAttribute("editVersion",version);
-        session.setAttribute("editAuthorName",authorName);
-        session.setAttribute("editLanguage",language);
-        session.setAttribute("editAddress",address);
-        session.setAttribute("editDownload",download);
-        session.setAttribute("editContent",content);
+        Topic topicObj = new Topic(bigTitle,label,titleName,titleEnglishName,source,version,authorName,language,address,download,content);
+        session.setAttribute("editTopic",topicObj);
         return "redirect:/topic/publish";
     }
 

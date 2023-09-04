@@ -57,24 +57,24 @@ public class EditController {
         Pageable pageableG = PageRequest.of(pageG-1,20, Sort.by("id").ascending());
 
         session.setAttribute("adminUsers",userDao.findAll(pageableU));
-        session.setAttribute("adminPageUNum",pageU);
-        session.setAttribute("adminPageULast",(userDao.count()+19)/20);
+        Page pageUObj = new Page(pageU, (int) ((userDao.count()+19)/20));
+        session.setAttribute("adminPageUsers",pageUObj);
 
         session.setAttribute("adminTopics",topicDao.findAll(pageableT));
-        session.setAttribute("adminPageTNum",pageT);
-        session.setAttribute("adminPageTLast",(topicDao.count()+19)/20);
+        Page pageTObj = new Page(pageT, (int) ((topicDao.count()+19)/20));
+        session.setAttribute("adminPageTopics",pageTObj);
 
         session.setAttribute("adminNotices",noticeDao.findAll(pageableN));
-        session.setAttribute("adminPageNNum",pageN);
-        session.setAttribute("adminPageNLast",(noticeDao.count()+19)/20);
+        Page pageNObj = new Page(pageN, (int) ((noticeDao.count()+19)/20));
+        session.setAttribute("adminPageNotices",pageNObj);
 
         session.setAttribute("adminComments",commentDao.findAll(pageableC));
-        session.setAttribute("adminPageCNum",pageC);
-        session.setAttribute("adminPageCLast",(commentDao.count()+19)/20);
+        Page pageCObj = new Page(pageC, (int) ((commentDao.count()+19)/20));
+        session.setAttribute("adminPageComments",pageCObj);
 
         session.setAttribute("adminGoods", goodDao.findAll(pageableG));
-        session.setAttribute("adminPageGNum",pageG);
-        session.setAttribute("adminPageGLast", (goodDao.count()+19)/20);
+        Page pageGObj = new Page(pageG, (int) ((goodDao.count()+19)/20));
+        session.setAttribute("adminPageGoods",pageGObj);
 
         return "administer/edit";
     }

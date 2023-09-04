@@ -57,7 +57,7 @@
     <li id="ul_li"><a href="/home"><b>作品</b><br><span>works</span></a></li>
     <li id="ul_li"><a href="https://blog.csdn.net/weixin_46396315?type=blog"><b>博客</b><br><span>Blog</span></a></li>
     <li id="ul_li"><a class="active"><b>主题</b><br><span>topic</span></a></li>
-    <li id="ul_li" th:if="${session.user.promise >= 100}"><a href="/administer/html"><b>管理</b><br><span>admin</span></a></li>
+    <li id="ul_li" th:if="${session.user != null && session.user.promise >= 100}"><a href="/administer/html"><b>管理</b><br><span>admin</span></a></li>
 
     <form th:if="${session.user} != null" class="user">
         <!-- <span class="user_massage" th:text="${session.name}">用户名用户名用户名</span> -->
@@ -80,7 +80,7 @@
         <div class="home_right"></div>
         <div class="home_foot"></div>
         <div class="home_content">
-            <button class="createTopic" th:if="${session.user.promise} >= 10" onclick="window.location.href='/topic/publish'">发&nbsp;帖</button>
+            <button class="createTopic" th:if="${session.user != null && session.user.promise >= 10}" onclick="window.location.href='/topic/publish'">发&nbsp;帖</button>
             <div class="carousel slide" id="ad" data-bs-ride="carousel" data-bs-interval="2500">
                 <div class="carousel-inner" >
                     <div class="carousel-item active"><img src="./img/ad/1.jpg" class="d-block" style="width: 100%;" alt=""></div>
@@ -130,11 +130,11 @@
                 </table>
             </div>
             <div class="page">
-                <a th:href="'javascript:'+|page(1,${session.lastPage},${session.label})|" class="back"></a>
-                <a th:href="'javascript:'+|page(${session.page}-1,${session.lastPage},${session.label})|" class="pre" ></a>
-                <span th:text="${session.page}+'/'+${session.lastPage}">1/10</span>
-                <a th:href="'javascript:'+|page(${session.page}+1,${session.lastPage},${session.label})|" class="next"></a>
-                <a th:href="'javascript:'+|page(${session.lastPage},${session.lastPage},${session.label})|" class="last"></a>
+                <a th:href="'javascript:'+|page(1,${session.topicPage.getLastPage()},${session.label})|" class="back"></a>
+                <a th:href="'javascript:'+|page(${session.topicPage.getPage()}-1,${session.topicPage.getLastPage()},${session.label})|" class="pre" ></a>
+                <span th:text="${session.topicPage.getPage()}+'/'+${session.topicPage.getLastPage()}">1/10</span>
+                <a th:href="'javascript:'+|page(${session.topicPage.getPage()}+1,${session.topicPage.getLastPage()},${session.label})|" class="next"></a>
+                <a th:href="'javascript:'+|page(${session.topicPage.getLastPage()},${session.topicPage.getLastPage()},${session.label})|" class="last"></a>
             </div>
         </div>
     </div>

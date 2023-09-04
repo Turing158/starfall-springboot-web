@@ -69,7 +69,7 @@
                     <th class="titleRight">
                         <h1>
                             [<select name="label" th:style="${session.editErrorColor}">
-                                <option value=""  hidden th:value="${session.editLabel}" th:text="${session.editLabel}">请选择</option>
+                                <option value=""  hidden th:value="${session.editTopic.getLabel()}" th:text="${session.editTopic.getLabel()}">请选择</option>
                                 <option value="服务端">服务端</option>
                                 <option value="客户端">客户端</option>
                                 <option value="视频">视频</option>
@@ -77,7 +77,7 @@
                                 <option value="插件">插件</option>
                                 <option value="公告">公告</option>
                             </select>]
-                            <input type="text" th:style="${session.editErrorColor}" class="editTitleName" maxlength="30" placeholder="标题title" name="bigTitle" th:value="${session.editBigTitle}">
+                            <input type="text" th:style="${session.editErrorColor}" class="editTitleName" maxlength="30" placeholder="标题title" name="bigTitle" th:value="${session.editTopic.getTitle()}">
                         </h1>
                         <input type="submit" class="submit" value="提 交">
                     </th>
@@ -117,17 +117,17 @@
                                         <caption>作品发布</caption>
                                         <tr>
                                             <th>作品名称：</th>
-                                            <td><input class="editInf" maxlength="20" type="text" placeholder="标题" name="titleName" th:style="${session.editErrorColor}" th:value="${session.editTitleName}"></td>
+                                            <td><input class="editInf" maxlength="20" type="text" placeholder="标题" name="titleName" th:style="${session.editErrorColor}" th:value="${session.editTopic.getTitlename()}"></td>
                                         </tr>
                                         <tr>
                                             <th>Title：</th>
-                                            <td><input class="editInf" maxlength="20" type="text" placeholder="Title" name="titleEnglishName" th:style="${session.editErrorColor}" th:value="${session.editTitleEnglishName}"></td>
+                                            <td><input class="editInf" maxlength="20" type="text" placeholder="Title" name="titleEnglishName" th:style="${session.editErrorColor}" th:value="${session.editTopic.getTitleenglishname()}"></td>
                                         </tr>
                                         <tr>
                                             <th>来源 source：</th>
                                             <td>
                                                 <select name="source" id="" class="editSource" th:style="${session.editErrorColor}">
-                                                    <option value="" th:value="${session.editSource}" th:text="${session.editSource}" hidden>请选择</option>
+                                                    <option value="" th:value="${session.editTopic.getSource()}" th:text="${session.editTopic.getSource()}" hidden>请选择</option>
                                                     <option value="原创">原创</option>
                                                     <option value="搬运">搬运</option>
                                                 </select>
@@ -135,23 +135,23 @@
                                         </tr>
                                         <tr>
                                             <th>适用版本 version：</th>
-                                            <td><input class="editInf" maxlength="10" type="text" placeholder="0.0.0" name="version" th:style="${session.editErrorColor}" th:value="${session.editVersion}"></td>
+                                            <td><input class="editInf" maxlength="10" type="text" placeholder="0.0.0" name="version" th:style="${session.editErrorColor}" th:value="${session.editTopic.getVersion()}"></td>
                                         </tr>
                                         <tr>
                                             <th>作者 author：</th>
-                                            <td><input class="editInf" maxlength="15" type="text" placeholder="作者" name="authorName" th:style="${session.editErrorColor}" th:value="${session.editAuthorName}"></td>
+                                            <td><input class="editInf" maxlength="15" type="text" placeholder="作者" name="authorName" th:style="${session.editErrorColor}" th:value="${session.editTopic.getAuthorname()}"></td>
                                         </tr>
                                         <tr>
                                             <th>语言 language：</th>
-                                            <td><input class="editInf" maxlength="20" type="text" placeholder="语言" name="language" th:style="${session.editErrorColor}" th:value="${session.editLanguage}"></td>
+                                            <td><input class="editInf" maxlength="20" type="text" placeholder="语言" name="language" th:style="${session.editErrorColor}" th:value="${session.editTopic.getLanguage()}"></td>
                                         </tr>
                                         <tr>
                                             <th>原帖 address：</th>
-                                            <td><input class="editInf" type="text" placeholder="href" name="address" th:style="${session.editErrorColor}" th:value="${session.editAddress}"></td>
+                                            <td><input class="editInf" type="text" placeholder="href" name="address" th:style="${session.editErrorColor}" th:value="${session.editTopic.getAddress()}"></td>
                                         </tr>
                                         <tr>
                                             <th>下载 download：</th>
-                                            <td><input class="editInf" type="text" placeholder="href" name="download" th:style="${session.editErrorColor}" th:value="${session.editDownload}"></td>
+                                            <td><input class="editInf" type="text" placeholder="href" name="download" th:style="${session.editErrorColor}" th:value="${session.editTopic.getDownload()}"></td>
                                         </tr>
                                     </table>
                                 </td>
@@ -214,7 +214,7 @@
                                             <button type="button" onclick="picture()">&nbsp;图片&nbsp;</button>
                                             
                                         </div>
-                                        <textarea placeholder="请输入你想发布的内容" onfocusout="transformToMd()" v-show="!flag" name="content" th:text="${session.editContent}"></textarea>
+                                        <textarea placeholder="请输入你想发布的内容" onfocusout="transformToMd()" v-show="!flag" name="content" th:text="${session.editTopic.getContent()}"></textarea>
                                     </div>
                                     <div class="contentMd" id="contentMd" v-show="flag">
                                         

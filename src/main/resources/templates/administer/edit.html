@@ -73,11 +73,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn" th:onclick="|Page(1,${session.adminPageULast},1)|">首页</button>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageUNum}-1,${session.adminPageULast},1)|">←</button>
-                <span th:text="${session.adminPageUNum}+'/'+${session.adminPageULast}">1/1</span>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageUNum}+1,${session.adminPageULast},1)|">→</button>
-                <button class="btn" th:onclick="|Page(${session.adminPageULast},${session.adminPageULast},1)|">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageUsers.getLastPage()},1)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageUsers.getPage()}-1,${session.adminPageUsers.getLastPage()},1)|">←</button>
+                <span th:text="${session.adminPageUsers.getPage()}+'/'+${session.adminPageUsers.getLastPage()}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageUsers.getPage()}+1,${session.adminPageUsers.getLastPage()},1)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageUsers.getLastPage()},${session.adminPageUsers.getLastPage()},1)|">尾页</button>
             </div>
         </div>
     </div>
@@ -121,11 +121,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn" th:onclick="|Page(1,${session.adminPageTLast},2)|">首页</button>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageTNum}-1,${session.adminPageTLast},2)|">←</button>
-                <span th:text="${session.adminPageTNum}+'/'+${session.adminPageTLast}">1/1</span>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageTNum}+1,${session.adminPageTLast},2)|">→</button>
-                <button class="btn" th:onclick="|Page(${session.adminPageTLast},${session.adminPageTLast},2)|">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageTopics.getLastPage()},2)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageTopics.getPage()}-1,${session.adminPageTopics.getLastPage()},2)|">←</button>
+                <span th:text="${session.adminPageTopics.getPage()}+'/'+${session.adminPageTopics.getLastPage()}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageTopics.getPage()}+1,${session.adminPageTopics.getLastPage()},2)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageTopics.getLastPage()},${session.adminPageTopics.getLastPage()},2)|">尾页</button>
             </div>
         </div>
     </div>
@@ -149,11 +149,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn" th:onclick="|Page(1,${session.adminPageNLast},3)|">首页</button>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageNNum}-1,${session.adminPageNLast},3)|">←</button>
-                <span th:text="${session.adminPageNNum}+'/'+${session.adminPageNLast}">1/1</span>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageNNum}+1,${session.adminPageNLast},3)|">→</button>
-                <button class="btn" th:onclick="|Page(${session.adminPageNLast},${session.adminPageNLast},3)|">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageNotices.getLastPage()},3)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageNotices.getPage()}-1,${session.adminPageNotices.getLastPage()},3)|">←</button>
+                <span th:text="${session.adminPageNotices.getPage()}+'/'+${session.adminPageNotices.getLastPage()}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageNotices.getPage()}+1,${session.adminPageNotices.getLastPage()},3)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageNotices.getLastPage()},${session.adminPageNotices.getLastPage()},3)|">尾页</button>
             </div>
         </div>
     </div>
@@ -181,11 +181,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn" th:onclick="|Page(1,${session.adminPageCLast},4)|">首页</button>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageCNum}-1,${session.adminPageCLast},4)|">←</button>
-                <span th:text="${session.adminPageCNum}+'/'+${session.adminPageCLast}">1/1</span>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageCNum}+1,${session.adminPageCLast},4)|">→</button>
-                <button class="btn" th:onclick="|Page(${session.adminPageCLast},${session.adminPageCLast},4)|">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageComments.getLastPage()},4)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageComments.getPage()}-1,${session.adminPageUsers.getLastPage()},4)|">←</button>
+                <span th:text="${session.adminPageComments.getPage()}+'/'+${session.adminPageComments.getLastPage()}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageComments.getPage()}+1,${session.adminPageComments.getLastPage()},4)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageComments.getLastPage()},${session.adminPageComments.getLastPage()},4)|">尾页</button>
             </div>
         </div>
     </div>
@@ -213,11 +213,11 @@
                 </tr>
             </table>
             <div class="changePage">
-                <button class="btn" th:onclick="|Page(1,${session.adminPageGLast},5)|">首页</button>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageGNum}-1,${session.adminPageGLast},5)|">←</button>
-                <span th:text="${session.adminPageGNum}+'/'+${session.adminPageGLast}">1/1</span>
-                <button class="btn arrow" th:onclick="|Page(${session.adminPageGNum}+1,${session.adminPageGLast},5)|">→</button>
-                <button class="btn" th:onclick="|Page(${session.adminPageGLast},${session.adminPageGLast},5)|">尾页</button>
+                <button class="btn" th:onclick="|Page(1,${session.adminPageGoods.getLastPage()},5)|">首页</button>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageGoods.getPage()}-1,${session.adminPageGoods.getLastPage()},5)|">←</button>
+                <span th:text="${session.adminPageGoods.getPage()}+'/'+${session.adminPageGoods.getLastPage()}">1/1</span>
+                <button class="btn arrow" th:onclick="|Page(${session.adminPageGoods.getPage()}+1,${session.adminPageGoods.getLastPage()},5)|">→</button>
+                <button class="btn" th:onclick="|Page(${session.adminPageGoods.getLastPage()},${session.adminPageGoods.getLastPage()},5)|">尾页</button>
             </div>
         </div>
     </div>
