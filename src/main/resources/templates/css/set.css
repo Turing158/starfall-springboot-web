@@ -294,7 +294,7 @@ button:active{
 .head{
     object-fit: cover;
 }
-.grayTips{
+.grayTips,.grayConfirm{
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -304,7 +304,10 @@ button:active{
     justify-content: center;
     align-items: center;
 }
-.grayTips .tips{
+.grayConfirm{
+    display: none;
+}
+.grayTips .tips,.grayConfirm .confirm{
     background-image: url(../img/set/woodWhite.png);
     width: 600px;
     height: 250px;
@@ -312,14 +315,14 @@ button:active{
     border: 2px solid #131313;
     display: block;
 }
-.grayTips .tips p{
+.grayTips .tips p,.grayConfirm .confirm p{
     position: relative;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
     line-height: 50px;
 }
-.grayTips .tips .tipsContent{
+.grayTips .tips .tipsContent,.grayConfirm .confirm .confirmContent{
     position: relative;
     width: 500px;
     height: 160px;
@@ -331,13 +334,21 @@ button:active{
     white-space:pre-wrap;
     word-break: break-all;
 }
-.grayTips .tips .tipsBtn{
+.grayTips .tips .tipsBtn,.grayConfirm .confirm .confirmBtn{
     position: relative;
     float: right;
     width: 80px;
     height: 40px;
     right: 10px;
     bottom: 10px;
+}
+.grayConfirm .confirm .confirmBtn:nth-child(3){
+    float: left;
+    right: 0px;
+    left: 150px;
+}
+.grayConfirm .confirm .confirmBtn:nth-child(4){
+    right: 150px;
 }
 .topicPage{
     width: 990px;

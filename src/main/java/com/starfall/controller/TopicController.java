@@ -381,6 +381,15 @@ public class TopicController {
         return "redirect:/topic/publish";
     }
 
+    @RequestMapping("/topic/clearTips")
+    @ResponseBody
+    public void clearTips(
+            HttpSession session
+    ){
+        session.setAttribute("editErrorColor",null);
+        session.setAttribute("editErrorTips",null);
+    }
+
 
 
     //处理label字符串

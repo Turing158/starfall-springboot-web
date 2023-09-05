@@ -25,6 +25,14 @@
         <button class="tipsBtn" onclick="closeTips()">确定</button>
     </div>
 </div>
+<div class="grayConfirm">
+    <div class="confirm">
+        <p>提示</p>
+        <div class="confirmContent"></div>
+        <button class="confirmYes confirmBtn">确定</button>
+        <button class="confirmNo confirmBtn" onclick="cancelDel()">取消</button>
+    </div>
+</div>
 <div class="square" id="square"></div>
 <div class="me page" id="me">
     <div class="content">
@@ -71,8 +79,8 @@
                 <td class="date"><span th:text="${topic.date.split('-')[0]}">0000</span><br><span th:text="${topic.date.split('-')[1]}+'-'+${topic.date.split('-')[2]}">00-00</span></td>
                 <td class="vc"><span th:text="${topic.view}">1</span><span th:text="${topic.comment}">2</span></td>
                 <td>
-                    <button>编辑</button>
-                    <button>删除</button>
+                    <button th:onclick="|href('/set/editTopic?id='+${topic.id})|">编辑</button>
+                    <button th:onclick="|Delete(${topic.id})|">删除</button>
                 </td>
             </tr>
         </table>

@@ -173,7 +173,26 @@ function closeTips(){
     ajax.open("post","/set/clearTips");
     ajax.send();
 }
-
+function Delete(num) {
+    let confirm = document.querySelector('.grayConfirm');
+    confirm.style.display = "flex";
+    let confirmContent = document.querySelector('.confirmContent');
+    confirmContent.innerHTML = "你确定要删除Topic:"+num+"吗？";
+    let confirmYes = document.querySelector('.confirmYes');
+    confirmYes.onclick = function () {
+        confirmDel(num);
+    }
+    let confirmNo = document.querySelector('.confirmNo');
+    confirmNo.onclick = function () {
+        confirm.style.display = "none";
+    }
+}
+function confirmDel(num){
+    window.location.href = "/set/deleteTopic?id="+num;
+}
+function href(str){
+    window.location.href = str;
+}
 function pageChange(page_num,last_page) {
     if (page_num <= last_page && page_num >= 1) {
         window.location.href = "set?page=" + page_num;

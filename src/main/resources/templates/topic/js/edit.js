@@ -5,6 +5,12 @@ let show = Vue.createApp({
             }
         }
 }).mount('.editTd');
+let tips = document.querySelector('.grayTips');
+let tipsContent = document.querySelector('.tipsContent').textContent;
+tips.style.display = 'none';
+if(tipsContent.length !== 0){
+    tips.style.display = 'block';
+}
 function h(num){
     let select = window.getSelection();
     let str = '';
@@ -92,6 +98,19 @@ function selectPicture(){
 }
 function table(){
 
+}
+function cleartips(num){
+    let ajax = new XMLHttpRequest();
+    let tips = document.querySelector('.grayTips');
+    tips.style.display = 'none';
+
+    if(num === 1){
+        ajax.open('GET','/set/clearTips');
+    }
+    else{
+        ajax.open('GET','/topic/clearTips');
+    }
+    ajax.send();
 }
 function replaceText(str){
     let text = document.querySelector('textarea');
