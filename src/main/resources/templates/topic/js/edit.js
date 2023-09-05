@@ -120,6 +120,9 @@ function replaceText(str){
     let newValue = value.substring(0,start) + str + value.substring(end);
     text.value = newValue;
 }
+function href(str){
+    window.location.href = str;
+}
 let date = Date().toString().split(' ');
 let month = checkMonth(date[1]);
 let day = date[2];

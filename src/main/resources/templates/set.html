@@ -30,7 +30,7 @@
         <p>提示</p>
         <div class="confirmContent"></div>
         <button class="confirmYes confirmBtn">确定</button>
-        <button class="confirmNo confirmBtn" onclick="cancelDel()">取消</button>
+        <button class="confirmNo confirmBtn">取消</button>
     </div>
 </div>
 <div class="square" id="square"></div>
@@ -79,7 +79,7 @@
                 <td class="date"><span th:text="${topic.date.split('-')[0]}">0000</span><br><span th:text="${topic.date.split('-')[1]}+'-'+${topic.date.split('-')[2]}">00-00</span></td>
                 <td class="vc"><span th:text="${topic.view}">1</span><span th:text="${topic.comment}">2</span></td>
                 <td>
-                    <button th:onclick="|href('/set/editTopic?id='+${topic.id})|">编辑</button>
+                    <button th:onclick="|href('/topic/editTopic?id='+${topic.id})|">编辑</button>
                     <button th:onclick="|Delete(${topic.id})|">删除</button>
                 </td>
             </tr>

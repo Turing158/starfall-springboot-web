@@ -86,7 +86,7 @@
                             </select>]
                             <input type="text" th:style="${session.setErrorColor}" class="editTitleName" maxlength="30" placeholder="标题title" name="bigTitle" th:value="${session.editTopic.getTitle()}">
                         </h1>
-                        <input type="submit" class="submit" value="确认修改">
+                        <input type="submit" style="width: 100px" class="submit" value="确认修改">
                     </th>
                 </table>
                 <table class="line">
@@ -115,7 +115,7 @@
                         <table class="contentTable">
                             <tr>
                                 <td class="contentTop">
-                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"></span></span>
+                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"></span></span><button type="button" class="back" onclick="href('/set')">返回/取消修改</button>
                                 </td>
                             </tr>
                             <tr>

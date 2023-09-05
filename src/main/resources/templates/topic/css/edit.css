@@ -150,20 +150,22 @@ textarea:focus{
     height: 30px;
     border: 2px solid rgba(255, 255, 255, 0);
     border-radius: 5px;
-    background-color: rgb(182, 146, 99);
+    /* background-color: rgb(182, 146, 99); */
     color: aliceblue;
     font-size: 18px;
     transition: all 0.2s;
+    background-image: url(../img/CommentBackground.png);
 }
 .submit:hover{
-    background-color: rgb(148, 115, 68);
+    background-image: url(../img/botton.png);
+    /* background-color: rgb(148, 115, 68); */
     border-top: 2px solid rgb(231, 210, 181);
     border-left: 2px solid rgb(231, 210, 181);
     border-right: 2px solid rgb(75, 56, 29);
     border-bottom: 2px solid rgb(75, 56, 29);
 }
 .submit:active{
-    background-color: rgb(122, 88, 35);
+    /* background-color: rgb(122, 88, 35); */
     border-top: 2px solid rgb(75, 56, 29);
     border-left: 2px solid rgb(75, 56, 29);
     border-right: 2px solid rgb(231, 210, 181);
@@ -230,4 +232,29 @@ input.verifyInput{
 }
 .tips .tipsBtn:hover{
     background-image: url(../img/botton.png);
+}
+.back{
+    position: relative;
+    float: right;
+    width: 120px;
+    height: 35px;
+    color: #f1f1f1;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0);
+    background-image: url(../img/CommentBackground.png);
+}
+.back:hover{
+    border-top: 2px solid rgb(231, 210, 181);
+    border-left: 2px solid rgb(231, 210, 181);
+    border-right: 2px solid rgb(75, 56, 29);
+    border-bottom: 2px solid rgb(75, 56, 29);
+    background-image: url(../img/botton.png);
+}
+.back:active{
+    border-top: 2px solid rgb(75, 56, 29);
+    border-left: 2px solid rgb(75, 56, 29);
+    border-right: 2px solid rgb(231, 210, 181);
+    border-bottom: 2px solid rgb(231, 210, 181);
 }

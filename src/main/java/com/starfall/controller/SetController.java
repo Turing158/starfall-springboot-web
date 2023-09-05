@@ -84,7 +84,7 @@ public class SetController extends HttpServlet {
     }
 
 //进入主题帖的编辑
-    @RequestMapping("/set/editTopic")
+    @RequestMapping("/topic/editTopic")
     public String editTopic(
             HttpSession session,
             @RequestParam(value = "id",required = false) String id_str
@@ -186,7 +186,7 @@ public class SetController extends HttpServlet {
         }
 
         session.setAttribute("editTopic",topicObj);
-        return "redirect:/set/editTopic?id="+topicObj.getId();
+        return "redirect:/topic/editTopic?id="+topicObj.getId();
     }
 //    删除主题帖
     @RequestMapping("/set/deleteTopic")
