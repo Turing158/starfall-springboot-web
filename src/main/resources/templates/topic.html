@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./loading/load.css" rel="stylesheet">
     <link rel="stylesheet" href="css/html.css">
     <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" href="css/ul.css">
@@ -17,6 +18,17 @@
 
 </head>
 <body background="img/bg.png" onload="notice_start()">
+<div class="load">
+    <div class="cube">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<script src="./loading/load.js"></script>
 <div class="top">
     <div class="starfall">StarFall</div>
     <input type="hidden" th:value="${session.noticeLength}" id="NoticeLength">

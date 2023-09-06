@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th = "http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link href="./loading/load.css" rel="stylesheet">
     <link rel="stylesheet" href="css/html.css">
     <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" href="css/ul.css">
@@ -22,6 +23,17 @@
     <script src="js/home.js" type="text/javascript"></script>
 </head>
 <body background="img/bg.png" onload="notice_start()">
+    <div class="load">
+        <div class="cube">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <script src="./loading/load.js"></script>
 <div class="top">
     <div class="starfall">StarFall</div>
     <input type="hidden" th:value="${session.noticeLength}" id="NoticeLength">
