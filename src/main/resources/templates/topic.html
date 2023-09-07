@@ -65,10 +65,10 @@
     </div>
 </div>
 <ul id="ul">
-    <li id="ul_li"><a id="ul_home" class="active"><b>首页</b><br><span>home</span></a></li>
+    <li id="ul_li"><a id="ul_home" class="ul_border"><b>首页</b><br><span>home</span></a></li>
     <li id="ul_li"><a id="ul_works" class="ul_border"><b>作品</b><br><span>works</span></a></li>
     <li id="ul_li"><a class="ul_border" href="https://blog.csdn.net/weixin_46396315?type=blog"><b>博客</b><br><span>Blog</span></a></li>
-    <li id="ul_li"><a class="ul_border" href="/topic"><b>主题</b><br><span>topic</span></a></li>
+    <li id="ul_li"><a class="active" href="/topic"><b>主题</b><br><span>topic</span></a></li>
     <li id="ul_li" th:if="${ session.user != null && session.user.promise >= 100}"><a class="ul_border" href="/administer/html"><b>管理</b><br><span>admin</span></a></li>
     <div th:if="${session.user} != null" class="user ul_border">
         <img th:src="@{'/head_img/'+${session.user.head}}" alt="" class="head_img">
