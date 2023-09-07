@@ -68,38 +68,30 @@
             <span class="carousel-control-next-icon"></span>
         </button>
     </div>
-    <!--
-        弃用[利用Javascript]，改成运用bootstrap5轮播图片
-    <div id="ppt" onmouseover="stop()" onmouseleave="start()">
-        <div class="il" onclick="ppt_left()">&lt;-</div>
-        <div class="ir" onclick="ppt_right()">-&gt;</div>
-        <div id="ppt_dot">
-            <div id="pd1" onclick="click_dot1()"></div>
-            <div id="pd2" onclick="click_dot2()"></div>
-            <div id="pd3" onclick="click_dot3()"></div>
-            <div id="pd4" onclick="click_dot4()"></div>
-        </div>
-    </div> -->
 </div>
 <ul id="ul">
     <li id="ul_li"><a id="ul_home" class="active"><b>首页</b><br><span>home</span></a></li>
-    <li id="ul_li"><a id="ul_works"><b>作品</b><br><span>works</span></a></li>
-    <li id="ul_li"><a  href="https://blog.csdn.net/weixin_46396315?type=blog"><b>博客</b><br><span>Blog</span></a></li>
-    <li id="ul_li"><a href="/topic"><b>主题</b><br><span>topic</span></a></li>
-    <li id="ul_li" th:if="${ session.user != null && session.user.promise >= 100}"><a href="/administer/html"><b>管理</b><br><span>admin</span></a></li>
-
-    <form th:if="${session.user} != null" class="user">
-        <!-- <span class="user_massage" th:text="${session.name}">用户名用户名用户名</span> -->
+    <li id="ul_li"><a id="ul_works" class="ul_border"><b>作品</b><br><span>works</span></a></li>
+    <li id="ul_li"><a class="ul_border" href="https://blog.csdn.net/weixin_46396315?type=blog"><b>博客</b><br><span>Blog</span></a></li>
+    <li id="ul_li"><a class="ul_border" href="/topic"><b>主题</b><br><span>topic</span></a></li>
+    <li id="ul_li" th:if="${ session.user != null && session.user.promise >= 100}"><a class="ul_border" href="/administer/html"><b>管理</b><br><span>admin</span></a></li>
+    <div th:if="${session.user} != null" class="user ul_border">
         <img th:src="@{'/head_img/'+${session.user.head}}" alt="" class="head_img">
-        <input type="button" value="">
         <div class="menu">
-            <p><a href="/set" th:text="${session.user.name}" >用户名用户名用户名</a></p>
-            <p><a href="/exit">退出</a></p>
+            <p>User</p>
+            <div class="level"></div>
+            <span class="levelText"><span>1</span>&ensp;&ensp;<span>100/10000</span></span>
+            <div class="operate">
+                <a class="ul_border" href="/set">设置</a>
+                <a class="ul_border" href="/exit">退出</a>
+            </div>
         </div>
-    </form>
-    <form action="login" th:if="${session.user} == null" class="unuser">
-        <span class="user_massage">请登录，谢谢</span>
-        <input type="submit" value=""></form>
+    </div>
+    <div th:if="${session.user} == null" class="unuser ul_border" onclick="window.location.href='/login'">
+        <span>请登录，谢谢</span>
+        <br><br>
+        <span>Login</span>
+    </div>
 </ul>
 <div class="return_top" id="rt"><img src="./img/icon/Rtop.png" alt=""></div>
 <div class="mainContent">

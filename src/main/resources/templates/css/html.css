@@ -1,20 +1,7 @@
 html{
     overflow-x: hidden;
 }
-::-webkit-scrollbar{
-    width: 10px;
-}
-::-webkit-scrollbar-thumb{
-    border-radius: 10px;
-    background-color: rgb(0, 174, 255);
-    border: 1px solid rgb(56, 27, 1);
-}
-::-webkit-scrollbar-track{
-    background-color: gray;
-}
 body{
-    /* display: flex;
-    justify-content: center; */
     width: 100vw;
     min-height: 100vh;
 }
@@ -34,7 +21,7 @@ body{
     width: 45px;
     height: 45px;
     opacity: 0.3;
-    background-color: white;
+    background-color: #f1f1f1;
     text-align: center;
     line-height: 55px;
     top: 80%;
