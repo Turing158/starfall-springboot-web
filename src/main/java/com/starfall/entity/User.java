@@ -44,4 +44,6 @@ public class User implements Serializable {
     private String head;
     @Column
     private int promise;
+    @Column
+    private int exp;
 }

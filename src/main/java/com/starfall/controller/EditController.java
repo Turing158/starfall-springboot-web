@@ -191,7 +191,8 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "0") String promise,
             @RequestParam(required = false,defaultValue = "") String introduce
     ){
-        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise));
+        int exp = 1;
+        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp);
         userDao.deleteById(((User) session.getAttribute("administerModifyInfU")).getUser());
         System.out.println(((User) session.getAttribute("administerModifyInfU")).getUser());
         userDao.save(userObj);
@@ -469,7 +470,8 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "0") String promise,
             @RequestParam(required = false,defaultValue = "") String introduce
     ){
-        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise));
+        int exp = 1;
+        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp);
         if(userDao.existsById(user)){
             session.setAttribute("administerTips","添加失败！已存在User："+user);
             session.setAttribute("administerModifyInfU",userObj);

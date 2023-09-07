@@ -3,6 +3,7 @@ package com.starfall.controller;
 import com.mysql.cj.util.StringUtils;
 import com.starfall.Application;
 import com.starfall.dao.UserDao;
+import com.starfall.entity.Exp;
 import com.starfall.entity.User;
 import com.starfall.util.GetCode;
 import com.starfall.util.MailUtil;
@@ -99,7 +100,10 @@ public class LoginRegController {
         //成功[性能测试换第一个]
 //        else if(Objects.equals(flag, password)){
         else if(Objects.equals(flag, password) && Objects.equals(code,session.getAttribute("code"))){
-            session.setAttribute("user",userDao.findByUser(user));
+            User userObj = userDao.findByUser(user);
+            Exp exp = new Exp(userObj.getLevel(),userObj.getExp());
+            session.setAttribute("user",userObj);
+            session.setAttribute("userExp",exp);
             session.removeAttribute("password");
             session.removeAttribute("userLogin");
             session.setAttribute("code",null);
@@ -240,16 +244,15 @@ public class LoginRegController {
             }
             String name = "新用户"+ id_last6;
             LocalDate date = LocalDate.now();
-//            userService.reg(user,password,name,String.valueOf(date),email);
-            userDao.save(new User(user,password,String.valueOf(date),1,name,null,email,"null.jpg",0));
+            userDao.save(new User(user,password,String.valueOf(date),1,name,null,email,"null.jpg",0,0));
             session.setAttribute("reg_notice","block");
-//            super.processTemplate("reg_emailCode",req,resp);
-            session.setAttribute("email_code",null);
-            session.setAttribute("reg_email",null);
-            session.setAttribute("reg_user",null);
-            session.setAttribute("reg_password",null);
-            session.setAttribute("reg_tips",null);
-            session.setAttribute("reg",null);
+            session.removeAttribute("email_code");
+            session.removeAttribute("reg_email");
+            session.removeAttribute("reg_user");
+            session.removeAttribute("reg_password");
+            session.removeAttribute("reg_tips");
+            session.removeAttribute("reg");
+            session.removeAttribute("enter_flag");
             session.setAttribute("tips","成功注册账号");
         }
         return "reg_emailCode";
