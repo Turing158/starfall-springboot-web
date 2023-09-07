@@ -73,9 +73,11 @@
     <div th:if="${session.user} != null" class="user ul_border">
         <img th:src="@{'/head_img/'+${session.user.head}}" alt="" class="head_img">
         <div class="menu">
-            <p>User</p>
-            <div class="level"></div>
-            <span class="levelText"><span>1</span>&ensp;&ensp;<span>100/10000</span></span>
+            <p th:text="${session.user.name}">User</p>
+            <div class="level">
+                <div></div>
+            </div>
+            <span class="levelText"><span th:text="'Lv:'+${session.user.level}">Lv:1</span>&ensp;&ensp;<span>0/1</span></span>
             <div class="operate">
                 <a class="ul_border" href="/set">设置</a>
                 <a class="ul_border" href="/exit">退出</a>

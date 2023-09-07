@@ -9,5 +9,6 @@
         <language minSize="225" name="Java" />
       </Languages>
     </inspection_tool>
+    <inspection_tool class="XmlDuplicatedId" enabled="false" level="ERROR" enabled_by_default="false" />
   </profile>
 </component>
