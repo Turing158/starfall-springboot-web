@@ -162,6 +162,13 @@
 .topicContent .author .span1{
     top: 5px;
 }
+.topicContent .author .span1 a{
+    color: #131313;
+    text-decoration: none;
+}
+.topicContent .author .span1 a:hover{
+    text-decoration: underline;
+}
 .topicContent .author .date{
     color: gray;
     font-size: 10px;

@@ -66,11 +66,10 @@
                     <td class="author">
                         <div class="authorContent">
                             <div class="authorName">
-                                <span th:text="${session.topic.username}">TuringICE</span>
+                                <span><a class="user" th:href="'/personal?user='+${session.topic.user}" th:text="${session.topic.username}">TuringICE</a></span>
                             </div>
                             <div class="authorHead">
-                                <img th:src="'../head_img/'+${session.topic.userhead}" alt="">
-                                
+                                <a th:href="'/personal?user='+${session.topic.user}"><img th:src="'../head_img/'+${session.topic.userhead}" alt=""></a>
                             </div>
                             <div class="authorInf">
                                 <!-- <p class="authorInfP">&ensp;作者信息：</p> -->
@@ -171,9 +170,9 @@
                         <tr>
                             <th>
                                 <div class="authorName">
-                                    <span th:text="${comment.name}">用户名user</span>
+                                    <span><a class="user" th:href="'/personal?user='+${comment.user}" th:text="${comment.name}">用户名user</a></span>
                                 </div>
-                                <img th:src="@{'/head_img/'+${comment.head}}" alt="">
+                                <a th:href="'/personal?user='+${comment.user}"><img th:src="@{'/head_img/'+${comment.head}}" alt=""></a>
                                 <div class="comment_bottom">
                                     <span th:text="${comment.introduce}">Aa啊哈吧</span>
                                 </div>
@@ -212,9 +211,9 @@
                         <tr>
                             <th>
                                 <div class="authorName">
-                                    <span th:text="${session.user.name}">用户名user</span>
+                                    <span><a class="user" th:href="'/personal?user='+${session.user.user}" th:text="${session.user.name}"></a></span>
                                 </div>
-                                <img th:src="@{'/head_img/'+${session.user.head}}" alt="">
+                                <a th:href="'/personal?user='+${session.user.user}"><img th:src="@{'/head_img/'+${session.user.head}}" alt=""></a>
                                 <div class="comment_bottom">
                                     <span th:text="${session.user.introduce}">Aa啊哈吧</span>
                                 </div>

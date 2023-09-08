@@ -136,7 +136,7 @@ public class TopicController {
             session.setAttribute("html",html_int);
 
             //评论区分页
-            Pageable pageable =PageRequest.of(page_int,5, Sort.by("id").ascending());
+            Pageable pageable =PageRequest.of(page_int-1,5, Sort.by("id").ascending());
             //如果输入的只看ta为空，查全部评论，否，查只看ta
             if(StringUtils.isNullOrEmpty(user)){
                 //查全部
