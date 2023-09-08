@@ -139,7 +139,7 @@ ul .head_img{
     line-height: 40px;
     text-align: center;
 }
-.menu .level{
+.menu .exp{
     margin: 0 5px;
     width: 135px;
     height: 10px;
@@ -149,7 +149,7 @@ ul .head_img{
     overflow: hidden;
     border: 0;
 }
-.menu .level div{
+.menu .exp div{
     position: relative;
     width: 0%;
     height: 10px;
@@ -158,14 +158,14 @@ ul .head_img{
     border-radius: 10px;
     border: 0;
 }
-.menu .levelText{
+.menu .level{
     position: relative;
     top: -15px;
 }
-.menu .levelText span:nth-child(1){
+.menu .level span:nth-child(1){
     color: #046404;
 }
-.menu .levelText span:nth-child(2){
+.menu .level span:nth-child(2){
     color: #044964;
 }
 .menu .operate{

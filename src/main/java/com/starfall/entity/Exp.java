@@ -19,6 +19,38 @@ public class Exp {
         return (int) (result*100);
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public int getMaxExp() {
+        return MaxExp;
+    }
+
+    public void setMaxExp(int maxExp) {
+        MaxExp = maxExp;
+    }
+
+    public int getPresent() {
+        return present;
+    }
+
+    public void setPresent(int present) {
+        this.present = present;
+    }
+
     @Override
     public String toString() {
         return "Exp{" +

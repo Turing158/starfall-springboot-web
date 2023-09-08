@@ -39,6 +39,9 @@
         <table class="eleTable">
             <tr>
                 <th colspan="2">你好！<span th:text="${session.user.name}">name</span></th>
+                <th class="infTd"><div class="level"><span th:text="' lv:'+${session.userExp.level}">&nbsp;lv:1</span><span th:text="${session.userExp.exp}+'/'+${session.userExp.maxExp}">0/1</span><div class="exp"><div class="expBar"></div></div></div></th>
+                <input class="expBarValue" type="hidden" th:value="${session.userExp.present}">
+                <script src="./js/exp.js"></script>
             </tr>
             <tr>
                 <td>用户名</td>

@@ -124,6 +124,10 @@ textarea:focus{
     font-weight: bold;
     border-collapse: collapse;
 }
+.eleTable tr th{
+    height: 20px;
+    overflow: hidden;
+}
 .eleTable tr td{
     padding: 5px 0;
     text-align: center;
@@ -403,4 +407,30 @@ button:active{
 }
 .topicPage .last:hover{
     background-image: url(../img/icon/lasthover.png);
+}
+.level{
+    font-size: 15px;
+    color: #02631f;
+}
+.level span:nth-child(2){
+    float: right;
+}
+.exp{
+    position: relative;
+    top: 0;
+    left: 5px;
+    width: 770px;
+    height: 10px;
+    background-image: url(../img/lv0.png);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 0;
+}
+.exp div{
+    position: relative;
+    width: 0%;
+    height: 10px;
+    background-image: url(../img/lv1.png);
+    border-radius: 10px;
+    border: 0;
 }

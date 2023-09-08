@@ -3,6 +3,8 @@ package com.starfall.controller;
 import com.starfall.Application;
 import com.starfall.dao.GoodDao;
 import com.starfall.dao.NoticeDao;
+import com.starfall.entity.Exp;
+import com.starfall.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -35,6 +37,11 @@ public class HomeController{
         session.setMaxInactiveInterval(10);
         if(session.getAttribute("user") != null){
             session.setMaxInactiveInterval(60*60*24*7);
+            if(session.getAttribute("userExp") == null){
+                User userObj = (User) session.getAttribute("user");
+                Exp exp = new Exp(userObj.getLevel(),userObj.getExp());
+                session.setAttribute("userExp",exp);
+            }
         }
         session.setAttribute("noticeLength",noticeDao.count());
         session.setAttribute("notices",noticeDao.findAll());

@@ -79,15 +79,17 @@
         <img th:src="@{'/head_img/'+${session.user.head}}" alt="" class="head_img">
         <div class="menu">
             <p th:text="${session.user.name}">User</p>
-            <div class="level">
-                <div></div>
+            <div class="exp">
+                <input class="expBarValue" type="hidden" th:value="${session.userExp.present}">
+                <div class="expBar"></div>
             </div>
-            <span class="levelText"><span th:text="'Lv:'+${session.user.level}">Lv:1</span>&ensp;&ensp;<span>0/1</span></span>
+            <span class="level"><span th:text="'Lv:'+${session.user.level}">Lv:1</span>&ensp;&ensp;<span th:text="${session.userExp.exp}+'/'+${session.userExp.maxExp}">0/1</span></span>
             <div class="operate">
                 <a class="ul_border" href="/set">设置</a>
                 <a class="ul_border" href="/exit">退出</a>
             </div>
         </div>
+        <script src="./js/exp.js"></script>
     </div>
     <div th:if="${session.user} == null" class="unuser ul_border" onclick="window.location.href='/login'">
         <span>请登录，谢谢</span>
