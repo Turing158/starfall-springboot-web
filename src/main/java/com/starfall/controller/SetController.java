@@ -4,6 +4,7 @@ import com.starfall.Application;
 import com.starfall.dao.CommentDao;
 import com.starfall.dao.TopicDao;
 import com.starfall.dao.UserDao;
+import com.starfall.entity.Exp;
 import com.starfall.entity.Page;
 import com.starfall.entity.Topic;
 import com.starfall.entity.User;
@@ -60,6 +61,11 @@ public class SetController extends HttpServlet {
         Pageable pageable = PageRequest.of(page-1,10, Sort.by("date").descending());
         session.setAttribute("userTopic",topicDao.findAllByUser(pageable,userObj.getUser()));
         session.setAttribute("userTopicPage",pageObj);
+//        防止session去除
+        if(session.getAttribute("userExp") == null){
+            Exp exp = new Exp(userObj.getLevel(),userObj.getExp());
+            session.setAttribute("userExp",exp);
+        }
         return "set";
     }
 
