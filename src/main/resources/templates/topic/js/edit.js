@@ -9,7 +9,7 @@ let tips = document.querySelector('.grayTips');
 let tipsContent = document.querySelector('.tipsContent').textContent;
 tips.style.display = 'none';
 if(tipsContent.length !== 0){
-    tips.style.display = 'block';
+    tips.style.display = 'flex';
 }
 function h(num){
     let select = window.getSelection();
