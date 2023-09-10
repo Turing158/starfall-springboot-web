@@ -51,6 +51,10 @@ public class SetController extends HttpServlet {
             HttpSession session,
             @RequestParam(value = "page",required = false) String page_str
     ){
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/set";
+        }
         int page = 1;
         if(page_str != null){
             page = Integer.parseInt(page_str);
@@ -95,6 +99,10 @@ public class SetController extends HttpServlet {
             HttpSession session,
             @RequestParam(value = "id",required = false) String id_str
     ){
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/set";
+        }
         long id = 0;
         User userObj = (User) session.getAttribute("user");
         if(id_str != null){
@@ -130,6 +138,10 @@ public class SetController extends HttpServlet {
             @RequestParam(value = "download",required = false) String download,//下载地址
             @RequestParam(value = "content",required = false) String content//内容
     ){
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/set";
+        }
         //防止label和source为空
         if(label == null || label.equals("请选择")){
             label = "";
@@ -200,6 +212,10 @@ public class SetController extends HttpServlet {
             HttpSession session,
             @RequestParam(value = "id",required = false) String id_str
     ){
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/set";
+        }
         long id = 0;
         User userObj = (User) session.getAttribute("user");
         if(id_str != null){
@@ -227,10 +243,10 @@ public class SetController extends HttpServlet {
             HttpServletRequest req,
             HttpServletResponse resp
     ) throws IOException, ServletException {
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        DiscussService discussService = context.getBean("discussService", DiscussService.class);
-//        HttpSession session = req.getSession();
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/set";
+        }
 //        改编码，以免乱码
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("utf-8");
@@ -275,9 +291,10 @@ public class SetController extends HttpServlet {
             @RequestParam(value = "introduce",required = false) String introduce,
             @RequestParam(value = "code",required = false) String code
     ) throws IOException {
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        HttpSession session = req.getSession();
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/set";
+        }
         req.setCharacterEncoding("utf-8");
         String user = ((User) session.getAttribute("user")).getUser();
         if(Objects.equals(code,"")){
@@ -307,6 +324,10 @@ public class SetController extends HttpServlet {
             @RequestParam(value = "code",required = false) String code
 
     ) throws IOException {
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/set";
+        }
         req.setCharacterEncoding("utf-8");
         User userObj = (User) session.getAttribute("user");
         String user = userObj.getUser();

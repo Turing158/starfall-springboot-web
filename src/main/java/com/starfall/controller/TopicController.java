@@ -171,6 +171,10 @@ public class TopicController {
         String date = ldt.getYear()+"-"+ldt.getMonthValue()+"-"+ldt.getDayOfMonth();
 //        获取点赞主题
         int html = (int) session.getAttribute("html");
+//        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/topic/html?html="+html;
+        }
 //        获取点赞用户
         String user = ((User) session.getAttribute("user")).getUser();
 //        先将点赞信息查出来
@@ -199,11 +203,16 @@ public class TopicController {
     public String dislike(
             HttpSession session
     ){
+
 //        获取时间
         LocalDateTime ldt = LocalDateTime.now();
         String date = ldt.getYear()+"-"+ldt.getMonthValue()+"-"+ldt.getDayOfMonth();
 //        获取点赞主题
         int html = (int) session.getAttribute("html");
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/topic/html?html="+html;
+        }
 //        获取点赞用户
         String user = ((User) session.getAttribute("user")).getUser();
 //        先将点赞信息查出来
@@ -232,6 +241,10 @@ public class TopicController {
             HttpSession session
     ){
         int html = (int) session.getAttribute("html");
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/topic/html?html="+html;
+        }
         String user = ((User) session.getAttribute("user")).getUser();
         Good goodOld = goodDao.findByTopicidAndUser(html,user);
         if(goodOld != null){
@@ -252,6 +265,10 @@ public class TopicController {
     ){
         //获取你是在哪个主题发布的评论
         int html = (int) session.getAttribute("html");
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/topic/html?html="+html;
+        }
         int lastPage = 1;
 
         //保存发布的内容
@@ -293,6 +310,10 @@ public class TopicController {
     public String publish(
             HttpSession session
     ){
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/topic";
+        }
 //        return "topic/edit";
 //        调试时注释掉下面，使用时不要注释
         User user = (User) session.getAttribute("user");
@@ -323,6 +344,10 @@ public class TopicController {
             @RequestParam(value = "download",required = false) String download,//下载地址
             @RequestParam(value = "content",required = false) String content//内容
     ){
+        //        判断是否登录,防止错乱
+        if(session.getAttribute("user") == null){
+            return "redirect:/topic";
+        }
         //防止label和source为空
         if(label == null || label.equals("请选择")){
             label = "";
