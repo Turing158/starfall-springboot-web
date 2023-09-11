@@ -8,6 +8,7 @@ import com.starfall.entity.Exp;
 import com.starfall.entity.Page;
 import com.starfall.entity.Topic;
 import com.starfall.entity.User;
+import com.starfall.util.OtherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.PageRequest;
@@ -43,7 +44,7 @@ public class SetController extends HttpServlet {
 
     @Autowired
     private TopicDao topicDao;
-
+    private final OtherUtil otherUtil = new OtherUtil();
 
 
     @RequestMapping("/set")
@@ -182,7 +183,7 @@ public class SetController extends HttpServlet {
         }
         else if(session.getAttribute("code").equals(code)){
             //获取labelHref变量[详细看数据库]
-            String labelHref = labelCE(label);
+            String labelHref = otherUtil.labelCE(label);
             //获取时间
             LocalDateTime ldt = LocalDateTime.now();
             String date = ldt.toLocalDate().toString();
@@ -344,16 +345,5 @@ public class SetController extends HttpServlet {
             session.setAttribute("setTips","原密码错误");
         }
         return "redirect:/set";
-    }
-    public String labelCE(String label){
-        switch(label){
-            case "服务端": return "serve";
-            case "客户端":return "Client";
-            case "视频": return "video";
-            case "文章":return "article";
-            case "插件":return "plug_in";
-            case "公告": return "notice";
-        }
-        return "no";
     }
 }

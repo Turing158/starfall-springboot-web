@@ -4,6 +4,7 @@ import com.starfall.Application;
 import com.starfall.dao.*;
 import com.starfall.entity.*;
 import com.starfall.util.OnlineUtil;
+import com.starfall.util.OtherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.print.attribute.standard.MediaSize;
 import javax.servlet.http.*;
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +36,7 @@ public class EditController {
     private CommentDao commentDao;
     @Autowired
     private GoodDao goodDao;
+    private final OtherUtil otherUtil = new OtherUtil();
 
 
 //    进入编辑页面
@@ -227,7 +230,7 @@ public class EditController {
     ){
         long idLong = Integer.parseInt(id);
         long oldId = ((Topic) session.getAttribute("administerModifyInfT")).getId();
-        Topic topicObj = new Topic(idLong,"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
+        Topic topicObj = new Topic(idLong,"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),otherUtil.labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
         if(topicDao.existsById(idLong) && oldId != idLong){
             session.setAttribute("administerTips","修改失败！已存在Topic："+id);
             session.setAttribute("administerModifyInfT",topicObj);
@@ -508,7 +511,7 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String content
     ){
         long idLong = Integer.parseInt(id);
-        Topic topicObj = new Topic(idLong,"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
+        Topic topicObj = new Topic(idLong,"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),otherUtil.labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
         if(topicDao.existsById(idLong)){
             session.setAttribute("administerTips","添加失败！已存在Topic："+id);
             session.setAttribute("administerModifyInfT",topicObj);
@@ -619,29 +622,6 @@ public class EditController {
     //  有关添加功能========================================================================================
 
 
-//处理label字符串
-    public String labelEC(String label){
-        switch(label){
-            case "serve": return "服务端";
-            case "Client":return "客户端";
-            case "video": return "视频";
-            case "article":return "文章";
-            case "plug_in":return "插件";
-            case "notice": return "公告";
-        }
-        return "no";
-    }
-    public String labelCE(String label){
-        switch(label){
-            case "服务端": return "serve";
-            case "客户端":return "Client";
-            case "视频": return "video";
-            case "文章":return "article";
-            case "插件":return "plug_in";
-            case "公告": return "notice";
-        }
-        return "no";
-    }
 }
 
 

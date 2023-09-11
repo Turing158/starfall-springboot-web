@@ -4,6 +4,7 @@ import com.mysql.cj.util.StringUtils;
 import com.starfall.Application;
 import com.starfall.dao.*;
 import com.starfall.entity.*;
+import com.starfall.util.OtherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.PageRequest;
@@ -31,6 +32,7 @@ public class TopicController {
     private CommentDao commentDao;
     @Autowired
     private GoodDao goodDao;
+    private final OtherUtil otherUtil = new OtherUtil();
 
     //前往主题区
     @RequestMapping("/topic")
@@ -57,7 +59,7 @@ public class TopicController {
         if (!StringUtils.isNullOrEmpty(label)){
             session.setAttribute("labelTF",true);//控制"显示全部"按钮
             session.setAttribute("label","'"+label+"'");//防止session输出时，字符串没''引号
-            label_Chinese = labelEC(label);
+            label_Chinese = otherUtil.labelEC(label);
         }
         //分页
         Pageable pageable =PageRequest.of(page_int-1,10, Sort.by("id").ascending());
@@ -380,7 +382,7 @@ public class TopicController {
             LocalDateTime ldt = LocalDateTime.now();
             String date = ldt.toLocalDate().toString();
             //获取labelHref变量[详细看数据库]
-            String labelHref = labelCE(label);
+            String labelHref = otherUtil.labelCE(label);
             //获取用户名称，及发帖作者
             String user = ((User) session.getAttribute("user")).getUser();
             //获取主题id
@@ -414,28 +416,4 @@ public class TopicController {
     }
 
 
-
-    //处理label字符串
-    public String labelEC(String label){
-        switch(label){
-            case "serve": return "服务端";
-            case "Client":return "客户端";
-            case "video": return "视频";
-            case "article":return "文章";
-            case "plug_in":return "插件";
-            case "notice": return "公告";
-        }
-        return "no";
-    }
-    public String labelCE(String label){
-        switch(label){
-            case "服务端": return "serve";
-            case "客户端":return "Client";
-            case "视频": return "video";
-            case "文章":return "article";
-            case "插件":return "plug_in";
-            case "公告": return "notice";
-        }
-        return "no";
-    }
 }
