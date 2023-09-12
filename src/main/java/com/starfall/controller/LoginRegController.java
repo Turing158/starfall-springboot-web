@@ -136,10 +136,6 @@ public class LoginRegController {
     }
 
 
-
-
-
-
 //注册发邮件
     @RequestMapping("/verify_code")
     public String reg_email(
@@ -229,7 +225,7 @@ public class LoginRegController {
         String password = (String) session.getAttribute("reg_password");
         String email = (String) session.getAttribute("reg_email");
 //        String email_code = req.getParameter("reg_email_code");
-        if(email_code.equals("")){
+        if(email_code.isEmpty()){
             session.setAttribute("code_tips","验证码不能为空");
         }
         else if(!email_code.equals(session.getAttribute("email_code"))){

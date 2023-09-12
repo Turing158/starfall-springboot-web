@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.print.attribute.standard.MediaSize;
 import javax.servlet.http.*;
 import java.util.List;
 import java.util.Objects;
@@ -104,9 +103,7 @@ public class EditController {
 //    获取在线人数
     @RequestMapping("/administer/getOnline")
     @ResponseBody
-    public int getOnlineCount(
-        HttpSession session
-    ){
+    public int getOnlineCount(){
         return OnlineUtil.list.size();
     }
 

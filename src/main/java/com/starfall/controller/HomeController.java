@@ -20,8 +20,6 @@ public class HomeController{
 
     @Autowired
     private NoticeDao noticeDao;
-    @Autowired
-    private GoodDao goodDao;
 
 
 //进入主页与返回主页的控制
@@ -29,8 +27,6 @@ public class HomeController{
     public String home(
             HttpSession session
     ) {
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        DiscussService discussService = context.getBean("discussService", DiscussService.class);
 //        测试用
 //        session.setMaxInactiveInterval(1);
         session.setMaxInactiveInterval(10);

@@ -95,7 +95,6 @@ public class TopicController {
             @RequestParam(value = "page",required = false) String page,
             @RequestParam(value = "user",required = false) String user
     ){
-
         int page_int = 1;
         int html_int = 0;
         //初始化session，只看ta
@@ -131,7 +130,6 @@ public class TopicController {
                 if(goodDao.existsGoodByTopicidAndUser(html_int,userObj.getUser())){
                     //如果点赞过，就把点赞信息放入session
                     session.setAttribute("topicUserLike",goodDao.findByTopicidAndUser(html_int,userObj.getUser()));
-
                 }
             }
             //设置进入了哪个主题
@@ -193,7 +191,6 @@ public class TopicController {
         else{
 //            因为点赞信息不存在，数据库中存在主键，所以通过最后数据的id+1来创建新的点赞信息
             id = goodDao.findAll(Sort.by("id").descending()).get(0).getId()+1;
-
         }
 //        创建新的点赞信息对象
         Good goodNew = new Good(id,1,user,html,date);
@@ -205,7 +202,6 @@ public class TopicController {
     public String dislike(
             HttpSession session
     ){
-
 //        获取时间
         LocalDateTime ldt = LocalDateTime.now();
         String date = ldt.getYear()+"-"+ldt.getMonthValue()+"-"+ldt.getDayOfMonth();
@@ -272,7 +268,6 @@ public class TopicController {
             return "redirect:/topic/html?html="+html;
         }
         int lastPage = 1;
-
         //保存发布的内容
         session.setAttribute("commentContent",content);
         //初始化发布信息提示
@@ -283,7 +278,6 @@ public class TopicController {
         }
         //检测验证码是否正确
         else if(session.getAttribute("code").equals(code)){
-
             //获取时间
             LocalDateTime ldt = LocalDateTime.now();
             //获取用户
@@ -306,7 +300,6 @@ public class TopicController {
         }
         return "redirect:/topic/html?html="+html+"&page="+lastPage;
     }
-
     //进入编辑主题
     @RequestMapping("/topic/publish")
     public String publish(
@@ -327,8 +320,6 @@ public class TopicController {
         }
         return "topic/noEdit";
     }
-
-
     //发布主题
     @RequestMapping("/topic/submitTopic")
     public String submitTopic(
@@ -357,8 +348,6 @@ public class TopicController {
         if(source == null || source.equals("请选择")){
             source = "";
         }
-
-
         //方便检测是否有空值
         String[] list = {bigTitle,label,titleName,titleEnglishName,source,version,authorName,language,address,download,content};
         boolean infoNull = false;
@@ -405,7 +394,6 @@ public class TopicController {
         session.setAttribute("editTopic",topicObj);
         return "redirect:/topic/publish";
     }
-
     @RequestMapping("/topic/clearTips")
     @ResponseBody
     public void clearTips(

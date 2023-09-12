@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer{
-
+//添加资源静态文件地址
     public void addResourceHandlers(ResourceHandlerRegistry registry){
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/templates/", "classpath:/templates/");
