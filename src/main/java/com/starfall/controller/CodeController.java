@@ -60,7 +60,6 @@ public class CodeController {
         ServletOutputStream sos = resp.getOutputStream();
         //将图片以IO流方式输出
         ImageIO.write(bufferedImage,"jpeg",sos);
-//        System.out.println(session.getAttribute("code"));
     }
 
 

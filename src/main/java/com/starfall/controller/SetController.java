@@ -306,8 +306,13 @@ public class SetController extends HttpServlet {
         else if ((name != null || introduce != null )&& Objects.equals(code,session.getAttribute("code"))){
             session.setAttribute("setTips","信息修改成功");
             userDao.updateInformation(user,name,introduce);
+            User userObj = (User) session.getAttribute("user");
+            userObj.setName(name);
+            userObj.setIntroduce(introduce);
+            session.setAttribute("user",userObj);
             commentDao.updateData();
             topicDao.updateData();
+
         }
         session.setAttribute("code",null);
         return "redirect:/set";

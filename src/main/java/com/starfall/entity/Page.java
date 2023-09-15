@@ -1,5 +1,5 @@
 package com.starfall.entity;
-
+//用于管理页数
 public class Page {
     int page;
     int lastPage;

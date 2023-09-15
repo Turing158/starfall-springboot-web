@@ -394,6 +394,7 @@ public class TopicController {
         session.setAttribute("editTopic",topicObj);
         return "redirect:/topic/publish";
     }
+//    清除session
     @RequestMapping("/topic/clearTips")
     @ResponseBody
     public void clearTips(

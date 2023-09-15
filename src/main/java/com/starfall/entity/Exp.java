@@ -1,5 +1,5 @@
 package com.starfall.entity;
-
+//用于计算经验值
 public class Exp {
     private int level;
     private int exp;
