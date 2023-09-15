@@ -29,6 +29,7 @@ public class HomeController{
     ) {
 //        测试用
 //        session.setMaxInactiveInterval(1);
+
         session.setMaxInactiveInterval(10);
         if(session.getAttribute("user") != null){
             session.setMaxInactiveInterval(60*60*24*7);

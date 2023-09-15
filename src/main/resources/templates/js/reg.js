@@ -11,7 +11,11 @@ function checkUser(){
         ajax.onreadystatechange = function () {
             if(ajax.readyState === 4 && ajax.status === 200){
                 let data = ajax.responseText;
-                if(data === "exist"){
+                if(data === "noChar"){
+                    tips.style.color = "darkred";
+                    tips.innerHTML = "用户名不符合规范[大写/小写字母,数字,下划线]";
+                }
+                else if(data === "exist"){
                     tips.style.color = "darkred";
                     tips.innerHTML = "用户名已存在";
                 }
@@ -41,13 +45,12 @@ function checkPwd() {
         tips.innerHTML = "密码长度不得小于6";
     }
 }
-
 function checkEmail() {
-    ajax.open("POST", "/checkEmail", true);
-    ajax.setRequestHeader("email", email.value);
-    ajax.send(email.value);
-    ajax.onreadystatechange = function (){
-        if(email.value.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/)){
+    if(email.value.match(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/)){
+        ajax.open("POST", "/checkEmail", true);
+        ajax.setRequestHeader("email", email.value);
+        ajax.send(email.value);
+        ajax.onreadystatechange = function (){
             if(ajax.readyState === 4 && ajax.status === 200){
                 let data = ajax.responseText;
                 if(data === "exist"){
@@ -63,12 +66,14 @@ function checkEmail() {
                 tips.style.color = "darkred";
                 tips.innerHTML = "!!!服务器异常!!!";
             }
-        }
-        else{
-            tips.style.color = "darkred";
-            tips.innerHTML = "邮箱格式错误";
+
         }
     }
+    else{
+        tips.style.color = "darkred";
+        tips.innerHTML = "邮箱格式错误[Aa1@Aa1.com]";
+    }
+
 
 }
 

@@ -118,6 +118,9 @@ public class LoginRegController {
     public String checkUser(
             @RequestBody(required = false) String user
     ){
+        if(!user.matches("^[0-9a-zA-Z_]+$")){
+            return "noChar";
+        }
         if(userDao.countByUser(user) != 0){
             return "exist";
         }
@@ -217,14 +220,9 @@ public class LoginRegController {
             HttpSession session,
             @RequestParam(value = "reg_email_code",required = false)String email_code
     ){
-//        ApplicationContext context = new AnnotationConfigApplicationContext(sf_config.class);
-//        UserService userService = context.getBean("userService", UserService.class);
-//        HttpSession session = req.getSession();
-//        session.setAttribute("reg","block");
         String user = (String) session.getAttribute("reg_user");
         String password = (String) session.getAttribute("reg_password");
         String email = (String) session.getAttribute("reg_email");
-//        String email_code = req.getParameter("reg_email_code");
         if(email_code.isEmpty()){
             session.setAttribute("code_tips","验证码不能为空");
         }
@@ -232,7 +230,7 @@ public class LoginRegController {
             session.setAttribute("code_tips","验证码错误，请仔细检查邮箱与验证码是否正确");
         }
         else if(email_code.equals(session.getAttribute("email_code"))){
-
+            //创建新用户默认名字
             char[] id = session.getId().toCharArray();
             StringBuilder id_last6 = new StringBuilder();
             for (int i=0;i < 6;i++) {
