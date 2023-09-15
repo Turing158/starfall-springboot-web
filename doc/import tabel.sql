@@ -14,6 +14,7 @@ create table user
     email     varchar(255) null comment '用户邮箱[独一无二]',
     head      varchar(255) not null,
     promise   int          null comment '用户权限',
+    exp       int          null comment '经验',
     constraint user
         unique (user)
 );
