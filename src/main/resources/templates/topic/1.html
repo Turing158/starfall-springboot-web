@@ -91,7 +91,7 @@
                         <table class="contentTable">
                             <tr>
                                 <td class="contentTop" style="height: 47px">
-                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于<span th:text="${session.topic.date}">0000-00-00</span></span>
+                                    &nbsp;<img style="width: 15px" src="./img/Cicon.gif" alt=""> <span>发表于<span th:text="${session.topic.date}">0000-00-00</span></span>
                                     <div class="likeDiv" th:if="${session.user == null}">
                                         <a href="javascript:like(0)" class="like"></a>
                                         <a href="javascript:like(0)" class="dislike"></a>
@@ -155,10 +155,14 @@
                             </tr>
                             <tr>
                                 <td style="border: 0;background-color: initial">
-                                    <div class="contentMd" id="contentMd"  th:utext="${#strings.replace(session.topicContent,'&#10;','&lt;br/&gt;')}">
+                                    <div class="contentMd" id="contentMd" th:text="${session.topicContent}">
 
                                     </div>
-                                    <script src="./js/Markdown.js"></script>
+                                    <script>
+                                        let htmlContend = document.querySelector('.contentMd').textContent;
+                                        let mark = marked.parse(htmlContend,{ breaks: true });
+                                        document.getElementById("contentMd").innerHTML = mark;
+                                    </script>
                                 </td>
                             </tr>
                         </table>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./css/book.css">
     <link rel="stylesheet" href="./css/comment.css">
@@ -14,242 +14,238 @@
     
 </head>
 <body background="./img/bg.png">
-    <ul class="ul">
-        <li class="li_home"><a class="a_home" href="/home">首页</a></li>
-        <li><a href="/topic">主题</a></li>
-        <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
-        <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
-        <li th:if="${session.user == null}" class="li_user" style="border: 2px solid rgb(97, 97, 97); height: 48px;"><a href="/login">! 请登录 !</a></li>
-        <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.user.head}}" alt="">
-            <div class="menu">
-                <p th:text="${session.user.name}">User</p>
-                <div class="exp">
-                    <input class="expBarValue" type="hidden" th:value="${session.userExp.present}">
-                    <div class="expBar"></div>
-                </div>
-                <span class="level"><span th:text="'Lv:'+${session.user.level}">Lv:1</span>&ensp;&ensp;<span th:text="${session.userExp.exp}+'/'+${session.userExp.maxExp}">0/1</span></span>
-                <div class="operate">
-                    <a class="ul_border" href="/set">设置</a>
-                    <a class="ul_border" href="/exit">退出</a>
-                </div>
+<ul class="ul">
+    <li class="li_home"><a class="a_home" href="/home">首页</a></li>
+    <li><a href="/topic">主题</a></li>
+    <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
+    <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
+    <li th:if="${session.user == null}" class="li_user"><a href="/login">! 请登录 !</a></li>
+    <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.user.head}}" alt="">
+        <div class="menu">
+            <p th:text="${session.user.name}">User</p>
+            <div class="exp">
+                <input class="expBarValue" type="hidden" th:value="${session.userExp.present}">
+                <div class="expBar"></div>
             </div>
-        </li>
-        <script src="./js/exp.js"></script>
-        <li th:if="${session.user == null}" class="li_user" ><a href="/login">! 请登录 !</a></li>
-    </ul>
-    <div class="grayTips">
-        <div class="tips">
-            <p>提示</p>
-            <div class="tipsContent" th:text="${session.setTips}"></div>
-            <button class="tipsBtn" onclick="cleartips(1)">确定</button>
-        </div>
-    </div>
-    <div class="windows">
-        <a class="close" href="javascript:close()">×</a>
-        <p style="font-size: 30px;">插入图片</p>
-        <br><br><br>
-        <span>仅支持其他网站图床
-            <br>
-            <a href="sm.ms">[sm.ms-免费|登陆]</a>
-            <a href="https://imgse.com/">[路过图床-免费]</a>
-            <a href="https://z4a.net/">[Z4a-免费|登录]</a>
-        </span>
-        <br>
-        <input class="pictureHref" type="text" placeholder="请复制图床的href粘贴至此[注意：是图片的URL]" style="text-align: center;width: 500px;">
-        <br>
-        <button onclick="selectPicture()">&nbsp;插入图片&nbsp;</button>
-        <br>
-        <span style="font-size: 12px;color: brown;">tips:插入图片前请确认没有选中任何文字</span>
-    </div>
-    <script>
-        function close(){
-            let window = document.querySelector(".windows");
-            window.style.display = 'none';
-        }
-    </script>
-    <div class="main">
-        <div class="book">
-            <div class="top"></div>
-            <div class="left"></div>
-            <div class="right"></div>
-            <div class="bookCenter">
-                <form action="/set/submitEditTopic" method="post">
-                <table class="title">
-                    <th class="titleLeft">
-                        <div>
-                            <img src="/jpegCode" alt="" class="verifyCode" onclick="change()">
-                            &nbsp;:
-                            <input type="text" class="verifyInput" maxlength="4" placeholder="验证码" name="verifyCode" th:style="${session.setErrorColor}">
-                        </div>
-                    </th>
-                    <th class="titleRight">
-                        <h1>
-                            [<select name="label" th:style="${session.setErrorColor}">
-                                <option value=""  hidden th:value="${session.editTopic.getLabel()}" th:text="${session.editTopic.getLabel()}">请选择</option>
-                                <option value="服务端">服务端</option>
-                                <option value="客户端">客户端</option>
-                                <option value="视频">视频</option>
-                                <option value="文章">文章</option>
-                                <option value="插件">插件</option>
-                                <option value="公告">公告</option>
-                            </select>]
-                            <input type="text" th:style="${session.setErrorColor}" class="editTitleName" maxlength="30" placeholder="标题title" name="bigTitle" th:value="${session.editTopic.getTitle()}">
-                        </h1>
-                        <input type="submit" style="width: 100px" class="submit" value="确认修改">
-                    </th>
-                </table>
-                <table class="line">
-                    <th class="lineLeft"></th>
-                    <th class="lineRight"></th>
-                </table>
-                <table class="mainTable">
-                    <td class="author">
-                        <div class="authorContent">
-                            <div class="authorName">
-                                <span th:text="${session.user.name}">TuringICE</span>
-                            </div>
-                            <div class="authorHead">
-                                <img th:src="'../head_img/'+${session.user.head}" alt="">
-                                
-                            </div>
-                            <div class="authorInf">
-                                <!-- <p class="authorInfP">&ensp;作者信息：</p> -->
-                                <span class="authorInfSpan">&emsp;Information</span>
-                                <br>
-                                <span class="authorInfText" th:text="${session.user.introduce}">哈嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</span>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="content">
-                        <table class="contentTable">
-                            <tr>
-                                <td class="contentTop">
-                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"></span></span><button type="button" class="back" onclick="href('/set')">返回/取消修改</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="content">
-                                    <table class="contentInf">
-                                        <caption>作品发布</caption>
-                                        <tr>
-                                            <th>作品名称：</th>
-                                            <td><input class="editInf" maxlength="20" type="text" placeholder="标题" name="titleName" th:style="${session.setErrorColor}" th:value="${session.editTopic.getTitlename()}"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Title：</th>
-                                            <td><input class="editInf" maxlength="20" type="text" placeholder="Title" name="titleEnglishName" th:style="${session.setErrorColor}" th:value="${session.editTopic.getTitleenglishname()}"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>来源 source：</th>
-                                            <td>
-                                                <select name="source" id="" class="editSource" th:style="${session.setErrorColor}">
-                                                    <option value="" th:value="${session.editTopic.getSource()}" th:text="${session.editTopic.getSource()}" hidden>请选择</option>
-                                                    <option value="原创">原创</option>
-                                                    <option value="搬运">搬运</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>适用版本 version：</th>
-                                            <td><input class="editInf" maxlength="10" type="text" placeholder="0.0.0" name="version" th:style="${session.setErrorColor}" th:value="${session.editTopic.getVersion()}"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>作者 author：</th>
-                                            <td><input class="editInf" maxlength="15" type="text" placeholder="作者" name="authorName" th:style="${session.setErrorColor}" th:value="${session.editTopic.getAuthorname()}"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>语言 language：</th>
-                                            <td><input class="editInf" maxlength="20" type="text" placeholder="语言" name="language" th:style="${session.setErrorColor}" th:value="${session.editTopic.getLanguage()}"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>原帖 address：</th>
-                                            <td><input class="editInf" type="text" placeholder="href" name="address" th:style="${session.setErrorColor}" th:value="${session.editTopic.getAddress()}"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>下载 download：</th>
-                                            <td><input class="editInf" type="text" placeholder="href" name="download" th:style="${session.setErrorColor}" th:value="${session.editTopic.getDownload()}"></td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="editTd">
-                                    <div class="editContent">
-                                        <button type="button" class="editShow" @click="flag = !flag" onclick="transformToMd()">&nbsp;<span v-if="flag">返回编辑</span><span v-else="flag">显示效果</span>&nbsp;</button>
-                                        <div class="editTools" v-show="!flag">
-                                            <span class="selectFspan">&nbsp;字体
-                                                <div class="selectF">
-                                                    <button type="button" onclick="fontFace('黑体')">&nbsp;黑体&nbsp;</button>
-                                                    <button type="button" onclick="fontFace('宋体')">&nbsp;宋体&nbsp;</button>
-                                                    <button type="button" onclick="fontFace('楷体')">&nbsp;楷体&nbsp;</button>
-                                                    <button type="button" onclick="fontFace('微软雅黑')">&nbsp;微软雅黑&nbsp;</button>
-                                                </div>
-                                            </span>
-                                            <span>&nbsp;</span>
-                                            <span class="selectHspan">&nbsp;H
-                                                <div class="selectH">
-                                                    <button type="button" onclick="h(1)">&nbsp;h1&nbsp;</button>
-                                                    <button type="button" onclick="h(2)">&nbsp;h2&nbsp;</button>
-                                                    <button type="button" onclick="h(3)">&nbsp;h3&nbsp;</button>
-                                                    <button type="button" onclick="h(4)">&nbsp;h4&nbsp;</button>
-                                                </div>
-                                            </span>
-                                            <button type="button" style="font-weight: bold;" onclick="b()">&nbsp;B&nbsp;</button>
-                                            <button type="button" style="font-style: italic;"onclick="i()">&nbsp;&nbsp;I&nbsp;&nbsp;</button>
-                                            <button type="button" onclick="del()" style="text-decoration: line-through;">&nbsp;删除线&nbsp;</button>
-                                            <button type="button" onclick="line()">&nbsp;分割线&nbsp;</button>
-                                            <span class="selectSspan">&nbsp;大小
-                                                <div class="selectS">
-                                                    <button type="button" onclick="fontSize(1)">&ensp;1&ensp;</button>
-                                                    <button type="button" onclick="fontSize(2)">&ensp;2&ensp;</button>
-                                                    <button type="button" onclick="fontSize(3)">&ensp;3&ensp;</button>
-                                                    <button type="button" onclick="fontSize(4)">&ensp;4&ensp;</button>
-                                                    <button type="button" onclick="fontSize(5)">&ensp;5&ensp;</button>
-                                                    <button type="button" onclick="fontSize(6)">&ensp;6&ensp;</button>
-                                                    <button type="button" onclick="fontSize(7)">&ensp;7&ensp;</button>
-                                                </div>
-                                            </span>
-                                            <button type="button" onclick="a()">&nbsp;链接&nbsp;</button>
-                                            <button type="button" onclick="blockquote()">&nbsp;引用&nbsp;</button>
-                                            <button type="button" onclick="mark()">&nbsp;标记&nbsp;</button>
-                                            <span class="selectCspan">&nbsp;颜色
-                                                <div class="selectC">
-                                                    <button type="button" onclick="color('black')" style="color: black;">&nbsp;黑&nbsp;</button>
-                                                    <button type="button" onclick="color('aliceblue')" style="color: aliceblue;">&nbsp;白&nbsp;</button>
-                                                    <button type="button" onclick="color('red')" style="color: red;">&nbsp;红&nbsp;</button>
-                                                    <button type="button" onclick="color('orange')" style="color: orange;">&nbsp;橙&nbsp;</button>
-                                                    <button type="button" onclick="color('darkgoldenrod')" style="color: darkgoldenrod;">&nbsp;深黄&nbsp;</button>
-                                                    <button type="button" onclick="color('blue')" style="color: blue;">&nbsp;蓝&nbsp;</button>
-                                                    <button type="button" onclick="color('green')" style="color: green;">&nbsp;绿&nbsp;</button>
-                                                    <button type="button" onclick="color('purple')" style="color: purple;">&nbsp;紫&nbsp;</button>
-                                                    <button type="button" onclick="color('darkcyan')" style="color: darkcyan;">&nbsp;深青&nbsp;</button>
-                                                </div>
-                                            </span>
-                                            <button type="button" onclick="code()">&nbsp;代码&nbsp;</button>
-                                            <button type="button" onclick="center()">&nbsp;居中&nbsp;</button>
-                                            <button type="button" onclick="picture()">&nbsp;图片&nbsp;</button>
-                                            
-                                        </div>
-                                        <textarea placeholder="请输入你想发布的内容" onfocusout="transformToMd()" v-show="!flag" name="content" th:text="${session.editTopic.getContent()}"></textarea>
-                                    </div>
-                                    <div class="contentMd" id="contentMd" v-show="flag">
-                                        
-                                    </div>
-                                    <script src="./js/Markdown.js"></script>
-                                    <script src="./js/edit.js" type="text/javascript"></script>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </table>
-                </form>
+            <span class="level"><span th:text="'Lv:'+${session.user.level}">Lv:1</span>&ensp;&ensp;<span th:text="${session.userExp.exp}+'/'+${session.userExp.maxExp}">0/1</span></span>
+            <div class="operate">
+                <a class="ul_border" href="/set">设置</a>
+                <a class="ul_border" href="/exit">退出</a>
             </div>
-            <div class="bottom"></div>
         </div>
+    </li>
+    <script src="./js/exp.js"></script>
+</ul>
+<div class="grayTips">
+    <div class="tips">
+        <p>提示</p>
+        <div class="tipsContent" th:text="${session.setTips}"></div>
+        <button class="tipsBtn" onclick="cleartips(1)">确定</button>
     </div>
-    <div class="tail">
-        <p>StarFall<br>始于2016</p>
+</div>
+<div class="windows">
+    <a class="close" href="javascript:close()">×</a>
+    <p style="font-size: 30px;">插入图片</p>
+    <br><br><br>
+    <span>仅支持其他网站图床
+        <br>
+        <a href="sm.ms">[sm.ms-免费|登陆]</a>
+        <a href="https://imgse.com/">[路过图床-免费]</a>
+        <a href="https://z4a.net/">[Z4a-免费|登录]</a>
+    </span>
+    <br>
+    <input class="pictureHref" type="text" placeholder="请复制图床的href粘贴至此[注意：是图片的URL]" style="text-align: center;width: 500px;">
+    <br>
+    <button onclick="selectPicture()">&nbsp;插入图片&nbsp;</button>
+    <br>
+    <span style="font-size: 12px;color: brown;">tips:插入图片前请确认没有选中任何文字</span>
+</div>
+<script>
+    function close(){
+        let window = document.querySelector(".windows");
+        window.style.display = 'none';
+    }
+</script>
+<div class="main">
+    <div class="book">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="bookCenter">
+            <form action="/set/submitEditTopic" method="post"><table class="title">
+                <th class="titleLeft">
+                    <div>
+                        <img src="/jpegCode" alt="" class="verifyCode" onclick="change()">
+                        &nbsp;:
+                        <input type="text" class="verifyInput" maxlength="4" placeholder="验证码" name="verifyCode" th:style="${session.setErrorColor}">
+                    </div>
+                </th>
+                <th class="titleRight">
+                    <h1>
+                        [<select name="label" th:style="${session.setErrorColor}">
+                        <option value=""  hidden th:value="${session.editTopic.getLabel()}" th:text="${session.editTopic.getLabel()}">请选择</option>
+                        <option value="服务端">服务端</option>
+                        <option value="客户端">客户端</option>
+                        <option value="视频">视频</option>
+                        <option value="文章">文章</option>
+                        <option value="插件">插件</option>
+                        <option value="公告">公告</option>
+                    </select>]
+                        <input type="text" th:style="${session.setErrorColor}" class="editTitleName" maxlength="30" placeholder="标题title" name="bigTitle" th:value="${session.editTopic.getTitle()}">
+                    </h1>
+                    <input type="submit" style="width: 100px" class="submit" value="确认修改">
+                </th>
+            </table><table class="line">
+                <th class="lineLeft"></th>
+                <th class="lineRight"></th>
+            </table><table class="mainTable">
+                <td class="author">
+                    <div class="authorContent">
+                        <div class="authorName">
+                            <span><a class="user" th:href="'/personal?user='+${session.user.user}" th:text="${session.user.name}">TuringICE</a></span>
+                        </div>
+                        <div class="authorHead">
+                            <a th:href="'/personal?user='+${session.user.user}"><img th:src="'../head_img/'+${session.user.head}" alt=""></a>
+
+                        </div>
+                        <div class="authorInf">
+                            <span class="authorInfSpan">&emsp;Information</span>
+                            <br>
+                            <span class="authorInfText" th:utext="${session.user.introduce}">哈嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="content">
+                    <table class="contentTable">
+                        <tr>
+                            <td class="contentTop">
+                                &nbsp;<img style="width: 15px" src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"></span></span><button type="button" class="back" onclick="href('/set')">返回/取消修改</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="content">
+
+                                <table class="contentInf">
+                                    <caption>作品发布</caption>
+                                    <tr>
+                                        <th>作品名称：</th>
+                                        <td><input class="editInf" maxlength="20" type="text" placeholder="标题" name="titleName" th:style="${session.setErrorColor}" th:value="${session.editTopic.getTitlename()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Title：</th>
+                                        <td><input class="editInf" maxlength="20" type="text" placeholder="Title" name="titleEnglishName" th:style="${session.setErrorColor}" th:value="${session.editTopic.getTitleenglishname()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>来源 source：</th>
+                                        <td>
+                                            <select name="source" id="" class="editSource" th:style="${session.setErrorColor}">
+                                                <option value="" th:value="${session.editTopic.getSource()}" th:text="${session.editTopic.getSource()}" hidden>请选择</option>
+                                                <option value="原创">原创</option>
+                                                <option value="搬运">搬运</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>适用版本 version：</th>
+                                        <td><input class="editInf" maxlength="10" type="text" placeholder="0.0.0" name="version" th:style="${session.setErrorColor}" th:value="${session.editTopic.getVersion()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>作者 author：</th>
+                                        <td><input class="editInf" maxlength="15" type="text" placeholder="作者" name="authorName" th:style="${session.setErrorColor}" th:value="${session.editTopic.getAuthorname()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>语言 language：</th>
+                                        <td><input class="editInf" maxlength="20" type="text" placeholder="语言" name="language" th:style="${session.setErrorColor}" th:value="${session.editTopic.getLanguage()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>原帖 address：</th>
+                                        <td><input class="editInf" type="text" placeholder="href" name="address" th:style="${session.setErrorColor}" th:value="${session.editTopic.getAddress()}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>下载 download：</th>
+                                        <td><input class="editInf" type="text" placeholder="href" name="download" th:style="${session.setErrorColor}" th:value="${session.editTopic.getDownload()}"></td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="editTd">
+                                <div class="editContent">
+                                    <button type="button" class="editShow" @click="flag = !flag" onclick="transformToMd()">&nbsp;<span v-if="flag">返回编辑</span><span v-else="flag">显示效果</span>&nbsp;</button>
+                                    <div class="editTools" v-show="!flag">
+                                        <span class="selectFspan">&nbsp;字体
+                                            <div class="selectF">
+                                                <button type="button" onclick="fontFace('黑体')">&nbsp;黑体&nbsp;</button>
+                                                <button type="button" onclick="fontFace('宋体')">&nbsp;宋体&nbsp;</button>
+                                                <button type="button" onclick="fontFace('楷体')">&nbsp;楷体&nbsp;</button>
+                                                <button type="button" onclick="fontFace('微软雅黑')">&nbsp;微软雅黑&nbsp;</button>
+                                            </div>
+                                        </span>
+                                        <span>&nbsp;</span>
+                                        <span class="selectHspan">&nbsp;H
+                                            <div class="selectH">
+                                                <button type="button" onclick="h(1)">&nbsp;h1&nbsp;</button>
+                                                <button type="button" onclick="h(2)">&nbsp;h2&nbsp;</button>
+                                                <button type="button" onclick="h(3)">&nbsp;h3&nbsp;</button>
+                                                <button type="button" onclick="h(4)">&nbsp;h4&nbsp;</button>
+                                            </div>
+                                        </span>
+                                        <button type="button" style="font-weight: bold;" onclick="b()">&nbsp;B&nbsp;</button>
+                                        <button type="button" style="font-style: italic;"onclick="i()">&nbsp;&nbsp;I&nbsp;&nbsp;</button>
+                                        <button type="button" onclick="del()" style="text-decoration: line-through;">&nbsp;删除线&nbsp;</button>
+                                        <button type="button" onclick="line()">&nbsp;分割线&nbsp;</button>
+                                        <span class="selectSspan">&nbsp;大小
+                                            <div class="selectS">
+                                                <button type="button" onclick="fontSize(1)">&ensp;1&ensp;</button>
+                                                <button type="button" onclick="fontSize(2)">&ensp;2&ensp;</button>
+                                                <button type="button" onclick="fontSize(3)">&ensp;3&ensp;</button>
+                                                <button type="button" onclick="fontSize(4)">&ensp;4&ensp;</button>
+                                                <button type="button" onclick="fontSize(5)">&ensp;5&ensp;</button>
+                                                <button type="button" onclick="fontSize(6)">&ensp;6&ensp;</button>
+                                                <button type="button" onclick="fontSize(7)">&ensp;7&ensp;</button>
+                                            </div>
+                                        </span>
+                                        <button type="button" onclick="a()">&nbsp;链接&nbsp;</button>
+                                        <button type="button" onclick="blockquote()">&nbsp;引用&nbsp;</button>
+                                        <button type="button" onclick="mark()">&nbsp;标记&nbsp;</button>
+                                        <span class="selectCspan">&nbsp;颜色
+                                            <div class="selectC">
+                                                <button type="button" onclick="color('black')" style="color: black;">&nbsp;黑&nbsp;</button>
+                                                <button type="button" onclick="color('aliceblue')" style="color: aliceblue;">&nbsp;白&nbsp;</button>
+                                                <button type="button" onclick="color('red')" style="color: red;">&nbsp;红&nbsp;</button>
+                                                <button type="button" onclick="color('orange')" style="color: orange;">&nbsp;橙&nbsp;</button>
+                                                <button type="button" onclick="color('darkgoldenrod')" style="color: darkgoldenrod;">&nbsp;深黄&nbsp;</button>
+                                                <button type="button" onclick="color('blue')" style="color: blue;">&nbsp;蓝&nbsp;</button>
+                                                <button type="button" onclick="color('green')" style="color: green;">&nbsp;绿&nbsp;</button>
+                                                <button type="button" onclick="color('purple')" style="color: purple;">&nbsp;紫&nbsp;</button>
+                                                <button type="button" onclick="color('darkcyan')" style="color: darkcyan;">&nbsp;深青&nbsp;</button>
+                                            </div>
+                                        </span>
+                                        <button type="button" onclick="code()">&nbsp;代码&nbsp;</button>
+                                        <button type="button" onclick="center()">&nbsp;居中&nbsp;</button>
+                                        <button type="button" onclick="picture()">&nbsp;图片&nbsp;</button>
+
+                                    </div>
+
+                                    <textarea class="textContent" th:utext="${session.editTopic.getContent()}" placeholder="请输入你想发布的内容" onfocusout="transformToMd()" v-show="!flag" name="content" v-html="content">aaaaaaaaaaa</textarea>
+                                </div>
+                                <div class="contentMd" id="contentMd" v-show="flag">
+                                </div>
+                                <script src="./js/Markdown.js"></script>
+                                <script src="./js/edit.js" type="text/javascript"></script>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </table>
+            </form>
+        </div>
+        <div class="bottom"></div>
     </div>
+</div>
+<div class="tail">
+    <p>StarFall<br>始于2016</p>
+</div>
 </body>
 <script>
     function change() {

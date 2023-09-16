@@ -18,7 +18,7 @@
         <li><a href="/topic">主题</a></li>
         <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
         <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
-        <li th:if="${session.user == null}" class="li_user" style="border: 2px solid rgb(97, 97, 97); height: 48px;"><a href="/login">! 请登录 !</a></li>
+        <li th:if="${session.user == null}" class="li_user"><a href="/login">! 请登录 !</a></li>
         <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.user.head}}" alt="">
             <div class="div_user">
                 <p class="username" th:text="${session.user.name}">用户名user</p>
@@ -106,7 +106,7 @@
                         <table class="contentTable">
                             <tr>
                                 <td class="contentTop">
-                                    &nbsp;<img src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="date" placeholder="默认值1000-01-01" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
+                                    &nbsp;<img style="width: 15px" src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="date" placeholder="默认值1000-01-01" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
                                 </td>
                             </tr>
                             <tr>
@@ -211,7 +211,7 @@
                                             <button type="button" onclick="center()">&nbsp;居中&nbsp;</button>
                                             <button type="button" onclick="picture()">&nbsp;图片&nbsp;</button>
                                         </div>
-                                        <textarea placeholder="请输入你想发布的内容" onfocusout="transformToMd()" v-show="!flag" name="content" th:text="${session.administerModifyInfT.getContent()}"></textarea>
+                                        <textarea class="textContent" th:utext="${session.administerModifyInfT.getContent()}" placeholder="请输入你想发布的内容" onfocusout="transformToMd()" v-show="!flag" name="content" v-html="content">aaaaaaaaaaa</textarea>
                                     </div>
                                     <div class="contentMd" id="contentMd" v-show="flag">
                                         

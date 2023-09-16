@@ -1,7 +1,10 @@
+let textContent = document.querySelector('.textContent');
+console.log(textContent.textContent);
 let show = Vue.createApp({
     data(){
         return {
-            flag:false
+            flag:false,
+            content:textContent.textContent
         }
     }
 }).mount('.editTd');

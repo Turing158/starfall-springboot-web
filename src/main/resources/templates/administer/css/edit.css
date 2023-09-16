@@ -51,6 +51,10 @@ input.editTitleName:focus{
     background-color: initial;
     border: 0;
 }
+.editTd img{
+    width: 100%;
+    object-fit: cover;
+}
 select{
     outline: 0;
     border: 0;

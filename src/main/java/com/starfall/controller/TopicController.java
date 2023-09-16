@@ -391,6 +391,7 @@ public class TopicController {
             session.setAttribute("editErrorTips","验证码错误");
         }
         Topic topicObj = new Topic(bigTitle,label,titleName,titleEnglishName,source,version,authorName,language,address,download,content);
+
         session.setAttribute("editTopic",topicObj);
         return "redirect:/topic/publish";
     }

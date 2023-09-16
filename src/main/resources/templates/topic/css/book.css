@@ -180,6 +180,11 @@ a:hover{
     border-collapse: collapse;
     background-color: initial;
     border: 0;
+    margin-bottom: 20px;
+}
+.contentTable img{
+    object-fit: cover;
+    width: 100%;
 }
 .contentTop{
     position: relative;
@@ -237,6 +242,7 @@ a:hover{
     word-wrap: break-word;
     font-size: 1rem;
     font-weight: 400;
+    overflow: hidden;
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
 blockquote{
@@ -274,7 +280,6 @@ table{
     border-spacing: 0;
     width: 100%;
     display: table;
-    margin-bottom: 20px;
 }
 table td, table th{
     border: 1px solid #7c6229;

@@ -113,12 +113,14 @@ public class SetController extends HttpServlet {
             session.setAttribute("setTips","你想干嘛");
             return "redirect:/set";
         }
-        Topic topicObj = topicDao.findAllById(id);
-        if(!topicObj.getUser().equals(userObj.getUser())){
-            session.setAttribute("setTips","你想干嘛!这不是你的东西");
-            return "redirect:/set";
+        if(session.getAttribute("setTips") == null){
+            Topic topicObj = topicDao.findAllById(id);
+            if(!topicObj.getUser().equals(userObj.getUser())){
+                session.setAttribute("setTips","你想干嘛!这不是你的东西");
+                return "redirect:/set";
+            }
+            session.setAttribute("editTopic",topicObj);
         }
-        session.setAttribute("editTopic",topicObj);
         return "/topic/setTopic";
     }
 //    保持编辑的主题帖
@@ -202,7 +204,6 @@ public class SetController extends HttpServlet {
         else{
             session.setAttribute("setTips","验证码错误");
         }
-
         session.setAttribute("editTopic",topicObj);
         return "redirect:/topic/editTopic?id="+topicObj.getId();
     }

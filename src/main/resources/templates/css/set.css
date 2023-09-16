@@ -48,7 +48,6 @@ textarea{
     overflow-y: auto;
     resize: none;
     outline: 0;
-    border: 0;
     background-image: url(../img/set/oak.png);
     color: #f1f1f1;
     font-size: 18px;
