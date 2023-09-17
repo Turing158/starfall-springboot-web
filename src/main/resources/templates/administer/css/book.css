@@ -241,6 +241,9 @@ a:hover{
     font-weight: 400;
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
+.contentMd a{
+    color: midnightblue;
+}
 blockquote{
     display: block;
     padding: 2px;

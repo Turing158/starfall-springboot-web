@@ -245,6 +245,9 @@ a:hover{
     overflow: hidden;
     /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
 }
+.contentMd a{
+    color: midnightblue;
+}
 blockquote{
     display: block;
     padding: 2px;
