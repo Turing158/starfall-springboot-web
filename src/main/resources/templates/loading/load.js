@@ -5,7 +5,6 @@ document.onreadystatechange = function () {
     html.style.overflow = "hidden";
     if(state === 'complete'){
         load.style.display = "none";
-        html.style.overflow = "auto";
+        html.style.overflowY = "auto";
     }
-
 }
