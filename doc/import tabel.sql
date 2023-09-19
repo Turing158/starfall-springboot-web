@@ -4,7 +4,7 @@ create database web default character set utf8mb4;
 #新建用户表结构
 create table user
 (
-    user      varchar(255) not null comment '用户名[独一无二]'
+    user      varchar(100) not null comment '用户名[独一无二]'
         primary key,
     password  varchar(255) null comment '用户名密码',
     date      varchar(255) null comment '用户注册日期',
@@ -22,7 +22,6 @@ create table user
 create index head
     on user (head);
 
-
 #新建公告表结构
 create table notice
 (
@@ -36,28 +35,27 @@ create table topic
 (
     id               int auto_increment comment '主题id[用于分辨每个主题]'
         primary key,
-    icon             varchar(255) null comment '可上传的主题贴图标，就是为了好看',
-    label            varchar(255) null comment '标签：用于区分每个主题贴的主题为什么',
-    title            varchar(255) null comment '大标题：在主题区显示，且在主题帖最顶上',
-    user             varchar(255) null comment '发帖人用户名',
-    date             date         null comment '发帖日期',
-    comment          int          null comment '评论数量',
-    view             int          null comment '点击查看人数',
-    label_href       varchar(255) null comment '标签链接[此列相当于lable列的翻译]',
-    titlename        varchar(255) null comment '标题名称[中文]',
-    titleenglishname varchar(255) null comment '标题名称[英文]',
-    source           varchar(255) null comment '来源[原创 or 转载]',
-    version          varchar(255) null comment 'ban''b',
-    language         varchar(255) null comment '语言',
-    address          varchar(255) null comment '原帖地址',
-    download         varchar(255) null comment '下载地址',
-    content          varchar(255) null comment '主题帖内容',
-    authorname       varchar(255) null comment '主题发布的东西的作者',
-    username         varchar(255) null comment '发帖人名称',
-    userhead         varchar(255) null comment '发帖人头像',
-    userinformation  varchar(255) null comment '发帖人介绍'
+    icon             varchar(255)  null comment '可上传的主题贴图标，就是为了好看',
+    label            varchar(255)  null comment '标签：用于区分每个主题贴的主题为什么',
+    title            varchar(255)  null comment '大标题：在主题区显示，且在主题帖最顶上',
+    user             varchar(255)  null comment '发帖人用户名',
+    date             date          null comment '发帖日期',
+    comment          int           null comment '评论数量',
+    view             int           null comment '点击查看人数',
+    label_href       varchar(255)  null comment '标签链接[此列相当于lable列的翻译]',
+    titlename        varchar(255)  null comment '标题名称[中文]',
+    titleenglishname varchar(255)  null comment '标题名称[英文]',
+    source           varchar(255)  null comment '来源[原创 or 转载]',
+    version          varchar(255)  null comment 'ban''b',
+    language         varchar(255)  null comment '语言',
+    address          varchar(255)  null comment '原帖地址',
+    download         varchar(255)  null comment '下载地址',
+    content          varchar(8126) null comment '主题帖内容',
+    authorname       varchar(255)  null comment '主题发布的东西的作者',
+    username         varchar(255)  null comment '发帖人名称',
+    userhead         varchar(255)  null comment '发帖人头像',
+    userinformation  varchar(255)  null comment '发帖人介绍'
 );
-
 
 
 
