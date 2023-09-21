@@ -403,7 +403,30 @@ public class TopicController {
     ){
         session.setAttribute("editErrorColor",null);
         session.setAttribute("editErrorTips",null);
+        session.setAttribute("searchTips",null);
     }
 
+    @RequestMapping("/topic/search")
+    @ResponseBody
+    public String search(
+            HttpSession session,
+            @RequestParam(required = false) String search,
+            @RequestParam(value = "page",required = false) String page_str
+    ) {
+        int page = 1;
+        if (page_str != null) {
+            page = Integer.parseInt(page_str);
+        }
+        if (search == null) {
+            session.setAttribute("searchTips", "不能搜索空的");
+            System.out.println("不能搜索空的");
+            return "不能搜索空的";
+//            return "redirect:/topic";
+        }
+        session.setAttribute("searchTopic", topicDao.searchTopic(search, page - 1));
+        System.out.println(search);
+        System.out.println(topicDao.searchTopic(search, page - 1));
+        return topicDao.searchTopic(search, page - 1).toString();
+    }
 
 }

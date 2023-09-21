@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,4 +28,6 @@ public interface TopicDao extends JpaRepository<Topic,Long> {
     @Modifying
     @Query(value = "UPDATE web.topic t INNER JOIN web.user u ON t.user = u.user SET t.userhead = u.head, t.username = u.name, t.userinformation = u.introduce",nativeQuery = true)
     void updateData();
+    @Query(value = "select * from topic where title like %?1% or content like %?1% limit ?2,10",nativeQuery = true)
+    List<Topic> searchTopic(String search, int page);
 }
