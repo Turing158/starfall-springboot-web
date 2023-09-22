@@ -161,7 +161,7 @@ public class TopicController {
         return "topic/null";
     }
 
-//点赞
+    //点赞
     @RequestMapping("/topic/like")
     public String like(
             HttpSession session
@@ -395,7 +395,7 @@ public class TopicController {
         session.setAttribute("editTopic",topicObj);
         return "redirect:/topic/publish";
     }
-//    清除session
+    //    清除session
     @RequestMapping("/topic/clearTips")
     @ResponseBody
     public void clearTips(
@@ -407,7 +407,6 @@ public class TopicController {
     }
 
     @RequestMapping("/topic/search")
-    @ResponseBody
     public String search(
             HttpSession session,
             @RequestParam(required = false) String search,
@@ -417,16 +416,17 @@ public class TopicController {
         if (page_str != null) {
             page = Integer.parseInt(page_str);
         }
-        if (search == null) {
-            session.setAttribute("searchTips", "不能搜索空的");
-            System.out.println("不能搜索空的");
-            return "不能搜索空的";
-//            return "redirect:/topic";
+        if(!StringUtils.isEmptyOrWhitespaceOnly(search)){
+            Page pageObj = new Page(page,(topicDao.countSearch(search)+9)/10);
+            session.setAttribute("searchTopic", topicDao.searchTopic(search, (page - 1)*10));
+            session.setAttribute("search",search);
+            session.setAttribute("searchPage",pageObj);
+            return "topic/search";
         }
-        session.setAttribute("searchTopic", topicDao.searchTopic(search, page - 1));
-        System.out.println(search);
-        System.out.println(topicDao.searchTopic(search, page - 1));
-        return topicDao.searchTopic(search, page - 1).toString();
+        session.setAttribute("searchTopic",null);
+        session.setAttribute("search",null);
+        session.setAttribute("searchPage",null);
+        return "topic/search";
     }
 
 }

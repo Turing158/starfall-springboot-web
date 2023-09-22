@@ -7,102 +7,112 @@
     <link rel="stylesheet" href="./css/book.css">
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/search.css">
-    <title>Search</title>
+    <title th:if="${session.search == null}">搜索</title>
+    <title th:else="${session.search == null}" th:text="'搜索-'+${session.search}">Search</title>
 </head>
 <body background="./img/bg.png">
-    <ul class="ul">
-        <li class="li_home"><a class="a_home" href="/home">首页</a></li>
-        <li><a href="/topic">主题</a></li>
-        <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
-        <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
-        <li th:if="${session.user == null}" class="li_user"><a href="/login">! 请登录 !</a></li>
-        <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.user.head}}" alt="">
-            <div class="menu">
-                <p th:text="${session.user.name}">User</p>
-                <div class="exp">
-                    <input class="expBarValue" type="hidden" th:value="${session.userExp.present}">
-                    <div class="expBar"></div>
-                </div>
-                <span class="level"><span th:text="'Lv:'+${session.user.level}">Lv:1</span>&ensp;&ensp;<span th:text="${session.userExp.exp}+'/'+${session.userExp.maxExp}">0/1</span></span>
-                <div class="operate">
-                    <a class="ul_border" href="/set">设置</a>
-                    <a class="ul_border" href="/exit">退出</a>
-                </div>
+<ul class="ul">
+    <li class="li_home"><a class="a_home" href="/home">首页</a></li>
+    <li><a href="/topic">主题</a></li>
+    <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
+    <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
+    <li th:if="${session.user == null}" class="li_user"><a href="/login">! 请登录 !</a></li>
+    <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.user.head}}" alt="">
+        <div class="menu">
+            <p th:text="${session.user.name}">User</p>
+            <div class="exp">
+                <input class="expBarValue" type="hidden" th:value="${session.userExp.present}">
+                <div class="expBar"></div>
             </div>
-        </li>
-        <script src="./js/exp.js"></script>
-    </ul>
-    <!-- <div class="grayTips">
-        <div class="tips">
-            <p>提示</p>
-            <div class="tipsContent" th:text="${session.editErrorTips}"></div>
-            <button class="tipsBtn" onclick="close()">确定</button>
-        </div>
-    </div>
-    <script>
-        function close(){
-            let window = document.querySelector(".windows");
-            window.style.display = 'none';
-        }
-    </script> -->
-    <div class="search">
-        <form action="topic/search" method="get">
-            <input type="text" name="search" placeholder="搜索主题"><button type="submit"></button>
-        </form>
-    </div>
-    <div class="main">
-        <div class="book">
-            <div class="top"></div>
-            <div class="left"></div>
-            <div class="right"></div>
-            <div class="bookCenter">
-                <div class="result">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <th><a href="">主题</a></th>
-                            </tr>
-                            <tr>
-                                <td>评论:<span>111</span> - 查看:<span>111</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span>1000-01-01</span>
-                                    -
-                                    <span><a href="">作者</a></span>
-                                    -
-                                    <span><a href="">插件</a></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="page">
-                    <a href="" class="back"></a>
-                    <a href="" class="pre"></a>
-                    <span>1/2</span>
-                    <a href="" class="next"></a>
-                    <a href="" class="last"></a>
-                </div>
+            <span class="level"><span th:text="'Lv:'+${session.user.level}">Lv:1</span>&ensp;&ensp;<span th:text="${session.userExp.exp}+'/'+${session.userExp.maxExp}">0/1</span></span>
+            <div class="operate">
+                <a class="ul_border" href="/set">设置</a>
+                <a class="ul_border" href="/exit">退出</a>
             </div>
-            <div class="bottom"></div>
         </div>
+    </li>
+    <script src="./js/exp.js"></script>
+</ul>
+<!-- <div class="grayTips">
+    <div class="tips">
+        <p>提示</p>
+        <div class="tipsContent" th:text="${session.editErrorTips}"></div>
+        <button class="tipsBtn" onclick="close()">确定</button>
     </div>
-    <div class="tail">
-        <p>StarFall<br>始于2016</p>
+</div>
+<script>
+    function close(){
+        let window = document.querySelector(".windows");
+        window.style.display = 'none';
+    }
+</script> -->
+<div class="search">
+    <form action="/topic/search" method="get">
+        <input type="text" name="search" placeholder="搜索主题" th:value="${session.search}"><button type="submit"></button>
+    </form>
+</div>
+<div class="main">
+    <div class="book">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="bookCenter">
+            <div class="result">
+                <table>
+                    <tbody th:if="${#lists.isEmpty(session.searchTopic)}">
+                    <tr>
+                        <th style="text-align: center">你快搜！现在没有任何东西</th>
+                    </tr>
+                    </tbody>
+                    <tbody th:else="${#lists.isEmpty(session.searchTopic)}" th:each="topic : ${session.searchTopic}">
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th><a th:href="'/topic/html?html='+${topic.id}" th:text="${topic.title}">主题</a></th>
+                    </tr>
+                    <tr>
+                        <td>评论:<span th:text="${topic.comment}">111</span> - 查看:<span th:text="${topic.view}">111</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div th:if="${topic.content.length() >= 180}" th:text="${#strings.substring(topic.content,0,180)+'......'}">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+                            </div>
+                            <div th:if="${topic.content.length() < 180}" th:text="${topic.content}">
+                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span th:text="${topic.date}">1000-01-01</span>
+                            -
+                            <span><a th:href="'/personal?user='+${topic.user}" th:text="${topic.username}">作者</a></span>
+                            -
+                            <span><a th:href="'/topic?label='+${topic.labelHref}" th:text="${topic.label}">插件</a></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="page" th:if="${session.search != null}">
+                <a th:href="'javascript:'+|page(1,${session.searchPage.lastPage},'${session.search}')|" class="back"></a>
+                <a th:href="'javascript:'+|page(${session.searchPage.page - 1},${session.searchPage.lastPage},'${session.search}')|" class="pre"></a>
+                <span th:text="${session.searchPage.page} + '/' + ${session.searchPage.lastPage}">1/2</span>
+                <a th:href="'javascript:'+|page(${session.searchPage.page + 1},${session.searchPage.lastPage},'${session.search}')|" class="next"></a>
+                <a th:href="'javascript:'+|page(${session.searchPage.lastPage},${session.searchPage.lastPage},'${session.search}')|" class="last"></a>
+            </div>
+            <script src="./js/search.js"></script>
+        </div>
+        <div class="bottom"></div>
     </div>
+</div>
+<div class="tail">
+    <p>StarFall<br>始于2016</p>
+</div>
 </body>
 </html>

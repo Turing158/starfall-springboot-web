@@ -20,7 +20,7 @@ public interface TopicDao extends JpaRepository<Topic,Long> {
     int countAllByUser(String user);
     int countAllBy();
     int countAllByLabel(String label);
-//    Topic findById(int num);
+    //    Topic findById(int num);
     @Modifying
     @Query(value = "UPDATE web.topic SET comment = ?2 WHERE id = ?1",nativeQuery = true)
     void updateCommentNum(int id,int num);
@@ -30,4 +30,7 @@ public interface TopicDao extends JpaRepository<Topic,Long> {
     void updateData();
     @Query(value = "select * from topic where title like %?1% or content like %?1% limit ?2,10",nativeQuery = true)
     List<Topic> searchTopic(String search, int page);
+
+    @Query(value = "select count(*) from topic where title like %?1% or content like %?1%",nativeQuery = true)
+    int countSearch(String search);
 }
