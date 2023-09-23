@@ -9,9 +9,8 @@
     <link rel="stylesheet" href="css/top.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/works.css">
-    <link rel="stylesheet" href="css/video.css">
-    <link rel="stylesheet" href="css/comment.css">
     <link rel="stylesheet" href="css/scrollbar.css">
+    <link rel="stylesheet" href="css/search.css">
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.css">
     <link rel="shortcut icon" href="img/ico.png" type="image/x-icon">
     <title>|</title>
@@ -69,6 +68,13 @@
     </div>
 </div>
 <ul id="ul">
+    <div class="minSearch">
+        <form action="/topic/search" method="get">
+            <div>
+                <input type="text" name="search"><button type="submit"></button>
+            </div>
+        </form>
+    </div>
     <li id="ul_li"><a id="ul_home" class="active"><b>首页</b><br><span>home</span></a></li>
     <li id="ul_li"><a id="ul_works" class="ul_border"><b>作品</b><br><span>works</span></a></li>
     <li id="ul_li"><a class="ul_border" href="https://blog.csdn.net/weixin_46396315?type=blog"><b>博客</b><br><span>Blog</span></a></li>
