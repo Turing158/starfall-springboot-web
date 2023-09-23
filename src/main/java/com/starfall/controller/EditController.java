@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.*;
 import java.util.List;
 import java.util.Objects;
@@ -192,9 +193,10 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String name,
             @RequestParam(required = false,defaultValue = "") String head,
             @RequestParam(required = false,defaultValue = "0") String promise,
-            @RequestParam(required = false,defaultValue = "") String introduce
+            @RequestParam(required = false,defaultValue = "") String introduce,
+            @RequestParam(value = "exp",required = false,defaultValue = "0") String exp_str
     ){
-        int exp = 1;
+        int exp = Integer.parseInt(exp_str);
         User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp);
         userDao.deleteById(((User) session.getAttribute("administerModifyInfU")).getUser());
         System.out.println(((User) session.getAttribute("administerModifyInfU")).getUser());
@@ -471,9 +473,10 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String name,
             @RequestParam(required = false,defaultValue = "") String head,
             @RequestParam(required = false,defaultValue = "0") String promise,
-            @RequestParam(required = false,defaultValue = "") String introduce
+            @RequestParam(required = false,defaultValue = "") String introduce,
+            @RequestParam(value = "exp",required = false,defaultValue = "0") String exp_str
     ){
-        int exp = 1;
+        int exp = Integer.parseInt(exp_str);
         User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp);
         if(userDao.existsById(user)){
             session.setAttribute("administerTips","添加失败！已存在User："+user);

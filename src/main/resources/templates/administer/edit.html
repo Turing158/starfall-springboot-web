@@ -53,6 +53,7 @@
                     <th><div style="width: 200px;"><span>介绍<br>Introduce</span></div></th>
                     <th><div style="width: 200px;"><span>邮箱<br>Email</span></div></th>
                     <th><div><span>头像<br>Head</span></div></th>
+                    <th><div><span>经验<br>Exp</span></div></th>
                     <th><div style="width: 120px;"><span>操作<br>Operate</span></div></th>
                 </tr>
                 <tr class="EditTd" th:each="user : ${session.adminUsers}">
@@ -63,6 +64,7 @@
                     <td><div th:text="${user.name}">name</div></td>
                     <td><div th:text="${user.introduce}" style="width: 200px;">introduce</div></td>
                     <td><div th:text="${user.email}" style="width: 200px;">12345678901@163.com</div></td>
+                    <td><div th:text="${user.exp}" style="width: 200px;">111</div></td>
                     <td style="text-align: center;">
                         <img class="minImg" th:src="'../head_img/'+${user.head}" alt="">
                     </td>
