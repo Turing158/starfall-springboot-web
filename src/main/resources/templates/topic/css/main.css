@@ -44,7 +44,7 @@ body{
     background-image: url(../img/ul_bg.png);
     width: 155px;
     height: 50px;
-    margin-right: 100px;
+    margin-right: 180px;
 }
 .ul .li_user img{
     border: 2px solid #f1f1f1;
@@ -60,7 +60,7 @@ body{
     width: 150px;
     height: 120px;
     top: 50px;
-    right: 100px;
+    right: 180px;
     border-left: 2px solid #8f8568;
     border-right: 2px solid #3f3a2c;
     border-bottom: 2px solid #3f3a2c;

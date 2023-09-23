@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../topic/css/book.css">
     <link rel="stylesheet" href="../topic/css/comment.css">
     <link rel="stylesheet" href="../topic/css/font.css">
+    <link rel="stylesheet" href="./css/search.css">
     <link rel="shortcut icon" href="img/starfall.png" type="image/x-icon">
     <title>error</title>
 </head>
@@ -16,6 +17,13 @@
     <li><a href="/topic">主题</a></li>
     <li><a href="https://www.minecraft.net/zh-hans">Minecraft</a></li>
     <li><a href="https://minecraft.fandom.com/zh/wiki/Minecraft_Wiki">Minecraft Wiki</a></li>
+    <div class="minSearch">
+        <form action="/topic/search" method="get">
+            <div>
+                <input type="text" name="search" placeholder="搜你所想"><button type="submit"></button>
+            </div>
+        </form>
+    </div>
     <li th:if="${session.user != null}" class="li_user"><img th:src="@{'/head_img/'+${session.user.head}}" alt="">
         <div class="menu">
             <p th:text="${session.user.name}">User</p>
