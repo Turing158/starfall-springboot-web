@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Error</title>
+    <link rel="shortcut icon" href="img/starfall.png" type="image/x-icon">
 </head>
 <style>
     body{
@@ -13,12 +14,12 @@
         align-items: center;
         overflow: hidden;
     }
-    div{
+    .main{
         width: 500px;
         height: 200px;
-        backdrop-filter: blur(5px);
+        background-color: #f8eee0;
         text-align: center;
-        border-radius: 10px;
+        border-radius: 20px;
     }
     a{
         text-decoration: none;
@@ -30,12 +31,47 @@
     h1{
         color: darkred;
     }
+    .main div:nth-child(1){
+        width: 100%;
+        height: 26px;
+        background-size: 100%;
+        background-image: url("img/home_top.png");
+    }
+    .main div:nth-child(2){
+        width: 36px;
+        height: calc(100% - 26px);
+        background-size: 100%;
+        background-image: url("img/left.png");
+    }
+    .main div:nth-child(3){
+        width: 100%;
+        height: 26px;
+        background-size: 100%;
+        background-image: url("img/home_foot.png");
+    }
+    .main div:nth-child(4){
+        margin-top: -200px;
+        float: right;
+        width: 36px;
+        height: calc(100% - 26px);
+        background-size: 100%;
+        background-image: url("img/right.png");
+    }
+    .main div:nth-child(5){
+        margin-top: -200px;
+    }
 </style>
 <body background="img/bg.png">
-<div>
-    <h1>错误</h1>
-    <p>您的操作有误，请返回首页</p>
-    <a href="/home">返回首页</a>
+<div class="main">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div>
+        <h1>错误</h1>
+        <p>您的操作有误，请返回首页</p>
+        <a href="/home">返回首页</a>
+    </div>
 </div>
 </body>
 </html>
