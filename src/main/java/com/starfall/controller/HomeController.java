@@ -1,10 +1,7 @@
 package com.starfall.controller;
 
 import com.starfall.Application;
-import com.starfall.dao.GoodDao;
-import com.starfall.dao.NoticeDao;
-import com.starfall.entity.Exp;
-import com.starfall.entity.User;
+import com.starfall.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -18,29 +15,18 @@ import javax.servlet.http.HttpSession;
 @SpringBootApplication(scanBasePackageClasses = Application.class)
 public class HomeController{
 
+
     @Autowired
-    private NoticeDao noticeDao;
+    private HomeService homeService;
 
 
 //进入主页与返回主页的控制
     @RequestMapping(value = {"/home","/"})
     public String home(
             HttpSession session
-    ) {
-//        测试用
-//        session.setMaxInactiveInterval(1);
+    ){
 
-        session.setMaxInactiveInterval(10);
-        if(session.getAttribute("user") != null){
-            session.setMaxInactiveInterval(60*60*24*7);
-            if(session.getAttribute("userExp") == null){
-                User userObj = (User) session.getAttribute("user");
-                Exp exp = new Exp(userObj.getLevel(),userObj.getExp());
-                session.setAttribute("userExp",exp);
-            }
-        }
-        session.setAttribute("noticeLength",noticeDao.count());
-        session.setAttribute("notices",noticeDao.findAll());
+        homeService.enterHome(session);
         return "index";
     }
     //退出，将session清空
