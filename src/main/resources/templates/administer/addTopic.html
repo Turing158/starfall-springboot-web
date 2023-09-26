@@ -11,7 +11,6 @@
     <title>正在添加...</title>
     <script src="https://cdn.bootcdn.net/ajax/libs/marked/4.3.0/marked.min.js" type="text/javascript"></script>
     <script src="https://cdn.staticfile.org/vue/3.0.5/vue.global.js"></script>
-    
 </head>
 <body background="./img/bg.png">
     <ul class="ul">
@@ -28,6 +27,13 @@
             </div>
         </li>
     </ul>
+    <div class="grayTips">
+        <div class="tips">
+            <p>提示</p>
+            <div class="tipsContent" th:text="${session.administerTips}"></div>
+            <button class="tipsBtn" onclick="cleartips()">确定</button>
+        </div>
+    </div>
     <div class="windows">
         <a class="close" href="javascript:close()">×</a>
         <p style="font-size: 30px;">插入图片</p>
@@ -107,7 +113,7 @@
                         <table class="contentTable">
                             <tr>
                                 <td class="contentTop">
-                                    &nbsp;<img style="width: 15px" src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="date" placeholder="默认值1000-01-01" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span> <span style="position: relative;font-size: 18px;color: darkred;float:right">tips:</span>
+                                    &nbsp;<img style="width: 15px" src="./img/Cicon.gif" alt=""> <span>发表于 <span class="date"><input type="text" name="date" placeholder="默认值1000-01-01" style="width: 100px" th:value="${session.administerModifyInfT.getDate()}"></span></span> <span>主题id：<input type="text" placeholder="默认0" name="id" style="width: 50px" th:value="${session.administerModifyInfT.getId()}"> </span>
                                 </td>
                             </tr>
                             <tr>

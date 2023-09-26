@@ -3,6 +3,7 @@ package com.starfall.controller;
 import com.starfall.Application;
 import com.starfall.dao.*;
 import com.starfall.entity.*;
+import com.starfall.service.EditService;
 import com.starfall.util.OnlineUtil;
 import com.starfall.util.OtherUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,8 @@ public class EditController {
     @Autowired
     private GoodDao goodDao;
     private final OtherUtil otherUtil = new OtherUtil();
-
+    @Autowired
+    private EditService editService;
 
 //    进入编辑页面
     @RequestMapping("/administer/html")
@@ -49,44 +51,12 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "1") int pageC,
             @RequestParam(required = false,defaultValue = "1") int pageG
     ){
-        if(session.getAttribute("user") == null){
+        String status = editService.toEdit(session,pageU,pageT,pageN,pageC,pageG);
+        if(status.equals("error")){
             return "redirect:/home";
         }
-        int promise = ((User) session.getAttribute("user")).getPromise();
-        if(promise != 100){
-            return "redirect:/home";
-        }
-        Pageable pageableU = PageRequest.of(pageU-1,20, Sort.by("user").ascending());
-        Pageable pageableT = PageRequest.of(pageT-1,20, Sort.by("id").ascending());
-        Pageable pageableN = PageRequest.of(pageN-1,20, Sort.by("id").ascending());
-        Pageable pageableC = PageRequest.of(pageC-1,20, Sort.by("id").ascending());
-        Pageable pageableG = PageRequest.of(pageG-1,20, Sort.by("id").ascending());
-
-        session.setAttribute("adminUsers",userDao.findAll(pageableU));
-        Page pageUObj = new Page(pageU, (int) ((userDao.count()+19)/20));
-        session.setAttribute("adminPageUsers",pageUObj);
-
-        session.setAttribute("adminTopics",topicDao.findAll(pageableT));
-        Page pageTObj = new Page(pageT, (int) ((topicDao.count()+19)/20));
-        session.setAttribute("adminPageTopics",pageTObj);
-
-        session.setAttribute("adminNotices",noticeDao.findAll(pageableN));
-        Page pageNObj = new Page(pageN, (int) ((noticeDao.count()+19)/20));
-        session.setAttribute("adminPageNotices",pageNObj);
-
-        session.setAttribute("adminComments",commentDao.findAll(pageableC));
-        Page pageCObj = new Page(pageC, (int) ((commentDao.count()+19)/20));
-        session.setAttribute("adminPageComments",pageCObj);
-
-        session.setAttribute("adminGoods", goodDao.findAll(pageableG));
-        Page pageGObj = new Page(pageG, (int) ((goodDao.count()+19)/20));
-        session.setAttribute("adminPageGoods",pageGObj);
-
         return "administer/edit";
     }
-
-
-
 
 //存储当前页面
     @RequestMapping("/administer/setPage")
@@ -97,9 +67,6 @@ public class EditController {
     ){
         session.setAttribute("administerPage",page);
     }
-
-
-
 
 //    获取在线人数
     @RequestMapping("/administer/getOnline")
@@ -120,65 +87,11 @@ public class EditController {
             @RequestParam(required = false) String comment,
             @RequestParam(required = false) String good
     ){
-        if(user != null){
-            Optional<User> userObj = userDao.findById(user);
-            if(userObj.isPresent()){
-                session.setAttribute("administerModifyInfU",userObj.get());
-                session.setAttribute("administerModify",userObj.get().getUser());
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
+        String status = editService.modify(session,user,topic,notice,comment,good);
+        if(status.equals("modify")){
+            return "administer/modify";
         }
-        else if(topic != null){
-            Long topicId = (long) Integer.parseInt(topic);
-            Optional<Topic> topicObj = topicDao.findById(topicId);
-            if(topicObj.isPresent()){
-                session.setAttribute("administerModifyInfT",topicObj.get());
-                session.setAttribute("administerModify",topicObj.get().getId());
-                return "administer/modifyTopic";
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-        }
-        else if(notice != null){
-            Long noticeId = (long) Integer.parseInt(notice);
-            Optional<Notice> noticeObj = noticeDao.findById(noticeId);
-            if(noticeObj.isPresent()){
-                session.setAttribute("administerModifyInfN",noticeObj.get());
-                session.setAttribute("administerModify",noticeObj.get().getId());
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-        }
-        else if(comment != null){
-            Long commentId = (long) Integer.parseInt(comment);
-            Optional<Comment> commentObj = commentDao.findById(commentId);
-            if(commentObj.isPresent()){
-                session.setAttribute("administerModifyInfC",commentObj.get());
-                session.setAttribute("administerModify",commentObj.get().getId());
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-
-        }
-        else if(good != null){
-            Long goodId = (long) Integer.parseInt(good);
-            Optional<Good> goodObj = goodDao.findById(goodId);
-            if(goodObj.isPresent()){
-                session.setAttribute("administerModifyInfG",goodObj.get());
-                session.setAttribute("administerModify",goodObj.get().getId());
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-
-        }
-        session.setAttribute("administerModify",null);
-        return "administer/modify";
+        return "administer/modifyTopic";
     }
 
     //    添加用户
@@ -196,13 +109,7 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String introduce,
             @RequestParam(value = "exp",required = false,defaultValue = "0") String exp_str
     ){
-        int exp = Integer.parseInt(exp_str);
-        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp);
-        userDao.deleteById(((User) session.getAttribute("administerModifyInfU")).getUser());
-        System.out.println(((User) session.getAttribute("administerModifyInfU")).getUser());
-        userDao.save(userObj);
-        session.setAttribute("administerTips","修改成功！已修改User："+user);
-        session.removeAttribute("administerModifyInfU");
+        editService.modifyUser(session,user,password,email,level,date,name,head,promise,introduce,exp_str);
         return "redirect:/administer/html";
     }
 
@@ -227,25 +134,11 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String download,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        long idLong = Integer.parseInt(id);
-        long oldId = ((Topic) session.getAttribute("administerModifyInfT")).getId();
-        Topic topicObj = new Topic(idLong,"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),otherUtil.labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
-        if(topicDao.existsById(idLong) && oldId != idLong){
-            session.setAttribute("administerTips","修改失败！已存在Topic："+id);
-            session.setAttribute("administerModifyInfT",topicObj);
-            return "redirect:/administer/modifyData?topic="+oldId;
+        int status = editService.modifyTopic(session,id,view,comment,label,bigTitle,date,user,titleName,titleEnglishName,source,version,authorName,language,address,download,content);
+        System.out.println(status);
+        if(status >= 0){
+            return "redirect:/administer/modify?topic="+status;
         }
-//        如果id为0，说明是新添加的，需要重新设置id
-        if(idLong == 0){
-            List<Topic> topics = topicDao.findAll(Sort.by("id").descending());
-            idLong = topics.get(0).getId()+1;
-            topicObj.setId(idLong);
-        }
-        topicDao.deleteById(oldId);
-        topicDao.save(topicObj);
-        topicDao.updateData();
-        session.setAttribute("administerTips","修改成功！已修改Topic："+idLong);
-        session.removeAttribute("administerModifyInfT");
         return "redirect:/administer/html";
     }
 
@@ -256,24 +149,10 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "0") String id,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        long idLong = Integer.parseInt(id);
-        long oldId = ((Notice) session.getAttribute("administerModifyInfN")).getId();
-        Notice noticeObj = new Notice(idLong,content);
-        if(noticeDao.existsById(idLong) && oldId != idLong){
-            session.setAttribute("administerTips","修改失败！已存在Notice："+id);
-            session.setAttribute("administerModifyInfN",noticeObj);
-            return "redirect:/administer/modifyData?notice="+oldId;
+        int status = editService.modifyNotice(session,id,content);
+        if(status >= 0){
+            return "redirect:/administer/modify?notice="+status;
         }
-//        如果id为0，说明是新添加的，需要重新设置id
-        if(idLong == 0){
-            List<Notice> notices = noticeDao.findAll(Sort.by("id").descending());
-            idLong = notices.get(0).getId()+1;
-            noticeObj.setId(idLong);
-        }
-        noticeDao.save(noticeObj);
-        noticeDao.deleteById(oldId);
-        session.setAttribute("administerTips","修改成功！已修改公告："+idLong);
-        session.removeAttribute("administerModifyInfN");
         return "redirect:/administer/html";
     }
 
@@ -288,25 +167,10 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "1000-01-01") String date,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        long idLong = Integer.parseInt(id);
-        long oldId = ((Comment) session.getAttribute("administerModifyInfC")).getId();
-        Comment commentObj = new Comment(idLong,content,date,user,Integer.parseInt(topicid));
-        if(commentDao.existsById(idLong) && oldId != idLong){
-            session.setAttribute("administerTips","修改失败！已存在Comment："+id);
-            session.setAttribute("administerModifyInfC",commentObj);
-            return "redirect:/administer/modifyData?comment="+oldId;
+        int status = editService.modifyComment(session,id,topicid,user,date,content);
+        if(status >= 0){
+            return "redirect:/administer/modify?comment="+status;
         }
-//        如果id为0，说明是新添加的，需要重新设置id
-        if(idLong == 0){
-            List<Comment> comments = commentDao.findAll(Sort.by("id").descending());
-            idLong = comments.get(0).getId()+1;
-            commentObj.setId(idLong);
-        }
-        commentDao.deleteById(oldId);
-        commentDao.save(commentObj);
-        commentDao.updateData();
-        session.setAttribute("administerTips","修改成功！已修改评论："+idLong);
-        session.removeAttribute("administerModifyInfC");
         return "redirect:/administer/html";
     }
 
@@ -320,25 +184,10 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "1000-01-01") String date,
             @RequestParam(required = false,defaultValue = "0") String good
     ){
-        int goodInt = Integer.parseInt(good);
-        long idLong = Integer.parseInt(id);
-        long oldId = ((Good) session.getAttribute("administerModifyInfG")).getId();
-        Good goodObj = new Good(idLong,goodInt,user,Integer.parseInt(topicid),date);
-        if(goodDao.existsById(idLong) && oldId != idLong){
-            session.setAttribute("administerTips","修改失败！已存在Good："+id);
-            session.setAttribute("administerModifyInfG", goodObj);
-            return "redirect:/administer/modifyData?good="+oldId;
+        int status = editService.modifyGood(session,id,topicid,user,date,good);
+        if(status >= 0){
+            return "redirect:/administer/modify?good="+status;
         }
-//        如果id为0，说明是新添加的，需要重新设置id
-        if(idLong == 0){
-            List<Good> goods = goodDao.findAll(Sort.by("id").descending());
-            idLong = goods.get(0).getId()+1;
-            goodObj.setId(idLong);
-        }
-        goodDao.deleteById(oldId);
-        goodDao.save(goodObj);
-        session.setAttribute("administerTips","修改成功！已修改喜欢："+idLong);
-        session.removeAttribute("administerModifyInfG");
         return "redirect:/administer/html";
     }
 
@@ -354,63 +203,7 @@ public class EditController {
             @RequestParam(required = false) String comment,
             @RequestParam(required = false) String good
     ){
-        if(user != null){
-            Optional<User> userObj = userDao.findById(user);
-            if(userObj.isPresent()){
-                userDao.deleteById(user);
-                session.setAttribute("administerTips","删除成功！已删除User："+user);
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-        }
-        else if(topic != null){
-            Long topicId = (long) Integer.parseInt(topic);
-            Optional<Topic> topicObj = topicDao.findById(topicId);
-            if(topicObj.isPresent()){
-                topicDao.deleteById(topicId);
-                session.setAttribute("administerTips","删除成功！已删除Topic："+topic);
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-        }
-        else if(notice != null){
-            Long noticeId = (long) Integer.parseInt(notice);
-            Optional<Notice> noticeObj = noticeDao.findById(noticeId);
-            if(noticeObj.isPresent()){
-                noticeDao.deleteById(noticeId);
-                session.setAttribute("administerTips","删除成功！已删除Notice："+notice);
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-        }
-        else if(comment != null){
-            Long commentId = (long) Integer.parseInt(comment);
-            Optional<Comment> commentObj = commentDao.findById(commentId);
-            if(commentObj.isPresent()){
-                commentDao.deleteById(commentId);
-                session.setAttribute("administerTips","删除成功！已删除Comment："+comment);
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-
-        }
-        else if(good != null){
-            Long goodId = (long) Integer.parseInt(good);
-            Optional<Good> goodObj = goodDao.findById(goodId);
-            if(goodObj.isPresent()){
-                goodDao.deleteById(goodId);
-                session.setAttribute("administerTips","删除成功！已删除good："+good);
-            }
-            else {
-                session.setAttribute("administerModify","not exist");
-            }
-
-        }
-        session.setAttribute("administerModify",null);
+        editService.delete(session,user,topic,notice,comment,good);
         return "redirect:/administer/html";
     }
 
@@ -432,32 +225,14 @@ public class EditController {
             HttpSession session,
             @RequestParam(required = false) String type
     ){
-//        初始化session，不然无法访问，会使渲染层报空指针异常
-        User user = new User();
-        if (session.getAttribute("administerModifyInfU") == null){
-            session.setAttribute("administerModifyInfU",user);
+        String status = editService.addDataPage(session,type);
+        if(status.equals("error")){
+            return "redirect:/administer/html";
         }
-        Topic topic = new Topic();
-        if (session.getAttribute("administerModifyInfT") == null){
-            session.setAttribute("administerModifyInfT",topic);
+        if(status.equals("topic")){
+            return "administer/addTopic";
         }
-        Notice notice = new Notice();
-        if (session.getAttribute("administerModifyInfN") == null){
-            session.setAttribute("administerModifyInfN",notice);
-        }
-        Comment comment = new Comment();
-        if (session.getAttribute("administerModifyInfC") == null){
-            session.setAttribute("administerModifyInfC",comment);
-        }
-        Good good = new Good();
-        if (session.getAttribute("administerModifyInfG") == null){
-            session.setAttribute("administerModifyInfG", good);
-        }
-//        判断类型
-        if(!Objects.equals(type, "topic")){
-            return "administer/addData";
-        }
-        return "administer/addTopic";
+        return "administer/addData";
     }
 
 
@@ -476,17 +251,12 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String introduce,
             @RequestParam(value = "exp",required = false,defaultValue = "0") String exp_str
     ){
-        int exp = Integer.parseInt(exp_str);
-        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp);
-        if(userDao.existsById(user)){
-            session.setAttribute("administerTips","添加失败！已存在User："+user);
-            session.setAttribute("administerModifyInfU",userObj);
-            return "redirect:/administer/addData?type=user";
+        String status = editService.addUser(session,user,password,email,level,date,name,head,promise,introduce,exp_str);
+        if(status.equals("success")){
+            return "redirect:/administer/html";
+
         }
-        userDao.save(userObj);
-        session.setAttribute("administerTips","添加成功！已添加User："+user);
-        session.removeAttribute("administerModifyInfU");
-        return "redirect:/administer/html";
+        return "redirect:/administer/addData?type=user";
     }
 
 //    添加话题
@@ -510,24 +280,11 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String download,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        long idLong = Integer.parseInt(id);
-        Topic topicObj = new Topic(idLong,"",label,bigTitle,user,date,Integer.parseInt(comment),Integer.parseInt(view),otherUtil.labelCE(label),titleName,titleEnglishName,source,version,language,address,download,content,authorName);
-        if(topicDao.existsById(idLong)){
-            session.setAttribute("administerTips","添加失败！已存在Topic："+id);
-            session.setAttribute("administerModifyInfT",topicObj);
-            return "redirect:/administer/addData?type=topic";
+        String status = editService.addTopic(session,id,view,comment,label,bigTitle,date,user,titleName,titleEnglishName,source,version,authorName,language,address,download,content);
+        if(status.equals("success")){
+            return "redirect:/administer/html";
         }
-//        如果id为0，说明是新添加的，需要重新设置id
-        if(idLong == 0){
-            List<Topic> topics = topicDao.findAll(Sort.by("id").descending());
-            idLong = topics.get(0).getId()+1;
-            topicObj.setId(idLong);
-        }
-        topicDao.save(topicObj);
-        topicDao.updateData();
-        session.setAttribute("administerTips","添加成功！已添加Topic："+idLong);
-        session.removeAttribute("administerModifyInfT");
-        return "redirect:/administer/html";
+        return "redirect:/administer/addData?type=topic";
     }
 
 //    添加公告
@@ -537,23 +294,11 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "0") String id,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        long idLong = Integer.parseInt(id);
-        Notice noticeObj = new Notice(idLong,content);
-        if(noticeDao.existsById(idLong)){
-            session.setAttribute("administerTips","添加失败！已存在Notice："+id);
-            session.setAttribute("administerModifyInfN",noticeObj);
-            return "redirect:/administer/addData?type=notice";
+        String status = editService.addNotice(session,id,content);
+        if(status.equals("success")){
+            return "redirect:/administer/html";
         }
-//        如果id为0，说明是新添加的，需要重新设置id
-        if(idLong == 0){
-            List<Notice> notices = noticeDao.findAll(Sort.by("id").descending());
-            idLong = notices.get(0).getId()+1;
-            noticeObj.setId(idLong);
-        }
-        noticeDao.save(noticeObj);
-        session.setAttribute("administerTips","添加成功！已添加公告："+idLong);
-        session.removeAttribute("administerModifyInfN");
-        return "redirect:/administer/html";
+        return "redirect:/administer/addData?type=notice";
     }
 
 
@@ -567,31 +312,18 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "1000-01-01") String date,
             @RequestParam(required = false,defaultValue = "") String content
     ){
-        long idLong = Integer.parseInt(id);
-        Comment commentObj = new Comment(idLong,content,date,user,Integer.parseInt(topicid));
-        if(commentDao.existsById((long) Integer.parseInt(id))){
-            session.setAttribute("administerTips","添加失败！已存在Comment："+id);
-            session.setAttribute("administerModifyInfC",commentObj);
-            return "redirect:/administer/addData?type=comment";
+        String status = editService.addComment(session,id,topicid,user,date,content);
+        if(status.equals("success")){
+            return "redirect:/administer/html";
         }
-//        如果id为0，说明是新添加的，需要重新设置id
-        if(idLong == 0){
-            List<Comment> comments = commentDao.findAll(Sort.by("id").descending());
-            idLong = comments.get(0).getId()+1;
-            commentObj.setId(idLong);
-        }
-        commentDao.save(commentObj);
-        commentDao.updateData();
-        session.setAttribute("administerTips","添加成功！已添加评论："+idLong);
-        session.removeAttribute("administerModifyInfC");
-        return "redirect:/administer/html";
+        return "redirect:/administer/addData?type=comment";
     }
 
 
 
     //    添加喜欢
     @RequestMapping("/administer/addData/addGoodData")
-    public String addgood(
+    public String addGood(
             HttpSession session,
             @RequestParam(required = false,defaultValue = "0") String id,
             @RequestParam(required = false,defaultValue = "0") String topicid,
@@ -599,24 +331,11 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "1000-01-01") String date,
             @RequestParam(required = false,defaultValue = "0") String good
     ){
-        long idLong = Integer.parseInt(id);
-        int goodInt = Integer.parseInt(good);
-        Good goodObj = new Good(idLong,goodInt,user,Integer.parseInt(topicid),date);
-        if(goodDao.existsById((long) Integer.parseInt(id))){
-            session.setAttribute("administerTips","添加失败！已存在good："+id);
-            session.setAttribute("administerModifyInfL", goodObj);
-            return "redirect:/administer/addData?type=good";
+        String status = editService.addGood(session,id,topicid,user,date,good);
+        if(status.equals("success")){
+            return "redirect:/administer/html";
         }
-//        如果id为0，说明是新添加的，需要重新设置id
-        if(idLong == 0){
-            List<Good> goods = goodDao.findAll(Sort.by("id").descending());
-            idLong = goods.get(0).getId()+1;
-            goodObj.setId(idLong);
-        }
-        goodDao.save(goodObj);
-        session.setAttribute("administerTips","添加成功！已添加喜欢："+idLong);
-        session.removeAttribute("administerModifyInfL");
-        return "redirect:/administer/html";
+        return "redirect:/administer/addData?type=good";
     }
 
     //  有关添加功能========================================================================================

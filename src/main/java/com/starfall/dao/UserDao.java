@@ -25,5 +25,4 @@ public interface UserDao extends JpaRepository<User,String> {
     @Modifying
     @Query(value = "update user set user.head = :head where user.user = :user",nativeQuery = true)
     void setHead(@Param("user") String user, @Param("head") String head);
-
 }

@@ -1,5 +1,4 @@
 let textContent = document.querySelector('.textContent');
-console.log(textContent.textContent);
 let show = Vue.createApp({
     data(){
         return {
@@ -8,6 +7,12 @@ let show = Vue.createApp({
         }
     }
 }).mount('.editTd');
+let tips = document.querySelector('.grayTips');
+let tipsContent = document.querySelector('.tipsContent').textContent;
+// tips.style.display = 'none';
+if(tipsContent.length !== 0){
+    tips.style.display = 'flex';
+}
 function h(num){
     let select = window.getSelection();
     let str = '';
@@ -22,11 +27,14 @@ function b(){
     let str = '**'+select.toString()+'**';
     replaceText(str);
 }
+
+
 function i(){
     let select = window.getSelection();
     let str = '*'+select.toString()+'*';
     replaceText(str);
 }
+
 function code(){
     let select = window.getSelection();
     let str = '```\n'+select.toString()+'\n```';
@@ -44,7 +52,7 @@ function del(){
 function a(){
     let select = window.getSelection();
     let str = '';
-    if(select.toString().length == 0){
+    if(select.toString().length === 0){
         str = '[请输入](href)';
     }
     else{
@@ -95,6 +103,13 @@ function selectPicture(){
 }
 function table(){
 
+}
+function cleartips(){
+    let ajax = new XMLHttpRequest();
+    let tips = document.querySelector('.grayTips');
+    tips.style.display = 'none';
+    ajax.open('GET','/administer/clearTips');
+    ajax.send();
 }
 function replaceText(str){
     let text = document.querySelector('textarea');
