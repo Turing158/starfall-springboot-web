@@ -107,9 +107,10 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String head,
             @RequestParam(required = false,defaultValue = "0") String promise,
             @RequestParam(required = false,defaultValue = "") String introduce,
-            @RequestParam(value = "exp",required = false,defaultValue = "0") String exp_str
+            @RequestParam(value = "exp",required = false,defaultValue = "0") String exp_str,
+            @RequestParam(value = "exp",required = false,defaultValue = "0") String sign_str
     ){
-        editService.modifyUser(session,user,password,email,level,date,name,head,promise,introduce,exp_str);
+        editService.modifyUser(session,user,password,email,level,date,name,head,promise,introduce,exp_str,sign_str);
         return "redirect:/administer/html";
     }
 
@@ -249,9 +250,10 @@ public class EditController {
             @RequestParam(required = false,defaultValue = "") String head,
             @RequestParam(required = false,defaultValue = "0") String promise,
             @RequestParam(required = false,defaultValue = "") String introduce,
-            @RequestParam(value = "exp",required = false,defaultValue = "0") String exp_str
+            @RequestParam(value = "exp",required = false,defaultValue = "0") String exp_str,
+            @RequestParam(value = "exp",required = false,defaultValue = "0") String sign_str
     ){
-        String status = editService.addUser(session,user,password,email,level,date,name,head,promise,introduce,exp_str);
+        String status = editService.addUser(session,user,password,email,level,date,name,head,promise,introduce,exp_str,sign_str);
         if(status.equals("success")){
             return "redirect:/administer/html";
 

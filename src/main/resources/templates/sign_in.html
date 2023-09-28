@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'签到-'+${session.user.getName()}">签到</title>
+    <link rel="stylesheet" href="./css/sign_in.css">
+    
+</head>
+<body>
+    <div class="book">
+        <div class="top"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <script src="./js/sign_in.js"></script>
+        <div class="main">
+            <table>
+                <tr>
+                    <th th:text="${session.user.name}">name</th>
+                    <th><span>0000-00-00</span></th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="main_left">
+                            <img th:src="@{'/head_img/'+${session.user.head}}" alt="">
+                            <div class="sign btn" onclick="sign()"><span>签 到</span></div>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="bottom"></div>
+    </div>
+</body>
+</html>

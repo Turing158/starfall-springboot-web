@@ -1,0 +1,106 @@
+*{
+    user-select: none;
+    margin: 0;
+    padding: 0;
+    transition: all 0.2s,font 0s;
+}
+body{
+    background-image: url(../img/bg.png);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+.book{
+    position: relative;
+    top: 50px;
+}
+.top{
+    background-image: url(../img/home_top.png);
+    height: 59px;
+    width: 1129px;
+}
+.left{
+    position: absolute;
+    background-image: url(../img/left.png);
+    width: 84px;
+    height: 500px;
+}
+.right{
+    position: absolute;
+    background-image: url(../img/right.png);
+    width: 84px;
+    height: 500px;
+    right: 0;
+}
+.bottom{
+    position: absolute;
+    background-image: url(../img/home_foot.png);
+    top: calc(500px + 59px);
+    height: 59px;
+    width: 1129px;
+}
+.btn{
+    background-image: url(../img/set/birch.png);
+    color: #131313;
+    border: 2px solid #ad8f66;
+    cursor: pointer;
+}
+.btn:hover{
+    background-image: url(../img/set/spruce.png);
+    color: #f9f9f9;
+    border: 2px solid #4d381e;
+}
+.main{
+    position: absolute;
+    background-color: #fcf4dc;
+    left: 84px;
+    top: 59px;
+    height: 500px;
+    width: calc(100% - 168px);
+}
+.main table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.main table tr th{
+    height: 30px;
+    border-bottom: 1px solid #d4bfa3;
+}
+.main table tr th:nth-child(1){
+    width: 150px;
+    border-right: 1px solid #d4bfa3;
+}
+.main table tr th:nth-child(2){
+    text-align: left;
+    font-weight: 300;
+}
+.main table tr th:nth-child(2) span{
+    margin-left: 20px;
+}
+.main_left{
+    height: 500px;
+    width: 150px;
+    background-color: antiquewhite;
+    border-right: 1px solid #d4bfa3;
+}
+.main_left img{
+    border: 5px solid #f9f9f9;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    background-size: 100%;
+    background-position: 50%;
+    object-fit: cover;
+}
+.main_left .sign{
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

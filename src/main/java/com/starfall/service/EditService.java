@@ -167,10 +167,12 @@ public class EditService {
             String head,
             String promise,
             String introduce,
-            String exp_str
+            String exp_str,
+            String sign_str
     ){
+        int sign = Integer.parseInt(sign_str);
         int exp = Integer.parseInt(exp_str);
-        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp);
+        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp,sign);
         userDao.deleteById(((User) session.getAttribute("administerModifyInfU")).getUser());
         userDao.save(userObj);
         session.setAttribute("administerTips","修改成功！已修改User："+user);
@@ -426,10 +428,12 @@ public class EditService {
             String head,
             String promise,
             String introduce,
-            String exp_str
+            String exp_str,
+            String sign_str
     ){
+        int sign = Integer.parseInt(sign_str);
         int exp = Integer.parseInt(exp_str);
-        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp);
+        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp,sign);
         if(userDao.existsById(user)){
             session.setAttribute("administerTips","添加失败！已存在User："+user);
             session.setAttribute("administerModifyInfU",userObj);

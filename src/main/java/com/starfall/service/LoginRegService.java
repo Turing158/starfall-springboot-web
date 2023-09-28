@@ -182,7 +182,7 @@ public class LoginRegService {
             }
             String name = "新用户"+ id_last6;
             LocalDate date = LocalDate.now();
-            userDao.save(new User(user,password,String.valueOf(date),1,name,null,email,"null.jpg",0,0));
+            userDao.save(new User(user,password,String.valueOf(date),1,name,null,email,"null.jpg",0,0,0));
             session.setAttribute("reg_notice","block");
             session.removeAttribute("email_code");
             session.removeAttribute("reg_email");
