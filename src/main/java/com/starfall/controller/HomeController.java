@@ -1,6 +1,7 @@
 package com.starfall.controller;
 
 import com.starfall.Application;
+import com.starfall.dao.SignInDao;
 import com.starfall.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,14 +19,14 @@ public class HomeController{
 
     @Autowired
     private HomeService homeService;
-
+    @Autowired
+    private SignInDao signInDao;
 
 //进入主页与返回主页的控制
     @RequestMapping(value = {"/home","/"})
     public String home(
             HttpSession session
     ){
-
         homeService.enterHome(session);
         return "index";
     }

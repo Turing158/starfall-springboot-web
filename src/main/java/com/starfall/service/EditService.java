@@ -168,11 +168,11 @@ public class EditService {
             String promise,
             String introduce,
             String exp_str,
-            String sign_str
+            String signcountinuous_str
     ){
-        int sign = Integer.parseInt(sign_str);
+        int signcountinuous = Integer.parseInt(signcountinuous_str);
         int exp = Integer.parseInt(exp_str);
-        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp,sign);
+        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp,signcountinuous);
         userDao.deleteById(((User) session.getAttribute("administerModifyInfU")).getUser());
         userDao.save(userObj);
         session.setAttribute("administerTips","修改成功！已修改User："+user);
@@ -429,11 +429,11 @@ public class EditService {
             String promise,
             String introduce,
             String exp_str,
-            String sign_str
+            String signcountinuous_str
     ){
-        int sign = Integer.parseInt(sign_str);
+        int signcountinuous = Integer.parseInt(signcountinuous_str);
         int exp = Integer.parseInt(exp_str);
-        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp,sign);
+        User userObj = new User(user,password,date,Integer.parseInt(level),name,introduce,email,head,Integer.parseInt(promise),exp,signcountinuous);
         if(userDao.existsById(user)){
             session.setAttribute("administerTips","添加失败！已存在User："+user);
             session.setAttribute("administerModifyInfU",userObj);

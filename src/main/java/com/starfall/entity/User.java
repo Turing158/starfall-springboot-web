@@ -47,5 +47,5 @@ public class User implements Serializable {
     @Column
     private int exp;
     @Column
-    private int signin;
+    private int signcontinuous;
 }
