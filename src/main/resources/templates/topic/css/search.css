@@ -184,6 +184,7 @@
     outline: none;
     padding-left: 10px;
     font-size: 15px;
+    background-color: #f1f1f1;
 }
 .minSearch div:hover{
     border: 1px solid #00862d;

@@ -22,6 +22,7 @@ public class SignInController {
         if(user == null){
             return "redirect:/home";
         }
+        signInService.enterSignIn(session);
         return "sign_in";
     }
 

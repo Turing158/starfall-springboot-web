@@ -18,6 +18,7 @@ body{
     width: 100vw;
     border-radius: 0 0 0 8px;
     z-index: 100;
+    font-family: cool_font;
 }
 .ul li{
     list-style: none;
@@ -101,8 +102,7 @@ body{
     border: 0;
 }
 .menu .level{
-    font-size: 12px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
 }
 .menu .level span:nth-child(1){
     color: #046404;
@@ -117,8 +117,8 @@ body{
 .menu .operate a{
     background-image: url(../img/oak.png);
     font-size: 14px;
-    padding: 3px 5px;
-    margin: 0 10px;
+    padding: 4px 6px;
+    margin: 0 2px;
     border-radius: 3px;
     text-decoration: none;
     color: #131313;

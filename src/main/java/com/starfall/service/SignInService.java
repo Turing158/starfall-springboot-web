@@ -2,9 +2,11 @@ package com.starfall.service;
 
 import com.starfall.dao.SignInDao;
 import com.starfall.dao.UserDao;
+import com.starfall.entity.Exp;
 import com.starfall.entity.SignIn;
 import com.starfall.entity.User;
 import com.starfall.util.DateUtil;
+import com.starfall.util.OtherUtil;
 import javafx.scene.input.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -23,6 +25,18 @@ public class SignInService {
     private UserDao userDao;
     @Autowired
     private SignInDao signInDao;
+
+
+    public void enterSignIn(
+            HttpSession session
+    ){
+
+        if(session.getAttribute("userExp") == null){
+            User userObj = (User) session.getAttribute("user");
+            Exp exp = new Exp(userObj.getLevel(),userObj.getExp());
+            session.setAttribute("userExp",exp);
+        }
+    }
 
     public String SignIn(
             HttpSession session
@@ -46,8 +60,11 @@ public class SignInService {
         Random r = new Random();
         int getExp = r.nextInt(100)+80;
         user.setExp(user.getExp()+getExp);
+        user.setLevel(OtherUtil.isLevel(user.getExp()));
         userDao.save(user);
         signInDao.save(new SignIn(signInDao.findAll(Sort.by(Sort.Direction.DESC, "id")).get(0).getId()+1,user.getUser(),LocalDateTime.now().toString(),"获得经验"+getExp+"点"));
+        Exp exp = new Exp(user.getLevel(),user.getExp());
+        session.setAttribute("userExp",exp);
         session.setAttribute("user",user);
         return "success";
     }

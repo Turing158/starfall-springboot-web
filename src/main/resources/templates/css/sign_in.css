@@ -12,8 +12,8 @@ body{
     justify-content: center;
 }
 .book{
-    position: relative;
-    top: 50px;
+    position: absolute;
+    top: 100px;
 }
 .top{
     background-image: url(../img/home_top.png);
@@ -113,4 +113,178 @@ body{
     position: absolute;
     font-size: 10px;
     margin-top: 25px;
+}
+.ul{
+    position:fixed;
+    background-image: url(../img/ul_bg.png);
+    height: 50px;
+    width: 100vw;
+    border-radius: 0 0 0 8px;
+    z-index: 100;
+    font-family: cool_font;
+}
+.ul li{
+    list-style: none;
+    float: left;
+    text-align: center;
+
+}
+.ul li a{
+    display: block;
+    padding: 14px 18px;
+    text-decoration: none;
+    color: #f1f1f1;
+    font-weight: bold;
+}
+.ul .li_home{
+    margin-left: 100px;
+}
+.ul li a:hover {
+    background-color: rgb(180, 180, 180);
+    color: #131313;
+}
+.ul .li_user{
+    float: right;
+    background-image: url(../img/ul_bg.png);
+    width: 155px;
+    height: 50px;
+    margin-right: 180px;
+}
+.ul .li_user img{
+    border: 2px solid #f1f1f1;
+    border-radius: 5px;
+    width: 40px;
+    height: 40px;
+}
+.menu{
+    position: absolute;
+    background-image: url(../img/set/birch.png);
+    background-size: 100%;
+    display: block;
+    width: 150px;
+    height: 120px;
+    top: 50px;
+    right: 180px;
+    border-left: 2px solid #8f8568;
+    border-right: 2px solid #3f3a2c;
+    border-bottom: 2px solid #3f3a2c;
+    font-weight: 100;
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    z-index: -1;
+    transform: translateY(-300px);
+    transition: all 250ms;
+}
+.menu p{
+    position: relative;
+    margin: 0;
+    font-size: 18px;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.menu .exp{
+    margin: 0 5px;
+    width: 135px;
+    height: 10px;
+    background-image: url(../img/lv0.png);
+    background-size: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 0;
+}
+.menu .exp div{
+    position: relative;
+    width: 0%;
+    height: 10px;
+    background-image: url(../img/lv1.png);
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    border: 0;
+}
+.menu .level{
+    font-size: 15px;
+}
+.menu .level span:nth-child(1){
+    color: #046404;
+}
+.menu .level span:nth-child(2){
+    color: #044964;
+}
+.menu .operate{
+    position: relative;
+    top: 15px;
+}
+.menu .operate a{
+    background-image: url(../img/set/oak.png);
+    font-size: 14px;
+    padding: 4px 6px;
+    margin: 0 2px;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #131313;
+    display: inline;
+}
+.menu .operate a:hover{
+    color: #f1f1f1;
+    background-image: url(../img/set/spruce.png);
+}
+.ul .li_user:hover .menu{
+    transform:translateY(0);
+}
+.minSearch{
+    position: absolute;
+    right: 0;
+    width: 200px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+}
+.minSearch form{
+    border: 0;
+    display: inline-block;
+    line-height: 0;
+    height: 30px;
+    text-align: left;
+}
+.minSearch div{
+    position: relative;
+    right: 400px;
+    width: 180px;
+    height: 30px;
+    border: 1px solid #111111;
+    overflow: hidden;
+    border-radius: 5px;
+}
+.minSearch div input{
+    width: 150px;
+    height: 30px;
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    font-size: 15px;
+}
+.minSearch div:hover{
+    border: 1px solid #00862d;
+}
+.minSearch div button{
+    position: absolute;
+    left: 150px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color: #bbbbbb;
+    background-image: url(../img/search0.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    cursor: pointer;
+}
+.minSearch div button:hover{
+    background-color: #131313;
+    background-image: url(../img/search1.png);
 }
