@@ -5,12 +5,15 @@ import com.starfall.dao.UserDao;
 import com.starfall.entity.SignIn;
 import com.starfall.entity.User;
 import com.starfall.util.DateUtil;
+import javafx.scene.input.DataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
 
@@ -30,9 +33,9 @@ public class SignInService {
             return "error";
         }
         List<SignIn> signIns = signInDao.findAllByUserOrderByDateDesc(user.getUser());
-        LocalDateTime yesterday = LocalDateTime.parse(signIns.get(0).getDate());
+        LocalDateTime yesterday = LocalDateTime.parse(signIns.get(0).getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         LocalDateTime today = LocalDateTime.now();
-        if(!DateUtil.isSameDay(yesterday,today)){
+        if(DateUtil.isSameDay(yesterday,today)){
             session.setAttribute("signInTips","error-alreadySignIn");
             return "error";
         }
@@ -41,9 +44,10 @@ public class SignInService {
             user.setSigncontinuous(0);
         }
         Random r = new Random();
-        user.setExp(user.getExp()+r.nextInt(100)+80);
+        int getExp = r.nextInt(100)+80;
+        user.setExp(user.getExp()+getExp);
         userDao.save(user);
-        signInDao.save(new SignIn());
+        signInDao.save(new SignIn(signInDao.findAll(Sort.by(Sort.Direction.DESC, "id")).get(0).getId()+1,user.getUser(),LocalDateTime.now().toString(),"获得经验"+getExp+"点"));
         session.setAttribute("user",user);
         return "success";
     }
@@ -53,7 +57,6 @@ public class SignInService {
     ){
         User user = (User) session.getAttribute("user");
         String date = "%"+LocalDateTime.now().toString().substring(0,10)+"%";
-        signInDao.existsAllByUserAndDateLike(user.getUser(),date);
-        return false;
+        return signInDao.existsAllByUserAndDateLike(user.getUser(),date);
     }
 }

@@ -104,3 +104,13 @@ body{
     justify-content: center;
     align-items: center;
 }
+.sign span:nth-child(1){
+    position: absolute;
+    font-size: 20px;
+    margin-top: -15px;
+}
+.sign span:nth-child(2){
+    position: absolute;
+    font-size: 10px;
+    margin-top: 25px;
+}

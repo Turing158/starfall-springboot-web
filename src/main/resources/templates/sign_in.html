@@ -24,8 +24,10 @@
                     <td>
                         <div class="main_left">
                             <img th:src="@{'/head_img/'+${session.user.head}}" alt="">
-                            <div class="sign btn" onclick="sign()"><span>签 到</span></div>
+                            <div class="sign btn" onclick="sign()" id="noSign"><span class="status0">29 | 签 到</span><span>今天尚未签到</span></div>
+                            <div class="sign btn" id="alreadySign"><span class="status1">29 |已 签 到</span><span th:text="'已连续签到'+${session.user.signcontinuous}+'天'">已连续签到10天</span></div>
                         </div>
+
                     </td>
                     <td>
                         <div></div>

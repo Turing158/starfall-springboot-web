@@ -3,6 +3,24 @@ let month = checkMonth(date[1]);
 let day = date[2];
 let year = date[3];
 document.querySelector('.date').innerHTML = year+'-'+month+'-'+day;
+document.querySelector('.status0').innerHTML = day+' | 签 到';
+document.querySelector('.status1').innerHTML = day+' |已 签 到';
+
+
+let noSign = document.querySelector('#noSign');
+let alreadySign = document.querySelector('#alreadySign');
+let ajax = new XMLHttpRequest();
+alreadySign.style.display = 'none';
+ajax.open('GET', '/signIn/isSignInToday', true);
+ajax.send();
+ajax.onreadystatechange = function(){
+    if (ajax.readyState === 4 && ajax.status === 200){
+        if (ajax.responseText === 'true'){
+            noSign.style.display = 'none';
+            alreadySign.style.display = 'flex';
+        }
+    }
+}
 function checkMonth(month){
     switch(month){
         case 'Jan': return '01';
