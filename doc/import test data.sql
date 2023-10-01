@@ -1,11 +1,11 @@
 -- 用户User
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp) VALUES ('123456', '123456', '1000-01-01', 2, '新用户BAE846', '123456', '123456@163.com', 'null.png', 10, 250);
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp) VALUES ('1322621134', '123123', '2023-06-05', 1, '新用户19429E', null, '1322621134@qq.com', 'null.jpg', 0, 0);
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp) VALUES ('admin', 'admin', '0000-00-00', 1, '管理员', '我是管理员!
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp, signcontinuous) VALUES ('123456', '123456', '1000-01-01', 2, '新用户BAE846', '123456', '123456@163.com', 'null.png', 10, 250, 0);
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp, signcontinuous) VALUES ('1322621134', '123456', '2023-06-06', 12, '新用户19429Q', '', '1322621134@qq.com', 'null.jpg', 0, 100, 0);
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp, signcontinuous) VALUES ('admin', 'admin', '0000-00-00', 3, '管理员', '我是管理员!
 
-aa', 'admin@sf.com', 'admin.jpg', 100, 120);
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp) VALUES ('asd', 'asd', '1000-01-01', 1, 'asd', 'asdasd', 'asd@asd.com', 'null.png', 10, 0);
-INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp) VALUES ('qwe', '123456', '0000-00-00', 10, 'qwenba', '我叫qwe，一个用户a', '123@qq.com', 'qwe.jpg', 10, 0);
+aa', 'admin@sf.com', 'admin.jpg', 100, 964, 2);
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp, signcontinuous) VALUES ('asd', 'asd', '1000-01-01', 1, 'asd', 'asdasd', 'asd@asd.com', 'null.png', 10, 148, 0);
+INSERT INTO web.user (user, password, date, level, name, introduce, email, head, promise, exp, signcontinuous) VALUES ('qwe', '123456', '0000-00-00', 1, 'qwenba', '我叫qwe，一个用户a', '123@qq.com', 'qwe.jpg', 10, 122, 0);
 
 -- 主题topic
 INSERT INTO web.topic (id, icon, label, title, user, date, comment, view, label_href, titlename, titleenglishname, source, version, language, address, download, content, authorname, username, userhead, userinformation) VALUES (1, 'skyblock.png', '服务端', '[1.8.x-1.9.x][Spigot]StarFall空岛生存>巨大更新[物品扩展|粘液科技]', 'admin', '2023-09-19', 1, 100, 'serve', 'StarFall空岛生存', 'StarFall-Skyblock', '原创', '1.8.x-1.9.x', '简体中文', 'https://www.mcbbs.net/thread-792740-1-1.html', 'http://某.盘.com', '# <center>?️<font color="darkblue">星辰倾城</font>-<font color="darkcyan">空岛生存</font>?️</center>
@@ -531,3 +531,8 @@ INSERT INTO web.good (id, good, user, topicid, date) VALUES (21, 1, 'qwe', 10, '
 INSERT INTO web.good (id, good, user, topicid, date) VALUES (22, 1, 'qwe', 11, '2023-08-29');
 INSERT INTO web.good (id, good, user, topicid, date) VALUES (23, 1, 'admin', 1, '2023-08-29');
 INSERT INTO web.good (id, good, user, topicid, date) VALUES (24, 1, 'admin', 4, '2023-09-19');
+
+
+# 签到表数据
+INSERT INTO web.sign_in (id, user, date, comment, name) VALUES (1, 'admin', '2023-09-29 00:00:00', '1', '管理员');
+INSERT INTO web.sign_in (id, user, date, comment, name) VALUES (2, 'admin', '2023-09-30 15:34:55', '获得经验154点', '管理员');
