@@ -47,10 +47,10 @@
         <div class="right"></div>
         
         <div class="main">
-            <table>
+            <table class="outside">
                 <tr>
                     <th th:text="${session.user.name}">name</th>
-                    <th><span class="date">0000-00-00</span></th>
+                    <th><span class="date">0000-00-00</span><span th:if="${session.signInHistories.size() > 13}">可滑动↓</span></th>
                 </tr>
                 <tr>
                     <td>
@@ -59,10 +59,31 @@
                             <div class="sign btn" onclick="sign()" id="noSign"><span class="status0">29 | 签 到</span><span>今天尚未签到</span></div>
                             <div class="sign btn" id="alreadySign"><span class="status1">29 |已 签 到</span><span th:text="'已连续签到'+${session.user.signcontinuous}+'天'">已连续签到10天</span></div>
                         </div>
-
                     </td>
                     <td>
-                        <div></div>
+                        <div>
+                            <table class="inside">
+                                <tr>
+                                    <th></th>
+                                    <th>详细</th>
+                                    <th>日期</th>
+                                </tr>
+                                <tbody>
+                                    <tr th:if="${session.signInHistories.isEmpty()}">
+                                        <th>天哪！你没有签过到！快签一个</th>
+                                    </tr>
+                                    <tr th:else="${session.signInHistories.isEmpty()}" th:each="signInHistory : ${session.signInHistories}">
+                                        <td>
+                                            <span th:utext="'&nbsp;'+${signInHistory.name}">&nbsp;名称</span><br>
+                                            <span th:utext="'&emsp;'+${signInHistory.user}">&emsp;user</span>
+                                        </td>
+                                        <td th:text="${signInHistory.comment}">iiiiiiiiii</td>
+                                        <td><span th:text="${signInHistory.date}">0000-00-00 00:00:00</span></td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
                     </td>
                 </tr>
             </table>

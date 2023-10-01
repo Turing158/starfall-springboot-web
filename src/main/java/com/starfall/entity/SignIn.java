@@ -26,4 +26,6 @@ public class SignIn implements Serializable {
     String date;
     @Column
     String comment;
+    @Column
+    String name;
 }

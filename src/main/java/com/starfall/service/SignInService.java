@@ -30,12 +30,12 @@ public class SignInService {
     public void enterSignIn(
             HttpSession session
     ){
-
+        User userObj = (User) session.getAttribute("user");
         if(session.getAttribute("userExp") == null){
-            User userObj = (User) session.getAttribute("user");
             Exp exp = new Exp(userObj.getLevel(),userObj.getExp());
             session.setAttribute("userExp",exp);
         }
+        session.setAttribute("signInHistories",signInDao.findAllByUserOrderByDateDesc(userObj.getUser()));
     }
 
     public String SignIn(
@@ -47,22 +47,30 @@ public class SignInService {
             return "error";
         }
         List<SignIn> signIns = signInDao.findAllByUserOrderByDateDesc(user.getUser());
-        LocalDateTime yesterday = LocalDateTime.parse(signIns.get(0).getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        LocalDateTime today = LocalDateTime.now();
-        if(DateUtil.isSameDay(yesterday,today)){
-            session.setAttribute("signInTips","error-alreadySignIn");
-            return "error";
+//        此判断为了防止用户第一次签到时，数据库中没有数据，导致程序出错
+        if(!signIns.isEmpty()) {
+            LocalDateTime yesterday = LocalDateTime.parse(signIns.get(0).getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            LocalDateTime today = LocalDateTime.now();
+            if (DateUtil.isSameDay(yesterday, today)) {
+                session.setAttribute("signInTips", "error-alreadySignIn");
+                return "error";
+            }
+            user.setSigncontinuous(user.getSigncontinuous() + 1);
+            if (!DateUtil.isConsecutiveDates(yesterday, today)) {
+                user.setSigncontinuous(0);
+            }
         }
-        user.setSigncontinuous(user.getSigncontinuous()+1);
-        if(!DateUtil.isConsecutiveDates(yesterday,today)){
-            user.setSigncontinuous(0);
+//        用户第一次签到时，数据库中没有数据，导致数据出问题
+        if(signIns.isEmpty()){
+            user.setSigncontinuous(1);
         }
         Random r = new Random();
         int getExp = r.nextInt(100)+80;
         user.setExp(user.getExp()+getExp);
         user.setLevel(OtherUtil.isLevel(user.getExp()));
         userDao.save(user);
-        signInDao.save(new SignIn(signInDao.findAll(Sort.by(Sort.Direction.DESC, "id")).get(0).getId()+1,user.getUser(),LocalDateTime.now().toString(),"获得经验"+getExp+"点"));
+        signInDao.save(new SignIn(signInDao.findAll(Sort.by(Sort.Direction.DESC, "id")).get(0).getId()+1,user.getUser(),LocalDateTime.now().toString(),"获得经验"+getExp+"点",null));
+        signInDao.updateData();
         Exp exp = new Exp(user.getLevel(),user.getExp());
         session.setAttribute("userExp",exp);
         session.setAttribute("user",user);

@@ -11,109 +11,6 @@ body{
     display: flex;
     justify-content: center;
 }
-.book{
-    position: absolute;
-    top: 100px;
-}
-.top{
-    background-image: url(../img/home_top.png);
-    height: 59px;
-    width: 1129px;
-}
-.left{
-    position: absolute;
-    background-image: url(../img/left.png);
-    width: 84px;
-    height: 500px;
-}
-.right{
-    position: absolute;
-    background-image: url(../img/right.png);
-    width: 84px;
-    height: 500px;
-    right: 0;
-}
-.bottom{
-    position: absolute;
-    background-image: url(../img/home_foot.png);
-    top: calc(500px + 59px);
-    height: 59px;
-    width: 1129px;
-}
-.btn{
-    background-image: url(../img/set/birch.png);
-    color: #131313;
-    border: 2px solid #ad8f66;
-    cursor: pointer;
-}
-.btn:hover{
-    background-image: url(../img/set/spruce.png);
-    color: #f9f9f9;
-    border: 2px solid #4d381e;
-}
-.main{
-    position: absolute;
-    background-color: #fcf4dc;
-    left: 84px;
-    top: 59px;
-    height: 500px;
-    width: calc(100% - 168px);
-}
-.main table{
-    width: 100%;
-    border-collapse: collapse;
-}
-.main table tr th{
-    height: 30px;
-    border-bottom: 1px solid #d4bfa3;
-}
-.main table tr th:nth-child(1){
-    width: 150px;
-    border-right: 1px solid #d4bfa3;
-}
-.main table tr th:nth-child(2){
-    text-align: left;
-    font-weight: 300;
-}
-.main table tr th:nth-child(2) span{
-    margin-left: 20px;
-}
-.main_left{
-    height: 500px;
-    width: 150px;
-    background-color: antiquewhite;
-    border-right: 1px solid #d4bfa3;
-}
-.main_left img{
-    border: 5px solid #f9f9f9;
-    width: 100px;
-    height: 100px;
-    margin: 20px;
-    background-size: 100%;
-    background-position: 50%;
-    object-fit: cover;
-}
-.main_left .sign{
-    border-radius: 5px;
-    width: 120px;
-    height: 40px;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.sign span:nth-child(1){
-    position: absolute;
-    font-size: 20px;
-    margin-top: -15px;
-}
-.sign span:nth-child(2){
-    position: absolute;
-    font-size: 10px;
-    margin-top: 25px;
-}
 .ul{
     position:fixed;
     background-image: url(../img/ul_bg.png);
@@ -287,4 +184,168 @@ body{
 .minSearch div button:hover{
     background-color: #131313;
     background-image: url(../img/search1.png);
+}
+.book{
+    position: absolute;
+    top: 100px;
+}
+.top{
+    background-image: url(../img/home_top.png);
+    height: 59px;
+    width: 1129px;
+}
+.left{
+    position: absolute;
+    background-image: url(../img/left.png);
+    width: 84px;
+    height: 500px;
+}
+.right{
+    position: absolute;
+    background-image: url(../img/right.png);
+    width: 84px;
+    height: 500px;
+    right: 0;
+}
+.bottom{
+    position: absolute;
+    background-image: url(../img/home_foot.png);
+    top: calc(500px + 59px);
+    height: 59px;
+    width: 1129px;
+}
+.btn{
+    background-image: url(../img/set/birch.png);
+    color: #131313;
+    border: 2px solid #ad8f66;
+    cursor: pointer;
+}
+.btn:hover{
+    background-image: url(../img/set/spruce.png);
+    color: #f9f9f9;
+    border: 2px solid #4d381e;
+}
+.main{
+    position: absolute;
+    background-color: #fcf4dc;
+    left: 84px;
+    top: 59px;
+    height: 500px;
+    width: calc(100% - 168px);
+    overflow: hidden;
+}
+.main .outside{
+    width: 100%;
+    border-collapse: collapse;
+}
+.main .outside tr th{
+    height: 30px;
+    border-bottom: 1px solid #d4bfa3;
+}
+.main .outside tr th:nth-child(1){
+    width: 150px;
+    border-right: 1px solid #d4bfa3;
+}
+.main .outside tr th:nth-child(2){
+    text-align: left;
+    font-weight: 300;
+}
+.main .outside tr th:nth-child(2) span{
+    margin-left: 20px;
+}
+.main .outside tr th:nth-child(2) span:nth-child(2){
+    position: relative;
+    float: right;
+    right: 50px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.main .outside tr td:nth-child(2){
+    vertical-align: top;
+}
+.main_left{
+    height: 500px;
+    width: 150px;
+    background-color: antiquewhite;
+    border-right: 1px solid #d4bfa3;
+}
+.main_left img{
+    border: 5px solid #f9f9f9;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    background-size: 100%;
+    background-position: 50%;
+    object-fit: cover;
+}
+.main_left .sign{
+    border-radius: 5px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sign span:nth-child(1){
+    position: absolute;
+    font-size: 20px;
+    margin-top: -15px;
+}
+.sign span:nth-child(2){
+    position: absolute;
+    font-size: 10px;
+    margin-top: 25px;
+}
+.inside{
+    background-color: #ece4cc;
+    width: 800px;
+    margin: 10px 20px;
+    border-collapse: collapse;
+    border: 1px solid #d4bfa3;
+}
+
+.outside .inside tr th:nth-child(1){
+    width: 120px;
+    border-right: 0;
+}
+.inside tr th:nth-child(3){
+    width: 180px;
+}
+.main .outside .inside tr td{
+    height: 32px;
+    vertical-align: middle;
+}
+.inside tr td:nth-child(3){
+    text-align: center;
+    width: 190px;
+}
+.inside tbody:nth-child(2){
+    height: 420px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: block;
+}
+.inside tbody::-webkit-scrollbar{
+    display: none;
+}
+.inside tbody tr{
+    display: table;
+    width: 800px;
+    table-layout: fixed;
+}
+.inside tr td:nth-child(1){
+    width: 120px;
+    display: table-cell;
+}
+.inside tr td:nth-child(1) span:nth-child(1){
+    position: relative;
+    font-size: 16px;
+}
+.inside tr td:nth-child(1) span:nth-child(3){
+    position: relative;
+    font-size: 10px;
+    top: -10px;
 }
