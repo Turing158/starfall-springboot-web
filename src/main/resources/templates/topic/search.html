@@ -57,7 +57,7 @@
 </script> -->
 <div class="search">
     <form action="/topic/search" method="get">
-        <input type="text" name="search" placeholder="搜索主题" th:value="${session.search}"><button type="submit"></button>
+        <input class="key" type="text" name="search" placeholder="搜索主题" th:value="${session.search}"><button type="submit"></button>
     </form>
 </div>
 <div class="main">
@@ -78,19 +78,16 @@
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <th><a th:href="'/topic/html?html='+${topic.id}" th:text="${topic.title}">主题</a></th>
+                        <th><a class="keyContent" th:href="'/topic/html?html='+${topic.id}" th:text="${topic.title}">主123题</a></th>
                     </tr>
                     <tr>
                         <td>评论:<span th:text="${topic.comment}">111</span> - 查看:<span th:text="${topic.view}">111</span></td>
                     </tr>
                     <tr>
                         <td>
-                            <div th:if="${topic.content.length() >= 180}" th:text="${#strings.substring(topic.content,0,180)+'......'}">
-                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            </div>
-                            <div th:if="${topic.content.length() < 180}" th:text="${topic.content}">
-                                内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                            </div>
+<!--                                                                                                                        说明下，这串有点复杂，就是去除html标签，及去除特殊样式字符的-->
+                            <div class="keyContent" th:if="${topic.content.length() >= 180}" th:text="${#strings.substring(#strings.replace(topic.content.replaceAll('<[^>]+>','').replaceAll('#','').replaceAll('>',''),'*',''),0,180)+'......'}">asdasdad123asdasd</div>
+                            <div class="keyContent" th:if="${topic.content.length() < 180}" th:text="${#strings.replace(topic.content.replaceAll('<[^>]+>','').replaceAll('#','').replaceAll('>',''),'*','')}">内容内容内容内容内容内容内容123内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
                         </td>
                     </tr>
                     <tr>
