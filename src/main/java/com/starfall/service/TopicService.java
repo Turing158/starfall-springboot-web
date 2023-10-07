@@ -406,11 +406,32 @@ public class TopicService {
             page = Integer.parseInt(page_str);
         }
         if(!StringUtils.isEmptyOrWhitespaceOnly(search)){
-            Page pageObj = new Page(page,(topicDao.countSearch(search)+9)/10);
-            session.setAttribute("searchTopic", topicDao.searchTopic(search, (page - 1)*10));
+            int lastPage = 0;
+            Pageable pageable = PageRequest.of(page-1,10);
+            if(select.equals("title")){
+                session.setAttribute("searchTopic", topicDao.findAllByTitleLike(pageable,"%"+search+"%"));
+                lastPage = topicDao.countAllByTitleLike("%"+search+"%");
+            }
+            else if(select.equals("content")){
+                session.setAttribute("searchTopic", topicDao.findAllByContentLike(pageable,"%"+search+"%"));
+                lastPage = topicDao.countAllByContentLike("%"+search+"%");
+            }
+            else if(select.equals("author")){
+                session.setAttribute("searchTopic", topicDao.findAllByUsernameLike(pageable,"%"+search+"%"));
+                lastPage = topicDao.countAllByUsernameLike("%"+search+"%");
+            }
+            else{
+                session.setAttribute("searchTopic", topicDao.findAllByTitleLikeOrContentLikeOrUsernameLike(pageable,"%"+search+"%","%"+search+"%","%"+search+"%"));
+                lastPage = topicDao.countAllByTitleLikeOrContentLikeOrUsernameLike("%"+search+"%","%"+search+"%","%"+search+"%");
+            }
+            lastPage = (lastPage+9)/10;
+            Page pageObj = new Page(page,lastPage);
+//            session.setAttribute("searchTopic", topicDao.searchTopic(search, (page - 1)*10));
             session.setAttribute("search",search);
             session.setAttribute("searchPage",pageObj);
-            return "error";
+            session.setAttribute("searchType",select);
+            session.setAttribute("searchTypeCN",otherUtil.selectCN(select));
+            return "success";
         }
         session.setAttribute("searchTopic",null);
         session.setAttribute("search",null);

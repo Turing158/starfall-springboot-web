@@ -23,6 +23,19 @@ public class OtherUtil {
         }
         return "no";
     }
+    public String selectCN(String name){
+        switch (name){
+            case "all":
+                return "综合";
+            case "title":
+                return "标题";
+            case "content":
+                return "内容";
+            case "author":
+                return "作者";
+        }
+        return "error";
+    }
     public static int isLevel(int exp){
         if(exp>=0 && exp<100){
             return 0;

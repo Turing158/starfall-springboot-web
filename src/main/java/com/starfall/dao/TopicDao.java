@@ -30,7 +30,18 @@ public interface TopicDao extends JpaRepository<Topic,Long> {
     @Query(value = "UPDATE web.topic t INNER JOIN web.user u ON t.user = u.user SET t.userhead = u.head, t.username = u.name, t.userinformation = u.introduce",nativeQuery = true)
     void updateData();
 
-    Page<Topic> findAllByTitleLikeOrContentLikeOrUsername(Pageable page,String title,String content,String username);
+    Page<Topic> findAllByTitleLikeOrContentLikeOrUsernameLike(Pageable page,String title,String content,String username);
+    int countAllByTitleLikeOrContentLikeOrUsernameLike(String title,String content,String username);
+
+
+    Page<Topic> findAllByTitleLike(Pageable page,String title);
+    int countAllByTitleLike(String title);
+
+    Page<Topic> findAllByContentLike(Pageable page,String content);
+    int countAllByContentLike(String content);
+
+    Page<Topic> findAllByUsernameLike(Pageable page,String username);
+    int countAllByUsernameLike(String username);
 
     @Query(value = "select * from topic where title like %?1% or content like %?1% limit ?2,10",nativeQuery = true)
     List<Topic> searchTopic(String search, int page);

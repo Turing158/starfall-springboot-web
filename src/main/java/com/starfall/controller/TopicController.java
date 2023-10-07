@@ -141,8 +141,8 @@ public class TopicController {
     @RequestMapping("/topic/search")
     public String search(
             HttpSession session,
-            @RequestParam(required = false) String search,
             @RequestParam(required = false,defaultValue = "all") String select,
+            @RequestParam(required = false) String search,
             @RequestParam(value = "page",required = false) String page_str
     ) {
         topicService.search(session,search,select,page_str);

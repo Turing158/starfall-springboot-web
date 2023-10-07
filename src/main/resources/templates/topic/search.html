@@ -42,22 +42,10 @@
     <script src="./js/exp.js"></script>
     <li th:if="${session.user == null}" class="li_user" ><a href="/login">! 请登录 !</a></li>
 </ul>
-<!-- <div class="grayTips">
-    <div class="tips">
-        <p>提示</p>
-        <div class="tipsContent" th:text="${session.editErrorTips}"></div>
-        <button class="tipsBtn" onclick="close()">确定</button>
-    </div>
-</div>
-<script>
-    function close(){
-        let window = document.querySelector(".windows");
-        window.style.display = 'none';
-    }
-</script> -->
 <div class="search">
     <form action="/topic/search" method="get">
         <select name="select">
+            <option th:if="${session.searchType != null}" th:value="${session.searchType}" th:text="${session.searchTypeCN}" hidden></option>
             <option value="all">综合</option>
             <option value="title">标题</option>
             <option value="content">内容</option>
@@ -74,48 +62,49 @@
             <div class="result">
                 <table>
                     <tbody th:if="${#lists.isEmpty(session.searchTopic)}">
-                    <tr>
-                        <th style="text-align: center">你快搜！现在没有任何东西</th>
-                    </tr>
+                        <tr>
+                            <th style="text-align: center">你快搜！现在没有任何东西</th>
+                        </tr>
                     </tbody>
                     <tbody th:else="${#lists.isEmpty(session.searchTopic)}" th:each="topic : ${session.searchTopic}">
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <th><a class="keyContent" th:href="'/topic/html?html='+${topic.id}" th:text="${topic.title}">主123题</a></th>
-                    </tr>
-                    <tr>
-                        <td>评论:<span th:text="${topic.comment}">111</span> - 查看:<span th:text="${topic.view}">111</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-<!--                                                                                                                        说明下，这串有点复杂，就是去除html标签，及去除特殊样式字符的-->
-                            <div class="keyContent" th:if="${topic.content.length() >= 180}" th:text="${#strings.substring(#strings.replace(topic.content.replaceAll('<[^>]+>','').replaceAll('#','').replaceAll('>',''),'*',''),0,180)+'......'}">asdasdad123asdasd</div>
-                            <div class="keyContent" th:if="${topic.content.length() < 180}" th:text="${#strings.replace(topic.content.replaceAll('<[^>]+>','').replaceAll('#','').replaceAll('>',''),'*','')}">内容内容内容内容内容内容内容123内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span th:text="${topic.date}">1000-01-01</span>
-                            -
-                            <span><a th:href="'/personal?user='+${topic.user}" th:text="${topic.username}">作者</a></span>
-                            -
-                            <span><a th:href="'/topic?label='+${topic.labelHref}" th:text="${topic.label}">插件</a></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <th><a class="keyContent" th:href="'/topic/html?html='+${topic.id}" th:text="${topic.title}">主123题</a></th>
+                        </tr>
+                        <tr>
+                            <td>评论:<span th:text="${topic.comment}">111</span> - 查看:<span th:text="${topic.view}">111</span></td>
+                        </tr>
+                        <tr>
+                            <td th:with="content=${#strings.replace(topic.content.replaceAll('<[^>]+>','').replaceAll('\!\[(.*?)\]\((.*?)\)','').replaceAll('\[(.*?)\]\((.*?)\)','').replaceAll('#','').replaceAll('>',''),'*','')}">
+    <!--                                                                                                                    说明下，这串有点复杂，就是去除html标签，及去除特殊样式字符的    #strings.substring(#strings.replace(topic.content.replaceAll('<[^>]+>','').replaceAll('#','').replaceAll('>',''),'*',''),0,180)-->
+                                <div class="keyContent" th:if="${content.length() >= 170 && #strings.indexOf(content,session.search) < 170}" th:text="${#strings.substring(content,0,170)+'......'}">asdasdad123asdasd</div>
+                                <div class="keyContent" th:if="${content.length() >= 170 && #strings.indexOf(content,session.search) >= 170}" th:text="${#strings.substring(content,#strings.indexOf(content,session.search) - 85 + (#strings.length(session.search)),#strings.indexOf(content,session.search) + 85 - (#strings.length(session.search)) )+'......'}">asdasdad123asdasd</div>
+                                <div class="keyContent" th:if="${content.length() < 170}" th:text="${content}">内容内容内容内容内容内容内容123内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span th:text="${topic.date}">1000-01-01</span>
+                                -
+                                <span><a th:href="'/personal?user='+${topic.user}" th:text="${topic.username}">作者</a></span>
+                                -
+                                <span><a th:href="'/topic?label='+${topic.labelHref}" th:text="${topic.label}">插件</a></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <div class="page" th:if="${session.search != null}">
-                <a th:href="'javascript:'+|page(1,${session.searchPage.lastPage},'${session.search}')|" class="back"></a>
-                <a th:href="'javascript:'+|page(${session.searchPage.page - 1},${session.searchPage.lastPage},'${session.search}')|" class="pre"></a>
+                <a th:href="'javascript:'+|page(1,${session.searchPage.lastPage},'${session.search}','${session.searchType}')|" class="back"></a>
+                <a th:href="'javascript:'+|page(${session.searchPage.page - 1},${session.searchPage.lastPage},'${session.search}','${session.searchType}')|" class="pre"></a>
                 <span th:text="${session.searchPage.page} + '/' + ${session.searchPage.lastPage}">1/2</span>
-                <a th:href="'javascript:'+|page(${session.searchPage.page + 1},${session.searchPage.lastPage},'${session.search}')|" class="next"></a>
-                <a th:href="'javascript:'+|page(${session.searchPage.lastPage},${session.searchPage.lastPage},'${session.search}')|" class="last"></a>
+                <a th:href="'javascript:'+|page(${session.searchPage.page + 1},${session.searchPage.lastPage},'${session.search}','${session.searchType}')|" class="next"></a>
+                <a th:href="'javascript:'+|page(${session.searchPage.lastPage},${session.searchPage.lastPage},'${session.search}','${session.searchType}')|" class="last"></a>
             </div>
             <script src="./js/search.js"></script>
         </div>

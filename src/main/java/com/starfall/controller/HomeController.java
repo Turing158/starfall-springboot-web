@@ -31,7 +31,6 @@ public class HomeController{
             HttpSession session
     ){
         Pageable pageable = PageRequest.of(0,5);
-        System.out.println(topicDao.findAllByTitleLikeOrContentLikeOrUsername(pageable,"%a%","%a%","%a%"));
         homeService.enterHome(session);
         return "index";
     }

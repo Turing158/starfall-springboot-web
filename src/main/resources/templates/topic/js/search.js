@@ -14,9 +14,9 @@ for (let i = 0; i < ketContent.length; i++) {
     ketContent[i].innerHTML = newEl;
 }
 
-function page(page_num,last_page,search) {
+function page(page_num,last_page,search,select) {
     if (page_num <= last_page && page_num >= 1) {
-        window.location.href = "/topic/search?search="+search+"&page=" + page_num;
+        window.location.href = "/topic/search?search="+search+"&select="+select+"&page=" + page_num;
     } else {
         alert("求求别翻了，好不T_T");
     }
