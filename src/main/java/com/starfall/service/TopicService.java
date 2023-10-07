@@ -426,7 +426,6 @@ public class TopicService {
             }
             lastPage = (lastPage+9)/10;
             Page pageObj = new Page(page,lastPage);
-//            session.setAttribute("searchTopic", topicDao.searchTopic(search, (page - 1)*10));
             session.setAttribute("search",search);
             session.setAttribute("searchPage",pageObj);
             session.setAttribute("searchType",select);
