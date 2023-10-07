@@ -2,9 +2,12 @@ package com.starfall.controller;
 
 import com.starfall.Application;
 import com.starfall.dao.SignInDao;
+import com.starfall.dao.TopicDao;
 import com.starfall.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,13 +23,15 @@ public class HomeController{
     @Autowired
     private HomeService homeService;
     @Autowired
-    private SignInDao signInDao;
+    private TopicDao topicDao;
 
 //进入主页与返回主页的控制
     @RequestMapping(value = {"/home","/"})
     public String home(
             HttpSession session
     ){
+        Pageable pageable = PageRequest.of(0,5);
+        System.out.println(topicDao.findAllByTitleLikeOrContentLikeOrUsername(pageable,"%a%","%a%","%a%"));
         homeService.enterHome(session);
         return "index";
     }

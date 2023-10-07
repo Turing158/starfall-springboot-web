@@ -142,9 +142,10 @@ public class TopicController {
     public String search(
             HttpSession session,
             @RequestParam(required = false) String search,
+            @RequestParam(required = false,defaultValue = "all") String select,
             @RequestParam(value = "page",required = false) String page_str
     ) {
-        topicService.search(session,search,page_str);
+        topicService.search(session,search,select,page_str);
         return "topic/search";
     }
 

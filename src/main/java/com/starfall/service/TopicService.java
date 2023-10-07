@@ -398,6 +398,7 @@ public class TopicService {
     public String search(
             HttpSession session,
             String search,
+            String select,
             String page_str
     ) {
         int page = 1;

@@ -21,11 +21,24 @@ em{
     border-radius: 5px;
     overflow: hidden  ;
 }
+.search form select{
+    position: relative;
+    outline: 0;
+    border: 0;
+    width: 100px;
+    height: 45px;
+    top: -16px;
+    background-color: #f1f1f1;
+    font-size: 18px;
+    text-align: center;
+    color: #131313;
+    line-height: 30px;
+}
 .search form input{
     position: relative;
     top:-16px;
     outline: 0;
-    width: 750px;
+    width: 650px;
     height: 45px;
     font-size: 18px;
     padding: 0;
