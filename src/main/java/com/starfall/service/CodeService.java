@@ -1,11 +1,10 @@
 package com.starfall.service;
 
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

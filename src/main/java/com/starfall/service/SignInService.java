@@ -7,13 +7,11 @@ import com.starfall.entity.SignIn;
 import com.starfall.entity.User;
 import com.starfall.util.DateUtil;
 import com.starfall.util.OtherUtil;
-import javafx.scene.input.DataFormat;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

@@ -6,13 +6,14 @@ import com.starfall.entity.Exp;
 import com.starfall.entity.User;
 import com.starfall.util.GetCode;
 import com.starfall.util.MailUtil;
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpSession;
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -20,6 +21,8 @@ import java.util.Objects;
 public class LoginRegService {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private MailUtil mailUtil;
 
     public String confirmLogin(
             HttpSession session,
@@ -103,7 +106,6 @@ public class LoginRegService {
             String code
     ) {
         GetCode getCode = new GetCode();
-        MailUtil mail = new MailUtil();
         String email_code;
         session.setAttribute("reg_user", user);
         session.setAttribute("reg_password", password);
@@ -119,13 +121,19 @@ public class LoginRegService {
         if (userDao.countByEmail(email) != 0) {
             flag = true;
         }
+        boolean passFlag = (boolean) session.getAttribute("enter_flag");
+        if (session.getAttribute("enter_flag") == null){
+            passFlag = false;
+        }
         //原来已经成功进入验证页面，用于重新发送
-        if ((boolean) session.getAttribute("enter_flag")) {
+        if (passFlag) {
             email_code = getCode.getcode();
             session.setAttribute("email_code", email_code);
             try {
-                mail.reg_mail(email, email_code);
+                mailUtil.reg_mail(email, email_code);
             } catch (EmailException e) {
+                e.printStackTrace();
+            } catch (MessagingException e) {
                 e.printStackTrace();
             }
             session.setAttribute("code_tips", "邮箱已重新发送，请注意查收");
@@ -149,8 +157,10 @@ public class LoginRegService {
                 email_code = getCode.getcode();//获取验证码
                 session.setAttribute("email_code", email_code);
                 try {
-                    mail.reg_mail(email, email_code);//发邮件
+                    mailUtil.reg_mail(email, email_code);//发邮件
                 } catch (EmailException e) {
+                    e.printStackTrace();
+                } catch (MessagingException e) {
                     e.printStackTrace();
                 }
                 session.setAttribute("code", null);
@@ -200,7 +210,7 @@ public class LoginRegService {
             HttpSession session,
             String email,
             String code
-    ) throws EmailException {
+    ) throws MessagingException, EmailException {
         String emailCode;
         session.setAttribute("forgetEmail",email);
         if(StringUtils.isNullOrEmpty(code)){
@@ -212,11 +222,10 @@ public class LoginRegService {
         if(session.getAttribute("code").equals(code) || session.getAttribute("forgetCodePass").equals(true)){
             if(userDao.countByEmail(email) != 0){
                 GetCode getCode = new GetCode();
-                MailUtil mail = new MailUtil();
                 emailCode = getCode.getcode();
                 session.setAttribute("forgetCode",emailCode);
                 session.setAttribute("forgetCodePass",true);//为了重新发送邮件跳过验证码的session，也作为安保作用
-                mail.set_mail(email,emailCode);
+                mailUtil.set_mail(email,emailCode);
                 return "enterVerifyCode";
             }
             else {

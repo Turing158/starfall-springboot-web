@@ -4,6 +4,7 @@ import com.starfall.Application;
 import com.starfall.dao.SignInDao;
 import com.starfall.dao.TopicDao;
 import com.starfall.service.HomeService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.PageRequest;
@@ -11,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpSession;
 
 
 //主页控制器
