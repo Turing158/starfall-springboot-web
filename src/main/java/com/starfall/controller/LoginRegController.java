@@ -1,11 +1,9 @@
 package com.starfall.controller;
 
 import com.starfall.Application;
-import com.starfall.dao.UserDao;
 import com.starfall.service.LoginRegService;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
-import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
@@ -120,7 +118,7 @@ public class LoginRegController {
             HttpSession session,
             @RequestParam(value = "email",required = false) String email,
             @RequestParam(value = "code",required = false) String code
-    ) throws EmailException, MessagingException {
+    ) throws MessagingException {
         String status = loginRegService.forget_email(session,email,code);
         if(status.equals("enterVerifyCode")){
             return "forget_emailCode";

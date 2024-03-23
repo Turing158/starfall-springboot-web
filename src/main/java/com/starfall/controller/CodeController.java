@@ -5,7 +5,6 @@ import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,7 +14,6 @@ import java.io.IOException;
 
 //验证码控制器
 @Controller
-@SpringBootApplication
 public class CodeController {
     @Autowired
     private CodeService codeService;

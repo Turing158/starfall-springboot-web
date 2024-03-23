@@ -8,7 +8,6 @@ import com.starfall.util.GetCode;
 import com.starfall.util.MailUtil;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpSession;
-import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -131,8 +130,6 @@ public class LoginRegService {
             session.setAttribute("email_code", email_code);
             try {
                 mailUtil.reg_mail(email, email_code);
-            } catch (EmailException e) {
-                e.printStackTrace();
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
@@ -158,8 +155,6 @@ public class LoginRegService {
                 session.setAttribute("email_code", email_code);
                 try {
                     mailUtil.reg_mail(email, email_code);//发邮件
-                } catch (EmailException e) {
-                    e.printStackTrace();
                 } catch (MessagingException e) {
                     e.printStackTrace();
                 }
@@ -210,7 +205,7 @@ public class LoginRegService {
             HttpSession session,
             String email,
             String code
-    ) throws MessagingException, EmailException {
+    ) {
         String emailCode;
         session.setAttribute("forgetEmail",email);
         if(StringUtils.isNullOrEmpty(code)){

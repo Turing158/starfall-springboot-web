@@ -5,7 +5,7 @@
       <element id="javaee-facet-resources" facet="starfall-springboot/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="starfall-springboot" />
+          <element id="module-output" name="starfall-springboot-web" />
         </element>
       </element>
     </root>

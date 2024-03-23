@@ -124,7 +124,7 @@
 }
 .topic{
     position: relative;
-    border-bottom: 1px solid rgb(194, 173, 142);
+    border-bottom: 1px solid #c2ad8e;
     height: 50px;
 }
 .topicContent .icon img{
