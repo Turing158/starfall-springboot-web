@@ -151,7 +151,6 @@ window.onload=function(){
             alert('不是有效的图片文件!');
             return;
         }
-        submit.type="submit";
         // 读取文件:
         let reader = new FileReader();
         reader.onload = function(e) {
@@ -163,7 +162,6 @@ window.onload=function(){
         };
         // 以DataURL的形式读取文件:
         reader.readAsDataURL(file);
-
     });
 }
 function closeTips(){
